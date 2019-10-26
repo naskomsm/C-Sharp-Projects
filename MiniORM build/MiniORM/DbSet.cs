@@ -61,7 +61,7 @@
         {
             if (item == null)
             {
-                throw new ArgumentNullException($"{nameof(item)} cannot be null!");
+                throw new ArgumentNullException(nameof(item), "cannot be null!");
             }
 
             var removedSuccesfully = this.Entities.Remove(item);
@@ -72,6 +72,14 @@
             }
 
             return removedSuccesfully;
+        }
+
+        public void RemoveRange(IEnumerable<TEntity> entities)
+        {
+            foreach (var entity in entities.ToArray())
+            {
+                this.Remove(entity);
+            }
         }
 
         IEnumerator IEnumerable.GetEnumerator()
