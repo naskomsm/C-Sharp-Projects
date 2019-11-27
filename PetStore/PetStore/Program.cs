@@ -1,12 +1,20 @@
 ﻿namespace PetStore
 {
-    using System;
+    using Data;
+    using Services.Implementations;
 
     public class Program
     {
         public static void Main()
         {
-            // TODO
+            // Test the service
+            using var data = new PetStoreDbContext();
+            
+            var brandService = new BrandService(data);
+            
+            brandService.Create("Purrina");
+            
+            var brandWithToys = brandService.FindByIdWithToys(1);
         }
     }
 }

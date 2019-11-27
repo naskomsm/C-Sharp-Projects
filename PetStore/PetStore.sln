@@ -3,15 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29430.225
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetStore", "PetStore\PetStore.csproj", "{00C55A54-EE2A-44FA-A44C-933CEF923E5C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PetStore", "PetStore\PetStore.csproj", "{00C55A54-EE2A-44FA-A44C-933CEF923E5C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{73B40B16-0DD7-44CE-80BB-D815AACA0B87}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetStore.Data", "Data\PetStore.Data\PetStore.Data.csproj", "{AD1235AE-790E-4B8F-82E6-45FF98D7393F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PetStore.Data", "Data\PetStore.Data\PetStore.Data.csproj", "{AD1235AE-790E-4B8F-82E6-45FF98D7393F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetStore.Data.Models", "Data\PetStore.Data.Models\PetStore.Data.Models.csproj", "{85DC4C7C-9100-406A-AF39-5E958080A408}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PetStore.Data.Models", "Data\PetStore.Data.Models\PetStore.Data.Models.csproj", "{85DC4C7C-9100-406A-AF39-5E958080A408}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{7C4B249C-62CF-49FF-A97F-D209BBD1341D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetStore.Services", "Services\PetStore.Services\PetStore.Services.csproj", "{3E61DE7F-BE88-4AB0-A643-DCB0072F0952}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetStore.Services.Models", "Services\PetStore.Services.Models\PetStore.Services.Models.csproj", "{FADE046C-8029-4623-A861-1C6364CF6844}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,6 +35,14 @@ Global
 		{85DC4C7C-9100-406A-AF39-5E958080A408}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{85DC4C7C-9100-406A-AF39-5E958080A408}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{85DC4C7C-9100-406A-AF39-5E958080A408}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E61DE7F-BE88-4AB0-A643-DCB0072F0952}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E61DE7F-BE88-4AB0-A643-DCB0072F0952}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E61DE7F-BE88-4AB0-A643-DCB0072F0952}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E61DE7F-BE88-4AB0-A643-DCB0072F0952}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FADE046C-8029-4623-A861-1C6364CF6844}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FADE046C-8029-4623-A861-1C6364CF6844}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FADE046C-8029-4623-A861-1C6364CF6844}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FADE046C-8029-4623-A861-1C6364CF6844}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -38,6 +50,8 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{AD1235AE-790E-4B8F-82E6-45FF98D7393F} = {73B40B16-0DD7-44CE-80BB-D815AACA0B87}
 		{85DC4C7C-9100-406A-AF39-5E958080A408} = {73B40B16-0DD7-44CE-80BB-D815AACA0B87}
+		{3E61DE7F-BE88-4AB0-A643-DCB0072F0952} = {7C4B249C-62CF-49FF-A97F-D209BBD1341D}
+		{FADE046C-8029-4623-A861-1C6364CF6844} = {7C4B249C-62CF-49FF-A97F-D209BBD1341D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4E4687AB-D96D-4C22-A99B-F8E2BDF195AF}
