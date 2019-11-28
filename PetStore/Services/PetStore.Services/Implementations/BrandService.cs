@@ -60,7 +60,6 @@
                         })
                         .FirstOrDefault();
 
-
         public IEnumerable<BrandListingServiceModel> SearchByName(string name)
         {
             return this.data
