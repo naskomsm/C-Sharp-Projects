@@ -34,5 +34,14 @@
         {
             return this.data.Breeds.Any(x => x.Id == breedId);
         }
+
+        public int GetIdByName(string name)
+        {
+            return this.data
+                .Breeds
+                .Where(x => x.Name == name)
+                .Select(x => x.Id)
+                .FirstOrDefault();
+        }
     }
 }

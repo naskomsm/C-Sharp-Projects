@@ -5,5 +5,7 @@
         void Add(string name);
 
         bool Exists(int breedId);
+
+        int GetIdByName(string name);
     }
 }

@@ -106,5 +106,14 @@
         {
             return this.data.Food.Any(x => x.Id == foodId);
         }
+
+        public int GetIdByName(string name)
+        {
+            return this.data
+                .Food
+                .Where(x => x.Name == name)
+                .Select(x => x.Id)
+                .FirstOrDefault();
+        }
     }
 }

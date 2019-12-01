@@ -60,6 +60,15 @@
                         })
                         .FirstOrDefault();
 
+        public int GetIdByName(string name)
+        {
+            return this.data
+                .Brands
+                .Where(x => x.Name == name)
+                .Select(x => x.Id)
+                .FirstOrDefault();
+        }
+
         public IEnumerable<BrandListingServiceModel> SearchByName(string name)
         {
             return this.data

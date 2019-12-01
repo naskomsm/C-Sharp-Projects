@@ -13,5 +13,7 @@
         void SellFoodToUser(int foodId, int userId);
 
         bool Exists(int foodId);
+
+        int GetIdByName(string name);
     }
 }

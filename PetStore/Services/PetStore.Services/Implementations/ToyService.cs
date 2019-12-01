@@ -25,7 +25,7 @@
                 throw new ArgumentException("Name cannot be null or whitespace!");
             }
 
-            if(profit < 0 || profit > 5)
+            if (profit < 0 || profit > 5)
             {
                 throw new ArgumentException("Profit must be higher than 0 and lower than 500%"); // :D
             }
@@ -72,7 +72,7 @@
 
         public void SellToyToUser(int toyId, int userId)
         {
-            if(!this.Exists(toyId))
+            if (!this.Exists(toyId))
             {
                 throw new ArgumentException("There is no such toy with given ID!");
             }
@@ -103,6 +103,15 @@
         public bool Exists(int toyId)
         {
             return this.data.Toys.Any(t => t.Id == toyId);
+        }
+
+        public int GetIdByName(string name)
+        {
+            return this.data
+                .Toys
+                .Where(x => x.Name == name)
+                .Select(x => x.Id)
+                .FirstOrDefault();
         }
     }
 }

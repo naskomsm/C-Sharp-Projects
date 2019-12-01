@@ -30,5 +30,13 @@
             return this.data.Users.Any(x => x.Id == userId);
         }
 
+        public int GetIdByName(string name)
+        {
+            return this.data
+                .Users
+                .Where(x => x.Name == name)
+                .Select(x => x.Id)
+                .FirstOrDefault();
+        }
     }
 }

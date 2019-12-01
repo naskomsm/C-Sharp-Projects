@@ -12,5 +12,7 @@
         void SellToyToUser(int toyId, int userId);
 
         bool Exists(int toyId);
+
+        int GetIdByName(string name);
     }
 }
