@@ -3,11 +3,16 @@
     using PetStore.Data;
     using PetStore.Data.Models;
     using PetStore.Data.Models.enums;
+    using PetStore.Services.Models.Pet;
     using System;
+    using System.Collections.Generic;
+    using System.Globalization;
     using System.Linq;
 
     public class PetService : IPetService
     {
+        private const int PetsPageSize = 25;
+
         private readonly PetStoreDbContext data;
         private readonly ICategoryService categoryService;
         private readonly IBreedService breedService;
@@ -85,6 +90,41 @@
         public bool Exists(int petId)
         {
             return this.data.Pets.Any(x => x.Id == petId);
+        }
+
+        public IEnumerable<PetListingServiceModel> All(int page = 1)
+        {
+            return this.data
+                .Pets
+                .Skip((page - 1) * PetsPageSize)
+                .Take(PetsPageSize)
+                .Select(p => new PetListingServiceModel
+                {
+                    Id = p.Id,
+                    Price = p.Price,
+                    Category = p.Category.Name,
+                    Breed = p.Breed.Name
+                })
+                .ToList();
+        }
+
+        public PetInfoServiceModel PetInfo(int id)
+        {
+            return this.data
+                .Pets
+                .Where(p => p.Id == id)
+                .Select(p => new PetInfoServiceModel
+                {
+                    Id = p.Id,
+                    Age = p.Age,
+                    BirthDate = p.BirthDate.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture),
+                    Breed = p.Breed.Name,
+                    Category = p.Category.Name,
+                    Description = p.Description,
+                    Gender = p.Gender.ToString(),
+                    Price = p.Price
+                })
+                .FirstOrDefault();
         }
     }
 }

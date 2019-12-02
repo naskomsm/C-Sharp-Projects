@@ -1,0 +1,36 @@
+﻿@model IEnumerable<PetListingServiceModel>
+
+@{
+    ViewData["Title"] = "All";
+}
+
+<h1>All pets</h1>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Category</th>
+            <th scope="col">Breed</th>
+            <th scope="col">Price</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var pet in Model)
+        {
+            <tr>
+                <th scope="row">@pet.Id</th>
+                <th>@pet.Category</th>
+                <th>@pet.Breed</th>
+                <th>@pet.Price</th>
+                <th>
+                    <a href="/Pets/Info/@pet.Id" class="btn btn-info">Info</a>
+                    <a class="btn btn-danger">Delete</a>
+                </th>
+            </tr>
+        }
+    </tbody>
+</table>
+
