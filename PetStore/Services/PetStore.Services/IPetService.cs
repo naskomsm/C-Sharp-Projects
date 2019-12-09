@@ -9,6 +9,10 @@
     {
         PetInfoServiceModel PetInfo(int id);
 
+        PetDeleteServiceModel GetPetById(int id);
+
+        bool Delete(int id);
+
         IEnumerable<PetListingServiceModel> All(int page = 1);
 
         void BuyPet(Gender gender, DateTime birthdate, decimal price, string description, 

@@ -1,7 +1,8 @@
 ﻿namespace PetStore.Web.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
-    using PetStore.Services;
+    using Services;
+    using Services.Models.Pet;
 
     public class PetsController : Controller
     {
@@ -12,6 +13,7 @@
             this.pets = pets;
         }
 
+        [HttpGet]
         public IActionResult All(int page = 1)
         {
             var allPets = this.pets.All(page);
@@ -19,11 +21,36 @@
             return View(allPets);
         }
 
+        [HttpGet]
         public IActionResult Info(int id)
         {
             var pet = pets.PetInfo(id);
 
             return View(pet);
+        }
+
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            var pet = pets.GetPetById(id);
+
+            return View(pet);
+        }
+
+        [HttpPost]
+        public IActionResult Delete(PetDeleteServiceModel model)
+        {
+            this.pets.Delete(model.Id);
+
+            return RedirectToAction("All");
+        }
+
+        [HttpGet]
+        public IActionResult Add(PetAddServiceModel model)
+        {
+
+
+            return View(model);
         }
     }
 }

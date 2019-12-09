@@ -126,5 +126,33 @@
                 })
                 .FirstOrDefault();
         }
+
+        public PetDeleteServiceModel GetPetById(int id)
+        {
+            var pet = this
+                .data
+                .Pets
+                .Where(p => p.Id == id)
+                .Select(p => new PetDeleteServiceModel
+                {
+                    Id = p.Id,
+                    Price = p.Price
+                })
+                .FirstOrDefault();
+
+            return pet;
+        }
+
+        public bool Delete(int id)
+        {
+            var pet = this.data
+                .Pets
+                .Find(id);
+
+            this.data.Pets.Remove(pet);
+            this.data.SaveChanges();
+
+            return true;
+        }
     }
 }
