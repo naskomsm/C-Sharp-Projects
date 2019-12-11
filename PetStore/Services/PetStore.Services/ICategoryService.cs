@@ -1,7 +1,12 @@
 ﻿namespace PetStore.Services
 {
+    using PetStore.Services.Models.Category;
+    using System.Collections.Generic;
+
     public interface ICategoryService
     {
+        IEnumerable<CategoryListingServiceModel> All(int page = 1);
+
         bool Exists(int categoryId);
 
         void Add(string name);

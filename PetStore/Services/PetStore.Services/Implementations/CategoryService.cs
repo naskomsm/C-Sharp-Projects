@@ -2,11 +2,15 @@
 {
     using PetStore.Data;
     using PetStore.Data.Models;
+    using PetStore.Services.Models.Category;
     using System;
+    using System.Collections.Generic;
     using System.Linq;
 
     public class CategoryService : ICategoryService
     {
+        private const int PetsPageSize = 25;
+
         private readonly PetStoreDbContext data;
 
         public CategoryService(PetStoreDbContext data)
@@ -50,6 +54,20 @@
 
             this.data.Categories.Add(category);
             this.data.SaveChanges();
+        }
+
+        public IEnumerable<CategoryListingServiceModel> All(int page = 1)
+        {
+            return this.data
+                .Categories
+                .Skip((page - 1) * PetsPageSize)
+                .Select(c => new CategoryListingServiceModel
+                {
+                    Id = c.Id,
+                    Name = c.Name,
+                    Description = c.Description
+                })
+                .ToList();
         }
 
         public bool Exists(int categoryId)
