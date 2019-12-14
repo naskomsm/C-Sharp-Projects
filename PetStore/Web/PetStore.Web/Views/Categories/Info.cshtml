@@ -1,0 +1,13 @@
+﻿@model CategoryInfoServiceModel
+
+@{
+    ViewData["Title"] = "Info";
+}
+
+<h1>Additional info about the category</h1>
+
+<h2>Id @Model.Id</h2>
+<h2>Name @Model.Name</h2>
+<h2>Description @Model.Description</h2>
+
+<a href="/Categories/All" class="btn btn-primary">Back</a>

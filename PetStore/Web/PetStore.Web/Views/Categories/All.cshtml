@@ -4,14 +4,13 @@
     ViewData["Title"] = "All";
 }
 
-<h1>All categories</h1>
+<h1>All categories <a href="/Categories/Add" class="btn btn-success float-right">Add category</a></h1>
 
 <table class="table table-striped">
     <thead>
         <tr>
-            <th scope="col">Id</th>
-            <th scope="col">Name</th>
-            <th scope="col">Description</th>
+            <th>Name</th>
+            <th></th>
         </tr>
     </thead>
 
@@ -19,12 +18,10 @@
         @foreach (var category in Model)
         {
             <tr>
-                <th scope="row">@category.Id</th>
-                <th>@category.Name</th>
-                <th>@category.Description</th>
+                <th scope="row">@category.Name</th>
                 <th>
-                    @*<a href="/Pets/Info/@pet.Id" class="btn btn-info">Info</a>
-                    <a href="/Pets/Delete/@pet.Id" class="btn btn-danger">Delete</a>*@
+                    <a href="/Categories/Info/@category.Id" class="btn btn-info">Info</a>
+                    <a href="/Categories/Delete/@category.Id" class="btn btn-danger">Delete</a>
                 </th>
             </tr>
         }

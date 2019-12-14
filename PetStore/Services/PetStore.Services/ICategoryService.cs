@@ -7,6 +7,12 @@
     {
         IEnumerable<CategoryListingServiceModel> All(int page = 1);
 
+        bool Delete(int id);
+
+        CategoryInfoServiceModel Info(int id);
+
+        CategoryDeleteServiceModel GetCategoryById(int id);
+
         bool Exists(int categoryId);
 
         void Add(string name);

@@ -64,10 +64,22 @@
                 .Select(c => new CategoryListingServiceModel
                 {
                     Id = c.Id,
-                    Name = c.Name,
-                    Description = c.Description
+                    Name = c.Name
                 })
                 .ToList();
+        }
+
+        public CategoryDeleteServiceModel GetCategoryById(int id)
+        {
+            return this.data
+                .Categories
+                .Where(c => c.Id == id)
+                .Select(c => new CategoryDeleteServiceModel
+                {
+                    Id = c.Id,
+                    Name = c.Name
+                })
+                .FirstOrDefault();
         }
 
         public bool Exists(int categoryId)
@@ -82,6 +94,30 @@
                 .Where(x => x.Name == name)
                 .Select(x => x.Id)
                 .FirstOrDefault();
+        }
+
+        public CategoryInfoServiceModel Info(int id)
+        {
+            return this.data
+               .Categories
+               .Where(c => c.Id == id)
+               .Select(c => new CategoryInfoServiceModel
+               {
+                   Id = c.Id,
+                   Name = c.Name,
+                   Description = c.Description
+               })
+               .FirstOrDefault();
+        }
+
+        public bool Delete(int id)
+        {
+            var category = this.data.Categories.Find(id);
+
+            this.data.Categories.Remove(category);
+            this.data.SaveChanges();
+
+            return true;
         }
     }
 }
