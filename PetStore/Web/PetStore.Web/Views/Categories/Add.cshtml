@@ -2,21 +2,22 @@
     ViewData["Title"] = "Add";
 }
 
-<h1>Add category</h1>
-
-<form action="" method="post">
-    <div class="form-group">
+<div class="container mt-3">
+    <h1>Add category</h1>
+    <form action="" method="post">
         <div class="form-group">
-            <label for="Name">Name</label>
-            <input class="form-control" type="text" name="Name" placeholder="Name">
+            <div class="form-group">
+                <label for="Name"><strong>Name</strong></label>
+                <input class="form-control" type="text" name="Name" placeholder="Name">
+            </div>
+
+            <div class="form-group">
+                <label for="Description"><strong>Description</strong></label>
+                <textarea class="form-control" name="Description" rows="3"></textarea>
+            </div>
         </div>
 
-        <div class="form-group">
-            <label for="Description">Description</label>
-            <textarea class="form-control" name="Description" rows="3"></textarea>
-        </div>
-    </div>
-
-    <a href="/Categories/All" class="btn btn-primary">Back</a>
-    <input class="btn btn-success" type="submit" name="Add" value="Add" />
-</form>
+        <a href="/Categories/All" class="btn btn-primary">Back</a>
+        <input class="btn btn-success" type="submit" name="Add" value="Add" />
+    </form>
+</div>

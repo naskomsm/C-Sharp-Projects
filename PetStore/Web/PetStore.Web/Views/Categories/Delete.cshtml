@@ -4,11 +4,11 @@
     ViewData["Title"] = "Delete";
 }
 
-<h1>Are you sure you want to delete category with id=@Model.Id and name=@Model.Name</h1>
-
-
-<a href="/Categories/All" class="btn btn-primary">Back</a>
-<br />
-<form action="" method="post">
-    <input class="btn btn-danger" type="submit" name="Delete" value="Delete" />
-</form>
+<div class="container mt-3">
+    <h1>Are you sure you want to delete category with id=@Model.Id and name=@Model.Name</h1>
+    <a href="/Categories/All" class="btn btn-primary">Back</a>
+    <br />
+    <form action="" method="post">
+        <input class="btn btn-danger" type="submit" name="Delete" value="Delete" />
+    </form>
+</div>

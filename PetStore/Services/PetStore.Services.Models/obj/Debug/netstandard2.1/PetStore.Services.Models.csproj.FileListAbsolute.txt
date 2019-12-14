@@ -1,8 +1,0 @@
-C:\Users\Atanas\Desktop\code\C-Sharp-Projects\PetStore\Services\PetStore.Services.Models\bin\Debug\netstandard2.1\PetStore.Services.Models.deps.json
-C:\Users\Atanas\Desktop\code\C-Sharp-Projects\PetStore\Services\PetStore.Services.Models\bin\Debug\netstandard2.1\PetStore.Services.Models.dll
-C:\Users\Atanas\Desktop\code\C-Sharp-Projects\PetStore\Services\PetStore.Services.Models\bin\Debug\netstandard2.1\PetStore.Services.Models.pdb
-C:\Users\Atanas\Desktop\code\C-Sharp-Projects\PetStore\Services\PetStore.Services.Models\obj\Debug\netstandard2.1\PetStore.Services.Models.csprojAssemblyReference.cache
-C:\Users\Atanas\Desktop\code\C-Sharp-Projects\PetStore\Services\PetStore.Services.Models\obj\Debug\netstandard2.1\PetStore.Services.Models.AssemblyInfoInputs.cache
-C:\Users\Atanas\Desktop\code\C-Sharp-Projects\PetStore\Services\PetStore.Services.Models\obj\Debug\netstandard2.1\PetStore.Services.Models.AssemblyInfo.cs
-C:\Users\Atanas\Desktop\code\C-Sharp-Projects\PetStore\Services\PetStore.Services.Models\obj\Debug\netstandard2.1\PetStore.Services.Models.dll
-C:\Users\Atanas\Desktop\code\C-Sharp-Projects\PetStore\Services\PetStore.Services.Models\obj\Debug\netstandard2.1\PetStore.Services.Models.pdb

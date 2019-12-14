@@ -4,33 +4,28 @@
     ViewData["Title"] = "All";
 }
 
-<h1>All pets <a href="/Pets/Add" class="btn btn-success float-right">Add pet</a></h1>
-
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th scope="col">Id</th>
-            <th scope="col">Category</th>
-            <th scope="col">Breed</th>
-            <th scope="col">Price</th>
-            <th scope="col"></th>
+<div class="container mt-3">
+    <h1>All pets <a href="/Pets/Add" class="btn btn-success float-right">Add pet</a></h1>
+    <input type="text" id="searchBar" onkeyup="filterByBreedName()" placeholder="Search for breed name..">
+    <table id="myTable">
+        <tr class="header">
+            <th>Category</th>
+            <th>Breed</th>
+            <th>Price</th>
+            <th></th>
         </tr>
-    </thead>
 
-    <tbody>
         @foreach (var pet in Model)
         {
             <tr>
-                <th scope="row">@pet.Id</th>
-                <th>@pet.Category</th>
-                <th>@pet.Breed</th>
-                <th>@pet.Price</th>
-                <th>
+                <td>@pet.Category</td>
+                <td>@pet.Breed</td>
+                <td>@pet.Price</td>
+                <td>
                     <a href="/Pets/Info/@pet.Id" class="btn btn-info">Info</a>
                     <a href="/Pets/Delete/@pet.Id" class="btn btn-danger">Delete</a>
-                </th>
+                </td>
             </tr>
         }
-    </tbody>
-</table>
-
+    </table>
+</div>

@@ -4,20 +4,21 @@
     ViewData["Title"] = "Info";
 }
 
-<h1>Additional info about the pet</h1>
+<div class="container mt-3">
+    <h1>Additional info about the pet</h1>
+    <h2>Id @Model.Id</h2>
+    <h2>Age @Model.Age</h2>
+    <h2>Birthdate @Model.BirthDate</h2>
+    <h2>Price @Model.Price</h2>
 
-<h2>Id @Model.Id</h2>
-<h2>Age @Model.Age</h2>
-<h2>Birthdate @Model.BirthDate</h2>
-<h2>Price @Model.Price</h2>
+    @if (Model.Description.Length > 0)
+    {
+        <h2>Description @Model.Description</h2>
+    }
 
-@if (Model.Description.Length > 0)
-{
-    <h2>Description @Model.Description</h2>
-}
+    <h2>Gender @Model.Gender</h2>
+    <h2>Category @Model.Category</h2>
+    <h2>Breed @Model.Breed</h2>
 
-<h2>Gender @Model.Gender</h2>
-<h2>Category @Model.Category</h2>
-<h2>Breed @Model.Breed</h2>
-
-<a href="/Pets/All" class="btn btn-primary">Back</a>
+    <a href="/Pets/All" class="btn btn-primary">Back</a>
+</div>

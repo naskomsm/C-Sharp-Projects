@@ -4,26 +4,24 @@
     ViewData["Title"] = "All";
 }
 
-<h1>All categories <a href="/Categories/Add" class="btn btn-success float-right">Add category</a></h1>
-
-<table class="table table-striped">
-    <thead>
-        <tr>
+<div class="container mt-3">
+    <h1>All categories <a href="/Categories/Add" class="btn btn-success float-right">Add category</a></h1>
+    <input type="text" id="searchBar" onkeyup="filterByCategoryName()" placeholder="Search for category name..">
+    <table id="myTable">
+        <tr class="header">
             <th>Name</th>
             <th></th>
         </tr>
-    </thead>
 
-    <tbody>
         @foreach (var category in Model)
         {
             <tr>
-                <th scope="row">@category.Name</th>
-                <th>
+                <td>@category.Name</td>
+                <td>
                     <a href="/Categories/Info/@category.Id" class="btn btn-info">Info</a>
                     <a href="/Categories/Delete/@category.Id" class="btn btn-danger">Delete</a>
-                </th>
+                </td>
             </tr>
         }
-    </tbody>
-</table>
+    </table>
+</div>
