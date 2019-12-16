@@ -7,10 +7,18 @@
     {
         int Create(string name);
 
+        IEnumerable<BrandListingServiceModel> All(int page = 1);
+
         IEnumerable<BrandListingServiceModel> SearchByName(string name);
 
-        BrandWithToysServiceModel FindByIdWithToys(int id);
+        BrandInfoLIstingServiceModel Info(int id);
 
         int GetIdByName(string name);
+
+        void Add(string name);
+
+        BrandDeleteServiceModel GetBrandById(int id);
+
+        bool Delete(int id);
     }
 }

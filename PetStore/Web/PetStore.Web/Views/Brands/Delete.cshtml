@@ -1,0 +1,14 @@
+﻿@model BrandDeleteServiceModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<div class="container mt-3">
+    <h1>Are you sure you want to delete brand with id=@Model.Id and name=@Model.Name</h1>
+    <a href="/Brands/All" class="btn btn-primary">Back</a>
+    <br />
+    <form action="" method="post">
+        <input class="btn btn-danger" type="submit" name="Delete" value="Delete" />
+    </form>
+</div>

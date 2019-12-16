@@ -1,0 +1,27 @@
+﻿@model IEnumerable<BrandListingServiceModel>
+
+@{
+    ViewData["Title"] = "All";
+}
+
+<div class="container mt-3">
+    <h1>All Brands <a href="/Brands/Add" class="btn btn-success float-right">Add Brand</a></h1>
+    <input type="text" id="searchBar" onkeyup="filter(0)" placeholder="Search for brand name..">
+    <table id="myTable">
+        <tr class="header">
+            <th>Name</th>
+            <th></th>
+        </tr>
+
+        @foreach (var brand in Model)
+        {
+            <tr>
+                <td>@brand.Name</td>
+                <td>
+                    <a href="/Brands/Info/@brand.Id" class="btn btn-info">Info</a>
+                    <a href="/Brands/Delete/@brand.Id" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </table>
+</div>

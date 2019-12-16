@@ -1,0 +1,29 @@
+﻿@model BrandInfoLIstingServiceModel
+
+@{
+    ViewData["Title"] = "Info";
+}
+
+    <div class="container mt-3">
+        <h1>Additional info about the brand</h1>
+        <h2>Id @Model.</h2>
+        <h2>Name @Model.Name</h2>
+        <h2>Food: </h2>
+        @foreach (var foodItem in @Model.Food)
+        {
+            <h5>Food id: @foodItem.Id</h5>
+            <h5>Food name: @foodItem.Name</h5>
+            <h5>Food price: @foodItem.Price</h5>
+            <h5>Food expire date: @foodItem.ExpireDate</h5>
+            <h5>Food weight: @foodItem.Weight</h5>
+        }
+        <h2>Toys: </h2>
+        @foreach (var toyItem in @Model.Toys)
+        {
+            <h5>Toy id: @toyItem.Id</h5>
+            <h5>Toy name: @toyItem.Name</h5>
+            <h5>Toy price: @toyItem.Price</h5>
+            <h5>Toy orders: @toyItem.TotalOrders</h5>
+        }
+        <a href="/Brands/All" class="btn btn-primary">Back</a>
+    </div>
