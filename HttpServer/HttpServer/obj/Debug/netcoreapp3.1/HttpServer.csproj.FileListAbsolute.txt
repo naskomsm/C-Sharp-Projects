@@ -1,0 +1,11 @@
+C:\Users\Atanas\Desktop\code\C-Sharp-Projects\HttpServer\HttpServer\bin\Debug\netcoreapp3.1\HttpServer.exe
+C:\Users\Atanas\Desktop\code\C-Sharp-Projects\HttpServer\HttpServer\bin\Debug\netcoreapp3.1\HttpServer.deps.json
+C:\Users\Atanas\Desktop\code\C-Sharp-Projects\HttpServer\HttpServer\bin\Debug\netcoreapp3.1\HttpServer.runtimeconfig.json
+C:\Users\Atanas\Desktop\code\C-Sharp-Projects\HttpServer\HttpServer\bin\Debug\netcoreapp3.1\HttpServer.runtimeconfig.dev.json
+C:\Users\Atanas\Desktop\code\C-Sharp-Projects\HttpServer\HttpServer\bin\Debug\netcoreapp3.1\HttpServer.dll
+C:\Users\Atanas\Desktop\code\C-Sharp-Projects\HttpServer\HttpServer\bin\Debug\netcoreapp3.1\HttpServer.pdb
+C:\Users\Atanas\Desktop\code\C-Sharp-Projects\HttpServer\HttpServer\obj\Debug\netcoreapp3.1\HttpServer.csprojAssemblyReference.cache
+C:\Users\Atanas\Desktop\code\C-Sharp-Projects\HttpServer\HttpServer\obj\Debug\netcoreapp3.1\HttpServer.AssemblyInfoInputs.cache
+C:\Users\Atanas\Desktop\code\C-Sharp-Projects\HttpServer\HttpServer\obj\Debug\netcoreapp3.1\HttpServer.AssemblyInfo.cs
+C:\Users\Atanas\Desktop\code\C-Sharp-Projects\HttpServer\HttpServer\obj\Debug\netcoreapp3.1\HttpServer.dll
+C:\Users\Atanas\Desktop\code\C-Sharp-Projects\HttpServer\HttpServer\obj\Debug\netcoreapp3.1\HttpServer.pdb
