@@ -2,13 +2,12 @@
 {
     using SIS.HTTP.Common;
     using SIS.HTTP.Headers.Contracts;
-    using System;
     using System.Collections.Generic;
     using System.Linq;
 
     public class HttpHeaderCollection : IHttpHeaderCollection
     {
-        private Dictionary<string, HttpHeader> httpHeeaders;
+        private readonly Dictionary<string, HttpHeader> httpHeeaders;
 
         public HttpHeaderCollection()
         {

@@ -6,7 +6,8 @@
     {
         private const string BadRequestExceptionDefaultMessage = "The Request was malformed or contains unsupported elements.";
 
-        public BadRequestException() : this(BadRequestExceptionDefaultMessage)
+        public BadRequestException() 
+            : this(BadRequestExceptionDefaultMessage)
         {
         }
 
