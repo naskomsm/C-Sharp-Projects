@@ -20,6 +20,8 @@
             this.FormData = new Dictionary<string, object>();
             this.QueryData = new Dictionary<string, object>();
             this.Headers = new HttpHeaderCollection();
+
+            ParseRequest(requestString);
         }
 
         public string Path { get; private set; }
@@ -75,7 +77,7 @@
         {
             foreach (var header in headersParts)
             {
-                if(string.IsNullOrWhiteSpace(header) || string.IsNullOrEmpty(header))
+                if (string.IsNullOrWhiteSpace(header) || string.IsNullOrEmpty(header) || header == "\r\n")
                 {
                     break;
                 }
@@ -94,29 +96,67 @@
 
         private void ParseQueryParameters()
         {
-            var url = this.Url.Split("?");
-            var query = url[1].Split("&");
+            // TODO: parse multiple parameters ( cars=Volvo&cars=BMW&cars=Opel ) , select many HTML ( hint )
+            var url = this.Url.Split('?', '#');
+            var pairs = url[1].Split("&");
 
-            foreach (var kvp in query)
+            if (pairs.Length > 1)
             {
-                var kvpString = kvp.Split("=");
+                foreach (var queryString in pairs)
+                {
+                    var queryStringSplited = queryString.Split("=");
 
-                var key = kvpString[0]; // name
-                var value = kvpString[1]; // gosho
+                    var key = queryStringSplited[0]; // name
+                    var value = queryStringSplited[1]; // gosho
+
+                    if (!this.QueryData.ContainsKey(key))
+                    {
+                        this.QueryData.Add(key, value);
+                    }
+                }
             }
-
-            // todo
         }
 
         private bool IsValidRequestQueryString(string queryString, string[] queryParams)
         {
-            return true; // todo
+            if (string.IsNullOrEmpty(queryString) || string.IsNullOrWhiteSpace(queryString) || queryParams.Length < 1)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        private void ParseRequestParameters(string formData)
+        {
+            ParseQueryParameters();
+            ParseFormDataParameters(formData);
+        }
+
+        private void ParseFormDataParameters(string formData)
+        {
+            var pairs = formData.Split("&");
+            if (pairs.Length > 1)
+            {
+                foreach (var queryString in pairs)
+                {
+                    var queryStringSplited = queryString.Split("=");
+
+                    var key = queryStringSplited[0]; // name
+                    var value = queryStringSplited[1]; // gosho
+
+                    if (!this.FormData.ContainsKey(key))
+                    {
+                        this.FormData.Add(key, value);
+                    }
+                }
+            }
         }
 
         private void ParseRequest(string requestString)
         {
             var splitRequestContent = requestString.Split(new[] { GlobalConstants.HttpNewLine }, StringSplitOptions.None);
-            
+
             var requestLine = splitRequestContent[0].Trim().Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries); // GET /home/index?name=gosho&name2=stoqn HTTP/1.1
             var headersLines = splitRequestContent.Skip(1).ToArray();
 
@@ -125,12 +165,23 @@
                 throw new BadRequestException();
             }
 
+
             ParseRequestMethod(requestLine);
             ParseRequestUrl(requestLine);
             ParseRequestPath();
+
+            var queryString = this.Url.Split("?")[1];
+            var queryParams = queryString.Split("&");
+
+            if (!this.IsValidRequestQueryString(queryString, queryParams))
+            {
+                throw new BadRequestException();
+            }
+
             ParseHeaders(headersLines);
 
-            // todo
+            var formData = splitRequestContent[splitRequestContent.Length - 1];
+            ParseRequestParameters(formData);
         }
     }
 }
