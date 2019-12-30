@@ -4,6 +4,9 @@
 
     public class HttpHeader
     {
+        public const string ContentType = "content-type";
+        public const string Location = "location";
+
         public HttpHeader(string key, string value)
         {
             CoreValidator.ThrowIfNullOrEmpty(key, nameof(key));
