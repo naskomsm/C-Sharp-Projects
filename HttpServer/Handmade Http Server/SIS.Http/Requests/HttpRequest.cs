@@ -97,21 +97,24 @@
         private void ParseQueryParameters()
         {
             // TODO: parse multiple parameters ( cars=Volvo&cars=BMW&cars=Opel ) , select many HTML ( hint )
-            var url = this.Url.Split('?', '#');
-            var pairs = url[1].Split("&");
-
-            if (pairs.Length > 1)
+            if (this.Url.Length > 1)
             {
-                foreach (var queryString in pairs)
+                var url = this.Url.Split('?', '#');
+                var pairs = url[1].Split("&");
+
+                if (pairs.Length > 1)
                 {
-                    var queryStringSplited = queryString.Split("=");
-
-                    var key = queryStringSplited[0]; // name
-                    var value = queryStringSplited[1]; // gosho
-
-                    if (!this.QueryData.ContainsKey(key))
+                    foreach (var queryString in pairs)
                     {
-                        this.QueryData.Add(key, value);
+                        var queryStringSplited = queryString.Split("=");
+
+                        var key = queryStringSplited[0]; // name
+                        var value = queryStringSplited[1]; // gosho
+
+                        if (!this.QueryData.ContainsKey(key))
+                        {
+                            this.QueryData.Add(key, value);
+                        }
                     }
                 }
             }
@@ -165,17 +168,19 @@
                 throw new BadRequestException();
             }
 
-
             ParseRequestMethod(requestLine);
             ParseRequestUrl(requestLine);
             ParseRequestPath();
 
-            var queryString = this.Url.Split("?")[1];
-            var queryParams = queryString.Split("&");
-
-            if (!this.IsValidRequestQueryString(queryString, queryParams))
+            if (this.Url.Length > 1)
             {
-                throw new BadRequestException();
+                var queryString = this.Url.Split("?")[1];
+                var queryParams = queryString.Split("&");
+
+                if (!this.IsValidRequestQueryString(queryString, queryParams))
+                {
+                    throw new BadRequestException();
+                }
             }
 
             ParseHeaders(headersLines);

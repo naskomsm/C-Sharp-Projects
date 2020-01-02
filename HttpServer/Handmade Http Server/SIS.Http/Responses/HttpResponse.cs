@@ -34,17 +34,14 @@
             CoreValidator.ThrowIfNull(header, nameof(header));
 
             if (!this.Headers.ContainsHeader(header.Key))
-            {
+            { 
                 this.Headers.AddHeader(header);
             }
         }
 
         public byte[] GetBytes()
         {
-            var resultWithoutContent = Encoding.ASCII.GetBytes(this.ToString());
-            var httpResponseBytes = (byte[])resultWithoutContent.Concat(this.Content);
-            
-            return httpResponseBytes;
+            return Encoding.ASCII.GetBytes(this.ToString()).Concat(this.Content).ToArray();
         }
 
         public override string ToString()
