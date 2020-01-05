@@ -5,6 +5,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20200105101653_InitialMigration.cs" />
+    <Compile Remove="Migrations\20200105101653_InitialMigration.Designer.cs" />
+    <Compile Remove="Migrations\20200105102104_InitialMigration.cs" />
+    <Compile Remove="Migrations\20200105102104_InitialMigration.Designer.cs" />
+    <Compile Remove="Migrations\20200105110158_InitialMigration.cs" />
+    <Compile Remove="Migrations\20200105110158_InitialMigration.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.0">
       <PrivateAssets>all</PrivateAssets>
@@ -14,10 +23,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CarsInfo.Data.Models\CarsInfo.Data.Models.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Configuration\" />
   </ItemGroup>
 
 </Project>

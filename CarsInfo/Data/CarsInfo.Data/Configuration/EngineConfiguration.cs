@@ -9,9 +9,9 @@
         public void Configure(EntityTypeBuilder<Engine> engine)
         {
             engine
-                .HasOne(e => e.Cylinders)
+                .HasMany(e => e.Cars)
                 .WithOne(c => c.Engine)
-                .HasForeignKey<Cylinders>(c => c.EngineId);
+                .HasForeignKey(c => c.EngineId);
         }
     }
 }

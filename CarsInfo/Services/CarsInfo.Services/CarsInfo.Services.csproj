@@ -4,4 +4,10 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Data\CarsInfo.Data.Models\CarsInfo.Data.Models.csproj" />
+    <ProjectReference Include="..\..\Data\CarsInfo.Data\CarsInfo.Data.csproj" />
+    <ProjectReference Include="..\CarsInfo.Services.Models\CarsInfo.Services.Models.csproj" />
+  </ItemGroup>
+
 </Project>

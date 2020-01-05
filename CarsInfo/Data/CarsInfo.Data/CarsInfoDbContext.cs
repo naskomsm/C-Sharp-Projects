@@ -11,11 +11,17 @@
 
         public DbSet<Category> Categories { get; set; }
 
-        public DbSet<Cylinders> Cylinders { get; set; }
-
         public DbSet<Engine> Engines { get; set; }
 
         public DbSet<Image> Images { get; set; }
+
+        public DbSet<Suspension> Suspensions { get; set; }
+
+        public DbSet<Order> Orders { get; set; }
+
+        public DbSet<User> Users { get; set; }
+
+        public DbSet<Wheels> Wheels { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder builder)
         {

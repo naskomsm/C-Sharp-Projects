@@ -12,6 +12,11 @@
                 .HasMany(b => b.Cars)
                 .WithOne(c => c.Brakes)
                 .HasForeignKey(c => c.BrakesId);
+
+            brakes
+                .HasOne(b => b.Image)
+                .WithMany(i => i.Brakes)
+                .HasForeignKey(b => b.ImageId);
         }
     }
 }

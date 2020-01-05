@@ -12,6 +12,11 @@
                 .HasMany(cat => cat.Cars)
                 .WithOne(c => c.Category)
                 .HasForeignKey(c => c.CategoryId);
+
+            category
+                .HasMany(cat => cat.Suspensions)
+                .WithOne(s => s.Category)
+                .HasForeignKey(s => s.CategoryId);
         }
     }
 }
