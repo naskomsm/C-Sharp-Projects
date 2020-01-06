@@ -1,14 +1,10 @@
-﻿namespace CarsInfo.Data.Models
+﻿namespace CarsInfo.Services.Models.User
 {
-    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using static Data.Models.DataValidation.User;
     
-    using static DataValidation.User;
-
-    public class User
+    public class UserAddServiceModel
     {
-        public int Id { get; set; }
-
         [Required]
         [MaxLength(NameMaxLength)]
         public string Name { get; set; }
@@ -16,7 +12,5 @@
         [Required]
         [EmailAddress(ErrorMessage = "Email is not valid.")]
         public string Email { get; set; }
-
-        public ICollection<Order> Orders { get; set; } = new HashSet<Order>();
     }
 }

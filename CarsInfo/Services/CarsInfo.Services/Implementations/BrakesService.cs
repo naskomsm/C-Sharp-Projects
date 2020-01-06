@@ -54,6 +54,7 @@
 
             var brakes = this.data.Brakes.FirstOrDefault(x => x.Id == id);
             this.data.Brakes.Remove(brakes);
+            this.data.SaveChanges();
 
             return true;
         }

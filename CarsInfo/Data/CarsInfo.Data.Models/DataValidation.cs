@@ -7,9 +7,9 @@
     {
         public static class Car 
         {
-            public const int BrandLength = 20;
-            public const int ModelLength = 20;
-            public const int GenerationLength = 20;
+            public const int BrandLength = 50;
+            public const int ModelLength = 50;
+            public const int GenerationLength = 50;
             public const int ColorLength = 25;
             public const int MinimumYear = 1900;
             public const int MaximumYear = 2500;
@@ -50,12 +50,12 @@
 
         public static class User
         {
-            public const int EmailMaxLength = 100;
+            public const int NameMaxLength = 50;
         }
 
         public static class Wheels
         {
-            public const int NameLength = 20;
+            public const int NameLength = 50;
             public const int MaxWeight = 30;
             public const int ColorLength = 25;
         }

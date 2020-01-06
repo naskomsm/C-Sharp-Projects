@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarsInfo.Data.Migrations
 {
     [DbContext(typeof(CarsInfoDbContext))]
-    [Migration("20200105123426_InitialMigration")]
+    [Migration("20200106122116_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -74,8 +74,8 @@ namespace CarsInfo.Data.Migrations
 
                     b.Property<string>("Brand")
                         .IsRequired()
-                        .HasColumnType("nvarchar(20)")
-                        .HasMaxLength(20);
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
 
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
@@ -99,8 +99,8 @@ namespace CarsInfo.Data.Migrations
 
                     b.Property<string>("Generation")
                         .IsRequired()
-                        .HasColumnType("nvarchar(20)")
-                        .HasMaxLength(20);
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
 
                     b.Property<int>("Height")
                         .HasColumnType("int");
@@ -116,8 +116,8 @@ namespace CarsInfo.Data.Migrations
 
                     b.Property<string>("Model")
                         .IsRequired()
-                        .HasColumnType("nvarchar(20)")
-                        .HasMaxLength(20);
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
 
                     b.Property<int>("Seats")
                         .HasColumnType("int");
@@ -183,7 +183,6 @@ namespace CarsInfo.Data.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(2000)")
                         .HasMaxLength(2000);
 
@@ -361,8 +360,12 @@ namespace CarsInfo.Data.Migrations
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
 
                     b.HasKey("Id");
 
@@ -393,8 +396,8 @@ namespace CarsInfo.Data.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(20)")
-                        .HasMaxLength(20);
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
 
                     b.Property<string>("RearAxleSize")
                         .IsRequired()
@@ -404,8 +407,7 @@ namespace CarsInfo.Data.Migrations
                         .HasColumnType("bit");
 
                     b.Property<double>("Weight")
-                        .HasColumnType("float")
-                        .HasMaxLength(30);
+                        .HasColumnType("float");
 
                     b.HasKey("Id");
 
@@ -560,7 +562,8 @@ namespace CarsInfo.Data.Migrations
                 {
                     b.HasOne("CarsInfo.Data.Models.Image", "Image")
                         .WithMany("Wheels")
-                        .HasForeignKey("ImageId");
+                        .HasForeignKey("ImageId")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("CarsInfo.Data.Models.WheelsOrder", b =>

@@ -1,11 +1,11 @@
 ﻿namespace CarsInfo.Services.Implementations
 {
+    using System;
+    using System.Linq;
     using CarsInfo.Data;
     using CarsInfo.Data.Models;
     using CarsInfo.Data.Models.Enums.Engine;
     using CarsInfo.Services.Models.Engine;
-    using System;
-    using System.Linq;
 
     public class EngineService : IEngineService
     {
@@ -69,6 +69,7 @@
 
             var engine = this.data.Engines.FirstOrDefault(x => x.Id == id);
             this.data.Engines.Remove(engine);
+            this.data.SaveChanges();
 
             return true;
         }

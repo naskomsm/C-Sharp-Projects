@@ -14,7 +14,7 @@ namespace CarsInfo.Data.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(maxLength: 20, nullable: false),
-                    Description = table.Column<string>(maxLength: 2000, nullable: false)
+                    Description = table.Column<string>(maxLength: 2000, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -66,7 +66,8 @@ namespace CarsInfo.Data.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Email = table.Column<string>(maxLength: 100, nullable: false)
+                    Name = table.Column<string>(maxLength: 50, nullable: false),
+                    Email = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -128,9 +129,9 @@ namespace CarsInfo.Data.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(maxLength: 20, nullable: false),
+                    Name = table.Column<string>(maxLength: 50, nullable: false),
                     Used = table.Column<bool>(nullable: false),
-                    Weight = table.Column<double>(maxLength: 30, nullable: false),
+                    Weight = table.Column<double>(nullable: false),
                     Color = table.Column<string>(maxLength: 25, nullable: false),
                     FrontAxleSize = table.Column<string>(nullable: false),
                     RearAxleSize = table.Column<string>(nullable: false),
@@ -174,9 +175,9 @@ namespace CarsInfo.Data.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Brand = table.Column<string>(maxLength: 20, nullable: false),
-                    Model = table.Column<string>(maxLength: 20, nullable: false),
-                    Generation = table.Column<string>(maxLength: 20, nullable: false),
+                    Brand = table.Column<string>(maxLength: 50, nullable: false),
+                    Model = table.Column<string>(maxLength: 50, nullable: false),
+                    Generation = table.Column<string>(maxLength: 50, nullable: false),
                     Color = table.Column<string>(maxLength: 25, nullable: false),
                     YearStart = table.Column<int>(nullable: false),
                     YearEnd = table.Column<int>(nullable: true),

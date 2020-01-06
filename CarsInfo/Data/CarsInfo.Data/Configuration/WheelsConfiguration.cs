@@ -11,12 +11,14 @@
             wheels
                 .HasOne(w => w.Image)
                 .WithMany(i => i.Wheels)
-                .HasForeignKey(w => w.ImageId);
+                .HasForeignKey(w => w.ImageId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             wheels
                 .HasMany(w => w.Cars)
                 .WithOne(c => c.Wheels)
-                .HasForeignKey(c => c.WheelsId);
+                .HasForeignKey(c => c.WheelsId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

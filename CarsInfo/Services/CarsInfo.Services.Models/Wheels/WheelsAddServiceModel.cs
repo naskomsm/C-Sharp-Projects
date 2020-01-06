@@ -1,14 +1,11 @@
-﻿namespace CarsInfo.Data.Models
+﻿namespace CarsInfo.Services.Models.Wheels
 {
-    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    
-    using static DataValidation.Wheels;
+    using CarsInfo.Data.Models;
+    using static Data.Models.DataValidation.Wheels;
 
-    public class Wheels
+    public class WheelsAddServiceModel
     {
-        public int Id { get; set; }
-
         [Required]
         [MaxLength(NameLength)]
         public string Name { get; set; }
@@ -33,9 +30,5 @@
         public int? ImageId { get; set; }
 
         public Image Image { get; set; }
-
-        public ICollection<Car> Cars { get; set; } = new HashSet<Car>();
-
-        public ICollection<WheelsOrder> Orders { get; set; } = new HashSet<WheelsOrder>();
     }
 }
