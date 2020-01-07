@@ -9,6 +9,12 @@
         public void Configure(EntityTypeBuilder<User> user)
         {
             user
+                .HasMany(u => u.Orders)
+                .WithOne(o => o.User)
+                .HasForeignKey(o => o.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            user
                 .HasIndex(u => u.Email)
                 .IsUnique();
         }

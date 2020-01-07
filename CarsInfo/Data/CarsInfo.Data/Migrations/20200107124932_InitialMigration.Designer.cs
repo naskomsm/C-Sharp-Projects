@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarsInfo.Data.Migrations
 {
     [DbContext(typeof(CarsInfoDbContext))]
-    [Migration("20200106122116_InitialMigration")]
+    [Migration("20200107124932_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -362,10 +362,9 @@ namespace CarsInfo.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("Password")
                         .IsRequired()
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -435,7 +434,8 @@ namespace CarsInfo.Data.Migrations
                 {
                     b.HasOne("CarsInfo.Data.Models.Image", "Image")
                         .WithMany("Brakes")
-                        .HasForeignKey("ImageId");
+                        .HasForeignKey("ImageId")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("CarsInfo.Data.Models.BrakesOrder", b =>
@@ -526,7 +526,7 @@ namespace CarsInfo.Data.Migrations
                     b.HasOne("CarsInfo.Data.Models.User", "User")
                         .WithMany("Orders")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 

@@ -1,5 +1,8 @@
 ﻿namespace CarsInfo.ConsoleApp
 {
+    using System;
+    using System.Net;
+    using System.Linq;
     using CarsInfo.Data;
     using CarsInfo.Data.Models.Enums.Brakes;
     using CarsInfo.Data.Models.Enums.Engine;
@@ -13,9 +16,6 @@
     using CarsInfo.Services.Models.User;
     using CarsInfo.Services.Models.Wheels;
     using Microsoft.EntityFrameworkCore;
-    using System;
-    using System.Linq;
-    using System.Net;
 
     public class Program
     {
@@ -126,8 +126,8 @@
 
             var userModel = new UserAddServiceModel()
             {
-                Name = "Atanas",
-                Email = "naskokolev@gmail.com"
+                Email = "naskokolev@gmail.com",
+                Password = "Xtw9NMgx"
             };
 
             userService.Register(userModel);

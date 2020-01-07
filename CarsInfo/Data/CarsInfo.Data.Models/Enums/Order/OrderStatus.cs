@@ -2,7 +2,7 @@
 {
     public enum OrderStatus
     {
-        Paid = 0,
+        PickUpAvailable = 0,
         Pending = 1,
         Done = 2
     }

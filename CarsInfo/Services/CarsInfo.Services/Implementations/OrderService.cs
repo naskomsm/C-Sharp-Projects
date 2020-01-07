@@ -3,7 +3,7 @@
     using CarsInfo.Data;
     using CarsInfo.Data.Models.Enums.Order;
 
-    public class OrderService
+    public class OrderService : IOrderService
     {
         private readonly CarsInfoDbContext data;
 
@@ -15,7 +15,7 @@
         public void CompleteOrder(int orderId)
         {
             var order = this.data.Orders.Find(orderId);
-            order.Status = OrderStatus.Pending;
+            order.Status = OrderStatus.Done;
             this.data.SaveChanges();
         }
     }
