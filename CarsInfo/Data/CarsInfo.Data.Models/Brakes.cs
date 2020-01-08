@@ -14,6 +14,9 @@
         [Required]
         public bool Used { get; set; }
 
+        [Required]
+        public string Description { get; set; }
+
         public int? ImageId { get; set; }
 
         public Image Image { get; set; }

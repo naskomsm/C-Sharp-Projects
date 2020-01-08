@@ -6,9 +6,12 @@
     using CarsInfo.Data.Models;
     using CarsInfo.Services.Models.Brakes;
     using CarsInfo.Data.Models.Enums.Brakes;
+    using System.Collections.Generic;
 
     public class BrakesService : IBrakesService
     {
+        private const int pageSize = 6;
+
         private readonly CarsInfoDbContext data;
 
         public BrakesService(CarsInfoDbContext data)
@@ -28,6 +31,7 @@
             var brakes = new Brakes()
             {
                 Type = model.Type,
+                Description = model.Description,
                 Used = model.Used
             };
 
@@ -38,6 +42,38 @@
 
             this.data.Brakes.Add(brakes);
             this.data.SaveChanges();
+        }
+
+        public IEnumerable<BrakesListingServiceModel> All(int page = 1)
+        {
+            return this.data
+                .Brakes
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .Select(b => new BrakesListingServiceModel
+                {
+                    Id = b.Id,
+                    Type = b.Type.ToString(),
+                    ImageId = b.ImageId,
+                    Image = b.Image
+                })
+                .ToList();
+        }
+
+        public BrakesInfoServiceModel BrakesInfo(int id)
+        {
+            return this.data.Brakes
+                .Where(x => x.Id == id)
+                .Select(x => new BrakesInfoServiceModel
+                {
+                    Id = x.Id,
+                    Used = x.Used == true ? "Used" : "Brand new",
+                    Type = x.Type.ToString(),
+                    Description = x.Description,
+                    Image = x.Image,
+                    ImageId = x.ImageId
+                })
+                .FirstOrDefault();
         }
 
         public bool Exists(int id)
@@ -57,6 +93,11 @@
             this.data.SaveChanges();
 
             return true;
+        }
+
+        public int Total()
+        {
+            return this.data.Brakes.Count();
         }
     }
 }

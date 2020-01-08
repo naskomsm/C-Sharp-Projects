@@ -1,19 +1,15 @@
 ﻿namespace CarsInfo.Services.Models.Brakes
 {
     using CarsInfo.Data.Models;
-    using CarsInfo.Data.Models.Enums.Brakes;
     using System.ComponentModel.DataAnnotations;
 
-    public class BrakesAddServiceModel
+    public class BrakesListingServiceModel
     {
         [Required]
-        public BrakesType Type { get; set; }
+        public int Id { get; set; }
 
         [Required]
-        public bool Used { get; set; }
-
-        [Required]
-        public string Description { get; set; }
+        public string Type { get; set; }
 
         public int? ImageId { get; set; }
 

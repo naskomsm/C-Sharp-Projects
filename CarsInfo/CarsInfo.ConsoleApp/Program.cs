@@ -45,12 +45,31 @@
 
             engineService.Add(engineModel);
 
-            // Brakes
+            // Image
+            var imageService = new ImageService(data);
+
+            WebClient wc = new WebClient();
+            byte[] bytes = wc.DownloadData("https://www.wilwood.com/Images/BrakeKits/BrakeKit_Photos-XLarge/brake_kit_140-10996-D-xl.jpg");
+
+            var imageModel = new ImageAddServiceModel()
+            {
+                ImageTitle = "Brakes",
+                ImageData = bytes
+            };
+
+            string imageBase64Data = Convert.ToBase64String(imageModel.ImageData);
+
+            imageService.Add(imageModel);
+
+            //Brakes
             var brakesService = new BrakesService(data);
             var brakesModel = new BrakesAddServiceModel()
             {
                 Type = BrakesType.Electromagnetic,
-                Used = false
+                Description = @"Electromagnetic brakes are likewise often used where an electric motor is already part of the machinery. For example, many hybrid gasoline/electric vehicles use the electric motor as a generator to charge electric batteries and also as a regenerative brake. Some diesel/electric railroad locomotives use the electric motors to generate electricity which is then sent to a resistor bank and dumped as heat. Some vehicles, such as some transit buses, do not already have an electric motor but use a secondary retarder brake that is effectively a generator with an internal short-circuit. Related types of such a brake are eddy current brakes, and electro-mechanical brakes (which actually are magnetically driven friction brakes, but nowadays are often just called electromagnetic brakes as well).",
+                Used = false,
+                Image = data.Images.FirstOrDefault(x => x.Id == 1),
+                ImageId = 1
             };
 
             brakesService.Add(brakesModel);
@@ -71,22 +90,6 @@
 
             categoryService.Add(firstCategoryModel);
             categoryService.Add(secondCategoryModel);
-
-            // Image
-            var imageService = new ImageService(data);
-
-            WebClient wc = new WebClient();
-            byte[] bytes = wc.DownloadData("https://images.theconversation.com/files/301743/original/file-20191114-26207-lray93.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=926&fit=clip");
-
-            var imageModel = new ImageAddServiceModel()
-            {
-                ImageTitle = "Cat",
-                ImageData = bytes
-            };
-
-            string imageBase64Data = Convert.ToBase64String(imageModel.ImageData);
-
-            imageService.Add(imageModel);
 
             // suspension
             var suspensionService = new SuspensionService(data);
