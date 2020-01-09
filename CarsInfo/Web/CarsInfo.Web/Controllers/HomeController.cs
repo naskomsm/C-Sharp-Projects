@@ -1,14 +1,23 @@
 ﻿namespace CarsInfo.Web.Controllers
 {
     using System.Diagnostics;
+    using CarsInfo.Services;
     using CarsInfo.Web.Models;
     using Microsoft.AspNetCore.Mvc;
 
     public class HomeController : Controller
     {
+        private readonly IBrakesService brakes;
+
+        public HomeController(IBrakesService brakes)
+        {
+            this.brakes = brakes;
+        }
+
         public IActionResult Index()
         {
-            return View();
+            var allBrakes = this.brakes.AllInfo();
+            return View(allBrakes);
         }
 
         public IActionResult Privacy()

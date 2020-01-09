@@ -15,6 +15,8 @@
 
         IEnumerable<BrakesListingServiceModel> All(int page = 1);
 
+        IEnumerable<BrakesInfoServiceModel> AllInfo();
+
         BrakesInfoServiceModel BrakesInfo(int id);
     }
 }

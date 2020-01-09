@@ -7,9 +7,15 @@
     <div class="container">
         <h1 class="my-4">Brakes</h1>
 
+        <!-- Pagination -->
+        <ul class="pagination justify-content-center">
+            <li class="page-item @(Model.PreviousDisabled ? "disabled" : string.Empty)"><a class="page-link" href="/Brakes/All?page=@Model.PreviousPage">Previous</a></li>
+            <li class="page-item @(Model.NextDisabled ? "disabled" : string.Empty)"><a class="page-link" href="/Brakes/All?page=@Model.NextPage">Next</a></li>
+        </ul>
+
         @foreach (var brakes in Model.Brakes)
         {
-            <div class="row">
+            <div class="row pb-4">
                 <div class="col-md-7">
                     @if (brakes.Image != null)
                     {
@@ -23,33 +29,9 @@
                     }
                 </div>
                 <div class="col-md-5">
-                    <h3>@brakes.Type Brakes</h3>
-                    @switch (brakes.Type)
-                    {
-                        case "Frictional":
-                            <p>
-                                Frictional brakes are most common and can be divided broadly into "shoe" or "pad" brakes,
-                                using an explicit wear surface, and hydrodynamic brakes, such as parachutes, which use
-                                friction in a working fluid and do not explicitly wear.
-                            </p>
-                            break;
-                        case "Pumping":
-                            <p>
-                                Pumping brakes are often used where a pump is already part of the machinery. For example,
-                                an internal-combustion piston motor can have the fuel supply stopped, and then internal
-                                pumping losses of the engine create some braking.
-                            </p>
-                            break;
-                        case "Electromagnetic":
-                            <p>
-                                Electromagnetic brakes are likewise often used where an electric motor is already part of
-                                the machinery. For example, many hybrid gasoline/electric vehicles use the electric motor as a
-                                generator to charge electric batteries and also as a regenerative brake.
-                            </p>
-                            break;
-                        default:
-                            break;
-                    }
+                    <h3>@brakes.Name</h3>
+                    <h5>Price - $@brakes.Price</h5>
+                    <h6>Type - @brakes.Type</h6>
                     <a class="btn btn-primary" href="/Brakes/Info/@brakes.Id">Details</a>
                 </div>
             </div>
@@ -64,4 +46,3 @@
         </ul>
 
     </div>
-<!-- /.container -->

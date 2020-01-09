@@ -53,6 +53,12 @@
             public const int NameMaxLength = 50;
         }
 
+        public static class Brakes
+        {
+            public const int NameLength = 50;
+            public const int PriceMaxRange = 50000;
+        }
+
         public static class Wheels
         {
             public const int NameLength = 50;

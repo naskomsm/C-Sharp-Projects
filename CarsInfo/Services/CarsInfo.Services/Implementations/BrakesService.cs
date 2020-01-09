@@ -32,7 +32,11 @@
             {
                 Type = model.Type,
                 Description = model.Description,
-                Used = model.Used
+                Used = model.Used,
+                Name = model.Name,
+                Price = model.Price,
+                ImageId = model.ImageId,
+                Image = model.Image
             };
 
             if(model.Image != null)
@@ -54,10 +58,27 @@
                 {
                     Id = b.Id,
                     Type = b.Type.ToString(),
+                    Name = b.Name,
+                    Price = b.Price,
                     ImageId = b.ImageId,
                     Image = b.Image
                 })
                 .ToList();
+        }
+
+        public IEnumerable<BrakesInfoServiceModel> AllInfo()
+        {
+            return this.data.Brakes.Select(x => new BrakesInfoServiceModel
+            {
+                Id = x.Id,
+                Description = x.Description,
+                Image = x.Image,
+                Name = x.Name,
+                Price = x.Price,
+                ImageId = x.ImageId,
+                Type = x.Type.ToString(),
+                Used = x.Used == true ? "Used" : "Brand new"
+            });
         }
 
         public BrakesInfoServiceModel BrakesInfo(int id)
@@ -69,6 +90,8 @@
                     Id = x.Id,
                     Used = x.Used == true ? "Used" : "Brand new",
                     Type = x.Type.ToString(),
+                    Price = x.Price,
+                    Name = x.Name,
                     Description = x.Description,
                     Image = x.Image,
                     ImageId = x.ImageId
