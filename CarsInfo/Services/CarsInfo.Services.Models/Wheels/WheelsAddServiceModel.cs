@@ -14,6 +14,12 @@
         public bool Used { get; set; }
 
         [Required]
+        public decimal Price { get; set; }
+
+        [Required]
+        public string Description { get; set; }
+
+        [Required]
         [Range(0, MaxWeight)]
         public double Weight { get; set; }
 

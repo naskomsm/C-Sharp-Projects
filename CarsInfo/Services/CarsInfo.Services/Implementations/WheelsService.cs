@@ -31,6 +31,8 @@
                 FrontAxleSize = model.FrontAxleSize,
                 RearAxleSize = model.RearAxleSize,
                 ImageId = model.ImageId,
+                Description = model.Description,
+                Price = model.Price,
                 Image = model.Image
             };
 
