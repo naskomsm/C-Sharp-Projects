@@ -1,18 +1,12 @@
 ﻿namespace CarsInfo.Services.Models.Suspension
 {
     using CarsInfo.Data.Models;
-    using CarsInfo.Data.Models.Enums.Suspension;
     using System.ComponentModel.DataAnnotations;
     using static Data.Models.DataValidation.Suspension;
 
-    public class SuspensionAddServiceModel
+    public class SuspensionListingServiceModel
     {
-        [Required]
-        public SuspensionType Type { get; set; }
-
-        [Required]
-        [MaxLength(CarMadeForLength)]
-        public string CarBrandMadeFor { get; set; }
+        public int Id { get; set; }
 
         [Required]
         public string Name { get; set; }
@@ -20,11 +14,6 @@
         [Required]
         [Range(10, PriceMaxRange)]
         public decimal Price { get; set; }
-
-        [Required]
-        public int CategoryId { get; set; }
-
-        public Category Category { get; set; }
 
         public int? ImageId { get; set; }
 

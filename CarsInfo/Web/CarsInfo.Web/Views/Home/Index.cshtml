@@ -1,4 +1,4 @@
-﻿@model IEnumerable<BrakesInfoServiceModel>
+﻿@model HomeViewModel
 
 @{
     ViewData["Title"] = "Home Page";
@@ -15,12 +15,11 @@
                 <a href="Cars/All" class="list-group-item">Cars</a>
                 <a href="Engines/All" class="list-group-item">Engines</a>
                 <a href="Brakes/All" class="list-group-item">Brakes</a>
-                <a href="Suspensions/All" class="list-group-item">Suspensions</a>
+                <a href="Suspension/All" class="list-group-item">Suspensions</a>
                 <a href="Wheels/All" class="list-group-item">Wheels</a>
             </div>
 
         </div>
-        <!-- /.col-lg-3 -->
 
         <div class="col-lg-9">
 
@@ -52,7 +51,7 @@
             </div>
 
             <div class="row">
-                @foreach (var brakes in this.Model.Take(6))
+                @foreach (var brakes in @Model.Brakes)
                 {
                     <div class="col-lg-4 col-md-6 mb-4">
                         <div class="card h-100">
@@ -72,8 +71,7 @@
                                 <h4 class="card-title">
                                     <a href="/Brakes/Info/@brakes.Id">@brakes.Name</a>
                                 </h4>
-                                <h5>$@brakes.Price</h5>
-                                <p class="card-text">@brakes.Type brakes</p>
+                                <h5>Price - $@brakes.Price</h5>
                             </div>
                             <div class="card-footer">
                                 <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
@@ -81,13 +79,62 @@
                         </div>
                     </div>
                 }
+
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card h-100">
+                        <a href="/Wheels/Info/@Model.Wheels.Id">
+                            @if (@Model.Wheels.Image != null)
+                            {
+                                string imageBase64Data = Convert.ToBase64String(@Model.Wheels.Image.ImageData);
+                                string imageSrc = "data:image/jpg;base64," + imageBase64Data;
+                                <img class="card-img-top" src="@imageSrc" alt="">
+                            }
+                            else
+                            {
+                                <img class="card-img-top" src="http://simn-global.org/wp-content/uploads/2018/10/no-image-700x300.jpg" alt="">
+                            }
+                        </a>
+                        <div class="card-body">
+                            <h4 class="card-title">
+                                <a href="/Wheels/Info/@Model.Wheels.Id">@Model.Wheels.Name</a>
+                            </h4>
+                            <h5>Price - $@Model.Wheels.Price</h5>
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card h-100">
+                        <a href="/Suspension/Info/@Model.Suspension.Id">
+                            @if (@Model.Suspension.Image != null)
+                            {
+                                string imageBase64Data = Convert.ToBase64String(@Model.Suspension.Image.ImageData);
+                                string imageSrc = "data:image/jpg;base64," + imageBase64Data;
+                                <img class="card-img-top" src="@imageSrc" alt="">
+                            }
+                            else
+                            {
+                                <img class="card-img-top" src="http://simn-global.org/wp-content/uploads/2018/10/no-image-700x300.jpg" alt="">
+                            }
+                        </a>
+                        <div class="card-body">
+                            <h4 class="card-title">
+                                <a href="/Suspension/Info/@Model.Suspension.Id">@Model.Suspension.Name</a>
+                            </h4>
+                            <h5>Price - $@Model.Suspension.Price</h5>
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+                        </div>
+                    </div>
+                </div>
+
+                @*TODO CAR AND ENGINE*@
+
             </div>
-            <!-- /.row -->
-
         </div>
-        <!-- /.col-lg-9 -->
-
     </div>
-    <!-- /.row -->
-
 </div>

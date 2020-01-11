@@ -1,0 +1,52 @@
+﻿@model WheelsInfoServiceModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="container">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Name</th>
+                <th scope="col">Condition</th>
+                <th scope="col">Price</th>
+                <th scope="col">Weight</th>
+                <th scope="col">Color</th>
+                <th scope="col">FrontAxleSize</th>
+                <th scope="col">RearAxleSize</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">@Model.Id</th>
+                <td>@Model.Name</td>
+                <td>@Model.Used</td>
+                <td>$@Model.Price</td>
+                <td>@Model.Weight</td>
+                <td>@Model.Color</td>
+                <td>@Model.FrontAxleSize</td>
+                <td>@Model.RearAxleSize</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="card border-dark mb-3">
+        <div class="text-center card-header">Description</div>
+        <div class="card-body text-dark">
+            <p class="card-text">@Model.Description</p>
+        </div>
+    </div>
+
+    @if (Model.Image != null)
+    {
+        string imageBase64Data = Convert.ToBase64String(Model.Image.ImageData);
+        string imageSrc = "data:image/jpg;base64," + imageBase64Data;
+        <img class="img-thumbnail mx-auto d-block" src="@imageSrc" alt="">
+    }
+    else
+    {
+        <img class="img-thumbnail mx-auto d-block" src="http://simn-global.org/wp-content/uploads/2018/10/no-image-700x300.jpg" alt="">
+    }
+</div>

@@ -1,12 +1,12 @@
-﻿namespace CarsInfo.Web.Models.Wheels
+﻿namespace CarsInfo.Web.Models.Suspension
 {
-    using CarsInfo.Services.Models.Wheels;
+    using CarsInfo.Services.Models.Suspension;
     using System;
     using System.Collections.Generic;
 
-    public class AllWheelsViewModel
+    public class AllSuspensionViewModel
     {
-        public IEnumerable<WheelsListingServiceModel> Wheels { get; set; }
+        public IEnumerable<SuspensionListingServiceModel> Suspensions { get; set; }
 
         public int CurrentPage { get; set; }
 

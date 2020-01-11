@@ -68,7 +68,8 @@
 
         public IEnumerable<BrakesInfoServiceModel> AllInfo()
         {
-            return this.data.Brakes.Select(x => new BrakesInfoServiceModel
+            return this.data.Brakes
+                .Select(x => new BrakesInfoServiceModel
             {
                 Id = x.Id,
                 Description = x.Description,

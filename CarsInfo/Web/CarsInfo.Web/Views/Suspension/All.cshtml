@@ -1,0 +1,45 @@
+﻿@model AllSuspensionViewModel
+
+@{
+    ViewData["Title"] = "All";
+}
+
+<div class="container">
+    <h1 class="my-4">Suspensions</h1>
+
+    <ul class="pagination justify-content-center">
+        <li class="page-item @(Model.PreviousDisabled ? "disabled" : string.Empty)"><a class="page-link" href="/Suspension/All?page=@Model.PreviousPage">Previous</a></li>
+        <li class="page-item @(Model.NextDisabled ? "disabled" : string.Empty)"><a class="page-link" href="/Suspension/All?page=@Model.NextPage">Next</a></li>
+    </ul>
+
+    @foreach (var suspension in Model.Suspensions)
+    {
+        <div class="row pb-4">
+            <div class="col-md-7">
+                @if (suspension.Image != null)
+                {
+                    string imageBase64Data = Convert.ToBase64String(suspension.Image.ImageData);
+                    string imageSrc = "data:image/jpg;base64," + imageBase64Data;
+                    <img class="img-fluid rounded mb-3 mb-md-0" src="@imageSrc" alt="">
+                }
+                else
+                {
+                    <img class="img-fluid rounded mb-3 mb-md-0" src="http://simn-global.org/wp-content/uploads/2018/10/no-image-700x300.jpg" alt="">
+                }
+            </div>
+            <div class="col-md-5">
+                <h3>@suspension.Name</h3>
+                <h5>Price - $@suspension.Price</h5>
+                <a class="btn btn-primary" href="/Suspension/Info/@suspension.Id">Details</a>
+            </div>
+        </div>
+    }
+
+    <hr>
+
+    <ul class="pagination justify-content-center">
+        <li class="page-item @(Model.PreviousDisabled ? "disabled" : string.Empty)"><a class="page-link" href="/Suspension/All?page=@Model.PreviousPage">Previous</a></li>
+        <li class="page-item @(Model.NextDisabled ? "disabled" : string.Empty)"><a class="page-link" href="/Suspension/All?page=@Model.NextPage">Next</a></li>
+    </ul>
+
+</div>

@@ -49,21 +49,42 @@
             var imageService = new ImageService(data);
 
             WebClient wc = new WebClient();
-            byte[] bytes = wc.DownloadData("https://cariteautorepairs.com.au/wp-content/uploads/2014/04/Brakes-700x300.jpg");
+            var brakesBytes = wc.DownloadData("https://cariteautorepairs.com.au/wp-content/up                                                                                                                                                                                                                                                                                     loads/2014/04/Brakes-700x300.jpg");
+            var wheelsBytes = wc.DownloadData("http://osceolaspeedtires.com/wp-content/uploads/2018/11/Rims-page-banner-700x300.jpg");
+            var suspensionBytes = wc.DownloadData("http://www.alexlague.com/work/topgear/wp-content/uploads/2016/11/DSC_0646-700x300.jpg");
 
-            var imageModel = new ImageAddServiceModel()
+            // id - 1  
+            var brakesImageModel = new ImageAddServiceModel()
             {
                 ImageTitle = "Brakes",
-                ImageData = bytes
+                ImageData = brakesBytes
             };
 
-            string imageBase64Data = Convert.ToBase64String(imageModel.ImageData);
+            // id - 2
+            var wheelsImageModel = new ImageAddServiceModel()
+            {
+                ImageTitle = "Wheels",
+                ImageData = wheelsBytes
+            };
 
-            imageService.Add(imageModel);
+            // id - 3
+            var suspensionImageModel = new ImageAddServiceModel()
+            {
+                ImageTitle = "Suspension",
+                ImageData = suspensionBytes
+            };
+
+            string brakesImageBase64Data = Convert.ToBase64String(brakesImageModel.ImageData);
+            string wheelsImageBase64Data = Convert.ToBase64String(wheelsImageModel.ImageData);
+            string suspensionImageBase64Data = Convert.ToBase64String(suspensionImageModel.ImageData);
+
+            imageService.Add(brakesImageModel);
+            imageService.Add(wheelsImageModel);
+            imageService.Add(suspensionImageModel);
 
             //Brakes
             var brakesService = new BrakesService(data);
-            var brakesModel = new BrakesAddServiceModel()
+            var firstBrakesModel = new BrakesAddServiceModel()
             {
                 Type = BrakesType.Electromagnetic,
                 Description = @"Electromagnetic brakes are likewise often used where an electric motor is already part of the machinery. For example, many hybrid gasoline/electric vehicles use the electric motor as a generator to charge electric batteries and also as a regenerative brake. Some diesel/electric railroad locomotives use the electric motors to generate electricity which is then sent to a resistor bank and dumped as heat. Some vehicles, such as some transit buses, do not already have an electric motor but use a secondary retarder brake that is effectively a generator with an internal short-circuit. Related types of such a brake are eddy current brakes, and electro-mechanical brakes (which actually are magnetically driven friction brakes, but nowadays are often just called electromagnetic brakes as well).",
@@ -74,7 +95,17 @@
                 Image = data.Images.FirstOrDefault(x => x.Id == 1)
             };
 
-            brakesService.Add(brakesModel);
+            var secondBrakesModel = new BrakesAddServiceModel()
+            {
+                Type = BrakesType.Pumping,
+                Description = @"randomn brakes blblabllablalallal description",
+                Used = false,
+                Name = "Secpmd Brakes Name",
+                Price = 79.99m,
+            };
+
+            brakesService.Add(firstBrakesModel);
+            brakesService.Add(secondBrakesModel);
 
             // Category
             var categoryService = new CategoryService(data);
@@ -97,7 +128,6 @@
             var suspensionService = new SuspensionService(data);
 
             var category = data.Categories.FirstOrDefault(x => x.Id == 1);
-            var image = data.Images.FirstOrDefault(x => x.Id == 1);
 
             var suspensionModel = new SuspensionAddServiceModel()
             {
@@ -105,8 +135,10 @@
                 CarBrandMadeFor = "BMW",
                 CategoryId = category.Id,
                 Category = category,
-                ImageId = image.Id,
-                Image = image
+                ImageId = 3,
+                Image = data.Images.FirstOrDefault(x => x.Id == 3),
+                Name = "BILSTEIN B8 5100",
+                Price = 94.50m
             };
 
             suspensionService.Add(suspensionModel);
@@ -121,8 +153,8 @@
                 Color = "Gloss Black",
                 FrontAxleSize = "9.0 x 19 - ET 20.0",
                 RearAxleSize = "10.0 x 19 - ET 32.0",
-                ImageId = image.Id,
-                Image = image,
+                ImageId = 2,
+                Image = data.Images.FirstOrDefault(x => x.Id == 2),
                 Description = "just random wheels description",
                 Price = 990m
             };

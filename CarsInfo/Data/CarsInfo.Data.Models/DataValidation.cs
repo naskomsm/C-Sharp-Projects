@@ -22,7 +22,7 @@
 
         public static class Category
         {
-            public const int NameLength = 20;
+            public const int NameLength = 50;
             public const int DescriptionLength = 2000;
         }
 
@@ -46,6 +46,8 @@
         public static class Suspension
         {
             public const int CarMadeForLength = 20;
+            public const int NameLength = 50;
+            public const int PriceMaxRange = 50000;
         }
 
         public static class User

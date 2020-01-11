@@ -1,21 +1,19 @@
-﻿namespace CarsInfo.Data.Models
+﻿namespace CarsInfo.Services.Models.Suspension
 {
-    using CarsInfo.Data.Models.Enums.Suspension;
-    using System.Collections.Generic;
+    using CarsInfo.Data.Models;
     using System.ComponentModel.DataAnnotations;
-    
-    using static DataValidation.Suspension;
+    using static Data.Models.DataValidation.Suspension;
 
-    public class Suspension
+    public class SuspensionInfoServiceModel
     {
         public int Id { get; set; }
 
         [Required]
-        public SuspensionType Type { get; set; }
+        public string Type { get; set; }
 
         [Required]
         public string Name { get; set; }
-        
+
         [Required]
         [Range(10, PriceMaxRange)]
         public decimal Price { get; set; }
@@ -32,9 +30,5 @@
         public int? ImageId { get; set; }
 
         public Image Image { get; set; }
-
-        public ICollection<Car> Cars { get; set; } = new HashSet<Car>();
-
-        public ICollection<SuspensionOrder> Orders { get; set; } = new HashSet<SuspensionOrder>();
     }
 }
