@@ -12,6 +12,7 @@
         public string Type { get; set; }
 
         [Required]
+        [MaxLength(NameLength)]
         public string Name { get; set; }
 
         [Required]

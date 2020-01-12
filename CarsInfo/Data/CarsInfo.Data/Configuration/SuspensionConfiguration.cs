@@ -11,17 +11,20 @@
             suspension
                  .HasOne(s => s.Category)
                  .WithMany(cat => cat.Suspensions)
-                 .HasForeignKey(s => s.CategoryId);
+                 .HasForeignKey(s => s.CategoryId)
+                 .OnDelete(DeleteBehavior.Restrict);
 
             suspension
                 .HasOne(s => s.Image)
                 .WithMany(i => i.Suspensions)
-                .HasForeignKey(s => s.ImageId);
+                .HasForeignKey(s => s.ImageId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             suspension
                 .HasMany(s => s.Cars)
                 .WithOne(c => c.Suspension)
-                .HasForeignKey(c => c.SuspensionId);
+                .HasForeignKey(c => c.SuspensionId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

@@ -1,26 +1,24 @@
-﻿namespace CarsInfo.Data.Models
+﻿namespace CarsInfo.Services.Models.Car
 {
     using CarsInfo.Data.Models.Enums.Car;
-    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    
-    using static DataValidation.Car;
+    using static Data.Models.DataValidation.Car;
+    using Image = Data.Models.Image;
+    using CarsInfo.Data.Models;
 
-    public class Car
+    public class CarAddServiceModel
     {
-        public int Id { get; set; }
-
         [Required]
         [MaxLength(BrandLength)]
         public string Brand { get; set; }
 
         [Required]
-        [Range(20000,MaxPrice)]
-        public decimal Price { get; set; }
-
-        [Required]
         [MaxLength(ModelLength)]
         public string Model { get; set; }
+
+        [Required]
+        [Range(20000, MaxPrice)]
+        public decimal Price { get; set; }
 
         [Required]
         [MaxLength(GenerationLength)]
@@ -42,6 +40,7 @@
         [Required]
         public int Doors { get; set; }
 
+        // In MM
         [Required]
         [Range(0, MaximumLength)]
         public double Length { get; set; }
@@ -75,7 +74,7 @@
 
         [Required]
         public int EngineId { get; set; }
-        
+
         public Engine Engine { get; set; }
 
         [Required]
@@ -102,7 +101,5 @@
         public int SuspensionId { get; set; }
 
         public Suspension Suspension { get; set; }
-
-        public ICollection<CarOrder> Orders { get; set; } = new HashSet<CarOrder>();
     }
 }

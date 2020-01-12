@@ -1,9 +1,10 @@
 ﻿namespace CarsInfo.Services.Models.Brakes
 {
-    using CarsInfo.Data.Models;
     using CarsInfo.Data.Models.Enums.Brakes;
     using System.ComponentModel.DataAnnotations;
+    using static Data.Models.DataValidation;
     using static Data.Models.DataValidation.Brakes;
+    using Image = Data.Models.Image;
 
     public class BrakesAddServiceModel
     {
@@ -21,6 +22,7 @@
         public decimal Price { get; set; }
 
         [Required]
+        [MaxLength(DescriptionLength)]
         public string Description { get; set; }
 
         public int? ImageId { get; set; }

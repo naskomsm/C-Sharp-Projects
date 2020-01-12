@@ -3,14 +3,27 @@
     using CarsInfo.Data.Models.Enums.Engine;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    
+
+    using static DataValidation;
     using static DataValidation.Engine;
 
     public class Engine
     {
         public int Id { get; set; }
 
+        [Required]
+        [MaxLength(NameLength)]
+        public string Name { get; set; }
+
+        [Required]
+        [MaxLength(DescriptionLength)]
+        public string Description { get; set; }
+
         public Position Position { get; set; }
+
+        [Required]
+        [Range(150000,PriceMaxRange)]
+        public decimal Price { get; set; }
 
         [Required]
         [Range(0, MaxCylindersDiameter)]
@@ -21,7 +34,7 @@
         public double CylindersStroke { get; set; }
 
         [Required]
-        [Range(0, MaxCylindersCount)]
+        [Range(3, MaxCylindersCount)]
         public int CylindersCount { get; set; }
 
         [Required]
@@ -36,7 +49,7 @@
         public int MaxPowerIn { get; set; }
 
         [Required]
-        [Range(0, MaxTorque)]
+        [Range(100, MaxTorque)]
         public int Torque { get; set; }
 
         [Required]
@@ -51,6 +64,11 @@
 
         [Required]
         public int NumberOfValvesPerCylinder { get; set; }
+
+        [Required]
+        public int ImageId { get; set; }
+
+        public Image Image { get; set; }
 
         [Required]
         public FuelType FuelType { get; set; }

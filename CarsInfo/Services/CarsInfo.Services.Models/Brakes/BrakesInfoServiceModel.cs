@@ -1,7 +1,8 @@
 ﻿namespace CarsInfo.Services.Models.Brakes
 {
+    using Image = Data.Models.Image;
     using System.ComponentModel.DataAnnotations;
-    using CarsInfo.Data.Models;
+    using static Data.Models.DataValidation;
     using static Data.Models.DataValidation.Brakes;
 
     public class BrakesInfoServiceModel
@@ -13,6 +14,7 @@
         public string Type { get; set; }
 
         [Required]
+        [MaxLength(DescriptionLength)]
         public string Description { get; set; }
 
         [Required]

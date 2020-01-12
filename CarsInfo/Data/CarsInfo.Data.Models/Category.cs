@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     
+    using static DataValidation;
     using static DataValidation.Category;
 
     public class Category

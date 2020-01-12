@@ -1,6 +1,7 @@
 ﻿namespace CarsInfo.Services.Models.Category
 {
     using System.ComponentModel.DataAnnotations;
+    using static Data.Models.DataValidation;
     using static Data.Models.DataValidation.Category;
 
     public class CategoryAddServiceModel

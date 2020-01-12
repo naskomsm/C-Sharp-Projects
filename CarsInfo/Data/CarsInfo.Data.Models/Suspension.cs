@@ -17,7 +17,7 @@
         public string Name { get; set; }
         
         [Required]
-        [Range(10, PriceMaxRange)]
+        [Range(50, PriceMaxRange)]
         public decimal Price { get; set; }
 
         [Required]

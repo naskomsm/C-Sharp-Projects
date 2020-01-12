@@ -5,6 +5,8 @@
 
     public static class DataValidation
     {
+        public const int DescriptionLength = 2000;
+
         public static class Car 
         {
             public const int BrandLength = 50;
@@ -13,17 +15,17 @@
             public const int ColorLength = 25;
             public const int MinimumYear = 1900;
             public const int MaximumYear = 2500;
-            public const int MaximumLength = 10000;
-            public const int MaximumWidth = 5000;
-            public const int MaximumHeight = 8000;
+            public const int MaximumLength = 10;
+            public const int MaximumWidth = 5;
+            public const int MaximumHeight = 8;
             public const int MaximumWeight = 5000;
             public const int MaximumMaxWeight = 10000;
+            public const int MaxPrice = 3000000;
         }
 
         public static class Category
         {
             public const int NameLength = 50;
-            public const int DescriptionLength = 2000;
         }
 
         public static class Engine
@@ -36,6 +38,8 @@
             public const int MaximumMaxPowerIn = 10000;
             public const int MaxTorque = 2000;
             public const int MaxCompressionRatio = 30;
+            public const int NameLength = 50;
+            public const int PriceMaxRange = 350000;
         }
 
         public static class Image
@@ -66,6 +70,7 @@
             public const int NameLength = 50;
             public const int MaxWeight = 30;
             public const int ColorLength = 25;
+            public const int PriceMaxRange = 10000;
         }
 
         public static bool IsValid(object dto)

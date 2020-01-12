@@ -2,7 +2,8 @@
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    
+
+    using static DataValidation;
     using static DataValidation.Wheels;
 
     public class Wheels
@@ -17,13 +18,15 @@
         public bool Used { get; set; }
 
         [Required]
+        [Range(200, PriceMaxRange)]
         public decimal Price { get; set; }
 
         [Required]
+        [MaxLength(DescriptionLength)]
         public string Description { get; set; }
 
         [Required]
-        [Range(0, MaxWeight)]
+        [Range(10, MaxWeight)]
         public double Weight { get; set; }
 
         [Required]

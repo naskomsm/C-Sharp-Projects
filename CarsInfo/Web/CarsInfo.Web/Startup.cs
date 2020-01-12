@@ -29,6 +29,7 @@ namespace CarsInfo.Web
             services.AddTransient<IImageService, ImageService>();
             services.AddTransient<IOrderService, OrderService>();
             services.AddTransient<ISuspensionService, SuspensionService>();
+            services.AddTransient<ICarService, CarService>();
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IWheelsService, WheelsService>();
 

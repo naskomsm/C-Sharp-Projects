@@ -11,22 +11,32 @@
             image
                 .HasMany(i => i.Cars)
                 .WithOne(c => c.Image)
-                .HasForeignKey(c => c.ImageId);
+                .HasForeignKey(c => c.ImageId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             image
                 .HasMany(i => i.Wheels)
                 .WithOne(w => w.Image)
-                .HasForeignKey(w => w.ImageId);
+                .HasForeignKey(w => w.ImageId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             image
                 .HasMany(i => i.Brakes)
                 .WithOne(b => b.Image)
-                .HasForeignKey(b => b.ImageId);
+                .HasForeignKey(b => b.ImageId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             image
                 .HasMany(i => i.Suspensions)
                 .WithOne(s => s.Image)
-                .HasForeignKey(s => s.ImageId);
+                .HasForeignKey(s => s.ImageId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            image
+                .HasMany(i => i.Engines)
+                .WithOne(e => e.Image)
+                .HasForeignKey(e => e.ImageId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

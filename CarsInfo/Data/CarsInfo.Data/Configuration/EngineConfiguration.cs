@@ -11,7 +11,14 @@
             engine
                 .HasMany(e => e.Cars)
                 .WithOne(c => c.Engine)
-                .HasForeignKey(c => c.EngineId);
+                .HasForeignKey(c => c.EngineId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            engine
+                .HasOne(e => e.Image)
+                .WithMany(i => i.Engines)
+                .HasForeignKey(e => e.ImageId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

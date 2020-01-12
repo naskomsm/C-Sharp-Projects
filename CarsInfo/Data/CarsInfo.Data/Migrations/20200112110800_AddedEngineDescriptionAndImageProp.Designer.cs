@@ -4,14 +4,16 @@ using CarsInfo.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CarsInfo.Data.Migrations
 {
     [DbContext(typeof(CarsInfoDbContext))]
-    partial class CarsInfoDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200112110800_AddedEngineDescriptionAndImageProp")]
+    partial class AddedEngineDescriptionAndImageProp
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -112,14 +114,14 @@ namespace CarsInfo.Data.Migrations
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
 
-                    b.Property<double>("Height")
-                        .HasColumnType("float");
+                    b.Property<int>("Height")
+                        .HasColumnType("int");
 
                     b.Property<int?>("ImageId")
                         .HasColumnType("int");
 
-                    b.Property<double>("Length")
-                        .HasColumnType("float");
+                    b.Property<int>("Length")
+                        .HasColumnType("int");
 
                     b.Property<double>("MaxWeight")
                         .HasColumnType("float");
@@ -128,9 +130,6 @@ namespace CarsInfo.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("Seats")
                         .HasColumnType("int");
@@ -147,8 +146,8 @@ namespace CarsInfo.Data.Migrations
                     b.Property<int>("WheelsId")
                         .HasColumnType("int");
 
-                    b.Property<double>("Width")
-                        .HasColumnType("float");
+                    b.Property<int>("Width")
+                        .HasColumnType("int");
 
                     b.Property<int?>("YearEnd")
                         .HasColumnType("int");
@@ -555,9 +554,9 @@ namespace CarsInfo.Data.Migrations
             modelBuilder.Entity("CarsInfo.Data.Models.Engine", b =>
                 {
                     b.HasOne("CarsInfo.Data.Models.Image", "Image")
-                        .WithMany("Engines")
+                        .WithMany()
                         .HasForeignKey("ImageId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
@@ -590,13 +589,12 @@ namespace CarsInfo.Data.Migrations
                     b.HasOne("CarsInfo.Data.Models.Category", "Category")
                         .WithMany("Suspensions")
                         .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("CarsInfo.Data.Models.Image", "Image")
                         .WithMany("Suspensions")
-                        .HasForeignKey("ImageId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .HasForeignKey("ImageId");
                 });
 
             modelBuilder.Entity("CarsInfo.Data.Models.SuspensionOrder", b =>

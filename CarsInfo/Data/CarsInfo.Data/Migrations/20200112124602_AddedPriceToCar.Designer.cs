@@ -4,14 +4,16 @@ using CarsInfo.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CarsInfo.Data.Migrations
 {
     [DbContext(typeof(CarsInfoDbContext))]
-    partial class CarsInfoDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200112124602_AddedPriceToCar")]
+    partial class AddedPriceToCar
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

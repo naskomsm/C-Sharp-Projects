@@ -23,5 +23,7 @@
         public ICollection<Wheels> Wheels { get; set; } = new HashSet<Wheels>();
 
         public ICollection<Suspension> Suspensions { get; set; } = new HashSet<Suspension>();
+
+        public ICollection<Engine> Engines { get; set; } = new HashSet<Engine>();
     }
 }

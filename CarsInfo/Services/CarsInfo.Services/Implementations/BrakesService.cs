@@ -39,11 +39,6 @@
                 Image = model.Image
             };
 
-            if(model.Image != null)
-            {
-                brakes.Image = model.Image;
-            }
-
             this.data.Brakes.Add(brakes);
             this.data.SaveChanges();
         }

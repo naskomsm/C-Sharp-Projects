@@ -11,12 +11,14 @@
             category
                 .HasMany(cat => cat.Cars)
                 .WithOne(c => c.Category)
-                .HasForeignKey(c => c.CategoryId);
+                .HasForeignKey(c => c.CategoryId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             category
                 .HasMany(cat => cat.Suspensions)
                 .WithOne(s => s.Category)
-                .HasForeignKey(s => s.CategoryId);
+                .HasForeignKey(s => s.CategoryId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

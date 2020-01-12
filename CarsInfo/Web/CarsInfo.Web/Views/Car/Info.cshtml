@@ -1,0 +1,52 @@
+﻿@model CarInfoServiceModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="container">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Brand</th>
+                <th scope="col">Model</th>
+                <th scope="col">Generation</th>
+                <th scope="col">Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">@Model.Id</th>
+                <td>@Model.Brand</td>
+                <td>@Model.Model</td>
+                <td>@Model.Generation</td>
+                <td>$@Model.Price</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="card border-dark mb-3">
+        <div class="text-center card-header">Description</div>
+        <div class="card-body text-dark">
+            <p class="card-text">The car color is: @Model.Color, It is made between @Model.YearStart.ToString() and 
+            @(Model.YearEnd == null ? "-" : @Model.YearEnd.ToString()), seats - @Model.Seats, doors - @Model.Doors.  The length of the car is: @Model.Length m,
+            width: @Model.Width m, height: @Model.Height m, weight: @Model.Weight kg.  Fuel consumtion - @Model.FuelConsumption L/100, EURO @Model.EmissionStandard.ToString().ToUpper();
+            emission standard, possible max weight - @Model.MaxWeight, category - @Model.Category.Name (@Model.Category.Description), engine - @Model.Engine.Name 
+                (<a href="/Engine/Info/@Model.Engine.Id">Engine details</a>), brakes - @Model.Brakes.Name (<a href="/Brakes/Info/@Model.Brakes.Id">Brakes details</a>),
+             ABS - @(Model.ABS == true ? "Yes" : "No"), it is @Model.WheelDrive wheel drive with @Model.Suspension.Name suspension 
+            (<a href="/Suspension/Info/@Model.Suspension.Id">Suspension details</a>).
+        </div>
+    </div>
+
+    @if (Model.Image != null)
+    {
+        string imageBase64Data = Convert.ToBase64String(Model.Image.ImageData);
+        string imageSrc = "data:image/jpg;base64," + imageBase64Data;
+        <img class="img-thumbnail mx-auto d-block" src="@imageSrc" alt="">
+    }
+    else
+    {
+        <img class="img-thumbnail mx-auto d-block" src="http://simn-global.org/wp-content/uploads/2018/10/no-image-700x300.jpg" alt="">
+    }
+</div>
