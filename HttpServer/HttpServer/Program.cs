@@ -10,15 +10,22 @@
     {
         public static void Main()
         {
-            const string ImageFilePath = "../../../images/cat.png";
-            const string NewLine = "\r\n";
-            const string responseBody = "<form method='post'>" +
-                "<input type='text' name='username' placeholder='username'</input>" +
-                "<input type='password' name='password' placeholder='password'</input>" +
-                "<input type='submit'></input>" +
-                "</form>";
+            string body = "<form method='post'>" +
+                            "<input type='text' name='username' placeholder='username'</input>" +
+                            "<input type='password' name='password' placeholder='password'</input>" +
+                            "<input type='submit'></input>" +
+                            "</form>";
 
-            var users = new Dictionary<string, string>();
+            var responseLine = Constants.ResponseLines.Okay;
+            var headers = new List<Header>()
+            {
+                new Header("Content-Type", "text/html"),
+                new Header("Server", "MyCustomServer/1.0"),
+                new Header("Content-Length:", $"{body.Length}")
+            };
+
+            var response = new Response(responseLine, headers, body);
+
             var port = 8000;
             var ipAdress = IPAddress.Loopback;
 
@@ -31,39 +38,26 @@
 
                 using (var stream = client.GetStream())
                 {
-                    var requestBytes = new byte[100000]; // just for the test it is 100k
+                    var requestBytes = new byte[100000];
                     var readBytes = stream.Read(requestBytes, 0, requestBytes.Length);
                     var stringRequest = Encoding.UTF8.GetString(requestBytes, 0, readBytes);
 
-                    var splittedRequest = stringRequest.Split(Environment.NewLine);
-                    
-                    Console.WriteLine(new string('=', 70));
+                    var splittedRequest = stringRequest.Split(Constants.NewLine);
+
+                    Console.WriteLine("Request string: ");
                     Console.WriteLine(stringRequest);
 
                     if (splittedRequest[0].Contains("POST"))
                     {
-                        var nameAndPassword = splittedRequest[splittedRequest.Length - 1].Split("&");
-                        var username = nameAndPassword[0].Split("=")[1];
-                        var password = nameAndPassword[1].Split("=")[1];
-
-                        Console.WriteLine("Addd user with: ");
-                        Console.WriteLine($"Username: {username}");
-                        Console.WriteLine($"Password: {password}");
-
-                        if (!users.ContainsKey(username))
-                        {
-                            users.Add(username, password);
-                        }
+                        Console.WriteLine();
                     }
 
-                    // text/html response
-                    string response = "HTTP/1.0 200 OK" + NewLine +
-                                      "Content-Type: text/html" + NewLine +
-                                      "Server: MyCustomServer/1.0" + NewLine +
-                                      $"Content-Length {responseBody.Length}" + NewLine + NewLine +
-                                      responseBody;
-                    var responseBytes = Encoding.UTF8.GetBytes(response);
+                    var responseBytes = Encoding.UTF8.GetBytes(response.ToString());
                     stream.Write(responseBytes, 0, responseBytes.Length);
+                    
+                    Console.WriteLine("Response string: ");
+                    Console.WriteLine(response);
+                    Console.WriteLine(new string('=', 70));
 
                     // image/png response
                     //string response = "HTTP/1.0 200 OK" + NewLine +
