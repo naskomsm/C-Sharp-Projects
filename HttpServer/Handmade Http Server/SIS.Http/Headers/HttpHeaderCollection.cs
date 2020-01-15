@@ -1,41 +1,38 @@
 ﻿namespace SIS.HTTP.Headers
 {
-    using SIS.HTTP.Common;
+    using System.Linq;
+    using SIS.HTTP.Extensions;
     using SIS.HTTP.Headers.Contracts;
     using System.Collections.Generic;
-    using System.Linq;
 
     public class HttpHeaderCollection : IHttpHeaderCollection
     {
-        private readonly Dictionary<string, HttpHeader> httpHeeaders;
+        private Dictionary<string, HttpHeader> httpHeaders;
 
         public HttpHeaderCollection()
         {
-            this.httpHeeaders = new Dictionary<string, HttpHeader>();
+            this.httpHeaders = new Dictionary<string, HttpHeader>();
         }
 
         public void AddHeader(HttpHeader header)
         {
-            CoreValidator.ThrowIfNull(header, nameof(header));
-            this.httpHeeaders.Add(header.Key, header);
+            header.ThrowIfNull(nameof(header));
+            this.httpHeaders.Add(header.Key, header);
         }
 
         public bool ContainsHeader(string key)
         {
-            CoreValidator.ThrowIfNullOrEmpty(key, nameof(key));
-            return this.httpHeeaders.ContainsKey(key);
+            key.ThrowIfNullOrEmpty(nameof(key));
+            return this.httpHeaders.ContainsKey(key);
         }
 
         public HttpHeader GetHeader(string key)
         {
-            CoreValidator.ThrowIfNullOrEmpty(key, nameof(key));
-            return this.httpHeeaders[key];
+            key.ThrowIfNullOrEmpty(nameof(key));
+            return this.httpHeaders[key];
         }
 
-        public override string ToString()
-            => string.Join("\n\r", this
-            .httpHeeaders
-            .Values
-            .Select(h => h.ToString()));
+        public override string ToString() => string.Join("\r\n",
+            this.httpHeaders.Values.Select(header => header.ToString()));
     }
 }

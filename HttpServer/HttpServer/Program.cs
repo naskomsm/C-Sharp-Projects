@@ -10,6 +10,11 @@
     {
         public static void Main()
         {
+            // for image
+            // Content-Type: image/png
+            // and File.Read to read bytes from picture
+            // stream.Write()
+
             string body = "<form method='post'>" +
                             "<input type='text' name='username' placeholder='username'</input>" +
                             "<input type='password' name='password' placeholder='password'</input>" +
@@ -58,13 +63,6 @@
                     Console.WriteLine("Response string: ");
                     Console.WriteLine(response);
                     Console.WriteLine(new string('=', 70));
-
-                    // image/png response
-                    //string response = "HTTP/1.0 200 OK" + NewLine +
-                    //                  "Content-Type: image/png" + NewLine +
-                    //                  "Server: MyCustomServer/1.0" + NewLine + NewLine;
-                    //var imageBytes = File.ReadAllBytes(ImageFilePath);
-                    //stream.Write(imageBytes, 0, imageBytes.Length);
                 }
             }
         }

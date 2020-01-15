@@ -10,42 +10,38 @@
     using SIS.HTTP.Requests.Contracts;
     using SIS.HTTP.Extensions;
     using System.Linq;
+    using System.Net;
+    using System.Web;
 
     public class HttpRequest : IHttpRequest
     {
         public HttpRequest(string requestString)
         {
-            CoreValidator.ThrowIfNullOrEmpty(requestString, nameof(requestString));
+            requestString.ThrowIfNullOrEmpty(nameof(requestString));
 
-            this.FormData = new Dictionary<string, object>();
-            this.QueryData = new Dictionary<string, object>();
+            this.FormData = new Dictionary<string, ISet<string>>();
+            this.QueryData = new Dictionary<string, ISet<string>>();
             this.Headers = new HttpHeaderCollection();
 
-            ParseRequest(requestString);
+            this.ParseRequest(requestString);
         }
 
         public string Path { get; private set; }
 
         public string Url { get; private set; }
 
-        public Dictionary<string, object> FormData { get; }
+        public Dictionary<string, ISet<string>> FormData { get; }
 
-        public Dictionary<string, object> QueryData { get; }
+        public Dictionary<string, ISet<string>> QueryData { get; }
 
         public IHttpHeaderCollection Headers { get; }
 
-        public HttpRequestMethod Method { get; private set; }
+        public HttpRequestMethod RequestMethod { get; private set; }
 
-        private bool IsValidRequestLine(string[] requestLineParts)
+        private bool IsValidRequestLine(string[] requestLineParams)
         {
-            if (requestLineParts.Length != 3)
-            {
-                return false;
-            }
-
-            var protocol = requestLineParts[2];
-
-            if (protocol != "HTTP/1.1")
+            if (requestLineParams.Length != 3 
+                || requestLineParams[2] != GlobalConstants.HttpOneProtocolFragment)
             {
                 return false;
             }
@@ -53,140 +49,143 @@
             return true;
         }
 
-        private void ParseRequestMethod(string[] requestLineParts)
+        private bool HasQueryString()
         {
-            var method = requestLineParts[0].Capitalize();
-            var methodEnum = (HttpRequestMethod)Enum.Parse(typeof(HttpRequestMethod), method, true);
-            this.Method = methodEnum;
+            return this.Url.Split('?').Length > 1;
         }
 
-        private void ParseRequestUrl(string[] requestLineParts)
+        private IEnumerable<string> ParsePlainRequestHeaders(string[] requestLines)
         {
-            var url = requestLineParts[1];
-            this.Url = url;
+            for (int i = 1; i < requestLines.Length - 1; i++)
+            {
+                if (!string.IsNullOrEmpty(requestLines[i]))
+                {
+                    yield return requestLines[i];
+                }
+            }
+        }
+
+        private void ParseRequestMethod(string[] requestLineParams)
+        {
+            bool parseResult = HttpRequestMethod.TryParse(requestLineParams[0], true,
+                out HttpRequestMethod method);
+
+            if (!parseResult)
+            {
+                throw new BadRequestException(
+                    string.Format(GlobalConstants.UnsupportedHttpMethodExceptionMessage,
+                        requestLineParams[0]));
+            }
+
+            this.RequestMethod = method;
+        }
+
+        private void ParseRequestUrl(string[] requestLineParams)
+        {
+            // if url contains some strange characters this will handle the problem
+            this.Url = HttpUtility.UrlDecode(requestLineParams[1]);
         }
 
         private void ParseRequestPath()
         {
-            var url = this.Url.Split("?");
-            var path = url[0];
-            this.Path = path;
+            this.Path = this.Url.Split('?')[0];
         }
 
-        private void ParseHeaders(string[] headersParts)
+        private void ParseRequestHeaders(string[] plainHeaders)
         {
-            foreach (var header in headersParts)
-            {
-                if (string.IsNullOrWhiteSpace(header) || string.IsNullOrEmpty(header) || header == "\r\n")
-                {
-                    break;
-                }
-
-                var splittedHeader = header.Split(": ");
-
-                var headerKey = splittedHeader[0];
-                var headerValue = splittedHeader[1];
-
-                if (!this.Headers.ContainsHeader(headerKey))
-                {
-                    this.Headers.AddHeader(new HttpHeader(headerKey, headerValue));
-                }
-            }
+            plainHeaders
+                .Select(plainHeader => plainHeader.Split(new[] { ": " }, StringSplitOptions.RemoveEmptyEntries))
+                .ToList()
+                .ForEach(headerKeyValuePair => this.Headers.AddHeader(new HttpHeader(headerKeyValuePair[0], headerKeyValuePair[1])));
         }
 
-        private void ParseQueryParameters()
+        private void ParseRequestQueryParameters()
         {
-            // TODO: parse multiple parameters ( cars=Volvo&cars=BMW&cars=Opel ) , select many HTML ( hint )
-            if (this.Url.Length > 1)
+            if (this.HasQueryString())
             {
-                var url = this.Url.Split('?', '#');
-                var pairs = url[1].Split("&");
+                var parameters = this.Url.Split('?', '#')[1]
+                    .Split('&')
+                    .Select(plainQueryParameter => plainQueryParameter.Split('='))
+                    .ToList();
 
-                if (pairs.Length > 1)
+                foreach (var parameter in parameters)
                 {
-                    foreach (var queryString in pairs)
+                    if (!this.QueryData.ContainsKey(parameter[0]))
                     {
-                        var queryStringSplited = queryString.Split("=");
-
-                        var key = queryStringSplited[0]; // name
-                        var value = queryStringSplited[1]; // gosho
-
-                        if (!this.QueryData.ContainsKey(key))
-                        {
-                            this.QueryData.Add(key, value);
-                        }
+                        this.QueryData.Add(parameter[0], new HashSet<string>());
                     }
+
+                    this.QueryData[parameter[0]].Add(WebUtility.UrlDecode(parameter[1]));
                 }
             }
         }
 
-        private bool IsValidRequestQueryString(string queryString, string[] queryParams)
+        private void ParseRequestFormDataParameters(string requestBody)
         {
-            if (string.IsNullOrEmpty(queryString) || string.IsNullOrWhiteSpace(queryString) || queryParams.Length < 1)
+            if (string.IsNullOrEmpty(requestBody) == false)
             {
-                return false;
-            }
+                //TODO: Parse Multiple Parameters By Name
+                var paramsPairs = requestBody
+                   .Split('&')
+                   .Select(plainQueryParameter => plainQueryParameter.Split('='))
+                   .ToList();
 
-            return true;
-        }
-
-        private void ParseRequestParameters(string formData)
-        {
-            ParseQueryParameters();
-            ParseFormDataParameters(formData);
-        }
-
-        private void ParseFormDataParameters(string formData)
-        {
-            var pairs = formData.Split("&");
-            if (pairs.Length > 1)
-            {
-                foreach (var queryString in pairs)
+                foreach (var paramPair in paramsPairs)
                 {
-                    var queryStringSplited = queryString.Split("=");
+                    string key = paramPair[0];
+                    string value = paramPair[1];
 
-                    var key = queryStringSplited[0]; // name
-                    var value = queryStringSplited[1]; // gosho
-
-                    if (!this.FormData.ContainsKey(key))
+                    if (this.FormData.ContainsKey(key) == false)
                     {
-                        this.FormData.Add(key, value);
+                        this.FormData.Add(key, new HashSet<string>());
                     }
+
+                    this.FormData[key].Add(WebUtility.UrlDecode(value));
                 }
             }
+        }
+
+        private void ParseRequestParameters(string requestBody)
+        {
+            // /home/index?search=nissan&category=SUV
+            this.ParseRequestQueryParameters();
+
+            // username=pesho&password=12345
+            this.ParseRequestFormDataParameters(requestBody); //TODO: Split
         }
 
         private void ParseRequest(string requestString)
         {
-            var splitRequestContent = requestString.Split(new[] { GlobalConstants.HttpNewLine }, StringSplitOptions.None);
+            // GET /home/index?search=nissan&category=SUV HTTP/1.1
+            // Host: localhost:8000
+            // Accept: text/plain
+            string[] splitRequestString = requestString
+                .Split(new[] { GlobalConstants.HttpNewLine }, StringSplitOptions.None);
 
-            var requestLine = splitRequestContent[0].Trim().Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries); // GET /home/index?name=gosho&name2=stoqn HTTP/1.1
-            var headersLines = splitRequestContent.Skip(1).ToArray();
+            // GET /home/index?search=nissan&category=SUV HTTP/1.1
+            string[] requestLineParams = splitRequestString[0]
+                .Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
-            if (!this.IsValidRequestLine(requestLine))
+            if (!this.IsValidRequestLine(requestLineParams))
             {
                 throw new BadRequestException();
             }
 
-            ParseRequestMethod(requestLine);
-            ParseRequestUrl(requestLine);
-            ParseRequestPath();
+            // GET
+            this.ParseRequestMethod(requestLineParams);
 
-            if (this.Url.Length > 1)
-            {
-                var queryString = this.Url.Split("?")[1];
-                var queryParams = queryString.Split("&");
+            // /home/index?search=nissan&category=SUV
+            this.ParseRequestUrl(requestLineParams);
 
-                if (!this.IsValidRequestQueryString(queryString, queryParams))
-                {
-                    throw new BadRequestException();
-                }
-            }
+            // /home/index
+            this.ParseRequestPath();
 
-            ParseHeaders(headersLines);
+            // Host: localhost:8000
+            // Accept: text/plain
+            this.ParseRequestHeaders(this.ParsePlainRequestHeaders(splitRequestString).ToArray());
 
-            var formData = splitRequestContent[splitRequestContent.Length - 1];
-            ParseRequestParameters(formData);
+            // username=pesho&password=12345
+            this.ParseRequestParameters(splitRequestString[splitRequestString.Length - 1]);
         }
     }
 }
