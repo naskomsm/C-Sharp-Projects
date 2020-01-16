@@ -9,7 +9,6 @@
         {
             using var data = new TweeterDbContext();
             data.Database.Migrate();
-
         }
     }
 }

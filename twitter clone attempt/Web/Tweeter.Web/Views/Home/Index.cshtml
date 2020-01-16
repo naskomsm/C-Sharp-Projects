@@ -1,5 +1,7 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model IEnumerable<TweetListingServiceModel>
+
+@{
+    ViewData["Title"] = "Home";
 }
 
 <div class="row">
@@ -11,11 +13,14 @@
         </div>
     </div>
     <div class="col-sm-6">
-        <div class="card">
-            <div class="card-body">
-                <p>feed</p>
+        @foreach (var tweet in Model)
+        {
+            <div class="card">
+                <div class="card-body">
+                    <p>tweet</p>
+                </div>
             </div>
-        </div>
+        }
     </div>
     <div class="col-sm-3">
         <div class="card">
