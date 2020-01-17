@@ -4,4 +4,9 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Data\Tweeter.Data\Tweeter.Data.csproj" />
+    <ProjectReference Include="..\Tweeter.Services.Models\Tweeter.Services.Models.csproj" />
+  </ItemGroup>
+
 </Project>

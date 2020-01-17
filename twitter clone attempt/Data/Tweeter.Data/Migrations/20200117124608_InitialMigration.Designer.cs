@@ -10,7 +10,7 @@ using Tweeter.Data;
 namespace Tweeter.Data.Migrations
 {
     [DbContext(typeof(TweeterDbContext))]
-    [Migration("20200116125527_InitialMigration")]
+    [Migration("20200117124608_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

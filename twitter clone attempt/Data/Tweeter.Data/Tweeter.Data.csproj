@@ -13,8 +13,14 @@
     <Compile Remove="Migrations\20200116120442_CreateIdentitySchema.Designer.cs" />
     <Compile Remove="Migrations\20200116124850_InitialMigration.cs" />
     <Compile Remove="Migrations\20200116124850_InitialMigration.Designer.cs" />
+    <Compile Remove="Migrations\20200116125527_InitialMigration.cs" />
+    <Compile Remove="Migrations\20200116125527_InitialMigration.Designer.cs" />
     <Compile Remove="Migrations\20200116133318_AddedTweetServiceModel.cs" />
     <Compile Remove="Migrations\20200116133318_AddedTweetServiceModel.Designer.cs" />
+    <Compile Remove="Migrations\20200117105915_InitialMigration.cs" />
+    <Compile Remove="Migrations\20200117105915_InitialMigration.Designer.cs" />
+    <Compile Remove="Migrations\20200117112127_InitialMigration.cs" />
+    <Compile Remove="Migrations\20200117112127_InitialMigration.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

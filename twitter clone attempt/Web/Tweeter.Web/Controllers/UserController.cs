@@ -1,7 +1,7 @@
 ﻿namespace Tweeter.Web.Controllers
 {
-    using Microsoft.AspNetCore.Mvc;
     using System;
+    using Microsoft.AspNetCore.Mvc;
     using System.Collections.Generic;
     using Tweeter.Services.Models.Tweet;
 
