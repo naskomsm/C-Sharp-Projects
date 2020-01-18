@@ -2,13 +2,22 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UserSecretsId>aspnet-Tweeter.Web-1B690FC0-4B30-4F47-9A83-06C2B2BB730F</UserSecretsId>
   </PropertyGroup>
+
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.1" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <ProjectReference Include="..\..\Data\Tweeter.Data\Tweeter.Data.csproj" />
     <ProjectReference Include="..\..\Services\Tweeter.Services\Tweeter.Services.csproj" />
   </ItemGroup>
-
-
 
 </Project>

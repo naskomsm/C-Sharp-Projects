@@ -5,6 +5,7 @@
     using System.Linq;
     using Tweeter.Data.Models;
     using Tweeter.Services.Models.Tweet;
+    using System.Collections.Generic;
 
     public class TweetService : ITweetService
     {
@@ -36,6 +37,20 @@
         public bool Exists(int id)
         {
             return this.data.Tweets.Any(x => x.Id == id);
+        }
+
+        public ICollection<TweetListingServiceModel> GetAll()
+        {
+            return this.data.Tweets.Select(t => new TweetListingServiceModel
+            {
+                User = t.User,
+                Description = t.Description,
+                Comments = t.Comments,
+                Likes = t.Likes,
+                Shares = t.Shares,
+                TimePosted = t.TimePosted,
+                UserId = t.UserId
+            }).ToList();
         }
 
         public bool Remove(int id)

@@ -1,9 +1,11 @@
 ﻿namespace Tweeter.Services.Implementations
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using Tweeter.Data;
     using Tweeter.Data.Models;
+    using Tweeter.Services.Models.Tweet;
     using Tweeter.Services.Models.User;
 
     public class UserService : IUserService
@@ -48,6 +50,27 @@
             this.data.SaveChanges();
 
             return true;
+        }
+
+        public ICollection<TweetListingServiceModel> Tweets(string email)
+        {
+            return this.data.Tweets
+                .Where(x => x.User.Username == email)
+                .Select(t => new TweetListingServiceModel
+                {
+                    User = t.User,
+                    Description = t.Description,
+                    Comments = t.Comments,
+                    Likes = t.Likes,
+                    Shares = t.Shares,
+                    TimePosted = t.TimePosted,
+                    UserId = t.UserId
+                }).ToList();
+        }
+
+        public ICollection<string> UsersEmails()
+        {
+            return this.data.Users.Select(x => x.Username).ToList();
         }
     }
 }

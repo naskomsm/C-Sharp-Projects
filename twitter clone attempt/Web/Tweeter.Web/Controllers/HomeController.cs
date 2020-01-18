@@ -3,42 +3,48 @@
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
+    using System.Linq;
+    using System.Threading.Tasks;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Logging;
+    using Tweeter.Services;
     using Tweeter.Services.Models.Tweet;
+    using Tweeter.Services.Models.User;
     using Tweeter.Web.Models;
 
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IUserService users;
+        private readonly ITweetService tweets;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IUserService users, ITweetService tweets)
         {
             _logger = logger;
+            this.users = users;
+            this.tweets = tweets;
         }
 
         public IActionResult Index()
         {
-            // TODO MAKE SERVICE AND FIX EVERYTHING
-            var tweets = new List<TweetListingServiceModel>()
+            var username = User.Identity.Name;
+            var tweets = new List<TweetListingServiceModel>();
+
+            if (username != null)
             {
-                new TweetListingServiceModel()
+                if (!this.users.UsersEmails().Any(x => x == username))
                 {
-                    Description = "fist tweet",
-                    Likes = 16,
-                    Shares = 2,
-                    TimePosted = DateTime.Now,
-                    UserId = 1
-                },
-                new TweetListingServiceModel()
-                {
-                    Description = "second tweet",
-                    Likes = 22,
-                    Shares = 21,
-                    TimePosted = DateTime.Now,
-                    UserId = 1
-                },
-            };
+                    var userModel = new UserAddServiceModel()
+                    {
+                        Username = username,
+                        Joined = DateTime.Now
+                    };
+
+                    this.users.Add(userModel);
+                }
+
+                tweets = (List<TweetListingServiceModel>)this.users.Tweets(username);
+            }
 
             return View(tweets);
         }
@@ -50,26 +56,13 @@
 
         public IActionResult Explore()
         {
-            // TODO MAKE SERVICE AND FIX EVERYTHING
-            var tweets = new List<TweetListingServiceModel>()
+            var tweets = new List<TweetListingServiceModel>();
+            var username = User.Identity.Name;
+
+            if (username != null)
             {
-                new TweetListingServiceModel()
-                {
-                    Description = "fist tweet",
-                    Likes = 16,
-                    Shares = 2,
-                    TimePosted = DateTime.Now,
-                    UserId = 1
-                },
-                new TweetListingServiceModel()
-                {
-                    Description = "second tweet",
-                    Likes = 22,
-                    Shares = 21,
-                    TimePosted = DateTime.Now,
-                    UserId = 1
-                },
-            };
+                tweets = (List<TweetListingServiceModel>)this.tweets.GetAll();
+            }
 
             return View(tweets);
         }
