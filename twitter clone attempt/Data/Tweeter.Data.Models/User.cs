@@ -2,24 +2,22 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
 
     public class User
     {
         public int Id { get; set; }
 
-        public string Username { get; set; }
+        [Required]
+        [EmailAddress]
+        public string Email { get; set; }
 
-        public string Password { get; set; }
-
+        [Required]
         public DateTime Joined { get; set; }
 
         public int? PictureId { get; set; }
 
         public Picture Picture { get; set; }
-
-        public ICollection<User> Following = new HashSet<User>();
-
-        public ICollection<User> Followers = new HashSet<User>();
 
         public ICollection<Tweet> Tweets { get; set; } = new HashSet<Tweet>();
 

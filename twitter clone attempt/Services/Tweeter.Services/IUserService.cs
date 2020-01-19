@@ -13,7 +13,5 @@
         bool Remove(int id);
 
         ICollection<string> UsersEmails();
-
-        ICollection<TweetListingServiceModel> Tweets(string email);
     }
 }

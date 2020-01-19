@@ -1,11 +1,11 @@
 ﻿namespace Tweeter.Services.Implementations
 {
-    using System;
     using Tweeter.Data;
     using System.Linq;
     using Tweeter.Data.Models;
     using Tweeter.Services.Models.Tweet;
     using System.Collections.Generic;
+    using System;
 
     public class TweetService : ITweetService
     {
@@ -18,13 +18,16 @@
 
         public void Add(TweetAddServiceModel model)
         {
-            // Validation
+            if (!DataValidation.IsValid(model))
+            {
+                throw new ArgumentException("Invalid data.");
+            }
 
             var tweet = new Tweet()
             {
                 UserId = model.UserId,
                 User = model.User,
-                Description = model.Description,
+                Content = model.Content,
                 Likes = model.Likes,
                 Shares = model.Shares,
                 TimePosted = model.TimePosted
@@ -44,13 +47,59 @@
             return this.data.Tweets.Select(t => new TweetListingServiceModel
             {
                 User = t.User,
-                Description = t.Description,
+                Content = t.Content,
                 Comments = t.Comments,
                 Likes = t.Likes,
                 Shares = t.Shares,
                 TimePosted = t.TimePosted,
                 UserId = t.UserId
             }).ToList();
+        }
+
+        public ICollection<TweetListingServiceModel> GetUserFollowingTweets(string email)
+        {
+            var userId = this.data.Users.Where(x => x.Email == email).Select(x => x.Id).FirstOrDefault();
+            var followersIds = this.data.Followings.Where(x => x.UserId == userId).Select(x => x.FollowerId).ToList();
+
+            var followersTweets = new List<TweetListingServiceModel>();
+
+            foreach (var id in followersIds)
+            {
+                var followerTweets = this.data.Users
+                    .FirstOrDefault(x => x.Id == id)
+                    .Tweets
+                    .Select(x => new TweetListingServiceModel 
+                    {
+                        Comments = x.Comments,
+                        Content = x.Content,
+                        Likes = x.Likes,
+                        Shares = x.Shares,
+                        TimePosted = x.TimePosted,
+                        User = x.User,
+                        UserId = x.UserId
+                    })
+                    .ToList();
+
+                followersTweets.AddRange(followersTweets);
+            }
+
+            return followersTweets;
+        }
+
+        public ICollection<TweetListingServiceModel> GetUserTweetsByEmail(string email)
+        {
+            return this.data.Tweets
+                .Where(x => x.User.Email == email)
+                .Select(t => new TweetListingServiceModel
+                {
+                    User = t.User,
+                    Content = t.Content,
+                    Comments = t.Comments,
+                    Likes = t.Likes,
+                    Shares = t.Shares,
+                    TimePosted = t.TimePosted,
+                    UserId = t.UserId
+                }).ToList();
         }
 
         public bool Remove(int id)

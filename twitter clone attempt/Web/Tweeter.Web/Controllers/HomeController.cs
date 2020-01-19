@@ -27,23 +27,24 @@
 
         public IActionResult Index()
         {
-            var username = User.Identity.Name;
+            var email = User.Identity.Name;
             var tweets = new List<TweetListingServiceModel>();
 
-            if (username != null)
+            if (email != null)
             {
-                if (!this.users.UsersEmails().Any(x => x == username))
+                if (!this.users.UsersEmails().Any(x => x == email))
                 {
                     var userModel = new UserAddServiceModel()
                     {
-                        Username = username,
+                        Email = email,
                         Joined = DateTime.Now
                     };
 
                     this.users.Add(userModel);
                 }
 
-                tweets = (List<TweetListingServiceModel>)this.users.Tweets(username);
+                tweets = (List<TweetListingServiceModel>)this.tweets.GetUserTweetsByEmail(email);
+                tweets.AddRange((List<TweetListingServiceModel>)this.tweets.GetUserFollowingTweets(email));
             }
 
             return View(tweets);
@@ -57,9 +58,9 @@
         public IActionResult Explore()
         {
             var tweets = new List<TweetListingServiceModel>();
-            var username = User.Identity.Name;
+            var email = User.Identity.Name;
 
-            if (username != null)
+            if (email != null)
             {
                 tweets = (List<TweetListingServiceModel>)this.tweets.GetAll();
             }

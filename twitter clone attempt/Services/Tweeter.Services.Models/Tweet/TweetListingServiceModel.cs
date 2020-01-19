@@ -18,6 +18,6 @@
 
         public ICollection<Comment> Comments { get; set; } = new HashSet<Comment>();
 
-        public string Description { get; set; }
+        public string Content { get; set; }
     }
 }

@@ -8,6 +8,20 @@ namespace Tweeter.Data.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Followings",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<int>(nullable: false),
+                    FollowerId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Followings", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Pictures",
                 columns: table => new
                 {
@@ -27,8 +41,7 @@ namespace Tweeter.Data.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Username = table.Column<string>(nullable: true),
-                    Password = table.Column<string>(nullable: true),
+                    Email = table.Column<string>(nullable: false),
                     Joined = table.Column<DateTime>(nullable: false),
                     PictureId = table.Column<int>(nullable: true)
                 },
@@ -49,11 +62,11 @@ namespace Tweeter.Data.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<int>(nullable: false),
                     TimePosted = table.Column<DateTime>(nullable: false),
                     Likes = table.Column<int>(nullable: false),
                     Shares = table.Column<int>(nullable: false),
-                    Description = table.Column<string>(nullable: true)
+                    Content = table.Column<string>(maxLength: 10000, nullable: false),
+                    UserId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -73,6 +86,7 @@ namespace Tweeter.Data.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<int>(nullable: false),
+                    Content = table.Column<string>(maxLength: 6000, nullable: false),
                     TimePosted = table.Column<DateTime>(nullable: false),
                     Likes = table.Column<int>(nullable: false),
                     Shares = table.Column<int>(nullable: false),
@@ -120,6 +134,9 @@ namespace Tweeter.Data.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Comments");
+
+            migrationBuilder.DropTable(
+                name: "Followings");
 
             migrationBuilder.DropTable(
                 name: "Tweets");

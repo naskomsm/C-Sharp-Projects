@@ -5,7 +5,7 @@
 
     public class UserAddServiceModel
     {
-        public string Username { get; set; }
+        public string Email { get; set; }
 
         public DateTime Joined { get; set; }
 

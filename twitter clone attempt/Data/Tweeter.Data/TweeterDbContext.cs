@@ -11,6 +11,8 @@
 
         public DbSet<Tweet> Tweets { get; set; }
 
+        public DbSet<Following> Followings { get; set; }
+
         public DbSet<User> Users { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder builder)

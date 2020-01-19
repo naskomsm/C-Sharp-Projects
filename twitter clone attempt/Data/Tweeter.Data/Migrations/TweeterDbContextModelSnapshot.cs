@@ -26,6 +26,11 @@ namespace Tweeter.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasMaxLength(6000);
+
                     b.Property<int>("Likes")
                         .HasColumnType("int");
 
@@ -48,6 +53,24 @@ namespace Tweeter.Data.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Comments");
+                });
+
+            modelBuilder.Entity("Tweeter.Data.Models.Following", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("FollowerId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Followings");
                 });
 
             modelBuilder.Entity("Tweeter.Data.Models.Picture", b =>
@@ -75,8 +98,10 @@ namespace Tweeter.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasMaxLength(10000);
 
                     b.Property<int>("Likes")
                         .HasColumnType("int");
@@ -104,17 +129,15 @@ namespace Tweeter.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("Joined")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Password")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int?>("PictureId")
                         .HasColumnType("int");
-
-                    b.Property<string>("Username")
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
