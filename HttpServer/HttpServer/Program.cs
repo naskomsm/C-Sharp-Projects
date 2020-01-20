@@ -2,13 +2,29 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Net;
+    using System.Net.Http;
     using System.Net.Sockets;
     using System.Text;
+    using System.Threading.Tasks;
 
     public class Program
     {
-        public static void Main()
+        public static async Task Main()
+        {
+            SetupAndStartServer();
+            await HttpRequest();
+        }
+
+        public static async Task HttpRequest()
+        {
+            var client = new HttpClient();
+            var response = await client.GetStringAsync("https://softuni.bg/");
+            await File.WriteAllTextAsync("index.html", response);
+        }
+
+        public static void SetupAndStartServer()
         {
             // for image
             // Content-Type: image/png
@@ -41,29 +57,20 @@
             {
                 var client = server.AcceptTcpClient();
 
-                using (var stream = client.GetStream())
-                {
-                    var requestBytes = new byte[100000];
-                    var readBytes = stream.Read(requestBytes, 0, requestBytes.Length);
-                    var stringRequest = Encoding.UTF8.GetString(requestBytes, 0, readBytes);
+                using var stream = client.GetStream();
 
-                    var splittedRequest = stringRequest.Split(Constants.NewLine);
+                var requestBytes = new byte[100000];
+                var readBytes = stream.Read(requestBytes, 0, requestBytes.Length);
+                var stringRequest = Encoding.UTF8.GetString(requestBytes, 0, readBytes);
 
-                    Console.WriteLine("Request string: ");
-                    Console.WriteLine(stringRequest);
+                var responseBytes = Encoding.UTF8.GetBytes(response.ToString());
+                stream.Write(responseBytes, 0, responseBytes.Length);
 
-                    if (splittedRequest[0].Contains("POST"))
-                    {
-                        Console.WriteLine();
-                    }
+                Console.WriteLine("Response string: ");
+                Console.WriteLine(response);
 
-                    var responseBytes = Encoding.UTF8.GetBytes(response.ToString());
-                    stream.Write(responseBytes, 0, responseBytes.Length);
-                    
-                    Console.WriteLine("Response string: ");
-                    Console.WriteLine(response);
-                    Console.WriteLine(new string('=', 70));
-                }
+                Console.WriteLine("Request string:");
+                Console.WriteLine(stringRequest);
             }
         }
     }
