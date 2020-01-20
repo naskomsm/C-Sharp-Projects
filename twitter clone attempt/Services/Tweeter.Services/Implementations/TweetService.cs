@@ -59,15 +59,14 @@
         public ICollection<TweetListingServiceModel> GetUserFollowingTweets(string email)
         {
             var userId = this.data.Users.Where(x => x.Email == email).Select(x => x.Id).FirstOrDefault();
-            var followersIds = this.data.Followings.Where(x => x.UserId == userId).Select(x => x.FollowerId).ToList();
+            var followingIds = this.data.Followings.Where(x => x.UserId == userId).Select(x => x.FollowerId).ToList();
 
-            var followersTweets = new List<TweetListingServiceModel>();
+            var followingTweets = new List<TweetListingServiceModel>();
 
-            foreach (var id in followersIds)
+            foreach (var id in followingIds.Distinct())
             {
-                var followerTweets = this.data.Users
-                    .FirstOrDefault(x => x.Id == id)
-                    .Tweets
+                var followerTweets = this.data.Tweets
+                    .Where(x => x.UserId == id)
                     .Select(x => new TweetListingServiceModel 
                     {
                         Comments = x.Comments,
@@ -80,10 +79,13 @@
                     })
                     .ToList();
 
-                followersTweets.AddRange(followersTweets);
+                foreach (var tweet in followerTweets)
+                {
+                    followingTweets.Add(tweet);
+                }
             }
 
-            return followersTweets;
+            return followingTweets;
         }
 
         public ICollection<TweetListingServiceModel> GetUserTweetsByEmail(string email)
