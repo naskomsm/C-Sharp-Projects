@@ -40,6 +40,38 @@
             return this.data.Users.Any(x => x.Id == id);
         }
 
+        public ICollection<UserInfoServiceModel> GetAllUsers()
+        {
+            return this.data.Users.Select(x => new UserInfoServiceModel
+            {
+                Booksmarks = x.Booksmarks,
+                Comments = x.Comments,
+                Email = x.Email,
+                Id = x.Id,
+                Joined = x.Joined,
+                Picture = x.Picture,
+                PictureId = x.PictureId,
+                Tweets = x.Tweets
+            }).ToList();
+        }
+
+        public UserInfoServiceModel GetUserByEmail(string email)
+        {
+            return this.data.Users
+                .Where(x => x.Email == email)
+                .Select(x => new UserInfoServiceModel
+                { 
+                    Email = x.Email,
+                    Comments = x.Comments,
+                    Booksmarks = x.Booksmarks,
+                    Id = x.Id,
+                    Joined = x.Joined,
+                    Picture = x.Picture,
+                    PictureId = x.PictureId,
+                    Tweets = x.Tweets
+                }).FirstOrDefault();
+        }
+
         public bool Remove(int id)
         {
             if (!this.data.Users.Any(x => x.Id == id))

@@ -1,7 +1,6 @@
 ﻿namespace Tweeter.Services
 {
     using System.Collections.Generic;
-    using Tweeter.Services.Models.Tweet;
     using Tweeter.Services.Models.User;
 
     public interface IUserService
@@ -12,6 +11,10 @@
 
         bool Remove(int id);
 
+        UserInfoServiceModel GetUserByEmail(string email);
+
         ICollection<string> UsersEmails();
+
+        ICollection<UserInfoServiceModel> GetAllUsers();
     }
 }
