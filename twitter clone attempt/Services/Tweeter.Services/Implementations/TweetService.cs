@@ -59,7 +59,7 @@
         public ICollection<TweetListingServiceModel> GetUserFollowingTweets(string email)
         {
             var userId = this.data.Users.Where(x => x.Email == email).Select(x => x.Id).FirstOrDefault();
-            var followingIds = this.data.Followings.Where(x => x.UserId == userId).Select(x => x.FollowerId).ToList();
+            var followingIds = this.data.Followings.Where(x => x.FollowerId == userId).Select(x => x.UserId).ToList();
 
             var followingTweets = new List<TweetListingServiceModel>();
 

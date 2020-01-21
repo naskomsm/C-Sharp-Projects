@@ -18,7 +18,7 @@
 
             //var userService = new UserService(data);
             //var tweetService = new TweetService(data);
-            //var followingService = new FollowingService(data);
+            var followingService = new FollowingService(data);
             //var pictureService = new PictureService(data);
 
             //var atanasUser = data.Users.FirstOrDefault(x => x.Id == 2);
@@ -38,7 +38,7 @@
 
             // SeedPictures(data, pictureService)
             //SeedTweets(data, tweetService);
-            //followingService.AddFollowing(2, 1);
+            
         }
 
         private static void SeedTweets(TweeterDbContext data, TweetService tweetService)

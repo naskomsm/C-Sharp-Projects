@@ -33,11 +33,7 @@
                 .Select(x => x.UserId)
                 .ToList();
 
-            var usersToFollowIds = this.data.Followings
-                .Where(x => x.UserId != followerId)
-                .Where(x => x.FollowerId != followerId)
-                .Select(x => x.UserId)
-                .ToList();
+            var usersToFollowIds = new List<int>();
 
             foreach (var user in this.data.Users)
             {
