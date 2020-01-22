@@ -1,77 +1,68 @@
-﻿namespace HttpServer
+﻿namespace HttpRequester
 {
     using System;
     using System.Collections.Generic;
-    using System.IO;
+    using System.Linq;
     using System.Net;
-    using System.Net.Http;
     using System.Net.Sockets;
     using System.Text;
+    using System.Text.RegularExpressions;
     using System.Threading.Tasks;
 
     public class Program
     {
         public static async Task Main()
         {
-            SetupAndStartServer();
-            await HttpRequest();
+            TcpListener tcpListener = new TcpListener(IPAddress.Loopback, 80);
+            tcpListener.Start();
+            while (true)
+            {
+                TcpClient tcpClient = await tcpListener.AcceptTcpClientAsync();
+#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+                Task.Run(() => ProcessClientAsync(tcpClient));
+#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+            }
         }
 
-        public static async Task HttpRequest()
+        private static async Task ProcessClientAsync(TcpClient tcpClient)
         {
-            var client = new HttpClient();
-            var response = await client.GetStringAsync("https://softuni.bg/");
-            await File.WriteAllTextAsync("index.html", response);
-        }
+            const string NewLine = "\r\n";
+            using NetworkStream networkStream = tcpClient.GetStream();
+            byte[] requestBytes = new byte[1000000]; // TODO: Use buffer
+            int bytesRead = await networkStream.ReadAsync(requestBytes, 0, requestBytes.Length);
+            string request = Encoding.UTF8.GetString(requestBytes, 0, bytesRead);
 
-        public static void SetupAndStartServer()
-        {
-            // for image
-            // Content-Type: image/png
-            // and File.Read to read bytes from picture
-            // stream.Write()
-
-            string body = "<form method='post'>" +
+            string responseText = "<form method='post'>" +
                             "<input type='text' name='username' placeholder='username'</input>" +
                             "<input type='password' name='password' placeholder='password'</input>" +
                             "<input type='submit'></input>" +
                             "</form>";
 
-            var responseLine = Constants.ResponseLines.Okay;
-            var headers = new List<Header>()
+            string response = "HTTP/1.0 200 OK" + NewLine +
+                              "Server: SoftUniServer/1.0" + NewLine +
+                              "Content-Type: text/html" + NewLine +
+                              "Content-Lenght: " + responseText.Length + NewLine;
+
+            if (request.Contains("POST"))
             {
-                new Header("Content-Type", "text/html"),
-                new Header("Server", "MyCustomServer/1.0"),
-                new Header("Content-Length:", $"{body.Length}")
-            };
+                var body = request.Split(NewLine + NewLine)[1];
+                var username = body.Split("&")[0].Split("=")[1];
+                var password = body.Split("&")[1].Split("=")[1];
 
-            var response = new Response(responseLine, headers, body);
-
-            var port = 8000;
-            var ipAdress = IPAddress.Loopback;
-
-            var server = new TcpListener(ipAdress, port);
-            server.Start();
-
-            while (true)
-            {
-                var client = server.AcceptTcpClient();
-
-                using var stream = client.GetStream();
-
-                var requestBytes = new byte[100000];
-                var readBytes = stream.Read(requestBytes, 0, requestBytes.Length);
-                var stringRequest = Encoding.UTF8.GetString(requestBytes, 0, readBytes);
-
-                var responseBytes = Encoding.UTF8.GetBytes(response.ToString());
-                stream.Write(responseBytes, 0, responseBytes.Length);
-
-                Console.WriteLine("Response string: ");
-                Console.WriteLine(response);
-
-                Console.WriteLine("Request string:");
-                Console.WriteLine(stringRequest);
+                response += $"Set-Cookie: {username}={password}; Max-Age: 3600; HttpOnly;" + NewLine +
+                              NewLine +
+                              responseText;
             }
+            else
+            {
+                response += NewLine + responseText;
+            }
+
+
+            byte[] responseBytes = Encoding.UTF8.GetBytes(response);
+            await networkStream.WriteAsync(responseBytes, 0, responseBytes.Length);
+            Console.WriteLine(request);
+            Console.WriteLine(new string('=', 60));
         }
     }
 }
