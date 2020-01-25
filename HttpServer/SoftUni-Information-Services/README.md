@@ -3,7 +3,9 @@
 
 ## SIS.HTTP
 ```
-HTTP server made in university. It purpose is to understand better how HTTP is working by separating everything in different classes and using the newest C# 8.0 syntax to achieve better, cleaner code.
+HTTP server made in university. It purpose is to understand better 
+how HTTP is working by separating everything in different classes 
+and using the newest C# 8.0 syntax to achieve better, cleaner code.
 ```
 
 ## SIS.MvcFramework
