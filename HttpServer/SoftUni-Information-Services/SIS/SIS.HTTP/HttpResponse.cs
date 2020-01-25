@@ -1,15 +1,14 @@
-﻿using System.Collections.Generic;
-using System.Text;
-
-namespace SIS.HTTP
+﻿namespace SIS.HTTP
 {
+    using System.Collections.Generic;
+    using System.Text;
+
     public class HttpResponse
     {
         public HttpResponse(HttpResponseCode statusCode, byte[] body)
+            : this()
         {
-            this.Version = HttpVersionType.Http10;
             this.StatusCode = statusCode;
-            this.Headers = new List<Header>();
             this.Body = body;
             if (body?.Length > 0)
             {
@@ -17,11 +16,20 @@ namespace SIS.HTTP
             }
         }
 
+        internal HttpResponse()
+        {
+            this.Version = HttpVersionType.Http10;
+            this.Headers = new List<Header>();
+            this.Cookies = new List<ResponseCookie>();
+        }
+
         public HttpVersionType Version { get; set; }
 
         public HttpResponseCode StatusCode { get; set; }
 
         public IList<Header> Headers { get; set; }
+
+        public IList<ResponseCookie> Cookies { get; set; }
 
         public byte[] Body { get; set; }
 
@@ -40,6 +48,11 @@ namespace SIS.HTTP
             foreach (var header in this.Headers)
             {
                 responseAsString.Append(header.ToString() + HttpConstants.NewLine);
+            }
+
+            foreach (var cookie in this.Cookies)
+            {
+                responseAsString.Append("Set-Cookie: " + cookie.ToString() + HttpConstants.NewLine); ;
             }
 
             responseAsString.Append(HttpConstants.NewLine);

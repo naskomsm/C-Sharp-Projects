@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace SIS.HTTP
+﻿namespace SIS.HTTP
 {
+    using System;
+
     public class HttpServerException : Exception
     {
         public HttpServerException(string message)

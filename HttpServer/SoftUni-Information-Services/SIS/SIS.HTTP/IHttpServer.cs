@@ -1,7 +1,6 @@
-﻿using System.Threading.Tasks;
-
-namespace SIS.HTTP
+﻿namespace SIS.HTTP
 {
+    using System.Threading.Tasks;
 
     public interface IHttpServer
     {
