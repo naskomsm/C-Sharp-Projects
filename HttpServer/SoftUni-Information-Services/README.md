@@ -9,6 +9,6 @@ in different classes and using the newest C# 8.0 syntax to achieve better, clean
 
 ## SIS.MvcFramework
 ```
-Mini framework which purpose is to replicate ASP.NET MVC and see how everything is working. The project with 
+Mini framework which purpose is to replicate ASP.NET MVC and see how everything is working. The project will 
 stick  to the closest syntax that Microsoft used. Same patterns and class names.
 ```
