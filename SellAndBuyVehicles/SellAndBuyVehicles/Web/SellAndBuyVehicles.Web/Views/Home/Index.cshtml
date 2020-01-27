@@ -1,91 +1,33 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Начална страница";
 }
 
-<div class="container">
-    <div class="row">
-        <div class="col-8">
+<div class="row">
+    <div class="col-8">
 
-            <div class="col">
-                <h6>Търсене в Автомобили и Джипове</h6>
-                <hr />
-                <div style="border-style: groove;border-color: cornflowerblue;">
+        <div class="col">
+            <h6>Търсене в Автомобили и Джипове</h6>
+            <hr />
+            <div style="border-style: groove;border-color: cornflowerblue;">
 
-                    <div class="row mt-2 mb-2">
+                <div class="row mt-2 mb-2">
 
-                        <div class="col-6 ml-2 mr-2">
-                            <p class="mb-1 small">Основна категория</p>
-                            <select class="mdb-select md-form container">
-                                <option value="" disabled selected>Всички</option>
-                                <option value="1">Option 1</option>
-                                <option value="2">Option 2</option>
-                                <option value="3">Option 3</option>
-                            </select>
-                        </div>
-
+                    <div class="col-6 ml-2 mr-2">
+                        <p class="mb-1 small">Основна категория</p>
+                        <select class="mdb-select md-form container">
+                            <option value="" disabled selected>Всички</option>
+                            <option value="1">Option 1</option>
+                            <option value="2">Option 2</option>
+                            <option value="3">Option 3</option>
+                        </select>
                     </div>
 
-                    <div class="row mt-2 mb-2">
-                        <div class="col-3">
-                            <div class="ml-2">
-                                <p class="mb-1 small">Марка</p>
-                                <select class="mdb-select md-form container">
-                                    <option value="" disabled selected>Всички</option>
-                                    <option value="1">Option 1</option>
-                                    <option value="2">Option 2</option>
-                                    <option value="3">Option 3</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-3">
-                            <p class="mb-1 small">Модел</p>
-                            <select class="mdb-select md-form container">
-                                <option value="" disabled selected>Всички</option>
-                                <option value="1">Option 1</option>
-                                <option value="2">Option 2</option>
-                                <option value="3">Option 3</option>
-                            </select>
-                        </div>
-                        <div class="col-3 pl-0">
-                            <p class="mb-1 small">Регион</p>
-                            <select class="mdb-select md-form container">
-                                <option value="" disabled selected>Всички</option>
-                                <option value="1">Option 1</option>
-                                <option value="2">Option 2</option>
-                                <option value="3">Option 3</option>
-                            </select>
-                        </div>
-                        <div class="col-3 pl-0 pr-4">
-                            <div class="ml-2">
-                                <p class="mb-1 small">Населено място</p>
-                                <select class="mdb-select md-form container">
-                                    <option value="" disabled selected>Всички</option>
-                                    <option value="1">Option 1</option>
-                                    <option value="2">Option 2</option>
-                                    <option value="3">Option 3</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
+                </div>
 
-                    <div class="row mt-2 mb-2">
-                        <div class="col-3">
-                            <div class="ml-2 mr-2">
-                                <p class="mb-1 small">Maксимална цена</p>
-                                <input class="form-control form-control-sm container" type="text" placeholder="Цена">
-                            </div>
-                        </div>
-                        <div class="col-3">
-                            <p class="mb-1 small">Година</p>
-                            <select class="mdb-select md-form container">
-                                <option value="" disabled selected>Всички</option>
-                                <option value="1">Option 1</option>
-                                <option value="2">Option 2</option>
-                                <option value="3">Option 3</option>
-                            </select>
-                        </div>
-                        <div class="col-6 pl-0 pr-4">
-                            <p class="mb-1 small">Подреди резултатите по</p>
+                <div class="row mt-2 mb-2">
+                    <div class="col-3">
+                        <div class="ml-2">
+                            <p class="mb-1 small">Марка</p>
                             <select class="mdb-select md-form container">
                                 <option value="" disabled selected>Всички</option>
                                 <option value="1">Option 1</option>
@@ -94,21 +36,27 @@
                             </select>
                         </div>
                     </div>
-
-                    <div class="row mt-2 mb-2">
-                        <div class="col-3">
-                            <div class="ml-2 mr-2">
-                                <p class="mb-1 small">Двигател</p>
-                                <select class="mdb-select md-form container">
-                                    <option value="" disabled selected>Всички</option>
-                                    <option value="1">Option 1</option>
-                                    <option value="2">Option 2</option>
-                                    <option value="3">Option 3</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-3">
-                            <p class="mb-1 small">Скоростна кутия</p>
+                    <div class="col-3">
+                        <p class="mb-1 small">Модел</p>
+                        <select class="mdb-select md-form container">
+                            <option value="" disabled selected>Всички</option>
+                            <option value="1">Option 1</option>
+                            <option value="2">Option 2</option>
+                            <option value="3">Option 3</option>
+                        </select>
+                    </div>
+                    <div class="col-3 pl-0">
+                        <p class="mb-1 small">Регион</p>
+                        <select class="mdb-select md-form container">
+                            <option value="" disabled selected>Всички</option>
+                            <option value="1">Option 1</option>
+                            <option value="2">Option 2</option>
+                            <option value="3">Option 3</option>
+                        </select>
+                    </div>
+                    <div class="col-3 pl-0 pr-4">
+                        <div class="ml-2">
+                            <p class="mb-1 small">Населено място</p>
                             <select class="mdb-select md-form container">
                                 <option value="" disabled selected>Всички</option>
                                 <option value="1">Option 1</option>
@@ -116,55 +64,105 @@
                                 <option value="3">Option 3</option>
                             </select>
                         </div>
-                        <div class="col-6 pl-0 pr-4">
-                            <input class="container" style="margin-top:20px;" type="button" value="ТЪРСИ" />
+                    </div>
+                </div>
+
+                <div class="row mt-2 mb-2">
+                    <div class="col-3">
+                        <div class="ml-2 mr-2">
+                            <p class="mb-1 small">Maксимална цена</p>
+                            <input class="form-control form-control-sm container" type="text" placeholder="Цена">
                         </div>
+                    </div>
+                    <div class="col-3">
+                        <p class="mb-1 small">Година</p>
+                        <select class="mdb-select md-form container">
+                            <option value="" disabled selected>Всички</option>
+                            <option value="1">Option 1</option>
+                            <option value="2">Option 2</option>
+                            <option value="3">Option 3</option>
+                        </select>
+                    </div>
+                    <div class="col-6 pl-0 pr-4">
+                        <p class="mb-1 small">Подреди резултатите по</p>
+                        <select class="mdb-select md-form container">
+                            <option value="" disabled selected>Всички</option>
+                            <option value="1">Option 1</option>
+                            <option value="2">Option 2</option>
+                            <option value="3">Option 3</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row mt-2 mb-2">
+                    <div class="col-3">
+                        <div class="ml-2 mr-2">
+                            <p class="mb-1 small">Двигател</p>
+                            <select class="mdb-select md-form container">
+                                <option value="" disabled selected>Всички</option>
+                                <option value="1">Option 1</option>
+                                <option value="2">Option 2</option>
+                                <option value="3">Option 3</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <p class="mb-1 small">Скоростна кутия</p>
+                        <select class="mdb-select md-form container">
+                            <option value="" disabled selected>Всички</option>
+                            <option value="1">Option 1</option>
+                            <option value="2">Option 2</option>
+                            <option value="3">Option 3</option>
+                        </select>
+                    </div>
+                    <div class="col-6 pl-0 pr-4">
+                        <input class="container" style="margin-top:20px;" type="button" value="ТЪРСИ" />
                     </div>
                 </div>
             </div>
-
-            <div class="col mt-5">
-                <h6>Най-новите обяви за Автомобили и Джипове</h6>
-                <hr />
-                    <div class="row">
-                        <div class="col-6 container" style="border-style: groove ;border-color: cornflowerblue;">
-                            aaa
-                        </div>
-                        <div class="col-6 container" style="border-style: groove ;border-color: cornflowerblue;">
-                            aaa
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-6 container" style="border-style: groove ;border-color: cornflowerblue;">
-                            aaa
-                        </div>
-                        <div class="col-6 container" style="border-style: groove ;border-color: cornflowerblue;">
-                            aaa
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-6 container" style="border-style: groove ;border-color: cornflowerblue;">
-                            aaa
-                        </div>
-                        <div class="col-6 container" style="border-style: groove ;border-color: cornflowerblue;">
-                            aaa
-                        </div>
-                    </div>
-                </div>
         </div>
 
-        <div class="col-4">
-            <h6>Последни новини и факти</h6>
+        <div class="col mt-3">
+            <h6>Най-новите обяви за Автомобили и Джипове</h6>
             <hr />
-            <div class="row" style="border-style: groove ;border-color: cornflowerblue;">aaa</div>
-            <div class="row" style="border-style: groove ;border-color: cornflowerblue;">aaa</div>
-            <div class="row" style="border-style: groove ;border-color: cornflowerblue;">aaa</div>
-            <div class="row" style="border-style: groove ;border-color: cornflowerblue;">aaa</div>
-            <div class="row" style="border-style: groove ;border-color: cornflowerblue;">aaa</div>
-            <div class="row" style="border-style: groove ;border-color: cornflowerblue;">aaa</div>
-            <div class="row" style="border-style: groove ;border-color: cornflowerblue;">aaa</div>
+            <div class="row">
+                <div class="col-6 container" style="border-style: groove ;border-color: cornflowerblue;">
+                    aaa
+                </div>
+                <div class="col-6 container" style="border-style: groove ;border-color: cornflowerblue;">
+                    aaa
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-6 container" style="border-style: groove ;border-color: cornflowerblue;">
+                    aaa
+                </div>
+                <div class="col-6 container" style="border-style: groove ;border-color: cornflowerblue;">
+                    aaa
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-6 container" style="border-style: groove ;border-color: cornflowerblue;">
+                    aaa
+                </div>
+                <div class="col-6 container" style="border-style: groove ;border-color: cornflowerblue;">
+                    aaa
+                </div>
+            </div>
         </div>
+    </div>
+
+    <div class="col-4">
+        <h6>Последни новини и факти</h6>
+        <hr />
+        <div class="row" style="border-style: groove ;border-color: cornflowerblue;">aaa</div>
+        <div class="row" style="border-style: groove ;border-color: cornflowerblue;">aaa</div>
+        <div class="row" style="border-style: groove ;border-color: cornflowerblue;">aaa</div>
+        <div class="row" style="border-style: groove ;border-color: cornflowerblue;">aaa</div>
+        <div class="row" style="border-style: groove ;border-color: cornflowerblue;">aaa</div>
+        <div class="row" style="border-style: groove ;border-color: cornflowerblue;">aaa</div>
+        <div class="row" style="border-style: groove ;border-color: cornflowerblue;">aaa</div>
     </div>
 </div>

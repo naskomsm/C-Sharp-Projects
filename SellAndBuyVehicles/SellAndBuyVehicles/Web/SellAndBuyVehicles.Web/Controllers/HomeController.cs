@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using SellAndBuyVehicles.Web.Models;
-
-namespace SellAndBuyVehicles.Web.Controllers
+﻿namespace SellAndBuyVehicles.Web.Controllers
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Extensions.Logging;
+    using SellAndBuyVehicles.Web.Models;
+
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

@@ -13,6 +13,9 @@
         public string Name { get; set; }
 
         [Required]
+        public bool IsUsed { get; set; }
+
+        [Required]
         public DateTime ManufactureDate { get; set; }
 
         [Required]
