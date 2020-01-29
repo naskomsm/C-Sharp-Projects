@@ -1,13 +1,10 @@
-﻿using SIS.HTTP;
-using SIS.HTTP.Response;
-using SIS.MvcFramework;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text;
-
-namespace SulsApp.Controllers
+﻿namespace SulsApp.Controllers
 {
+    using SIS.HTTP;
+    using SIS.HTTP.Response;
+    using SIS.MvcFramework;
+    using System.IO;
+
     public class StaticFilesController : Controller
     {
         public HttpResponse Bootstrap(HttpRequest request)

@@ -24,6 +24,7 @@
             routeTable.Add(new Route(HttpMethodType.Get, "/css/site.css", new StaticFilesController().Site));
             routeTable.Add(new Route(HttpMethodType.Get, "/css/reset.css", new StaticFilesController().Reset));
             routeTable.Add(new Route(HttpMethodType.Get, "/Users/Login", new UsersController(usersService).Login));
+            routeTable.Add(new Route(HttpMethodType.Post, "/Users/Login", new UsersController(usersService).DoLogin));
             routeTable.Add(new Route(HttpMethodType.Get, "/Users/Register", new UsersController(usersService).Register));
             routeTable.Add(new Route(HttpMethodType.Post, "/Users/Register", new UsersController(usersService).DoRegister));
         }

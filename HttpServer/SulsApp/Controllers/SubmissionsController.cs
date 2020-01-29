@@ -1,11 +1,9 @@
-﻿using SIS.MvcFramework;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace SulsApp.Controllers
+﻿namespace SulsApp.Controllers
 {
-    class SubmissionsController : Controller
+    using SIS.MvcFramework;
+
+    public class SubmissionsController : Controller
     {
+
     }
 }

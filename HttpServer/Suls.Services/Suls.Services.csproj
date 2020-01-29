@@ -9,6 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SIS.HTTP\SIS.HTTP.csproj" />
     <ProjectReference Include="..\Suls.Data.Models\Suls.Data.Models.csproj" />
     <ProjectReference Include="..\Suls.Data\Suls.Data.csproj" />
     <ProjectReference Include="..\Suls.Services.Models\Suls.Services.Models.csproj" />

@@ -20,13 +20,12 @@
 
         public void Login(LoginUserServiceModel model)
         {
-            throw new NotImplementedException();
+            
         }
 
         public void Register(RegisterUserServiceModel model)
         {
             //validate passwords
-            //register user in db
 
             if(data.Users.Any(x => x.Username == model.Username))
             {

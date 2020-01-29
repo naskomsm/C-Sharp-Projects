@@ -27,7 +27,7 @@
 
         public HttpResponse DoLogin(HttpRequest request)
         {
-            return this.View("IndexLoggedIn");
+            return new RedirectResponse("/");
         }
 
         public HttpResponse DoRegister(HttpRequest request)
@@ -39,6 +39,7 @@
                 Username = request.FormData["username"],
             };
 
+            // maybe add it to sessions too ?
             usersService.Register(model);
 
             return new RedirectResponse("/");
