@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SIS.HTTP
+﻿namespace SIS.HTTP
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Net;
+    using System.Net.Sockets;
+    using System.Text;
+    using System.Threading.Tasks;
+
     public class HttpServer : IHttpServer
     {
         private readonly TcpListener tcpListener;
@@ -70,6 +70,24 @@ namespace SIS.HTTP
                 }
 
                 Console.WriteLine($"{request.Method} {request.Path}");
+
+                Console.WriteLine("Sessions: ");
+
+                if(this.sessions.Count > 0)
+                {
+                    foreach (var session in this.sessions)
+                    {
+                        Console.WriteLine("Session KEY: " + session.Key);
+                        foreach (var sessionValue in session.Value)
+                        {
+                            Console.WriteLine($"{sessionValue.Key}: {sessionValue.Value}");
+                        }
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("EMPTY");
+                }
 
                 var route = this.routeTable.FirstOrDefault(
                     x => x.HttpMethod == request.Method && x.Path == request.Path);

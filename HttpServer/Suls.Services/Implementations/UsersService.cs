@@ -1,12 +1,9 @@
 ﻿namespace Suls.Services.Implementations
 {
-    using Microsoft.AspNetCore.Cryptography.KeyDerivation;
     using Suls.Data;
     using Suls.Data.Models;
     using Suls.Services.Models.Users;
-    using System;
     using System.Linq;
-    using System.Security.Cryptography;
     using System.Text.RegularExpressions;
 
     public class UsersService : IUsersService
@@ -45,7 +42,7 @@
             var user = new User()
             {
                 Email = model.Email,
-                Password = this.HashPassword(model.Password),
+                Password = model.Password,
                 Username = model.Username,
             };
 
@@ -56,24 +53,6 @@
         private bool IsValidEmail(string strIn)
         {
             return Regex.IsMatch(strIn, @"^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$");
-        }
-       
-        private string HashPassword(string password)
-        {
-            byte[] salt = new byte[128 / 8];
-            using (var rng = RandomNumberGenerator.Create())
-            {
-                rng.GetBytes(salt);
-            }
-
-            string hashed = Convert.ToBase64String(KeyDerivation.Pbkdf2(
-                password: password,
-                salt: salt,
-                prf: KeyDerivationPrf.HMACSHA1,
-                iterationCount: 10000,
-                numBytesRequested: 256 / 8));
-
-            return hashed;
         }
     }
 }
