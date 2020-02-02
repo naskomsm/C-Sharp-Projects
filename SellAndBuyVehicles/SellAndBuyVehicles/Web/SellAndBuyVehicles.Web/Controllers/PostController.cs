@@ -27,5 +27,18 @@
         {
             return View();
         }
+
+        [HttpGet]
+        public IActionResult AddPictures()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult AddPictures(string arg)
+        {
+
+            return this.View();
+        }
     }
 }
