@@ -90,7 +90,7 @@ namespace SIS.HTTP
                 }
             }
 
-            // creator=Niki&tweetName=Hello!
+            //creator = Niki & tweetName = Hello!
             this.Body = bodyBuilder.ToString().TrimEnd('\r', '\n');
             this.FormData = new Dictionary<string, string>();
             var bodyParts = this.Body.Split(new char[] { '&' }, StringSplitOptions.RemoveEmptyEntries);
