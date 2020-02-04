@@ -17,4 +17,8 @@
     <ProjectReference Include="..\..\SellAndBuyVehicles.Data.Models\SellAndBuyVehicles.Data.Models\SellAndBuyVehicles.Data.Models.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 </Project>

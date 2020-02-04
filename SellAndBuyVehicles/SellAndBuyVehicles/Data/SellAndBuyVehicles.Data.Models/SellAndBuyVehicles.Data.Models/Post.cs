@@ -1,5 +1,6 @@
 ﻿namespace SellAndBuyVehicles.Data.Models
 {
+    using SellAndBuyVehicles.Data.Models.BaseModels;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using static DataValidation.Post;
@@ -68,6 +69,10 @@
         public int PostCategoryId { get; set; }
 
         public PostCategory PostCategory { get; set; }
+
+        public int SabvUserId { get; set; }
+
+        public SabvUser SabvUser { get; set; }
 
         public ICollection<PostPicture> PostsPictures { get; set; } = new HashSet<PostPicture>();
     }
