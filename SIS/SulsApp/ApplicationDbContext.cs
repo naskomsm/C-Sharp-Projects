@@ -1,8 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
-using SulsApp.Models;
-
-namespace SulsApp
+﻿namespace SulsApp
 {
+    using Microsoft.EntityFrameworkCore;
+    using SulsApp.Models;
+
     public class ApplicationDbContext : DbContext
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

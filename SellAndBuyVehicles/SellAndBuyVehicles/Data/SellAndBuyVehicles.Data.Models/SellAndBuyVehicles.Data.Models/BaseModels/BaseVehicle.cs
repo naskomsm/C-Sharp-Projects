@@ -1,4 +1,4 @@
-﻿namespace SellAndBuyVehicles.Data.Models
+﻿namespace SellAndBuyVehicles.Data.Models.BaseModels
 {
     using SellAndBuyVehicles.Data.Models.Enums;
     using System;

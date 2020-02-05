@@ -16,4 +16,10 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.1" />
   </ItemGroup>
 
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Data\SellAndBuyVehicles.Data\SellAndBuyVehicles.Data\SellAndBuyVehicles.Data.csproj" />
+    <ProjectReference Include="..\..\Services\SellAndBuyVehicles.Services\SellAndBuyVehicles.Services\SellAndBuyVehicles.Services.csproj" />
+  </ItemGroup>
+
 </Project>
