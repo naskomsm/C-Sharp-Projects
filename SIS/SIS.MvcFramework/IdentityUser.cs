@@ -1,7 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace SIS.MvcFramework
+﻿namespace SIS.MvcFramework
 {
+    using System.ComponentModel.DataAnnotations;
+
     public class IdentityUser<T>
     {
         public T Id { get; set; }

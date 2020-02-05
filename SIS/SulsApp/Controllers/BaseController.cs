@@ -1,10 +1,7 @@
-﻿using SIS.MvcFramework;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace SulsApp.Controllers
+﻿namespace SulsApp.Controllers
 {
+    using SIS.MvcFramework;
+
     public abstract class BaseController : Controller
     {
     }

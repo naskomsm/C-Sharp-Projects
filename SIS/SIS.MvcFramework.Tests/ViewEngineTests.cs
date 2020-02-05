@@ -1,9 +1,9 @@
-using System.Collections.Generic;
-using System.IO;
-using Xunit;
-
 namespace SIS.MvcFramework.Tests
 {
+    using Xunit;
+    using System.IO;
+    using SIS.MvcFramework.Interfaces;
+    using System.Collections.Generic;
     public class ViewEngineTests
     {
         [Theory]
@@ -34,15 +34,15 @@ namespace SIS.MvcFramework.Tests
             var viewModel = new List<int> { 1, 2, 3 };
 
             var viewContent = @"
-@foreach (var num in Model)
-{
-<p>@num</p>
-}";
-            var expectedResultContent = @"
-<p>1</p>
-<p>2</p>
-<p>3</p>
-";
+                            @foreach (var num in Model)
+                            {
+                            <p>@num</p>
+                            }";
+                                        var expectedResultContent = @"
+                            <p>1</p>
+                            <p>2</p>
+                            <p>3</p>
+                            ";
 
             IViewEngine viewEngine = new ViewEngine();
             var actualResult = viewEngine.GetHtml(viewContent, viewModel);

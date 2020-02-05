@@ -1,14 +1,16 @@
-﻿using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
-using System;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Text.RegularExpressions;
-
-namespace SIS.MvcFramework
+﻿namespace SIS.MvcFramework
 {
+    using System;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Reflection;
+    using Microsoft.CodeAnalysis;
+    using SIS.MvcFramework.Interfaces;
+    using Microsoft.CodeAnalysis.CSharp;
+    using System.Text.RegularExpressions;
+    using SIS.MvcFramework.Errors;
+
     public class ViewEngine : IViewEngine
     {
         public string GetHtml(string templateHtml, object model)
@@ -22,26 +24,27 @@ namespace SIS.MvcFramework
             }
 
             var code = @$"using System;
-using System.Text;
-using System.Linq;
-using System.Collections.Generic;
-using SIS.MvcFramework;
-namespace AppViewNamespace
-{{
-    public class AppViewCode : IView
-    {{
-        public string GetHtml(object model)
-        {{
-            var Model = model as {typeName};
-            object User = null;
-            var html = new StringBuilder();
+                        using System.Text;
+                        using System.Linq;
+                        using System.Collections.Generic;
+                        using SIS.MvcFramework.Interfaces;
+                        using SIS.MvcFramework;
+                        namespace AppViewNamespace
+                        {{
+                            public class AppViewCode : IView
+                            {{
+                                public string GetHtml(object model)
+                                {{
+                                    var Model = model as {typeName};
+                                    object User = null;
+                                    var html = new StringBuilder();
 
-{methodCode}
+                        {methodCode}
 
-            return html.ToString();
-        }}
-    }}
-}}";
+                                    return html.ToString();
+                                }}
+                            }}
+                        }}";
 
             IView view = GetInstanceFromCode(code, model);
             string html = view.GetHtml(model);

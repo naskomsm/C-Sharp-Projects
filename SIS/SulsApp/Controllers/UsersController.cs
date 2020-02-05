@@ -1,13 +1,12 @@
-﻿using SIS.HTTP;
-using SIS.HTTP.Response;
-using SIS.MvcFramework;
-using SulsApp.Models;
-using System;
-using System.Net.Mail;
-using System.Security.Cryptography;
-
-namespace SulsApp.Controllers
+﻿namespace SulsApp.Controllers
 {
+    using System;
+    using SIS.HTTP;
+    using SulsApp.Models;
+    using System.Net.Mail;
+    using SIS.MvcFramework;
+    using SIS.MvcFramework.Attribues;
+
     public class UsersController : Controller
     {
         public HttpResponse Login()

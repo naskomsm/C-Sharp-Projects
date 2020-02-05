@@ -1,11 +1,9 @@
-﻿using SIS.MvcFramework;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
-
-namespace SulsApp.Models
+﻿namespace SulsApp.Models
 {
+    using System;
+    using SIS.MvcFramework;
+    using System.Collections.Generic;
+
     public class User : IdentityUser<string>
     {
         public User()

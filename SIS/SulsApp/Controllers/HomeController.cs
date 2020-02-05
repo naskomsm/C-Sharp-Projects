@@ -1,11 +1,11 @@
-﻿using SIS.HTTP;
-using SIS.HTTP.Response;
-using SIS.MvcFramework;
-using SulsApp.ViewModels;
-using System;
-
-namespace SulsApp.Controllers
+﻿namespace SulsApp.Controllers
 {
+    using System;
+    using SIS.HTTP;
+    using SIS.MvcFramework;
+    using SulsApp.ViewModels;
+    using SIS.MvcFramework.Attribues;
+
     public class HomeController : Controller
     {
         [HttpGet("/")]
@@ -16,6 +16,7 @@ namespace SulsApp.Controllers
                 Message = "Welcome to SULS Platform!",
                 Year = DateTime.UtcNow.Year,
             };
+
             return this.View(viewModel);
         }
     }

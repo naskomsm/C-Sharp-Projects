@@ -1,14 +1,14 @@
-﻿using SIS.HTTP;
-using SIS.HTTP.Response;
-using System;
-using System.Diagnostics;
-using System.IO;
-using System.Runtime.CompilerServices;
-using System.Security.Cryptography;
-using System.Text;
-
-namespace SIS.MvcFramework
+﻿namespace SIS.MvcFramework
 {
+    using SIS.HTTP;
+    using System.IO;
+    using System.Text;
+    using SIS.HTTP.Response;
+    using SIS.MvcFramework.Interfaces;
+    using System.Security.Cryptography;
+    using System.Runtime.CompilerServices;
+    using SIS.MvcFramework.Errors;
+
     public abstract class Controller
     {
         public HttpRequest Request { get; set; }

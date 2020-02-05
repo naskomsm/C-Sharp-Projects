@@ -1,14 +1,16 @@
-﻿using SIS.HTTP;
-using SIS.HTTP.Response;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Threading.Tasks;
-
-namespace SIS.MvcFramework
+﻿namespace SIS.MvcFramework
 {
+    using System.IO;
+    using System;
+    using SIS.HTTP;
+    using System.Linq;
+    using SIS.HTTP.Response;
+    using System.Reflection;
+    using System.Threading.Tasks;
+    using SIS.MvcFramework.Interfaces;
+    using System.Collections.Generic;
+    using SIS.MvcFramework.Attribues;
+
     public static class WebHost
     {
         public static async Task StartAsync(IMvcApplication application)
