@@ -1,10 +1,7 @@
-﻿using SIS.HTTP;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace SIS.MvcFramework
+﻿namespace SIS.MvcFramework.Attribues
 {
+    using SIS.HTTP;
+
     public class HttpGetAttribute : HttpMethodAttribute
     {
         public HttpGetAttribute()
@@ -16,6 +13,7 @@ namespace SIS.MvcFramework
         {
         }
 
-        public override HttpMethodType Type => HttpMethodType.Get;
+        public override HttpMethodType Type 
+            => HttpMethodType.Get;
     }
 }

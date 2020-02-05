@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace SIS.MvcFramework
+﻿namespace SIS.MvcFramework.Errors
 {
+    using System.Text;
+    using SIS.MvcFramework.Interfaces;
+    using System.Collections.Generic;
+
     public class ErrorView : IView
     {
         private readonly IEnumerable<string> errors;

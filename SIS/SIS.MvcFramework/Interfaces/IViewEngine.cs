@@ -1,4 +1,4 @@
-﻿namespace SIS.MvcFramework
+﻿namespace SIS.MvcFramework.Interfaces
 {
     public interface IViewEngine
     {

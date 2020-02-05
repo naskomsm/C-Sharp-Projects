@@ -1,10 +1,8 @@
-﻿using SIS.HTTP;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace SIS.MvcFramework
+﻿namespace SIS.MvcFramework.Attribues
 {
+    using SIS.HTTP;
+    using System;
+
     public abstract class HttpMethodAttribute : Attribute
     {
         protected HttpMethodAttribute()
