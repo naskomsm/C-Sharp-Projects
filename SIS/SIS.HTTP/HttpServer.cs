@@ -1,20 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SIS.HTTP
+﻿namespace SIS.HTTP
 {
+    using System;
+    using System.Net;
+    using System.Text;
+    using System.Linq;
+    using System.Net.Sockets;
+    using System.Threading.Tasks;
+    using System.Collections.Generic;
+
     public class HttpServer : IHttpServer
     {
         private readonly TcpListener tcpListener;
         private readonly IList<Route> routeTable;
         private readonly IDictionary<string, IDictionary<string, string>> sessions;
 
-        // TODO: actions
         public HttpServer(int port, IList<Route> routeTable)
         {
             this.tcpListener = new TcpListener(IPAddress.Loopback, port);
@@ -22,12 +21,18 @@ namespace SIS.HTTP
             this.sessions = new Dictionary<string, IDictionary<string, string>>();
         }
 
+        /// <summary>
+        /// Resets the HTTP Server asynchronously.
+        /// </summary>
         public async Task ResetAsync()
         {
             this.Stop();
             await this.StartAsync();
         }
 
+        /// <summary>
+        /// Starts the HTTP Server asynchronously.
+        /// </summary>
         public async Task StartAsync()
         {
             this.tcpListener.Start();
@@ -40,11 +45,19 @@ namespace SIS.HTTP
             }
         }
 
+        /// <summary>
+        /// Stops the HTTP Server.
+        /// </summary>
         public void Stop()
         {
             this.tcpListener.Stop();
         }
 
+        /// <summary>
+        /// Processes the <see cref="TcpClient"/> asynchronously and returns HTTP Response for the browser.
+        /// </summary>
+        /// <param name="tcpClient">TCP Client</param>
+        /// <returns></returns>
         private async Task ProcessClientAsync(TcpClient tcpClient)
         {
             using NetworkStream networkStream = tcpClient.GetStream();
@@ -72,7 +85,7 @@ namespace SIS.HTTP
                 Console.WriteLine($"{request.Method} {request.Path}");
 
                 var route = this.routeTable.FirstOrDefault(
-                    x => x.HttpMethod == request.Method && x.Path == request.Path);
+                    x => x.HttpMethod == request.Method && string.Compare(x.Path, request.Path, true) == 0);
                 HttpResponse response;
                 if (route == null)
                 {

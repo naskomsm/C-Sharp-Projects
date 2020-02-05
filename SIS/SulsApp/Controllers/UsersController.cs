@@ -1,101 +1,86 @@
-﻿namespace SulsApp.Controllers
-{
-    using SIS.HTTP;
-    using SIS.MvcFramework;
-    using SulsApp.Models;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Security.Cryptography;
+﻿using SIS.HTTP;
+using SIS.HTTP.Response;
+using SIS.MvcFramework;
+using SulsApp.Models;
+using System;
+using System.Net.Mail;
+using System.Security.Cryptography;
 
+namespace SulsApp.Controllers
+{
     public class UsersController : Controller
     {
-        private readonly ApplicationDbContext data;
-
-        public UsersController(ApplicationDbContext data)
-        {
-            this.data = data;
-        }
-
-        // GET
-        public HttpResponse Login(HttpRequest request)
+        public HttpResponse Login()
         {
             return this.View();
         }
 
-        // GET
-        public HttpResponse Register(HttpRequest request)
+        [HttpPost("/Users/Login")]
+        public HttpResponse DoLogin()
         {
             return this.View();
         }
 
-        // POST
-        public HttpResponse DoRegister(HttpRequest request)
+        public HttpResponse Register()
         {
-            var user = new User()
+            return this.View();
+        }
+
+        [HttpPost("/Users/Register")]
+        public HttpResponse DoRegister()
+        {
+            var username = this.Request.FormData["username"];
+            var email = this.Request.FormData["email"];
+            var password = this.Request.FormData["password"];
+            var confirmPassword = this.Request.FormData["confirmPassword"];
+
+            if (password != confirmPassword)
             {
-                Email = request.FormData["email"],
-                Password = HashPassword(request.FormData["password"]),
-                Username = request.FormData["username"]
+                return this.Error("Passwords should be the same!");
+            }
+
+            if (username?.Length < 5 || username?.Length > 20)
+            {
+                return this.Error("Username should be between 5 and 20 characters .");
+            }
+
+            if (password?.Length < 6 || password?.Length > 20)
+            {
+                return this.Error("Password should be between 6 and 20 characters.");
+            }
+
+            if (!IsValid(email))
+            {
+                return this.Error("Invalid email!");
+            }
+
+            var user = new User
+            {
+                Email = email,
+                Username = username,
+                Password = this.Hash(password),
             };
 
-            this.data.Users.Add(user);
-            this.data.SaveChanges();
+            var db = new ApplicationDbContext();
+            db.Users.Add(user);
+            db.SaveChanges();
 
-            return this.View("../../../../../Views/Home/Index");
+            // TODO: Log in...
+
+            return this.Redirect("/");
         }
 
-        // POST
-        public HttpResponse DoLogin(HttpRequest request)
+        private bool IsValid(string emailaddress)
         {
-            var formUsername = request.FormData["username"];
-            var formPassword = request.FormData["password"];
-
-            if (VerifyUserCredentials(formUsername, formPassword))
+            try
             {
-                return this.View("../../../../../Views/Users/LoginSuccesfull");
+                new MailAddress(emailaddress);
+                return true;
             }
-            else
+            catch (FormatException)
             {
-                return this.View("../../../../../Views/Home/Index");
+                return false;
             }
-        }
-
-        private string HashPassword(string password)
-        {
-            byte[] salt;
-            new RNGCryptoServiceProvider().GetBytes(salt = new byte[16]);
-
-            var pbkdf2 = new Rfc2898DeriveBytes(password, salt, 10000);
-            byte[] hash = pbkdf2.GetBytes(20);
-
-            byte[] hashBytes = new byte[36];
-            Array.Copy(salt, 0, hashBytes, 0, 16);
-            Array.Copy(hash, 0, hashBytes, 16, 20);
-
-            string savedPasswordHash = Convert.ToBase64String(hashBytes);
-
-            return savedPasswordHash;
-        }
-
-        private bool VerifyUserCredentials(string username, string password)
-        {
-            string savedPasswordHash = this.data.Users.FirstOrDefault(u => u.Username == username).Password;
-            byte[] hashBytes = Convert.FromBase64String(savedPasswordHash);
-            byte[] salt = new byte[16];
-            Array.Copy(hashBytes, 0, salt, 0, 16);
-            var pbkdf2 = new Rfc2898DeriveBytes(password, salt, 10000);
-            byte[] hash = pbkdf2.GetBytes(20);
-
-            for (int i = 0; i < 20; i++)
-            {
-                if (hashBytes[i + 16] != hash[i])
-                {
-                    return false;
-                }
-            }
-
-            return true;
         }
     }
 }
