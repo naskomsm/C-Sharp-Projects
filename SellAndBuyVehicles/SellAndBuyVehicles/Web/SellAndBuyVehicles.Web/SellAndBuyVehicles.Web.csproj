@@ -22,4 +22,29 @@
     <ProjectReference Include="..\..\Services\SellAndBuyVehicles.Services\SellAndBuyVehicles.Services\SellAndBuyVehicles.Services.csproj" />
   </ItemGroup>
 
+
+  <ItemGroup>
+    <Content Update="Datasets\CarFeatures.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Datasets\CarTypeCategories.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Datasets\Categories.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Datasets\Cities.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Datasets\Colors.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Datasets\Makes.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Datasets\Years.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>
