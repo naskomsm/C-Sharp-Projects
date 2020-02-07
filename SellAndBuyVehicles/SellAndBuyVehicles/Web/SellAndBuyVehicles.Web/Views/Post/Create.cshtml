@@ -1,14 +1,17 @@
-﻿
+﻿@model SearchPageViewModel
+
 @{
     ViewData["Title"] = "Безплатно публикуване на обява";
 }
 
 <div class="row">
 
-    <div class="col" style="border-style: groove;border-color: silver;background-color: #DFF1FF" >1. Публикуване на обявата</div>
-    <div class="col"><img src="//cdn2.focus.bg/mobile/images/picturess/nav_arrow.gif" style="padding-left: 55px;
+    <div class="col" style="border-style: groove;border-color: silver;background-color: #DFF1FF">1. Публикуване на обявата</div>
+    <div class="col">
+        <img src="//cdn2.focus.bg/mobile/images/picturess/nav_arrow.gif" style="padding-left: 55px;
         padding-top: 20px;
-    " /></div>
+    " />
+    </div>
     <div class="col" style="border-style: groove;border-color: silver;">2. Преглед на текста</div>
     <div class="col"><img src="//cdn2.focus.bg/mobile/images/picturess/nav_arrow.gif" style="padding-left: 55px;padding-top: 20px;" /></div>
     <div class="col" style="border-style: groove;border-color: silver;">3. Добавяне на снимки и видео</div>
@@ -29,55 +32,25 @@
 
                         <p class="mb-1 small">Основна категория</p>
                         <select class="mdb-select md-form container">
-                            <option selected="" value="1">
-                                Автомобили и Джипове
-                            </option>
-                            <option value="3">
-                                Бусове
-                            </option>
-                            <option value="4">
-                                Камиони
-                            </option>
-                            <option value="5">
-                                Мотоциклети
-                            </option>
-                            <option value="6">
-                                Селскостопански
-                            </option>
-                            <option value="7">
-                                Индустриални
-                            </option>
-                            <option value="8">
-                                Кари
-                            </option>
-                            <option value="9">
-                                Каравани
-                            </option>
-                            <option value="a">
-                                Яхти и Лодки
-                            </option>
-                            <option value="b">
-                                Ремаркета
-                            </option>
-                            <option value="c">
-                                Велосипеди
-                            </option>
-                            <option value="u">
-                                Части
-                            </option>
-                            <option value="v">
-                                Аксесоари
-                            </option>
-                            <option value="w">
-                                Гуми и джанти
-                            </option>
-                            <option value="y">
-                                Купува
-                            </option>
-                            <option value="z">
-                                Услуги
+                            @for (int i = 0; i < Model.Categories.Length; i++)
+                            {
+                                int correctValue = i + 1;
 
-                            </option>
+                                if (correctValue == 1)
+                                {
+                                    <option selected="selected" value="@correctValue">
+                                        @Model.Categories[i]
+                                    </option>
+
+                                }
+
+                                else
+                                {
+                                    <option value="@correctValue">
+                                        @Model.Categories[i]
+                                    </option>
+                                }
+                            }
                         </select>
                     </div>
                 </div>
@@ -108,488 +81,24 @@
                     <div class="ml-2">
                         <p class="mb-1 small">Марка</p>
                         <select class="mdb-select md-form container">
-                            <option value="" disabled selected>Всички</option>
-                            <option selected="" value="">
-                            </option>
-                            <optgroup label="A">
-                                <option value="AC">
-                                    AC
-                                </option>
-                                <option value="Acura">
-                                    Acura
-                                </option>
-                                <option value="Aixam">
-                                    Aixam
-                                </option>
-                                <option value="Alfa Romeo">
-                                    Alfa Romeo
-                                </option>
-                                <option value="Alpina">
-                                    Alpina
-                                </option>
-                                <option value="Aro">
-                                    Aro
-                                </option>
-                                <option value="Asia">
-                                    Asia
-                                </option>
-                                <option value="Aston martin">
-                                    Aston martin
-                                </option>
-                                <option value="Audi">
-                                    Audi
-                                </option>
-                                <option value="Austin">
-                                    Austin
-                                </option>
-                            </optgroup>
-                            <optgroup label="B">
-                                <option value="BMW">
-                                    BMW
-                                </option>
-                                <option value="Bentley">
-                                    Bentley
-                                </option>
-                                <option value="Berliner">
-                                    Berliner
-                                </option>
-                                <option value="Bertone">
-                                    Bertone
-                                </option>
-                                <option value="Borgward">
-                                    Borgward
-                                </option>
-                                <option value="Brilliance">
-                                    Brilliance
-                                </option>
-                                <option value="Bugatti">
-                                    Bugatti
-                                </option>
-                                <option value="Buick">
-                                    Buick
-                                </option>
-                            </optgroup>
-                            <optgroup label="C">
-                                <option value="Cadillac">
-                                    Cadillac
-                                </option>
-                                <option value="Chevrolet">
-                                    Chevrolet
-                                </option>
-                                <option value="Chrysler">
-                                    Chrysler
-                                </option>
-                                <option value="Citroen">
-                                    Citroen
-                                </option>
-                                <option value="Corvette">
-                                    Corvette
-                                </option>
-                                <option value="Cupra">
-                                    Cupra
-                                </option>
-                            </optgroup>
-                            <optgroup label="D">
-                                <option value="DS">
-                                    DS
-                                </option>
-                                <option value="Dacia">
-                                    Dacia
-                                </option>
-                                <option value="Daewoo">
-                                    Daewoo
-                                </option>
-                                <option value="Daihatsu">
-                                    Daihatsu
-                                </option>
-                                <option value="Daimler">
-                                    Daimler
-                                </option>
-                                <option value="Datsun">
-                                    Datsun
-                                </option>
-                                <option value="Dkw">
-                                    Dkw
-                                </option>
-                                <option value="Dodge">
-                                    Dodge
-                                </option>
-                                <option value="Dr">
-                                    Dr
-                                </option>
-                            </optgroup>
-                            <optgroup label="E">
-                                <option value="Eagle">
-                                    Eagle
-                                </option>
-                            </optgroup>
-                            <optgroup label="F">
-                                <option value="FSO">
-                                    FSO
-                                </option>
-                                <option value="Ferrari">
-                                    Ferrari
-                                </option>
-                                <option value="Fiat">
-                                    Fiat
-                                </option>
-                                <option value="Ford">
-                                    Ford
-                                </option>
-                            </optgroup>
-                            <optgroup label="G">
-                                <option value="GOUPIL">
-                                    GOUPIL
-                                </option>
-                                <option value="Gaz">
-                                    Gaz
-                                </option>
-                                <option value="Geo">
-                                    Geo
-                                </option>
-                                <option value="Gmc">
-                                    Gmc
-                                </option>
-                                <option value="Great Wall">
-                                    Great Wall
-                                </option>
-                            </optgroup>
-                            <optgroup label="H">
-                                <option value="Haval">
-                                    Haval
-                                </option>
-                                <option value="Heinkel">
-                                    Heinkel
-                                </option>
-                                <option value="Hillman">
-                                    Hillman
-                                </option>
-                                <option value="Honda">
-                                    Honda
-                                </option>
-                                <option value="Hummer">
-                                    Hummer
-                                </option>
-                                <option value="Hyundai">
-                                    Hyundai
-                                </option>
-                            </optgroup>
-                            <optgroup label="I">
-                                <option value="Ifa">
-                                    Ifa
-                                </option>
-                                <option value="Infiniti">
-                                    Infiniti
-                                </option>
-                                <option value="Innocenti">
-                                    Innocenti
-                                </option>
-                                <option value="Isuzu">
-                                    Isuzu
-                                </option>
-                                <option value="Iveco">
-                                    Iveco
-                                </option>
-                            </optgroup>
-                            <optgroup label="J">
-                                <option value="Jaguar">
-                                    Jaguar
-                                </option>
-                                <option value="Jeep">
-                                    Jeep
-                                </option>
-                                <option value="Jpx">
-                                    Jpx
-                                </option>
-                            </optgroup>
-                            <optgroup label="K">
-                                <option value="Kia">
-                                    Kia
-                                </option>
-                            </optgroup>
-                            <optgroup label="L">
-                                <option value="Lada">
-                                    Lada
-                                </option>
-                                <option value="Laforza">
-                                    Laforza
-                                </option>
-                                <option value="Lamborghini">
-                                    Lamborghini
-                                </option>
-                                <option value="Lancia">
-                                    Lancia
-                                </option>
-                                <option value="Land Rover">
-                                    Land Rover
-                                </option>
-                                <option value="Landwind">
-                                    Landwind
-                                </option>
-                                <option value="Lexus">
-                                    Lexus
-                                </option>
-                                <option value="Lifan">
-                                    Lifan
-                                </option>
-                                <option value="Lincoln">
-                                    Lincoln
-                                </option>
-                                <option value="Lotus">
-                                    Lotus
-                                </option>
-                            </optgroup>
-                            <optgroup label="M">
-                                <option value="MG">
-                                    MG
-                                </option>
-                                <option value="Mahindra">
-                                    Mahindra
-                                </option>
-                                <option value="Maserati">
-                                    Maserati
-                                </option>
-                                <option value="Matra">
-                                    Matra
-                                </option>
-                                <option value="Maybach">
-                                    Maybach
-                                </option>
-                                <option value="Mazda">
-                                    Mazda
-                                </option>
-                                <option value="McLaren">
-                                    McLaren
-                                </option>
-                                <option value="Mercedes-Benz">
-                                    Mercedes-Benz
-                                </option>
-                                <option value="Mercury">
-                                    Mercury
-                                </option>
-                                <option value="Mg">
-                                    Mg
-                                </option>
-                                <option value="Microcar">
-                                    Microcar
-                                </option>
-                                <option value="Mini">
-                                    Mini
-                                </option>
-                                <option value="Mitsubishi">
-                                    Mitsubishi
-                                </option>
-                                <option value="Morgan">
-                                    Morgan
-                                </option>
-                                <option value="Moskvich">
-                                    Moskvich
-                                </option>
-                            </optgroup>
-                            <optgroup label="N">
-                                <option value="Nissan">
-                                    Nissan
-                                </option>
-                            </optgroup>
-                            <optgroup label="O">
-                                <option value="Oldsmobile">
-                                    Oldsmobile
-                                </option>
-                                <option value="Opel">
-                                    Opel
-                                </option>
-                            </optgroup>
-                            <optgroup label="P">
-                                <option value="Perodua">
-                                    Perodua
-                                </option>
-                                <option value="Peugeot">
-                                    Peugeot
-                                </option>
-                                <option value="Pgo">
-                                    Pgo
-                                </option>
-                                <option value="Plymouth">
-                                    Plymouth
-                                </option>
-                                <option value="Polonez">
-                                    Polonez
-                                </option>
-                                <option value="Pontiac">
-                                    Pontiac
-                                </option>
-                                <option value="Porsche">
-                                    Porsche
-                                </option>
-                                <option value="Proton">
-                                    Proton
-                                </option>
-                            </optgroup>
-                            <optgroup label="R">
-                                <option value="Renault">
-                                    Renault
-                                </option>
-                                <option value="Rolls-Royce">
-                                    Rolls-Royce
-                                </option>
-                                <option value="Rover">
-                                    Rover
-                                </option>
-                            </optgroup>
-                            <optgroup label="S">
-                                <option value="SECMA">
-                                    SECMA
-                                </option>
-                                <option value="SH auto">
-                                    SH auto
-                                </option>
-                                <option value="Saab">
-                                    Saab
-                                </option>
-                                <option value="Samand">
-                                    Samand
-                                </option>
-                                <option value="Santana">
-                                    Santana
-                                </option>
-                                <option value="Saturn">
-                                    Saturn
-                                </option>
-                                <option value="Scion">
-                                    Scion
-                                </option>
-                                <option value="Seat">
-                                    Seat
-                                </option>
-                                <option value="Shatenet">
-                                    Shatenet
-                                </option>
-                                <option value="Shuanghuan">
-                                    Shuanghuan
-                                </option>
-                                <option value="Simca">
-                                    Simca
-                                </option>
-                                <option value="Skoda">
-                                    Skoda
-                                </option>
-                                <option value="Smart">
-                                    Smart
-                                </option>
-                                <option value="Ssang yong">
-                                    Ssang yong
-                                </option>
-                                <option value="SsangYong">
-                                    SsangYong
-                                </option>
-                                <option value="Subaru">
-                                    Subaru
-                                </option>
-                                <option value="Suzuki">
-                                    Suzuki
-                                </option>
-                            </optgroup>
-                            <optgroup label="T">
-                                <option value="Talbot">
-                                    Talbot
-                                </option>
-                                <option value="Tata">
-                                    Tata
-                                </option>
-                                <option value="Tavria">
-                                    Tavria
-                                </option>
-                                <option value="Tazzari">
-                                    Tazzari
-                                </option>
-                                <option value="Tempo">
-                                    Tempo
-                                </option>
-                                <option value="Terberg">
-                                    Terberg
-                                </option>
-                                <option value="Tesla">
-                                    Tesla
-                                </option>
-                                <option value="Tofas">
-                                    Tofas
-                                </option>
-                                <option value="Toyota">
-                                    Toyota
-                                </option>
-                                <option value="Trabant">
-                                    Trabant
-                                </option>
-                                <option value="Triumph">
-                                    Triumph
-                                </option>
-                            </optgroup>
-                            <optgroup label="U">
-                                <option value="Uaz">
-                                    Uaz
-                                </option>
-                            </optgroup>
-                            <optgroup label="V">
-                                <option value="VROMOS">
-                                    VROMOS
-                                </option>
-                                <option value="VW">
-                                    VW
-                                </option>
-                                <option value="Volga">
-                                    Volga
-                                </option>
-                                <option value="Volvo">
-                                    Volvo
-                                </option>
-                            </optgroup>
-                            <optgroup label="W">
-                                <option value="Warszawa">
-                                    Warszawa
-                                </option>
-                                <option value="Wartburg">
-                                    Wartburg
-                                </option>
-                                <option value="Wiesmann">
-                                    Wiesmann
-                                </option>
-                            </optgroup>
-                            <optgroup label="X">
-                                <option value="Xinkai">
-                                    Xinkai
-                                </option>
-                                <option value="Xinshun">
-                                    Xinshun
-                                </option>
-                            </optgroup>
-                            <optgroup label="Z">
-                                <option value="Zastava">
-                                    Zastava
-                                </option>
-                                <option value="Zaz">
-                                    Zaz
-                                </option>
-                            </optgroup>
-                            <optgroup label="Д">
-                                <option value="Други">
-                                    Други
-                                </option>
-                            </optgroup>
-                            <optgroup label="П">
-                                <option value="Победа">
-                                    Победа
-                                </option>
-                            </optgroup>
-                            <optgroup label="С">
-                                <option value="София">
-                                    София
-                                </option>
-                            </optgroup>
-                            <optgroup label="Ч">
-                                <option value="Чайка">
-                                    Чайка
-                                </option>
-                            </optgroup>
+                            @for (int i = 0; i < Model.Makes.Length; i++)
+                            {
+                                if (i == 0)
+                                {
+                                    <option selected="selected" value="@Model.Makes[i]">
+                                        @Model.Makes[i]
+                                    </option>
+
+                                }
+
+                                else
+                                {
+                                    <option value="@Model.Makes[i]">
+                                        @Model.Makes[i]
+                                    </option>
+                                }
+                            }
+
                         </select>
                     </div>
                 </div>
@@ -676,38 +185,24 @@
                     <div class="ml-2">
                         <p class="mb-1 small">Категория</p>
                         <select class="mdb-select md-form container">
-                            <option value="" disabled selected>Всички</option>
-                            <option value="Ван">
-                                Ван
-                            </option>
-                            <option value="Джип">
-                                Джип
-                            </option>
-                            <option value="Кабрио">
-                                Кабрио
-                            </option>
-                            <option value="Комби">
-                                Комби
-                            </option>
-                            <option value="Купе">
-                                Купе
-                            </option>
-                            <option value="Миниван">
-                                Миниван
-                            </option>
-                            <option value="Пикап">
-                                Пикап
-                            </option>
-                            <option value="Седан">
-                                Седан
-                            </option>
-                            <option value="Стреч лимузина">
-                                Стреч лимузина
-                            </option>
-                            <option value="Хечбек">
-                                Хечбек
+                            @for (int i = 0; i < Model.CarTypeCategory.Length; i++)
+                            {
+                                if (i == 0)
+                                {
+                                    <option selected="selected" value="@Model.CarTypeCategory[i]">
+                                        @Model.CarTypeCategory[i]
+                                    </option>
 
-                            </option>
+                                }
+
+                                else
+                                {
+                                    <option value="@Model.CarTypeCategory[i]">
+                                        @Model.CarTypeCategory[i]
+                                    </option>
+                                }
+                            }
+
                         </select>
                     </div>
                 </div>
@@ -738,281 +233,23 @@
                     <div class="ml-2">
                         <p class="mb-1 small">Година на производство (От)</p>
                         <select class="mdb-select md-form container">
-                            <option value="" disabled selected></option>
-                            <option value="2020">
-                                от  2020 г.
-                            </option>
-                            <option value="2019">
-                                от  2019 г.
-                            </option>
-                            <option value="2018">
-                                от  2018 г.
-                            </option>
-                            <option value="2017">
-                                от  2017 г.
-                            </option>
-                            <option value="2016">
-                                от  2016 г.
-                            </option>
-                            <option value="2015">
-                                от  2015 г.
-                            </option>
-                            <option value="2014">
-                                от  2014 г.
-                            </option>
-                            <option value="2013">
-                                от  2013 г.
-                            </option>
-                            <option value="2012">
-                                от  2012 г.
-                            </option>
-                            <option value="2011">
-                                от  2011 г.
-                            </option>
-                            <option value="2010">
-                                от  2010 г.
-                            </option>
-                            <option value="2009">
-                                от  2009 г.
-                            </option>
-                            <option value="2008">
-                                от  2008 г.
-                            </option>
-                            <option value="2007">
-                                от  2007 г.
-                            </option>
-                            <option value="2006">
-                                от  2006 г.
-                            </option>
-                            <option value="2005">
-                                от  2005 г.
-                            </option>
-                            <option value="2004">
-                                от  2004 г.
-                            </option>
-                            <option value="2003">
-                                от  2003 г.
-                            </option>
-                            <option value="2002">
-                                от  2002 г.
-                            </option>
-                            <option value="2001">
-                                от  2001 г.
-                            </option>
-                            <option value="2000">
-                                от  2000 г.
-                            </option>
-                            <option value="1999">
-                                от  1999 г.
-                            </option>
-                            <option value="1998">
-                                от  1998 г.
-                            </option>
-                            <option value="1997">
-                                от  1997 г.
-                            </option>
-                            <option value="1996">
-                                от  1996 г.
-                            </option>
-                            <option value="1995">
-                                от  1995 г.
-                            </option>
-                            <option value="1994">
-                                от  1994 г.
-                            </option>
-                            <option value="1993">
-                                от  1993 г.
-                            </option>
-                            <option value="1992">
-                                от  1992 г.
-                            </option>
-                            <option value="1991">
-                                от  1991 г.
-                            </option>
-                            <option value="1990">
-                                от  1990 г.
-                            </option>
-                            <option value="1989">
-                                от  1989 г.
-                            </option>
-                            <option value="1988">
-                                от  1988 г.
-                            </option>
-                            <option value="1987">
-                                от  1987 г.
-                            </option>
-                            <option value="1986">
-                                от  1986 г.
-                            </option>
-                            <option value="1985">
-                                от  1985 г.
-                            </option>
-                            <option value="1984">
-                                от  1984 г.
-                            </option>
-                            <option value="1983">
-                                от  1983 г.
-                            </option>
-                            <option value="1982">
-                                от  1982 г.
-                            </option>
-                            <option value="1981">
-                                от  1981 г.
-                            </option>
-                            <option value="1980">
-                                от  1980 г.
-                            </option>
-                            <option value="1979">
-                                от  1979 г.
-                            </option>
-                            <option value="1978">
-                                от  1978 г.
-                            </option>
-                            <option value="1977">
-                                от  1977 г.
-                            </option>
-                            <option value="1976">
-                                от  1976 г.
-                            </option>
-                            <option value="1975">
-                                от  1975 г.
-                            </option>
-                            <option value="1974">
-                                от  1974 г.
-                            </option>
-                            <option value="1973">
-                                от  1973 г.
-                            </option>
-                            <option value="1972">
-                                от  1972 г.
-                            </option>
-                            <option value="1971">
-                                от  1971 г.
-                            </option>
-                            <option value="1970">
-                                от  1970 г.
-                            </option>
-                            <option value="1969">
-                                от  1969 г.
-                            </option>
-                            <option value="1968">
-                                от  1968 г.
-                            </option>
-                            <option value="1967">
-                                от  1967 г.
-                            </option>
-                            <option value="1966">
-                                от  1966 г.
-                            </option>
-                            <option value="1965">
-                                от  1965 г.
-                            </option>
-                            <option value="1964">
-                                от  1964 г.
-                            </option>
-                            <option value="1963">
-                                от  1963 г.
-                            </option>
-                            <option value="1962">
-                                от  1962 г.
-                            </option>
-                            <option value="1961">
-                                от  1961 г.
-                            </option>
-                            <option value="1960">
-                                от  1960 г.
-                            </option>
-                            <option value="1959">
-                                от  1959 г.
-                            </option>
-                            <option value="1958">
-                                от  1958 г.
-                            </option>
-                            <option value="1957">
-                                от  1957 г.
-                            </option>
-                            <option value="1956">
-                                от  1956 г.
-                            </option>
-                            <option value="1955">
-                                от  1955 г.
-                            </option>
-                            <option value="1954">
-                                от  1954 г.
-                            </option>
-                            <option value="1953">
-                                от  1953 г.
-                            </option>
-                            <option value="1952">
-                                от  1952 г.
-                            </option>
-                            <option value="1951">
-                                от  1951 г.
-                            </option>
-                            <option value="1950">
-                                от  1950 г.
-                            </option>
-                            <option value="1949">
-                                от  1949 г.
-                            </option>
-                            <option value="1948">
-                                от  1948 г.
-                            </option>
-                            <option value="1947">
-                                от  1947 г.
-                            </option>
-                            <option value="1946">
-                                от  1946 г.
-                            </option>
-                            <option value="1945">
-                                от  1945 г.
-                            </option>
-                            <option value="1944">
-                                от  1944 г.
-                            </option>
-                            <option value="1943">
-                                от  1943 г.
-                            </option>
-                            <option value="1942">
-                                от  1942 г.
-                            </option>
-                            <option value="1941">
-                                от  1941 г.
-                            </option>
-                            <option value="1940">
-                                от  1940 г.
-                            </option>
-                            <option value="1939">
-                                от  1939 г.
-                            </option>
-                            <option value="1938">
-                                от  1938 г.
-                            </option>
-                            <option value="1937">
-                                от  1937 г.
-                            </option>
-                            <option value="1936">
-                                от  1936 г.
-                            </option>
-                            <option value="1935">
-                                от  1935 г.
-                            </option>
-                            <option value="1934">
-                                от  1934 г.
-                            </option>
-                            <option value="1933">
-                                от  1933 г.
-                            </option>
-                            <option value="1932">
-                                от  1932 г.
-                            </option>
-                            <option value="1931">
-                                от  1931 г.
-                            </option>
-                            <option value="1930">
-                                от  1930 г.
+                            @for (int i = 0; i < Model.Years.Length; i++)
+                            {
+                                if (i == 0)
+                                {
+                                    <option selected="selected" value="@Model.Years[i]">
+                                        @Model.Years[i]
+                                    </option>
 
-                            </option>
+                                }
+
+                                else
+                                {
+                                    <option value="@Model.Years[i]">
+                                        От @Model.Years[i]
+                                    </option>
+                                }
+                            }
                         </select>
                     </div>
                 </div>
@@ -1021,281 +258,23 @@
                     <div class="ml-2">
                         <p class="mb-1 small">(До)</p>
                         <select class="mdb-select md-form container">
-                            <option value="" disabled selected></option>
-                            <option value="2020">
-                                от  2020 г.
-                            </option>
-                            <option value="2019">
-                                от  2019 г.
-                            </option>
-                            <option value="2018">
-                                от  2018 г.
-                            </option>
-                            <option value="2017">
-                                от  2017 г.
-                            </option>
-                            <option value="2016">
-                                от  2016 г.
-                            </option>
-                            <option value="2015">
-                                от  2015 г.
-                            </option>
-                            <option value="2014">
-                                от  2014 г.
-                            </option>
-                            <option value="2013">
-                                от  2013 г.
-                            </option>
-                            <option value="2012">
-                                от  2012 г.
-                            </option>
-                            <option value="2011">
-                                от  2011 г.
-                            </option>
-                            <option value="2010">
-                                от  2010 г.
-                            </option>
-                            <option value="2009">
-                                от  2009 г.
-                            </option>
-                            <option value="2008">
-                                от  2008 г.
-                            </option>
-                            <option value="2007">
-                                от  2007 г.
-                            </option>
-                            <option value="2006">
-                                от  2006 г.
-                            </option>
-                            <option value="2005">
-                                от  2005 г.
-                            </option>
-                            <option value="2004">
-                                от  2004 г.
-                            </option>
-                            <option value="2003">
-                                от  2003 г.
-                            </option>
-                            <option value="2002">
-                                от  2002 г.
-                            </option>
-                            <option value="2001">
-                                от  2001 г.
-                            </option>
-                            <option value="2000">
-                                от  2000 г.
-                            </option>
-                            <option value="1999">
-                                от  1999 г.
-                            </option>
-                            <option value="1998">
-                                от  1998 г.
-                            </option>
-                            <option value="1997">
-                                от  1997 г.
-                            </option>
-                            <option value="1996">
-                                от  1996 г.
-                            </option>
-                            <option value="1995">
-                                от  1995 г.
-                            </option>
-                            <option value="1994">
-                                от  1994 г.
-                            </option>
-                            <option value="1993">
-                                от  1993 г.
-                            </option>
-                            <option value="1992">
-                                от  1992 г.
-                            </option>
-                            <option value="1991">
-                                от  1991 г.
-                            </option>
-                            <option value="1990">
-                                от  1990 г.
-                            </option>
-                            <option value="1989">
-                                от  1989 г.
-                            </option>
-                            <option value="1988">
-                                от  1988 г.
-                            </option>
-                            <option value="1987">
-                                от  1987 г.
-                            </option>
-                            <option value="1986">
-                                от  1986 г.
-                            </option>
-                            <option value="1985">
-                                от  1985 г.
-                            </option>
-                            <option value="1984">
-                                от  1984 г.
-                            </option>
-                            <option value="1983">
-                                от  1983 г.
-                            </option>
-                            <option value="1982">
-                                от  1982 г.
-                            </option>
-                            <option value="1981">
-                                от  1981 г.
-                            </option>
-                            <option value="1980">
-                                от  1980 г.
-                            </option>
-                            <option value="1979">
-                                от  1979 г.
-                            </option>
-                            <option value="1978">
-                                от  1978 г.
-                            </option>
-                            <option value="1977">
-                                от  1977 г.
-                            </option>
-                            <option value="1976">
-                                от  1976 г.
-                            </option>
-                            <option value="1975">
-                                от  1975 г.
-                            </option>
-                            <option value="1974">
-                                от  1974 г.
-                            </option>
-                            <option value="1973">
-                                от  1973 г.
-                            </option>
-                            <option value="1972">
-                                от  1972 г.
-                            </option>
-                            <option value="1971">
-                                от  1971 г.
-                            </option>
-                            <option value="1970">
-                                от  1970 г.
-                            </option>
-                            <option value="1969">
-                                от  1969 г.
-                            </option>
-                            <option value="1968">
-                                от  1968 г.
-                            </option>
-                            <option value="1967">
-                                от  1967 г.
-                            </option>
-                            <option value="1966">
-                                от  1966 г.
-                            </option>
-                            <option value="1965">
-                                от  1965 г.
-                            </option>
-                            <option value="1964">
-                                от  1964 г.
-                            </option>
-                            <option value="1963">
-                                от  1963 г.
-                            </option>
-                            <option value="1962">
-                                от  1962 г.
-                            </option>
-                            <option value="1961">
-                                от  1961 г.
-                            </option>
-                            <option value="1960">
-                                от  1960 г.
-                            </option>
-                            <option value="1959">
-                                от  1959 г.
-                            </option>
-                            <option value="1958">
-                                от  1958 г.
-                            </option>
-                            <option value="1957">
-                                от  1957 г.
-                            </option>
-                            <option value="1956">
-                                от  1956 г.
-                            </option>
-                            <option value="1955">
-                                от  1955 г.
-                            </option>
-                            <option value="1954">
-                                от  1954 г.
-                            </option>
-                            <option value="1953">
-                                от  1953 г.
-                            </option>
-                            <option value="1952">
-                                от  1952 г.
-                            </option>
-                            <option value="1951">
-                                от  1951 г.
-                            </option>
-                            <option value="1950">
-                                от  1950 г.
-                            </option>
-                            <option value="1949">
-                                от  1949 г.
-                            </option>
-                            <option value="1948">
-                                от  1948 г.
-                            </option>
-                            <option value="1947">
-                                от  1947 г.
-                            </option>
-                            <option value="1946">
-                                от  1946 г.
-                            </option>
-                            <option value="1945">
-                                от  1945 г.
-                            </option>
-                            <option value="1944">
-                                от  1944 г.
-                            </option>
-                            <option value="1943">
-                                от  1943 г.
-                            </option>
-                            <option value="1942">
-                                от  1942 г.
-                            </option>
-                            <option value="1941">
-                                от  1941 г.
-                            </option>
-                            <option value="1940">
-                                от  1940 г.
-                            </option>
-                            <option value="1939">
-                                от  1939 г.
-                            </option>
-                            <option value="1938">
-                                от  1938 г.
-                            </option>
-                            <option value="1937">
-                                от  1937 г.
-                            </option>
-                            <option value="1936">
-                                от  1936 г.
-                            </option>
-                            <option value="1935">
-                                от  1935 г.
-                            </option>
-                            <option value="1934">
-                                от  1934 г.
-                            </option>
-                            <option value="1933">
-                                от  1933 г.
-                            </option>
-                            <option value="1932">
-                                от  1932 г.
-                            </option>
-                            <option value="1931">
-                                от  1931 г.
-                            </option>
-                            <option value="1930">
-                                от  1930 г.
+                            @for (int i = 0; i < Model.Years.Length; i++)
+                            {
+                                if (i == 0)
+                                {
+                                    <option selected="selected" value="@Model.Years[i]">
+                                        @Model.Years[i]
+                                    </option>
 
-                            </option>
+                                }
+
+                                else
+                                {
+                                    <option value="@Model.Years[i]">
+                                        До @Model.Years[i]
+                                    </option>
+                                }
+                            }
                         </select>
                     </div>
                 </div>
@@ -1307,325 +286,49 @@
                     <div class="ml-2">
                         <p class="mb-1 small">Цвят</p>
                         <select class="mdb-select md-form container">
-                            <option value="" disabled selected>Всички</option>
-                            <option value="Tъмно син">
-                                Tъмно син
-                            </option>
-                            <option value="Банан">
-                                Банан
-                            </option>
-                            <option value="Беата">
-                                Беата
-                            </option>
-                            <option value="Бежов">
-                                Бежов
-                            </option>
-                            <option value="Бордо">
-                                Бордо
-                            </option>
-                            <option value="Бронз">
-                                Бронз
-                            </option>
-                            <option value="Бял">
-                                Бял
-                            </option>
-                            <option value="Винен">
-                                Винен
-                            </option>
-                            <option value="Виолетов">
-                                Виолетов
-                            </option>
-                            <option value="Вишнев">
-                                Вишнев
-                            </option>
-                            <option value="Графит">
-                                Графит
-                            </option>
-                            <option value="Жълт">
-                                Жълт
-                            </option>
-                            <option value="Зелен">
-                                Зелен
-                            </option>
-                            <option value="Златист">
-                                Златист
-                            </option>
-                            <option value="Кафяв">
-                                Кафяв
-                            </option>
-                            <option value="Керемиден">
-                                Керемиден
-                            </option>
-                            <option value="Кремав">
-                                Кремав
-                            </option>
-                            <option value="Лилав">
-                                Лилав
-                            </option>
-                            <option value="Металик">
-                                Металик
-                            </option>
-                            <option value="Оранжев">
-                                Оранжев
-                            </option>
-                            <option value="Охра">
-                                Охра
-                            </option>
-                            <option value="Пепеляв">
-                                Пепеляв
-                            </option>
-                            <option value="Перла">
-                                Перла
-                            </option>
-                            <option value="Пясъчен">
-                                Пясъчен
-                            </option>
-                            <option value="Резидав">
-                                Резидав
-                            </option>
-                            <option value="Розов">
-                                Розов
-                            </option>
-                            <option value="Сахара">
-                                Сахара
-                            </option>
-                            <option value="Светло сив">
-                                Светло сив
-                            </option>
-                            <option value="Светло син">
-                                Светло син
-                            </option>
-                            <option value="Сив">
-                                Сив
-                            </option>
-                            <option value="Син">
-                                Син
-                            </option>
-                            <option value="Слонова кост">
-                                Слонова кост
-                            </option>
-                            <option value="Сребърен">
-                                Сребърен
-                            </option>
-                            <option value="Т.зелен">
-                                Т.зелен
-                            </option>
-                            <option value="Тъмно сив">
-                                Тъмно сив
-                            </option>
-                            <option value="Тъмно син мет.">
-                                Тъмно син мет.
-                            </option>
-                            <option value="Тъмно червен">
-                                Тъмно червен
-                            </option>
-                            <option value="Тютюн">
-                                Тютюн
-                            </option>
-                            <option value="Хамелеон">
-                                Хамелеон
-                            </option>
-                            <option value="Червен">
-                                Червен
-                            </option>
-                            <option value="Черен">
-                                Черен
+                            @for (int i = 0; i < Model.Colors.Length; i++)
+                            {
+                                if (i == 0)
+                                {
+                                    <option selected="selected" value="@Model.Colors[i]">
+                                        @Model.Colors[i]
+                                    </option>
 
-                            </option>
+                                }
+
+                                else
+                                {
+                                    <option value="@Model.Colors[i]">
+                                        @Model.Colors[i]
+                                    </option>
+                                }
+                            }
                         </select>
                     </div>
                 </div>
 
-                <div class="col-3">
-                    <div class="ml-2">
-                        <p class="mb-1 small">Регион</p>
-                        <select class="mdb-select md-form container">
-                            <option value="" disabled selected>Всички</option>
-                            <option value="Благоевград">
-                                Благоевград
-                            </option>
-                            <option value="Бургас">
-                                Бургас
-                            </option>
-                            <option value="Варна">
-                                Варна
-                            </option>
-                            <option value="Велико Търново">
-                                Велико Търново
-                            </option>
-                            <option value="Видин">
-                                Видин
-                            </option>
-                            <option value="Враца">
-                                Враца
-                            </option>
-                            <option value="Габрово">
-                                Габрово
-                            </option>
-                            <option value="Добрич">
-                                Добрич
-                            </option>
-                            <option value="Дупница">
-                                Дупница
-                            </option>
-                            <option value="Кърджали">
-                                Кърджали
-                            </option>
-                            <option value="Кюстендил">
-                                Кюстендил
-                            </option>
-                            <option value="Ловеч">
-                                Ловеч
-                            </option>
-                            <option value="Монтана">
-                                Монтана
-                            </option>
-                            <option value="Пазарджик">
-                                Пазарджик
-                            </option>
-                            <option value="Перник">
-                                Перник
-                            </option>
-                            <option value="Плевен">
-                                Плевен
-                            </option>
-                            <option value="Пловдив">
-                                Пловдив
-                            </option>
-                            <option value="Разград">
-                                Разград
-                            </option>
-                            <option value="Русе">
-                                Русе
-                            </option>
-                            <option value="Силистра">
-                                Силистра
-                            </option>
-                            <option value="Сливен">
-                                Сливен
-                            </option>
-                            <option value="Смолян">
-                                Смолян
-                            </option>
-                            <option value="София">
-                                София
-                            </option>
-                            <option value="Стара Загора">
-                                Стара Загора
-                            </option>
-                            <option value="Търговище">
-                                Търговище
-                            </option>
-                            <option value="Хасково">
-                                Хасково
-                            </option>
-                            <option value="Шумен">
-                                Шумен
-                            </option>
-                            <option value="Ямбол">
-                                Ямбол
-                            </option>
-                            <option value="Извън страната">
-                                Извън страната
-
-                            </option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="col-3">
+                <div class="col-6">
                     <div class="ml-2">
                         <p class="mb-1 small">Населено място</p>
                         <select class="mdb-select md-form container">
-                            <option value="" disabled selected>Всички</option>
-                            <option value="Благоевград">
-                                Благоевград
-                            </option>
-                            <option value="Бургас">
-                                Бургас
-                            </option>
-                            <option value="Варна">
-                                Варна
-                            </option>
-                            <option value="Велико Търново">
-                                Велико Търново
-                            </option>
-                            <option value="Видин">
-                                Видин
-                            </option>
-                            <option value="Враца">
-                                Враца
-                            </option>
-                            <option value="Габрово">
-                                Габрово
-                            </option>
-                            <option value="Добрич">
-                                Добрич
-                            </option>
-                            <option value="Дупница">
-                                Дупница
-                            </option>
-                            <option value="Кърджали">
-                                Кърджали
-                            </option>
-                            <option value="Кюстендил">
-                                Кюстендил
-                            </option>
-                            <option value="Ловеч">
-                                Ловеч
-                            </option>
-                            <option value="Монтана">
-                                Монтана
-                            </option>
-                            <option value="Пазарджик">
-                                Пазарджик
-                            </option>
-                            <option value="Перник">
-                                Перник
-                            </option>
-                            <option value="Плевен">
-                                Плевен
-                            </option>
-                            <option value="Пловдив">
-                                Пловдив
-                            </option>
-                            <option value="Разград">
-                                Разград
-                            </option>
-                            <option value="Русе">
-                                Русе
-                            </option>
-                            <option value="Силистра">
-                                Силистра
-                            </option>
-                            <option value="Сливен">
-                                Сливен
-                            </option>
-                            <option value="Смолян">
-                                Смолян
-                            </option>
-                            <option value="София">
-                                София
-                            </option>
-                            <option value="Стара Загора">
-                                Стара Загора
-                            </option>
-                            <option value="Търговище">
-                                Търговище
-                            </option>
-                            <option value="Хасково">
-                                Хасково
-                            </option>
-                            <option value="Шумен">
-                                Шумен
-                            </option>
-                            <option value="Ямбол">
-                                Ямбол
-                            </option>
-                            <option value="Извън страната">
-                                Извън страната
+                            @for (int i = 0; i < Model.Cities.Length; i++)
+                            {
+                                if (i == 0)
+                                {
+                                    <option selected="selected" value="@Model.Cities[i]">
+                                        @Model.Cities[i]
+                                    </option>
 
-                            </option>
+                                }
+
+                                else
+                                {
+                                    <option value="@Model.Cities[i]">
+                                        @Model.Cities[i]
+                                    </option>
+                                }
+                            }
+
                         </select>
                     </div>
                 </div>
@@ -1652,20 +355,13 @@
                     <div class="ml-2">
                         <p class="mb-1 small">Безопасност</p>
 
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                            <label class="form-check-label" for="defaultCheck1">GPS</label>
-                        </div>
-
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                            <label class="form-check-label" for="defaultCheck1">ABS</label>
-                        </div>
-
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                            <label class="form-check-label" for="defaultCheck1">Traction Control System</label>
-                        </div>
+                        @foreach (var item in Model.Features.Safety)
+                        {
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                <label class="form-check-label" for="defaultCheck1">@item</label>
+                            </div>
+                        }
                     </div>
                 </div>
 
@@ -1673,6 +369,13 @@
                     <div class="ml-2">
                         <p class="mb-1 small">Комфорт</p>
 
+                        @foreach (var item in Model.Features.Comfort)
+                        {
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                <label class="form-check-label" for="defaultCheck1">@item</label>
+                            </div>
+                        }
                     </div>
                 </div>
 
@@ -1680,13 +383,26 @@
                     <div class="ml-2">
                         <p class="mb-1 small">Екстериор</p>
 
+                        @foreach (var item in Model.Features.Exterior)
+                        {
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                <label class="form-check-label" for="defaultCheck1">@item</label>
+                            </div>
+                        }
                     </div>
                 </div>
 
                 <div class="col-3 pl-0 pr-4">
                     <div class="ml-2">
                         <p class="mb-1 small">Други</p>
-
+                        @foreach (var item in Model.Features.Others)
+                        {
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                <label class="form-check-label" for="defaultCheck1">@item</label>
+                            </div>
+                        }
                     </div>
                 </div>
 
