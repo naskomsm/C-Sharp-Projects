@@ -2,10 +2,8 @@
 {
     using SIS.HTTP;
     using System.IO;
-    using System.Text;
     using SIS.HTTP.Response;
     using SIS.MvcFramework.Interfaces;
-    using System.Security.Cryptography;
     using System.Runtime.CompilerServices;
     using SIS.MvcFramework.Errors;
 
@@ -37,29 +35,35 @@
             return new RedirectResponse(url);
         }
 
-        protected string Hash(string input)
-        {
-            var crypt = new SHA256Managed();
-            var hash = new StringBuilder();
-            byte[] crypto = crypt.ComputeHash(Encoding.UTF8.GetBytes(input));
-            foreach (byte theByte in crypto)
-            {
-                hash.Append(theByte.ToString("x2"));
-            }
-
-            return hash.ToString();
-        }
-
         private HttpResponse ViewByName<T>(string viewPath, object viewModel)
         {
             IViewEngine viewEngine = new ViewEngine();
             var html = File.ReadAllText(viewPath);
-            html = viewEngine.GetHtml(html, viewModel);
+            html = viewEngine.GetHtml(html, viewModel, this.User);
 
             var layout = File.ReadAllText("Views/Shared/_Layout.html");
             var bodyWithLayout = layout.Replace("@RenderBody()", html);
-            bodyWithLayout = viewEngine.GetHtml(bodyWithLayout, viewModel);
+            bodyWithLayout = viewEngine.GetHtml(bodyWithLayout, viewModel, this.User);
             return new HtmlResponse(bodyWithLayout);
         }
+
+        protected bool IsUserLoggedIn()
+        {
+            return this.User != null;
+        }
+
+        protected void SignIn(string userId)
+        {
+            this.Request.SessionData["UserId"] = userId;
+        }
+
+        protected void SignOut()
+        {
+            this.Request.SessionData["UserId"] = null;
+        }
+
+        public string User =>
+            this.Request.SessionData.ContainsKey("UserId") ?
+                this.Request.SessionData["UserId"] : null;
     }
 }

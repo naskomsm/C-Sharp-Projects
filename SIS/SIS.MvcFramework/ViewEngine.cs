@@ -13,7 +13,7 @@
 
     public class ViewEngine : IViewEngine
     {
-        public string GetHtml(string templateHtml, object model)
+        public string GetHtml(string templateHtml, object model, string user)
         {
             var methodCode = PrepareCSharpCode(templateHtml);
             var typeName = model?.GetType().FullName ?? "object";
@@ -24,30 +24,30 @@
             }
 
             var code = @$"using System;
-                        using System.Text;
-                        using System.Linq;
-                        using System.Collections.Generic;
-                        using SIS.MvcFramework.Interfaces;
-                        using SIS.MvcFramework;
-                        namespace AppViewNamespace
-                        {{
-                            public class AppViewCode : IView
-                            {{
-                                public string GetHtml(object model)
-                                {{
-                                    var Model = model as {typeName};
-                                    object User = null;
-                                    var html = new StringBuilder();
+using System.Text;
+using System.Linq;
+using System.Collections.Generic;
+using SIS.MvcFramework;
+using SIS.MvcFramework.Interfaces;
+namespace AppViewNamespace
+{{
+    public class AppViewCode : IView
+    {{
+        public string GetHtml(object model, string user)
+        {{
+            var Model = model as {typeName};
+            var User = user;
+            var html = new StringBuilder();
 
-                        {methodCode}
+{methodCode}
 
-                                    return html.ToString();
-                                }}
-                            }}
-                        }}";
+            return html.ToString();
+        }}
+    }}
+}}";
 
             IView view = GetInstanceFromCode(code, model);
-            string html = view.GetHtml(model);
+            string html = view.GetHtml(model, user);
             return html;
         }
 
@@ -97,7 +97,7 @@
             StringBuilder cSharpCode = new StringBuilder();
             StringReader reader = new StringReader(templateHtml);
             string line;
-            while((line = reader.ReadLine()) != null)
+            while ((line = reader.ReadLine()) != null)
             {
                 if (line.TrimStart().StartsWith("{")
                     || line.TrimStart().StartsWith("}"))

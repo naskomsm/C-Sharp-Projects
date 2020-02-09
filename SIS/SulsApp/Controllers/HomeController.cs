@@ -1,10 +1,10 @@
 ﻿namespace SulsApp.Controllers
 {
     using System;
-    using SIS.HTTP;
     using SIS.MvcFramework;
-    using SulsApp.ViewModels;
+    using SulsApp.ViewModels.Home;
     using SIS.MvcFramework.Attribues;
+    using SIS.HTTP.Response;
 
     public class HomeController : Controller
     {

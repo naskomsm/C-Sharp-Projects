@@ -1,6 +1,7 @@
 ﻿namespace SIS.HTTP
 {
     using System;
+    using SIS.HTTP.Response;
 
     /// <summary>
     /// Provides properties and methods for defining a route and for obtaining information about the route.
