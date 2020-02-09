@@ -1,6 +1,7 @@
-﻿namespace SIS.HTTP
+﻿namespace SIS.HTTP.Response
 {
     using System.Text;
+    using SIS.HTTP.Cookies;
     using System.Collections.Generic;
 
     /// <summary>

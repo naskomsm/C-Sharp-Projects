@@ -1,4 +1,4 @@
-﻿namespace SIS.HTTP
+﻿namespace SIS.HTTP.Cookies
 {
     /// <summary>
     /// Represents an HTTP Cookie information, consisting of <c>Name</c> and <c>Value</c>.

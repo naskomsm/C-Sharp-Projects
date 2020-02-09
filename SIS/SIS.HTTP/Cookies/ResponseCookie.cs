@@ -1,4 +1,4 @@
-﻿namespace SIS.HTTP
+﻿namespace SIS.HTTP.Cookies
 {
     using System;
     using System.Text;
