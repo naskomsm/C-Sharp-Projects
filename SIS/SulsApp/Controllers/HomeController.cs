@@ -1,23 +1,36 @@
 ﻿namespace SulsApp.Controllers
 {
-    using System;
     using SIS.MvcFramework;
-    using SulsApp.ViewModels.Home;
     using SIS.MvcFramework.Attribues;
     using SIS.HTTP.Response;
+    using SulsApp.ViewModels.Home;
+    using SulsApp.Services;
 
     public class HomeController : Controller
     {
+        private readonly IProblemsService problemsService;
+
+        public HomeController(IProblemsService problemsService)
+        {
+            this.problemsService = problemsService;
+        }
+
         [HttpGet("/")]
         public HttpResponse Index()
         {
-            var viewModel = new IndexViewModel
+            if (this.IsUserLoggedIn())
             {
-                Message = "Welcome to SULS Platform!",
-                Year = DateTime.UtcNow.Year,
-            };
+                var allProblems = this.problemsService.GetAllProblems();
+                
+                var model = new IndexLoggedInViewModel()
+                {
+                    Problems = allProblems
+                };
 
-            return this.View(viewModel);
+                return this.View(model, "IndexLoggedIn");
+            }
+
+            return this.View();
         }
     }
 }

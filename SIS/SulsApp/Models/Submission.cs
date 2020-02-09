@@ -1,8 +1,8 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-
-namespace SulsApp.Models
+﻿namespace SulsApp.Models
 {
+    using System;
+    using System.ComponentModel.DataAnnotations;
+
     public class Submission
     {
         public Submission()
