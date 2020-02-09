@@ -1,23 +1,42 @@
 ﻿namespace SulsApp.Controllers
 {
     using System;
-    using SIS.HTTP;
-    using SulsApp.Models;
     using System.Net.Mail;
+    using SulsApp.Services;
     using SIS.MvcFramework;
+    using SIS.HTTP.Logging;
+    using SIS.HTTP.Response;
     using SIS.MvcFramework.Attribues;
+    using SulsApp.ViewModels.Users;
 
     public class UsersController : Controller
     {
+        private IUsersService usersService;
+        private ILogger logger;
+
+        public UsersController(IUsersService usersService, ILogger logger)
+        {
+            this.usersService = usersService;
+            this.logger = logger;
+        }
+
         public HttpResponse Login()
         {
             return this.View();
         }
 
-        [HttpPost("/Users/Login")]
-        public HttpResponse DoLogin()
+        [HttpPost]
+        public HttpResponse Login(string username, string password)
         {
-            return this.View();
+            var userId = this.usersService.GetUserId(username, password);
+            if (userId == null)
+            {
+                return this.Redirect("/Users/Login");
+            }
+
+            this.SignIn(userId);
+            this.logger.Log("User logged in: " + username);
+            return this.Redirect("/");
         }
 
         public HttpResponse Register()
@@ -25,47 +44,52 @@
             return this.View();
         }
 
-        [HttpPost("/Users/Register")]
-        public HttpResponse DoRegister()
+        [HttpPost]
+        public HttpResponse Register(RegisterInputModel input)
         {
-            var username = this.Request.FormData["username"];
-            var email = this.Request.FormData["email"];
-            var password = this.Request.FormData["password"];
-            var confirmPassword = this.Request.FormData["confirmPassword"];
-
-            if (password != confirmPassword)
+            if (input.Password != input.ConfirmPassword)
             {
                 return this.Error("Passwords should be the same!");
             }
 
-            if (username?.Length < 5 || username?.Length > 20)
+            if (input.Username?.Length < 5 || input.Username?.Length > 20)
             {
                 return this.Error("Username should be between 5 and 20 characters .");
             }
 
-            if (password?.Length < 6 || password?.Length > 20)
+            if (input.Password?.Length < 6 || input.Password?.Length > 20)
             {
                 return this.Error("Password should be between 6 and 20 characters.");
             }
 
-            if (!IsValid(email))
+            if (!IsValid(input.Email))
             {
                 return this.Error("Invalid email!");
             }
 
-            var user = new User
+            if (this.usersService.IsUsernameUsed(input.Username))
             {
-                Email = email,
-                Username = username,
-                Password = this.Hash(password),
-            };
+                return this.Error("Username already used!");
+            }
 
-            var db = new ApplicationDbContext();
-            db.Users.Add(user);
-            db.SaveChanges();
+            if (this.usersService.IsEmailUsed(input.Email))
+            {
+                return this.Error("Email already used!");
+            }
 
-            // TODO: Log in...
+            this.usersService.CreateUser(input.Username, input.Email, input.Password);
+            this.logger.Log("New user: " + input.Username);
+            return this.Redirect("/Users/Login");
+        }
 
+        public HttpResponse Logout()
+        {
+            if (!this.IsUserLoggedIn())
+            {
+                return this.Redirect("/Users/Login");
+            }
+
+            this.SignOut();
             return this.Redirect("/");
         }
 
