@@ -10,47 +10,53 @@
     using SIS.MvcFramework.Interfaces;
     using System.Collections.Generic;
     using SIS.MvcFramework.Attribues;
+    using SIS.HTTP.Logging;
+    using SIS.HTTP.Logging.Implementations;
 
     public static class WebHost
     {
         public static async Task StartAsync(IMvcApplication application)
         {
-            var routeTable = new List<Route>();
-            application.ConfigureServices();
+            IList<Route> routeTable = new List<Route>();
+
+            IServiceCollection serviceCollection = new ServiceCollection();
+            serviceCollection.Add<ILogger, ConsoleLogger>();
+
+            application.ConfigureServices(serviceCollection);
             application.Configure(routeTable);
             AutoRegisterStaticFilesRoutes(routeTable);
-            AutoRegisterActionRoutes(routeTable, application);
+            AutoRegisterActionRoutes(routeTable, application, serviceCollection);
 
-            Console.WriteLine("Registered routes:");
+            var logger = serviceCollection.CreateInstance<ILogger>();
+            logger.Log("Registered routes:");
             foreach (var route in routeTable)
             {
-                Console.WriteLine(route);
+                logger.Log(route.ToString());
             }
 
-            Console.WriteLine();
-            Console.WriteLine("Requests:");
-            var httpServer = new HttpServer(80, routeTable);
+            logger.Log(string.Empty);
+            logger.Log("Requests:");
+            var httpServer = new HttpServer(80, routeTable, logger);
             await httpServer.StartAsync();
         }
 
         // /{controller}/{action}/
-        private static void AutoRegisterActionRoutes(List<Route> routeTable, IMvcApplication application)
+        private static void AutoRegisterActionRoutes(IList<Route> routeTable, IMvcApplication application, IServiceCollection serviceCollection)
         {
-            var types = application.GetType().Assembly.GetTypes()
+            var controllers = application.GetType().Assembly.GetTypes()
                 .Where(type => type.IsSubclassOf(typeof(Controller)) && !type.IsAbstract);
-            foreach (var type in types)
+            foreach (var controller in controllers)
             {
-                Console.WriteLine(type.FullName);
-                var methods = type.GetMethods()
+                var actions = controller.GetMethods()
                     .Where(x => !x.IsSpecialName
                     && !x.IsConstructor
                     && x.IsPublic
-                    && x.DeclaringType == type);
-                foreach (var method in methods)
+                    && x.DeclaringType == controller);
+                foreach (var action in actions)
                 {
-                    string url = "/" + type.Name.Replace("Controller", string.Empty) + "/" + method.Name;
+                    string url = "/" + controller.Name.Replace("Controller", string.Empty) + "/" + action.Name;
 
-                    var attribute = method.GetCustomAttributes()
+                    var attribute = action.GetCustomAttributes()
                         .FirstOrDefault(x => x.GetType()
                         .IsSubclassOf(typeof(HttpMethodAttribute)))
                          as HttpMethodAttribute;
@@ -64,19 +70,62 @@
                         }
                     }
 
-                    routeTable.Add(new Route(httpActionType, url, (request) =>
-                    {
-                        var controller = Activator.CreateInstance(type) as Controller;
-                        controller.Request = request;
-                        var response = method.Invoke(controller, new object[] { }) as HttpResponse;
-                        return response;
-                    }));
-                    Console.WriteLine("    " + url);
+                    routeTable.Add(new Route(httpActionType, url, (request) => InvokeAction(request, serviceCollection, controller, action)));
                 }
             }
         }
 
-        private static void AutoRegisterStaticFilesRoutes(List<Route> routeTable)
+        private static HttpResponse InvokeAction(HttpRequest request, IServiceCollection serviceCollection, Type controllerType, MethodInfo actionMethod)
+        {
+            var controller = serviceCollection.CreateInstance(controllerType) as Controller;
+            controller.Request = request;
+
+            var actionParameterValues = new List<object>();
+            var actionParameters = actionMethod.GetParameters();
+            foreach (var parameter in actionParameters)
+            {
+                object value = Convert.ChangeType(GetValueFromRequest(request, parameter.Name), parameter.ParameterType);
+                if (value == null)
+                {
+                    var parameterValue = serviceCollection.CreateInstance(parameter.ParameterType);
+                    foreach (var property in parameter.ParameterType.GetProperties(BindingFlags.Public | BindingFlags.Instance))
+                    {
+                        var propertyValue = GetValueFromRequest(request, property.Name);
+                        property.SetValue(parameterValue, Convert.ChangeType(propertyValue, property.PropertyType));
+                    }
+
+                    actionParameterValues.Add(parameterValue);
+                }
+
+                else
+                {
+                    actionParameterValues.Add(value);
+                }
+            }
+
+            var response = actionMethod.Invoke(controller, actionParameterValues.ToArray()) as HttpResponse;
+            return response;
+        }
+
+        private static object GetValueFromRequest(HttpRequest request, string parameterName)
+        {
+            object value = null;
+            parameterName = parameterName.ToLower();
+            if (request.QueryData.Any(x => x.Key.ToLower() == parameterName))
+            {
+                value = request.QueryData
+                    .FirstOrDefault(x => x.Key.ToLower() == parameterName).Value;
+            }
+            else if (request.FormData.Any(x => x.Key.ToLower() == parameterName))
+            {
+                value = request.FormData
+                    .FirstOrDefault(x => x.Key.ToLower() == parameterName).Value;
+            }
+
+            return value;
+        }
+
+        private static void AutoRegisterStaticFilesRoutes(IList<Route> routeTable)
         {
             var staticFiles = Directory.GetFiles("wwwroot", "*", SearchOption.AllDirectories);
             foreach (var staticFile in staticFiles)
@@ -104,3 +153,4 @@
         }
     }
 }
+
