@@ -30,12 +30,24 @@
             return this.View(model);
         }
 
-        //[HttpPost]
-        //public HttpResponse Create(string code)
-        //{
-        //    this.submissionsService.Create(code);
+        [HttpPost]
+        public HttpResponse Create(string code, string ProblemId)
+        {
+            if (string.IsNullOrEmpty(code) || string.IsNullOrWhiteSpace(code))
+            {
+                return this.Redirect("/Create");
+            }
 
-        //    return this.View();
-        //}
+            submissionsService.Create(code, ProblemId, this.User);
+
+            return this.Redirect("/");
+        }
+
+        public HttpResponse Delete(string id)
+        {
+            this.submissionsService.Delete(id);
+
+            return this.Redirect("/");
+        }
     }
 }
