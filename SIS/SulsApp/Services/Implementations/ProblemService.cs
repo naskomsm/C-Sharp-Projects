@@ -2,6 +2,7 @@
 {
     using SulsApp.Models;
     using SulsApp.ViewModels.Problems;
+    using SulsApp.ViewModels.Submissions;
     using System.Collections.Generic;
     using System.Linq;
 
@@ -41,7 +42,15 @@
             {
                 Id = x.Id,
                 Count = x.Submissions.Count,
-                Name = x.Name
+                Name = x.Name,
+                MaxPoints = x.Points,
+                Submissions = x.Submissions.Select(y => new SubmissionProblemDetailsViewModel
+                {
+                    AchievedResult = y.AchievedResult,
+                    CreatedOn = y.CreatedOn,
+                    Id = y.Id,
+                    Username = y.User.Username
+                }).ToList()
             }).FirstOrDefault();
         }
     }

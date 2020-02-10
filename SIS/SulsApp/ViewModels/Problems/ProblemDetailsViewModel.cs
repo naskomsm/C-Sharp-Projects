@@ -3,15 +3,9 @@
     using SulsApp.ViewModels.Submissions;
     using System.Collections.Generic;
 
-    public class ProblemViewModel
+    public class ProblemDetailsViewModel
     {
-        public string Id { get; set; }
-
-        public string Name { get; set; }
-
-        public int Count { get; set; }
-
-        public int MaxPoints { get; set; }
+        public ProblemViewModel Problem { get; set; }
 
         public ICollection<SubmissionProblemDetailsViewModel> Submissions { get; set; }
     }

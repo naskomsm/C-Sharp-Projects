@@ -1,5 +1,5 @@
 ﻿<main class="mt-3">
-    <h1 class="text-center suls-text-color">Problem Details - @Model.Name</h1>
+    <h1 class="text-center suls-text-color">Problem Details - @Model.Problem.Name</h1>
     <div class="top-border-line primary-separator"></div>
     <div class="text-center suls-text-color">Problem Submissions</div>
 
@@ -14,16 +14,19 @@
                 </tr>
             </thead>
             <tbody>
-                <tr class="row">
-                    <td class="col-lg-3 suls-text-color">@problem.Username</td>
-                    <td class="col-lg-3 suls-text-color">@problem.AchievedResult / @problem.MaxPoints</td>
-                    <td class="col-lg-3 suls-text-color">@problem.CreatedOn</td>
-                    <td class="col-lg-3 suls-text-color">
-                        <div class="button-holder">
-                            <a href="/Submissions/Delete?id=@problem.SubmissionId" class="btn btn-warning">Delete</a>
-                        </div>
-                    </td>
-                </tr>
+                @foreach(var submission in @Model.Submissions)
+                {
+                    <tr class="row">
+                        <td class="col-lg-3 suls-text-color">@submission.Username</td>
+                        <td class="col-lg-3 suls-text-color">@submission.AchievedResult / @Model.Problem.MaxPoints</td>
+                        <td class="col-lg-3 suls-text-color">@submission.CreatedOn</td>
+                        <td class="col-lg-3 suls-text-color">
+                            <div class="button-holder">
+                                <a href="/Submissions/Delete?id=@submission.Id" class="btn btn-warning">Delete</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
             </tbody>
         </table>
     </div>

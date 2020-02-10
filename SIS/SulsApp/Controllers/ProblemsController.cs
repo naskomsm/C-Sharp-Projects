@@ -4,6 +4,7 @@
     using SIS.MvcFramework;
     using SIS.MvcFramework.Attribues;
     using SulsApp.Services;
+    using SulsApp.ViewModels.Problems;
 
     public class ProblemsController : Controller
     {
@@ -16,12 +17,22 @@
 
         public HttpResponse Create()
         {
+            if (!this.IsUserLoggedIn())
+            {
+                return this.Redirect("/Users/Login");
+            }
+
             return this.View();
         }
 
         [HttpPost]
         public HttpResponse Create(string name, int points)
         {
+            if(string.IsNullOrEmpty(name) || string.IsNullOrWhiteSpace(name))
+            {
+                return this.Redirect("/Create");
+            }
+
             if (!this.IsUserLoggedIn())
             {
                 return this.Redirect("/Users/Login");
@@ -41,15 +52,17 @@
             return this.Redirect("/");
         }
 
-        public HttpResponse Details()
+        public HttpResponse Details(string id)
         {
-            return this.View();
-        }
+            var problem = this.problemsService.GetProblemById(id);
 
-        [HttpPost]
-        public HttpResponse Delete(string id)
-        {
-            return this.View();
+            var model = new ProblemDetailsViewModel()
+            {
+                Problem = problem,
+                Submissions = problem.Submissions
+            };
+
+            return this.View(model);
         }
     }
 }
