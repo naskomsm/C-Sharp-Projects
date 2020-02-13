@@ -13,7 +13,7 @@
 
     public class ViewEngine : IViewEngine
     {
-        public string GetHtml(string templateHtml, object model, string user)
+        public string GetHtml(string templateHtml, object model, string userId, string username, string role)
         {
             var methodCode = PrepareCSharpCode(templateHtml);
             var typeName = model?.GetType().FullName ?? "object";
@@ -33,13 +33,15 @@ namespace AppViewNamespace
 {{
     public class AppViewCode : IView
     {{
-        public string GetHtml(object model, string user)
+        public string GetHtml(object model, string userId, string username, string role)
         {{
             var Model = model as {typeName};
-            var User = user;
+            var UserId = userId;
+            var Username = username;
+            var Role = role;
             var html = new StringBuilder();
 
-{methodCode}
+            {methodCode}
 
             return html.ToString();
         }}
@@ -47,7 +49,7 @@ namespace AppViewNamespace
 }}";
 
             IView view = GetInstanceFromCode(code, model);
-            string html = view.GetHtml(model, user);
+            string html = view.GetHtml(model, userId, username, role);
             return html;
         }
 
@@ -92,7 +94,7 @@ namespace AppViewNamespace
 
         private string PrepareCSharpCode(string templateHtml)
         {
-            var cSharpExpressionRegex = new Regex(@"[^\<\""\s]+", RegexOptions.Compiled);
+            var cSharpExpressionRegex = new Regex(@"[^\<\""\s&]+", RegexOptions.Compiled);
             var supportedOpperators = new[] { "if", "for", "foreach", "else" };
             StringBuilder cSharpCode = new StringBuilder();
             StringReader reader = new StringReader(templateHtml);
