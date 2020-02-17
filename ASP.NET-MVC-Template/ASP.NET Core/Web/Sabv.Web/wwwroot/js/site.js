@@ -2,3 +2,9 @@
 // for details on configuring this project to bundle and minify static web assets.
 
 // Write your JavaScript code.
+
+$("#homePageSelect").on("change", function () {
+    var selectedText = $("#homePageSelect option:selected").text();
+    $("#pageHeader").html(selectedText);
+});
+

@@ -10,8 +10,7 @@ namespace Sabv.Data.Migrations
             migrationBuilder.AddColumn<string>(
                 name: "ImageId",
                 table: "AspNetUsers",
-                nullable: false,
-                defaultValue: "");
+                nullable: true);
 
             migrationBuilder.CreateTable(
                 name: "AdditionalInfo",

@@ -10,7 +10,7 @@ using Sabv.Data;
 namespace Sabv.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200217093635_Initial")]
+    [Migration("20200217101044_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -262,7 +262,6 @@ namespace Sabv.Data.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("ImageId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<bool>("IsDeleted")
@@ -594,9 +593,7 @@ namespace Sabv.Data.Migrations
                 {
                     b.HasOne("Sabv.Data.Models.Image", "Image")
                         .WithMany()
-                        .HasForeignKey("ImageId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .HasForeignKey("ImageId");
                 });
 
             modelBuilder.Entity("Sabv.Data.Models.Image", b =>
