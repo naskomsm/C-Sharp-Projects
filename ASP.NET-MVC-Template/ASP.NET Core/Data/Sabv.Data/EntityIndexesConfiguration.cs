@@ -2,9 +2,8 @@
 {
     using System.Linq;
 
-    using Sabv.Data.Common.Models;
-
     using Microsoft.EntityFrameworkCore;
+    using Sabv.Data.Common.Models;
 
     internal static class EntityIndexesConfiguration
     {

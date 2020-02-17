@@ -3,19 +3,22 @@ namespace Sabv.Data.Models
 {
     using System;
     using System.Collections.Generic;
-
-    using Sabv.Data.Common.Models;
+    using System.ComponentModel.DataAnnotations;
 
     using Microsoft.AspNetCore.Identity;
+    using Sabv.Data.Common.Models;
 
     public class ApplicationUser : IdentityUser, IAuditInfo, IDeletableEntity
     {
         public ApplicationUser()
         {
             this.Id = Guid.NewGuid().ToString();
+
+            // Collections
             this.Roles = new HashSet<IdentityUserRole<string>>();
             this.Claims = new HashSet<IdentityUserClaim<string>>();
             this.Logins = new HashSet<IdentityUserLogin<string>>();
+            this.Posts = new HashSet<Post>();
         }
 
         // Audit info
@@ -33,5 +36,13 @@ namespace Sabv.Data.Models
         public virtual ICollection<IdentityUserClaim<string>> Claims { get; set; }
 
         public virtual ICollection<IdentityUserLogin<string>> Logins { get; set; }
+
+        // Additional info
+        public virtual ICollection<Post> Posts { get; set; }
+
+        [Required]
+        public string ImageId { get; set; }
+
+        public Image Image { get; set; }
     }
 }

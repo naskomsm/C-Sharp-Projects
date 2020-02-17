@@ -1,9 +1,8 @@
 ﻿namespace Sabv.Web.ViewModels.Settings
 {
+    using AutoMapper;
     using Sabv.Data.Models;
     using Sabv.Services.Mapping;
-
-    using AutoMapper;
 
     public class SettingViewModel : IMapFrom<Setting>, IHaveCustomMappings
     {

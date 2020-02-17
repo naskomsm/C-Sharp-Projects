@@ -1,9 +1,8 @@
 ﻿namespace Sabv.Web.Areas.Administration.Controllers
 {
+    using Microsoft.AspNetCore.Mvc;
     using Sabv.Services.Data;
     using Sabv.Web.ViewModels.Administration.Dashboard;
-
-    using Microsoft.AspNetCore.Mvc;
 
     public class DashboardController : AdministrationController
     {

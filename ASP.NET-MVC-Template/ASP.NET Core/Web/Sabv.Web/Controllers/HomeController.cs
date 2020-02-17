@@ -2,9 +2,8 @@
 {
     using System.Diagnostics;
 
-    using Sabv.Web.ViewModels;
-
     using Microsoft.AspNetCore.Mvc;
+    using Sabv.Web.ViewModels;
 
     public class HomeController : BaseController
     {

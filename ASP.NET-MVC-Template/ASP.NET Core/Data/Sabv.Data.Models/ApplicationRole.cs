@@ -3,9 +3,8 @@ namespace Sabv.Data.Models
 {
     using System;
 
-    using Sabv.Data.Common.Models;
-
     using Microsoft.AspNetCore.Identity;
+    using Sabv.Data.Common.Models;
 
     public class ApplicationRole : IdentityRole, IAuditInfo, IDeletableEntity
     {
