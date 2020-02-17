@@ -39,4 +39,10 @@
     <ProjectReference Include="..\Sabv.Web.Infrastructure\Sabv.Web.Infrastructure.csproj" />
     <ProjectReference Include="..\Sabv.Web.ViewModels\Sabv.Web.ViewModels.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Views\Home\Index.cshtml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
 </Project>

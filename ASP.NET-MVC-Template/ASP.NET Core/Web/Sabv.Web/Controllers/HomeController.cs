@@ -1,20 +1,35 @@
 ﻿namespace Sabv.Web.Controllers
 {
     using System.Diagnostics;
+    using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Mvc;
+    using Sabv.Services.Data;
     using Sabv.Web.ViewModels;
+    using Sabv.Web.ViewModels.Home;
 
     public class HomeController : BaseController
     {
-        public IActionResult Index()
+        private readonly IDataSetsService dataSetsService;
+
+        public HomeController(IDataSetsService dataSetsService)
         {
-            return this.View();
+            this.dataSetsService = dataSetsService;
         }
 
-        public IActionResult Privacy()
+        public async Task<IActionResult> Index()
         {
-            return this.View();
+            var allDataSets = await this.dataSetsService.GetAllDataSets();
+
+            var model = new HomePageViewModel()
+            {
+                Categories = allDataSets.Categories,
+                Cities = allDataSets.Cities,
+                Makes = allDataSets.Makes,
+                Years = allDataSets.Years,
+            };
+
+            return this.View(model);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
