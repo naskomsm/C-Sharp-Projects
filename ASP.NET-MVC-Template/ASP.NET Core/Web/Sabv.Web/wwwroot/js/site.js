@@ -3,8 +3,28 @@
 
 // Write your JavaScript code.
 
-$("#homePageSelect").on("change", function () {
-    var selectedText = $("#homePageSelect option:selected").text();
+$("#categorySelect").on("change", function () {
+    var selectedText = $("#categorySelect option:selected").text();
     $("#pageHeader").html(selectedText);
 });
+
+
+$("#makesSelect").on("change", function () {
+    var selectedText = $("#makesSelect option:selected").text();
+
+
+    if (selectedText == 'BMW') {
+
+    }
+    else if (selectedText == 'Mercedes') {
+
+    }
+    else if (selectedText == 'Audi') {
+
+    }
+    else {
+        // dont have other cars..
+    }
+});
+
 

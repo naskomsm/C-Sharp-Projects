@@ -41,6 +41,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Update="Datasets\Models.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Update="Views\Home\Index.cshtml">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Content>
