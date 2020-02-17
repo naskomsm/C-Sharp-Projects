@@ -260,7 +260,6 @@ namespace Sabv.Data.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("ImageId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<bool>("IsDeleted")
@@ -592,9 +591,7 @@ namespace Sabv.Data.Migrations
                 {
                     b.HasOne("Sabv.Data.Models.Image", "Image")
                         .WithMany()
-                        .HasForeignKey("ImageId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .HasForeignKey("ImageId");
                 });
 
             modelBuilder.Entity("Sabv.Data.Models.Image", b =>

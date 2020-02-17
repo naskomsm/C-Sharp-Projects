@@ -40,7 +40,6 @@ namespace Sabv.Data.Models
         // Additional info
         public virtual ICollection<Post> Posts { get; set; }
 
-        [Required]
         public string ImageId { get; set; }
 
         public Image Image { get; set; }
