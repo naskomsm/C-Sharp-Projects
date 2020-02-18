@@ -2,6 +2,8 @@
 {
     using System.Threading.Tasks;
 
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using Sabv.Services.Data;
     using Sabv.Web.ViewModels.Posts;
@@ -22,6 +24,7 @@
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> Create()
         {
             var allDataSets = await this.dataSetsService.GetAllDataSets();
@@ -58,18 +61,25 @@
         }
 
         [HttpGet]
-        public IActionResult CheckText()
+        [Authorize]
+        public IActionResult CheckText(string make, string model)
         {
+            // A lot of validations for empty fields
+
+            System.Console.WriteLine();
+
             return this.View();
         }
 
         [HttpGet]
+        [Authorize]
         public IActionResult AddPictures()
         {
             return this.View();
         }
 
         [HttpPost]
+        [Authorize]
         public IActionResult AddPictures(string arg)
         {
             return this.View();

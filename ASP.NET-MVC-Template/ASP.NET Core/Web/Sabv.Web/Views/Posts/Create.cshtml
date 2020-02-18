@@ -4,422 +4,426 @@
     ViewData["Title"] = "Безплатно публикуване на обява";
 }
 
-<div class="row">
+<form action="/Posts/CheckText" method="get">
 
-    <div class="col" style="border-style: groove;border-color: silver;background-color: #DFF1FF">1. Публикуване на обявата</div>
-    <div class="col">
-        <img src="//cdn2.focus.bg/mobile/images/picturess/nav_arrow.gif" style="padding-left: 55px;
+
+    <div class="row">
+
+        <div class="col" style="border-style: groove;border-color: silver;background-color: #DFF1FF">1. Публикуване на обявата</div>
+        <div class="col">
+            <img src="//cdn2.focus.bg/mobile/images/picturess/nav_arrow.gif" style="padding-left: 55px;
         padding-top: 20px;
     " />
+        </div>
+        <div class="col" style="border-style: groove;border-color: silver;">2. Преглед на текста</div>
+        <div class="col"><img src="//cdn2.focus.bg/mobile/images/picturess/nav_arrow.gif" style="padding-left: 55px;padding-top: 20px;" /></div>
+        <div class="col" style="border-style: groove;border-color: silver;">3. Добавяне на снимки и видео</div>
+        <div class="col"><img src="//cdn2.focus.bg/mobile/images/picturess/nav_arrow.gif" style="padding-left: 55px;padding-top: 20px;" /></div>
+        <div class="col" style="border-style: groove;border-color: silver;">4. Преглед на обявата</div>
+
     </div>
-    <div class="col" style="border-style: groove;border-color: silver;">2. Преглед на текста</div>
-    <div class="col"><img src="//cdn2.focus.bg/mobile/images/picturess/nav_arrow.gif" style="padding-left: 55px;padding-top: 20px;" /></div>
-    <div class="col" style="border-style: groove;border-color: silver;">3. Добавяне на снимки и видео</div>
-    <div class="col"><img src="//cdn2.focus.bg/mobile/images/picturess/nav_arrow.gif" style="padding-left: 55px;padding-top: 20px;" /></div>
-    <div class="col" style="border-style: groove;border-color: silver;">4. Преглед на обявата</div>
 
-</div>
+    <div class="row">
+        <div class="col container mt-3">
+            <h6>Публикуване на безплатна обява - Автомобили и Джипове - Публикуване на текст (Стъпка 1)</h6>
+            <hr />
+            <div>
 
-<div class="row">
-    <div class="col container mt-3">
-        <h6>Публикуване на безплатна обява - Автомобили и Джипове - Публикуване на текст (Стъпка 1)</h6>
-        <hr />
-        <div>
+                <div class="row mt-2 mb-2">
+                    <div class="col-4">
+                        <div class="ml-2">
 
-            <div class="row mt-2 mb-2">
-                <div class="col-4">
-                    <div class="ml-2">
+                            <p class="mb-1 small">Основна категория</p>
+                            <select class="mdb-select md-form container" id="categorySelect" name="postCategory">
+                                @for (int i = 0; i < Model.Categories.Length; i++)
+                                {
+                                    int correctValue = i + 1;
 
-                        <p class="mb-1 small">Основна категория</p>
-                        <select class="mdb-select md-form container" id="categorySelect">
-                            @for (int i = 0; i < Model.Categories.Length; i++)
+                                    if (correctValue == 1)
+                                    {
+                                        <option selected="selected" value="@correctValue">
+                                            @Model.Categories[i]
+                                        </option>
+
+                                    }
+
+                                    else
+                                    {
+                                        <option value="@correctValue">
+                                            @Model.Categories[i]
+                                        </option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="col-4 pl-5">
+                        <p class="mb-1 small">Състояние</p>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                            <label class="form-check-label" for="inlineRadio1">Употребяван</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                            <label class="form-check-label" for="inlineRadio2">Нов</label>
+                        </div>
+                    </div>
+
+                    <div class="col-4 pl-0 pr-4">
+                        <p class="mb-1 small">Пробег</p>
+                        <input class="form-control form-control-sm container" type="text" placeholder="в километри" name="mileage">
+                    </div>
+
+                </div>
+
+                <div class="row mt-2 mb-2">
+
+                    <div class="col-3">
+                        <div class="ml-2">
+                            <p class="mb-1 small">Марка</p>
+                            <select class="mdb-select md-form container" id="makesSelect" name="make"></select>
+                        </div>
+                    </div>
+
+                    <div class="col-3">
+                        <div class="ml-2">
+                            <p class="mb-1 small">Модел</p>
+                            <select class="mdb-select md-form container" id="modelsSelect" name="model">
+                                <option value="1">Всички</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-3">
+                        <div class="ml-2">
+                            <p class="mb-1 small">Модификация</p>
+                            <input class="form-control form-control-sm container" type="text" name="modification">
+                        </div>
+                    </div>
+
+                    <div class="col-3 pl-0 pr-4">
+                        <div class="ml-2">
+                            <p class="mb-1 small">Тип двигател</p>
+                            <select class="mdb-select md-form container" name="engineType">
+                                <option value="">Всички</option>
+                                <option value="Бензинов">Бензинов</option>
+                                <option value="Дизелов">Дизелов</option>
+                                <option value="Електрически">Електрически</option>
+                                <option value="Хибриден">Хибриден</option>
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row mt-2 mb-2">
+
+                    <div class="col-3">
+                        <div class="ml-2">
+                            <p class="mb-1 small">Мощност [к.с.]</p>
+                            <input class="form-control form-control-sm container" type="text" name="horsePower">
+                        </div>
+                    </div>
+
+                    <div class="col-3">
+                        <div class="ml-2">
+                            <p class="mb-1 small">Евростандарт</p>
+                            <select class="mdb-select md-form container" name="eurostandard">
+                                <option value="">Всички</option>
+                                <option value="1">Евро 1</option>
+                                <option value="2">Евро 2</option>
+                                <option value="3">Евро 3</option>
+                                <option value="4">Евро 4</option>
+                                <option value="5">Евро 5</option>
+                                <option value="6">Евро 6</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-3">
+                        <div class="ml-2">
+                            <p class="mb-1 small">Скоростна кутия</p>
+                            <select class="mdb-select md-form container" name="transmissionType">
+                                <option value="">Всички</option>
+                                <option value="Ръчна">
+                                    Ръчна
+                                </option>
+                                <option value="Автоматична">
+                                    Автоматична
+                                </option>
+                                <option value="Полуавтоматична">
+                                    Полуавтоматична
+
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-3 pl-0 pr-4">
+                        <div class="ml-2">
+                            <p class="mb-1 small">Категория</p>
+                            <select class="mdb-select md-form container" id="categorySelect" name="carCategory">
+                                @for (int i = 0; i < Model.CarTypeCategories.Length; i++)
+                                {
+                                    if (i == 0)
+                                    {
+                                        <option selected="selected" value="@Model.CarTypeCategories[i]">
+                                            @Model.CarTypeCategories[i]
+                                        </option>
+
+                                    }
+
+                                    else
+                                    {
+                                        <option value="@Model.CarTypeCategories[i]">
+                                            @Model.CarTypeCategories[i]
+                                        </option>
+                                    }
+                                }
+
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row mt-2 mb-2">
+                    <div class="col-3">
+                        <div class="ml-2">
+                            <p class="mb-1 small">Цена</p>
+                            <input class="form-control form-control-sm container" type="text" name="price">
+                        </div>
+                    </div>
+
+                    <div class="col-3">
+                        <div class="ml-2">
+                            <p class="mb-1 small">Валута</p>
+                            <select class="mdb-select md-form container" name="currency">
+                                <option value="">Всички</option>
+                                <option value="лв.">лв.</option>
+                                <option value="USD">USD</option>
+                                <option value="EUR">EUR</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-3">
+                        <div class="ml-2">
+                            <p class="mb-1 small">Година на производство (От)</p>
+                            <select class="mdb-select md-form container" name="yearFrom">
+                                @for (int i = 0; i < Model.Years.Length; i++)
+                                {
+                                    if (i == 0)
+                                    {
+                                        <option selected="selected" value="@Model.Years[i]">
+                                            @Model.Years[i]
+                                        </option>
+
+                                    }
+
+                                    else
+                                    {
+                                        <option value="@Model.Years[i]">
+                                            От @Model.Years[i]
+                                        </option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-3 pl-0 pr-4">
+                        <div class="ml-2">
+                            <p class="mb-1 small">(До)</p>
+                            <select class="mdb-select md-form container" name="yearTo">
+                                @for (int i = 0; i < Model.Years.Length; i++)
+                                {
+                                    if (i == 0)
+                                    {
+                                        <option selected="selected" value="@Model.Years[i]">
+                                            @Model.Years[i]
+                                        </option>
+
+                                    }
+
+                                    else
+                                    {
+                                        <option value="@Model.Years[i]">
+                                            До @Model.Years[i]
+                                        </option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row mt-2 mb-2">
+                    <div class="col-3">
+                        <div class="ml-2">
+                            <p class="mb-1 small">Цвят</p>
+                            <select class="mdb-select md-form container" name="color">
+                                @for (int i = 0; i < Model.Colors.Length; i++)
+                                {
+                                    if (i == 0)
+                                    {
+                                        <option selected="selected" value="@Model.Colors[i]">
+                                            @Model.Colors[i]
+                                        </option>
+
+                                    }
+
+                                    else
+                                    {
+                                        <option value="@Model.Colors[i]">
+                                            @Model.Colors[i]
+                                        </option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-6">
+                        <div class="ml-2">
+                            <p class="mb-1 small">Населено място</p>
+                            <select class="mdb-select md-form container" name="town">
+                                @for (int i = 0; i < Model.Cities.Length; i++)
+                                {
+                                    if (i == 0)
+                                    {
+                                        <option selected="selected" value="@Model.Cities[i]">
+                                            @Model.Cities[i]
+                                        </option>
+
+                                    }
+
+                                    else
+                                    {
+                                        <option value="@Model.Cities[i]">
+                                            @Model.Cities[i]
+                                        </option>
+                                    }
+                                }
+
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-3 pl-0 pr-4">
+                        <div class="ml-2">
+                            <p class="mb-1 small">Валидност на обявата</p>
+                            <select class="mdb-select md-form container" name="postExpirationDays">
+                                <option value="35">
+                                    35 дни
+                                </option>
+                                <option value="49">
+                                    49 дни
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row mt-4 mb-2">
+
+                    <div class="col-3">
+                        <div class="ml-2">
+                            <p class="mb-1 small">Безопасност</p>
+
+                            @foreach (var item in Model.Features.Safety)
                             {
-                                int correctValue = i + 1;
-
-                                if (correctValue == 1)
-                                {
-                                    <option selected="selected" value="@correctValue">
-                                        @Model.Categories[i]
-                                    </option>
-
-                                }
-
-                                else
-                                {
-                                    <option value="@correctValue">
-                                        @Model.Categories[i]
-                                    </option>
-                                }
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="">
+                                    <label class="form-check-label" for="defaultCheck1">@item</label>
+                                </div>
                             }
-                        </select>
+                        </div>
                     </div>
-                </div>
 
+                    <div class="col-3">
+                        <div class="ml-2">
+                            <p class="mb-1 small">Комфорт</p>
 
-                <div class="col-4 pl-5">
-                    <p class="mb-1 small">Състояние</p>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-                        <label class="form-check-label" for="inlineRadio1">Употребяван</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-                        <label class="form-check-label" for="inlineRadio2">Нов</label>
-                    </div>
-                </div>
-
-                <div class="col-4 pl-0 pr-4">
-                    <p class="mb-1 small">Пробег</p>
-                    <input class="form-control form-control-sm container" type="text" placeholder="в километри">
-                </div>
-
-            </div>
-
-            <div class="row mt-2 mb-2">
-
-                <div class="col-3">
-                    <div class="ml-2">
-                        <p class="mb-1 small">Марка</p>
-                        <select class="mdb-select md-form container" id="makesSelect"></select>
-                    </div>
-                </div>
-
-                <div class="col-3">
-                    <div class="ml-2">
-                        <p class="mb-1 small">Модел</p>
-                        <select class="mdb-select md-form container" id="modelsSelect">
-                            <option value="1">Всички</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="col-3">
-                    <div class="ml-2">
-                        <p class="mb-1 small">Модификация</p>
-                        <input class="form-control form-control-sm container" type="text">
-                    </div>
-                </div>
-
-                <div class="col-3 pl-0 pr-4">
-                    <div class="ml-2">
-                        <p class="mb-1 small">Тип двигател</p>
-                        <select class="mdb-select md-form container">
-                            <option value="">Всички</option>
-                            <option value="Бензинов">Бензинов</option>
-                            <option value="Дизелов">Дизелов</option>
-                            <option value="Електрически">Електрически</option>
-                            <option value="Хибриден">Хибриден</option>
-                        </select>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="row mt-2 mb-2">
-
-                <div class="col-3">
-                    <div class="ml-2">
-                        <p class="mb-1 small">Мощност [к.с.]</p>
-                        <input class="form-control form-control-sm container" type="text">
-                    </div>
-                </div>
-
-                <div class="col-3">
-                    <div class="ml-2">
-                        <p class="mb-1 small">Евростандарт</p>
-                        <select class="mdb-select md-form container">
-                            <option value="">Всички</option>
-                            <option value="1">Евро 1</option>
-                            <option value="2">Евро 2</option>
-                            <option value="3">Евро 3</option>
-                            <option value="4">Евро 4</option>
-                            <option value="5">Евро 5</option>
-                            <option value="6">Евро 6</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="col-3">
-                    <div class="ml-2">
-                        <p class="mb-1 small">Скоростна кутия</p>
-                        <select class="mdb-select md-form container">
-                            <option value="">Всички</option>
-                            <option value="Ръчна">
-                                Ръчна
-                            </option>
-                            <option value="Автоматична">
-                                Автоматична
-                            </option>
-                            <option value="Полуавтоматична">
-                                Полуавтоматична
-
-                            </option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="col-3 pl-0 pr-4">
-                    <div class="ml-2">
-                        <p class="mb-1 small">Категория</p>
-                        <select class="mdb-select md-form container" id="categorySelect">
-                            @for (int i = 0; i < Model.CarTypeCategories.Length; i++)
+                            @foreach (var item in Model.Features.Comfort)
                             {
-                                if (i == 0)
-                                {
-                                    <option selected="selected" value="@Model.CarTypeCategories[i]">
-                                        @Model.CarTypeCategories[i]
-                                    </option>
-
-                                }
-
-                                else
-                                {
-                                    <option value="@Model.CarTypeCategories[i]">
-                                        @Model.CarTypeCategories[i]
-                                    </option>
-                                }
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="">
+                                    <label class="form-check-label" for="defaultCheck1">@item</label>
+                                </div>
                             }
-
-                        </select>
+                        </div>
                     </div>
-                </div>
 
-            </div>
+                    <div class="col-3">
+                        <div class="ml-2">
+                            <p class="mb-1 small">Екстериор</p>
 
-            <div class="row mt-2 mb-2">
-                <div class="col-3">
-                    <div class="ml-2">
-                        <p class="mb-1 small">Цена</p>
-                        <input class="form-control form-control-sm container" type="text">
-                    </div>
-                </div>
-
-                <div class="col-3">
-                    <div class="ml-2">
-                        <p class="mb-1 small">Валута</p>
-                        <select class="mdb-select md-form container">
-                            <option value="">Всички</option>
-                            <option value="лв.">лв.</option>
-                            <option value="USD">USD</option>
-                            <option value="EUR">EUR</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="col-3">
-                    <div class="ml-2">
-                        <p class="mb-1 small">Година на производство (От)</p>
-                        <select class="mdb-select md-form container">
-                            @for (int i = 0; i < Model.Years.Length; i++)
+                            @foreach (var item in Model.Features.Exterior)
                             {
-                                if (i == 0)
-                                {
-                                    <option selected="selected" value="@Model.Years[i]">
-                                        @Model.Years[i]
-                                    </option>
-
-                                }
-
-                                else
-                                {
-                                    <option value="@Model.Years[i]">
-                                        От @Model.Years[i]
-                                    </option>
-                                }
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="">
+                                    <label class="form-check-label" for="defaultCheck1">@item</label>
+                                </div>
                             }
-                        </select>
+                        </div>
                     </div>
-                </div>
 
-                <div class="col-3 pl-0 pr-4">
-                    <div class="ml-2">
-                        <p class="mb-1 small">(До)</p>
-                        <select class="mdb-select md-form container">
-                            @for (int i = 0; i < Model.Years.Length; i++)
+                    <div class="col-3 pl-0 pr-4">
+                        <div class="ml-2">
+                            <p class="mb-1 small">Други</p>
+                            @foreach (var item in Model.Features.Others)
                             {
-                                if (i == 0)
-                                {
-                                    <option selected="selected" value="@Model.Years[i]">
-                                        @Model.Years[i]
-                                    </option>
-
-                                }
-
-                                else
-                                {
-                                    <option value="@Model.Years[i]">
-                                        До @Model.Years[i]
-                                    </option>
-                                }
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="">
+                                    <label class="form-check-label" for="defaultCheck1">@item</label>
+                                </div>
                             }
-                        </select>
+                        </div>
                     </div>
+
                 </div>
 
-            </div>
+                <div class="row mt-4 mb-2">
 
-            <div class="row mt-2 mb-2">
-                <div class="col-3">
-                    <div class="ml-2">
-                        <p class="mb-1 small">Цвят</p>
-                        <select class="mdb-select md-form container">
-                            @for (int i = 0; i < Model.Colors.Length; i++)
-                            {
-                                if (i == 0)
-                                {
-                                    <option selected="selected" value="@Model.Colors[i]">
-                                        @Model.Colors[i]
-                                    </option>
-
-                                }
-
-                                else
-                                {
-                                    <option value="@Model.Colors[i]">
-                                        @Model.Colors[i]
-                                    </option>
-                                }
-                            }
-                        </select>
-                    </div>
-                </div>
-
-                <div class="col-6">
-                    <div class="ml-2">
-                        <p class="mb-1 small">Населено място</p>
-                        <select class="mdb-select md-form container">
-                            @for (int i = 0; i < Model.Cities.Length; i++)
-                            {
-                                if (i == 0)
-                                {
-                                    <option selected="selected" value="@Model.Cities[i]">
-                                        @Model.Cities[i]
-                                    </option>
-
-                                }
-
-                                else
-                                {
-                                    <option value="@Model.Cities[i]">
-                                        @Model.Cities[i]
-                                    </option>
-                                }
-                            }
-
-                        </select>
-                    </div>
-                </div>
-
-                <div class="col-3 pl-0 pr-4">
-                    <div class="ml-2">
-                        <p class="mb-1 small">Валидност на обявата</p>
-                        <select class="mdb-select md-form container">
-                            <option value="35">
-                                35 дни
-                            </option>
-                            <option value="49">
-                                49 дни
-                            </option>
-                        </select>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="row mt-4 mb-2">
-
-                <div class="col-3">
-                    <div class="ml-2">
-                        <p class="mb-1 small">Безопасност</p>
-
-                        @foreach (var item in Model.Features.Safety)
-                        {
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                <label class="form-check-label" for="defaultCheck1">@item</label>
+                    <div class="col-4">
+                        <div class="ml-2">
+                            <p class="mb-1 small">Допълнителна информация</p>
+                            <div class="form-group">
+                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="additionalInfo"></textarea>
                             </div>
-                        }
+                        </div>
                     </div>
-                </div>
 
-                <div class="col-3">
-                    <div class="ml-2">
-                        <p class="mb-1 small">Комфорт</p>
 
-                        @foreach (var item in Model.Features.Comfort)
-                        {
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                <label class="form-check-label" for="defaultCheck1">@item</label>
-                            </div>
-                        }
+                    <div class="col-4">
+                        <div class="ml-2">
+                            <p class="mb-1 small">Мобилен телефон</p>
+                            <input class="form-control form-control-sm" type="text" name="mobileNumber">
+                        </div>
                     </div>
-                </div>
 
-                <div class="col-3">
-                    <div class="ml-2">
-                        <p class="mb-1 small">Екстериор</p>
-
-                        @foreach (var item in Model.Features.Exterior)
-                        {
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                <label class="form-check-label" for="defaultCheck1">@item</label>
-                            </div>
-                        }
-                    </div>
-                </div>
-
-                <div class="col-3 pl-0 pr-4">
-                    <div class="ml-2">
-                        <p class="mb-1 small">Други</p>
-                        @foreach (var item in Model.Features.Others)
-                        {
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                <label class="form-check-label" for="defaultCheck1">@item</label>
-                            </div>
-                        }
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="row mt-4 mb-2">
-
-                <div class="col-4">
-                    <div class="ml-2">
-                        <p class="mb-1 small">Допълнителна информация</p>
-                        <div class="form-group">
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                    <div class="col-4 pl-0 pr-4">
+                        <div class="ml-2">
+                            <p class="mb-1 small">Email</p>
+                            <input class="form-control form-control-sm" type="text" name="email">
                         </div>
                     </div>
                 </div>
 
-
-                <div class="col-4">
-                    <div class="ml-2">
-                        <p class="mb-1 small">Мобилен телефон</p>
-                        <input class="form-control form-control-sm" type="text">
-                    </div>
-                </div>
-
-                <div class="col-4 pl-0 pr-4">
-                    <div class="ml-2">
-                        <p class="mb-1 small">Email</p>
-                        <input class="form-control form-control-sm" type="text">
-                    </div>
-                </div>
-            </div>
-
-            <div class="row mt-4 mb-2">
-                <div class="col-md-4 offset-md-4 pl-0 pr-4">
-                    <div class="ml-2">
-                        <input onclick="window.location='/Posts/CheckText';" class="container" style="margin-top:20px;" type="button" value="ПУБЛИКУВАЙ ТЕКСТА" />
+                <div class="row mt-4 mb-2">
+                    <div class="col-md-4 offset-md-4 pl-0 pr-4">
+                        <div class="ml-2">
+                            <input class="container" style="margin-top:20px;" type="submit" value="ПУБЛИКУВАЙ ТЕКСТА" />
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
+</form>
