@@ -31,7 +31,7 @@
                     <div class="ml-2">
 
                         <p class="mb-1 small">Основна категория</p>
-                        <select class="mdb-select md-form container">
+                        <select class="mdb-select md-form container" id="categorySelect">
                             @for (int i = 0; i < Model.Categories.Length; i++)
                             {
                                 int correctValue = i + 1;
@@ -80,37 +80,15 @@
                 <div class="col-3">
                     <div class="ml-2">
                         <p class="mb-1 small">Марка</p>
-                        <select class="mdb-select md-form container">
-                            @for (int i = 0; i < Model.Makes.Length; i++)
-                            {
-                                if (i == 0)
-                                {
-                                    <option selected="selected" value="@Model.Makes[i]">
-                                        @Model.Makes[i]
-                                    </option>
-
-                                }
-
-                                else
-                                {
-                                    <option value="@Model.Makes[i]">
-                                        @Model.Makes[i]
-                                    </option>
-                                }
-                            }
-
-                        </select>
+                        <select class="mdb-select md-form container" id="makesSelect"></select>
                     </div>
                 </div>
 
                 <div class="col-3">
                     <div class="ml-2">
                         <p class="mb-1 small">Модел</p>
-                        <select class="mdb-select md-form container">
-                            <option value="" disabled selected>Всички</option>
-                            <option value="1">Option 1</option>
-                            <option value="2">Option 2</option>
-                            <option value="3">Option 3</option>
+                        <select class="mdb-select md-form container" id="modelsSelect">
+                            <option value="1">Всички</option>
                         </select>
                     </div>
                 </div>
@@ -126,7 +104,7 @@
                     <div class="ml-2">
                         <p class="mb-1 small">Тип двигател</p>
                         <select class="mdb-select md-form container">
-                            <option value="" disabled selected>Всички</option>
+                            <option value="">Всички</option>
                             <option value="Бензинов">Бензинов</option>
                             <option value="Дизелов">Дизелов</option>
                             <option value="Електрически">Електрически</option>
@@ -150,8 +128,7 @@
                     <div class="ml-2">
                         <p class="mb-1 small">Евростандарт</p>
                         <select class="mdb-select md-form container">
-                            <option value="" disabled selected>Всички</option>
-                            <option value="" disabled selected>Всички</option>
+                            <option value="">Всички</option>
                             <option value="1">Евро 1</option>
                             <option value="2">Евро 2</option>
                             <option value="3">Евро 3</option>
@@ -166,7 +143,7 @@
                     <div class="ml-2">
                         <p class="mb-1 small">Скоростна кутия</p>
                         <select class="mdb-select md-form container">
-                            <option value="" disabled selected>Всички</option>
+                            <option value="">Всички</option>
                             <option value="Ръчна">
                                 Ръчна
                             </option>
@@ -184,7 +161,7 @@
                 <div class="col-3 pl-0 pr-4">
                     <div class="ml-2">
                         <p class="mb-1 small">Категория</p>
-                        <select class="mdb-select md-form container">
+                        <select class="mdb-select md-form container" id="categorySelect">
                             @for (int i = 0; i < Model.CarTypeCategories.Length; i++)
                             {
                                 if (i == 0)
@@ -221,7 +198,7 @@
                     <div class="ml-2">
                         <p class="mb-1 small">Валута</p>
                         <select class="mdb-select md-form container">
-                            <option value="" disabled selected>Всички</option>
+                            <option value="">Всички</option>
                             <option value="лв.">лв.</option>
                             <option value="USD">USD</option>
                             <option value="EUR">EUR</option>

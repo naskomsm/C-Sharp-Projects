@@ -6,8 +6,6 @@
 
         public string[] Cities { get; set; }
 
-        public string[] Makes { get; set; }
-
         public string[] Years { get; set; }
     }
 }

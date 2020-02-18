@@ -4,27 +4,66 @@
 // Write your JavaScript code.
 
 $("#categorySelect").on("change", function () {
-    var selectedText = $("#categorySelect option:selected").text();
+    var selectedText = $("#categorySelect option:selected").text().trim();
+    
+    if (selectedText == "Автомобили и Джипове") {
+        $.getJSON("http://192.168.1.5:8080/Makes.json", function (data) {
+            $.each(data, function (key, val) {
+                var optionElement = document.createElement("option");
+                optionElement.innerHTML = val;
+                $("#makesSelect").append(optionElement);
+            });
+        });
+    }
+    else {
+        $("#makesSelect").html("<option>Всички</option>")
+        $("#modelsSelect").html("<option>Всички</option>")
+    }
+
     $("#pageHeader").html(selectedText);
 });
 
 
 $("#makesSelect").on("change", function () {
-    var selectedText = $("#makesSelect option:selected").text();
+    var selectedText = $("#makesSelect option:selected").text().trim();
 
+    $.getJSON("http://192.168.1.5:8080/Models.json", function (data) {
+        $.each(data, function (key, val) {
+            $("#modelsSelect").html("");
 
-    if (selectedText == 'BMW') {
+            if (selectedText == 'BMW') {
+                var bmwArrays = val['BMW'];
 
-    }
-    else if (selectedText == 'Mercedes') {
+                $.each(bmwArrays, function (bmwKey, bmwVal) {
+                    var optionElement = document.createElement("option");
+                    optionElement.innerHTML = bmwVal;
+                    $("#modelsSelect").append(optionElement);
+                })
+            }
+            else if (selectedText == 'Mercedes-Benz') {
+                var mercedesArrays = val['Mercedes'];
 
-    }
-    else if (selectedText == 'Audi') {
+                $.each(mercedesArrays, function (mercedesKey, mercedesVal) {
+                    var optionElement = document.createElement("option");
+                    optionElement.innerHTML = mercedesVal;
+                    $("#modelsSelect").append(optionElement);
+                })
+            }
+            else if (selectedText == 'Audi') {
+                var audiArrays = val['Audi'];
 
-    }
-    else {
-        // dont have other cars..
-    }
+                $.each(audiArrays, function (audiKey, audiVal) {
+                    var optionElement = document.createElement("option");
+                    optionElement.innerHTML = audiVal;
+                    $("#modelsSelect").append(optionElement);
+                })
+            }
+            else {
+                $("#modelsSelect").html("<option>Всички</option>");
+            }
+        })
+    })
+
 });
 
 

@@ -44,26 +44,7 @@
                     <div class="col-3">
                         <div class="ml-2">
                             <p class="mb-1 small">Марка</p>
-                            <select class="mdb-select md-form container" id="makesSelect">
-                                @for (int i = 0; i < Model.Makes.Length; i++)
-                                {
-                                    if (i == 0)
-                                    {
-                                        <option selected="selected" value="@Model.Makes[i]">
-                                            @Model.Makes[i]
-                                        </option>
-
-                                    }
-
-                                    else
-                                    {
-                                        <option value="@Model.Makes[i]">
-                                            @Model.Makes[i]
-                                        </option>
-                                    }
-                                }
-
-                            </select>
+                            <select class="mdb-select md-form container" id="makesSelect"></select>
                         </div>
                     </div>
 
@@ -71,7 +52,7 @@
                     @*JS?*@
                     <div class="col-3">
                         <p class="mb-1 small">Модел</p>
-                        <select class="mdb-select md-form container">
+                        <select class="mdb-select md-form container" id="modelsSelect">
                             <option value="1">Всички</option>
                         </select>
                     </div>
@@ -149,7 +130,7 @@
                         <div class="ml-2 mr-2">
                             <p class="mb-1 small">Двигател</p>
                             <select class="mdb-select md-form container">
-                                <option value="" disabled selected>Всички</option>
+                                <option value="">Всички</option>
                                 <option value="Бензинов">
                                     Бензинов
                                 </option>
@@ -169,7 +150,7 @@
                     <div class="col-3">
                         <p class="mb-1 small">Скоростна кутия</p>
                         <select class="mdb-select md-form container">
-                            <option value="" disabled selected>Всички</option>
+                            <option value="">Всички</option>
                             <option value="Ръчна">
                                 Ръчна
                             </option>

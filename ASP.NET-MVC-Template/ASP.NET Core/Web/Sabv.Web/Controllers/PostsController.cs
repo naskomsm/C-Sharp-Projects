@@ -30,7 +30,6 @@
             {
                 Categories = allDataSets.Categories,
                 Cities = allDataSets.Cities,
-                Makes = allDataSets.Makes,
                 Years = allDataSets.Years,
                 Colors = allDataSets.Colors,
                 Features = allDataSets.Features,
@@ -49,7 +48,6 @@
             {
                 Categories = allDataSets.Categories,
                 Cities = allDataSets.Cities,
-                Makes = allDataSets.Makes,
                 Years = allDataSets.Years,
                 Colors = allDataSets.Colors,
                 Features = allDataSets.Features,

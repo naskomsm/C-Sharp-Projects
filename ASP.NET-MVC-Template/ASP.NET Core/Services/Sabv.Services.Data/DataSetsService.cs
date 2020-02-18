@@ -13,7 +13,6 @@
         {
             var jsonStringCategories = await File.ReadAllTextAsync("./Datasets/Categories.json");
             var jsonStringCities = await File.ReadAllTextAsync("./Datasets/Cities.json");
-            var jsonStringMakes = await File.ReadAllTextAsync("./Datasets/Makes.json");
             var jsonStringYears = await File.ReadAllTextAsync("./Datasets/Years.json");
             var jsonStringColors = await File.ReadAllTextAsync("./Datasets/Colors.json");
             var jsonStringCarTypeCategories = await File.ReadAllTextAsync("./Datasets/CarTypeCategories.json");
@@ -21,7 +20,6 @@
 
             var parsedDataCategories = JsonConvert.DeserializeObject<string[]>(jsonStringCategories);
             var parsedDataCities = JsonConvert.DeserializeObject<string[]>(jsonStringCities);
-            var parsedDataMakes = JsonConvert.DeserializeObject<string[]>(jsonStringMakes);
             var parsedDataYears = JsonConvert.DeserializeObject<string[]>(jsonStringYears);
             var parsedDataColors = JsonConvert.DeserializeObject<string[]>(jsonStringColors);
             var parsedDataCarTypeCategories = JsonConvert.DeserializeObject<string[]>(jsonStringCarTypeCategories);
@@ -31,7 +29,6 @@
             {
                 Categories = parsedDataCategories,
                 Cities = parsedDataCities,
-                Makes = parsedDataMakes,
                 Years = parsedDataYears,
                 Colors = parsedDataColors,
                 Features = parsedDataCarFeatures[0],
