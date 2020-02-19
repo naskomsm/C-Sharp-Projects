@@ -18,24 +18,10 @@
 
                             <p class="mb-1 small">Основна категория</p>
                             <select class="mdb-select md-form container" id="categorySelect" name="postCategory">
-                                @for (int i = 0; i < Model.Categories.Length; i++)
+                                <option>Всички</option>
+                                @foreach (var item in Model.Categories)
                                 {
-                                    int correctValue = i + 1;
-
-                                    if (correctValue == 1)
-                                    {
-                                        <option selected="selected" value="@correctValue">
-                                            @Model.Categories[i]
-                                        </option>
-
-                                    }
-
-                                    else
-                                    {
-                                        <option value="@correctValue">
-                                            @Model.Categories[i]
-                                        </option>
-                                    }
+                                    <option>@item</option>
                                 }
                             </select>
                         </div>
@@ -132,15 +118,9 @@
                             <p class="mb-1 small">Скоростна кутия</p>
                             <select class="mdb-select md-form container" name="transmissionType">
                                 <option value="">Всички</option>
-                                <option value="Ръчна">
-                                    Ръчна
-                                </option>
-                                <option value="Автоматична">
-                                    Автоматична
-                                </option>
-                                <option value="Полуавтоматична">
-                                    Полуавтоматична
-                                </option>
+                                <option value="Ръчна">Ръчна</option>
+                                <option value="Автоматична">Автоматична</option>
+                                <option value="Полуавтоматична">Полуавтоматична</option>
                             </select>
                         </div>
                     </div>
@@ -149,24 +129,11 @@
                         <div class="ml-2">
                             <p class="mb-1 small">Категория</p>
                             <select class="mdb-select md-form container" name="carCategory">
-                                @for (int i = 0; i < Model.CarTypeCategories.Length; i++)
+                                <option>Всички</option>
+                                @foreach (var item in Model.CarTypeCategories)
                                 {
-                                    if (i == 0)
-                                    {
-                                        <option selected="selected" value="@Model.CarTypeCategories[i]">
-                                            @Model.CarTypeCategories[i]
-                                        </option>
-
-                                    }
-
-                                    else
-                                    {
-                                        <option value="@Model.CarTypeCategories[i]">
-                                            @Model.CarTypeCategories[i]
-                                        </option>
-                                    }
+                                    <option>@item</option>
                                 }
-
                             </select>
                         </div>
                     </div>
@@ -204,22 +171,9 @@
                         <div class="ml-2">
                             <p class="mb-1 small">Година на производство (От)</p>
                             <select class="mdb-select md-form container" name="yearFrom">
-                                @for (int i = 0; i < Model.Years.Length; i++)
+                                @foreach (var item in Model.Years)
                                 {
-                                    if (i == 0)
-                                    {
-                                        <option selected="selected" value="@Model.Years[i]">
-                                            @Model.Years[i]
-                                        </option>
-
-                                    }
-
-                                    else
-                                    {
-                                        <option value="@Model.Years[i]">
-                                            От @Model.Years[i]
-                                        </option>
-                                    }
+                                    <option>от @item</option>
                                 }
                             </select>
                         </div>
@@ -229,22 +183,9 @@
                         <div class="ml-2">
                             <p class="mb-1 small">(До)</p>
                             <select class="mdb-select md-form container" name="yearTo">
-                                @for (int i = 0; i < Model.Years.Length; i++)
+                                @foreach (var item in Model.Years)
                                 {
-                                    if (i == 0)
-                                    {
-                                        <option selected="selected" value="@Model.Years[i]">
-                                            @Model.Years[i]
-                                        </option>
-
-                                    }
-
-                                    else
-                                    {
-                                        <option value="@Model.Years[i]">
-                                            До @Model.Years[i]
-                                        </option>
-                                    }
+                                    <option>до @item</option>
                                 }
                             </select>
                         </div>
@@ -257,22 +198,9 @@
                         <div class="ml-2">
                             <p class="mb-1 small">Цвят</p>
                             <select class="mdb-select md-form container" name="color">
-                                @for (int i = 0; i < Model.Colors.Length; i++)
+                                @foreach (var item in Model.Colors)
                                 {
-                                    if (i == 0)
-                                    {
-                                        <option selected="selected" value="@Model.Colors[i]">
-                                            @Model.Colors[i]
-                                        </option>
-
-                                    }
-
-                                    else
-                                    {
-                                        <option value="@Model.Colors[i]">
-                                            @Model.Colors[i]
-                                        </option>
-                                    }
+                                    <option>@item</option>
                                 }
                             </select>
                         </div>
@@ -282,24 +210,10 @@
                         <div class="ml-2">
                             <p class="mb-1 small">Населено място</p>
                             <select class="mdb-select md-form container" name="town">
-                                @for (int i = 0; i < Model.Cities.Length; i++)
+                                @foreach (var item in Model.Cities)
                                 {
-                                    if (i == 0)
-                                    {
-                                        <option selected="selected" value="@Model.Cities[i]">
-                                            @Model.Cities[i]
-                                        </option>
-
-                                    }
-
-                                    else
-                                    {
-                                        <option value="@Model.Cities[i]">
-                                            @Model.Cities[i]
-                                        </option>
-                                    }
+                                    <option>@item</option>
                                 }
-
                             </select>
                         </div>
                     </div>
@@ -311,12 +225,14 @@
                     <div class="col-3">
                         <div class="ml-2">
                             <p class="mb-1 small">Безопасност</p>
-
-                            @foreach (var item in Model.Features.Safety)
+                            @for (int i = 0; i < Model.Features.Safety.Length; i++)
                             {
+                                var item = Model.Features.Safety[i];
+                                var name = "safety" + i;
+
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="">
-                                    <label class="form-check-label" for="defaultCheck1">@item</label>
+                                    <input class="form-check-input" type="checkbox" name="@name" value="true" />
+                                    <label class="form-check-label">@item</label>
                                 </div>
                             }
                         </div>
@@ -325,12 +241,14 @@
                     <div class="col-3">
                         <div class="ml-2">
                             <p class="mb-1 small">Комфорт</p>
-
-                            @foreach (var item in Model.Features.Comfort)
+                            @for (int i = 0; i < Model.Features.Comfort.Length; i++)
                             {
+                                var item = Model.Features.Comfort[i];
+                                var name = "comfort" + i;
+
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="">
-                                    <label class="form-check-label" for="defaultCheck1">@item</label>
+                                    <input class="form-check-input" type="checkbox" name="@name" value="true" />
+                                    <label class="form-check-label">@item</label>
                                 </div>
                             }
                         </div>
@@ -339,12 +257,14 @@
                     <div class="col-3">
                         <div class="ml-2">
                             <p class="mb-1 small">Екстериор</p>
-
-                            @foreach (var item in Model.Features.Exterior)
+                            @for (int i = 0; i < Model.Features.Exterior.Length; i++)
                             {
+                                var item = Model.Features.Exterior[i];
+                                var name = "exterior" + i;
+
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="">
-                                    <label class="form-check-label" for="defaultCheck1">@item</label>
+                                    <input class="form-check-input" type="checkbox" name="@name" value="true" />
+                                    <label class="form-check-label">@item</label>
                                 </div>
                             }
                         </div>
@@ -353,11 +273,14 @@
                     <div class="col-3 pl-0 pr-4">
                         <div class="ml-2">
                             <p class="mb-1 small">Други</p>
-                            @foreach (var item in Model.Features.Others)
+                            @for (int i = 0; i < Model.Features.Others.Length; i++)
                             {
+                                var item = Model.Features.Others[i];
+                                var name = "others" + i;
+
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="">
-                                    <label class="form-check-label" for="defaultCheck1">@item</label>
+                                    <input class="form-check-input" type="checkbox" name="@name" value="true" />
+                                    <label class="form-check-label">@item</label>
                                 </div>
                             }
                         </div>

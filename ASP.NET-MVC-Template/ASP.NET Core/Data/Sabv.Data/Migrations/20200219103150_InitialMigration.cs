@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Sabv.Data.Migrations
 {
-    public partial class Initial : Migration
+    public partial class InitialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -50,6 +50,8 @@ namespace Sabv.Data.Migrations
                     Id = table.Column<string>(nullable: false),
                     CreatedOn = table.Column<DateTime>(nullable: false),
                     ModifiedOn = table.Column<DateTime>(nullable: true),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    DeletedOn = table.Column<DateTime>(nullable: true),
                     VehicleCreatedOn = table.Column<DateTime>(nullable: false),
                     EngineType = table.Column<int>(nullable: false),
                     TransmissionType = table.Column<int>(nullable: false),
@@ -69,6 +71,8 @@ namespace Sabv.Data.Migrations
                     Id = table.Column<string>(nullable: false),
                     CreatedOn = table.Column<DateTime>(nullable: false),
                     ModifiedOn = table.Column<DateTime>(nullable: true),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    DeletedOn = table.Column<DateTime>(nullable: true),
                     Name = table.Column<string>(maxLength: 50, nullable: false)
                 },
                 constraints: table =>
@@ -184,6 +188,11 @@ namespace Sabv.Data.Migrations
                 column: "PostId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_MainInfo_IsDeleted",
+                table: "MainInfo",
+                column: "IsDeleted");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Post_AdditionalInfoId",
                 table: "Post",
                 column: "AdditionalInfoId");
@@ -212,6 +221,11 @@ namespace Sabv.Data.Migrations
                 name: "IX_Post_VehicleCategoryId",
                 table: "Post",
                 column: "VehicleCategoryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PostCategory_IsDeleted",
+                table: "PostCategory",
+                column: "IsDeleted");
 
             migrationBuilder.AddForeignKey(
                 name: "FK_AspNetUsers_Image_ImageId",

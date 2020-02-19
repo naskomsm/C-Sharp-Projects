@@ -10,8 +10,8 @@ using Sabv.Data;
 namespace Sabv.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200217101044_Initial")]
-    partial class Initial
+    [Migration("20200219111410_ModifiedCarTypeEntity")]
+    partial class ModifiedCarTypeEntity
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -368,11 +368,17 @@ namespace Sabv.Data.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("EngineType")
                         .HasColumnType("int");
 
                     b.Property<int>("HorsePower")
                         .HasColumnType("int");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<double>("Mileage")
                         .HasColumnType("float");
@@ -387,6 +393,8 @@ namespace Sabv.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("IsDeleted");
 
                     b.ToTable("MainInfo");
                 });
@@ -472,6 +480,12 @@ namespace Sabv.Data.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
@@ -481,6 +495,8 @@ namespace Sabv.Data.Migrations
                         .HasMaxLength(50);
 
                     b.HasKey("Id");
+
+                    b.HasIndex("IsDeleted");
 
                     b.ToTable("PostCategory");
                 });
@@ -525,6 +541,12 @@ namespace Sabv.Data.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
@@ -534,6 +556,8 @@ namespace Sabv.Data.Migrations
                         .HasMaxLength(50);
 
                     b.HasKey("Id");
+
+                    b.HasIndex("IsDeleted");
 
                     b.ToTable("VehicleCategory");
                 });

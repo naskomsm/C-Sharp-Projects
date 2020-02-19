@@ -1,5 +1,7 @@
 ﻿namespace Sabv.Web.ViewModels.Posts
 {
+    using Sabv.Services.Datasets.Models;
+
     public class SearchPageViewModel
     {
         public string[] Categories { get; set; }

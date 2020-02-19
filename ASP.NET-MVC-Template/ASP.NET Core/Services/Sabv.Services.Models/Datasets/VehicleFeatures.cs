@@ -1,4 +1,4 @@
-﻿namespace Sabv.Web.ViewModels.Posts
+﻿namespace Sabv.Services.Datasets.Models
 {
     public class VehicleFeatures
     {

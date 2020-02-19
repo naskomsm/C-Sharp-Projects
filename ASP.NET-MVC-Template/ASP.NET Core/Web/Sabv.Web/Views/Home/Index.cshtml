@@ -16,24 +16,10 @@
                     <div class="col-6 ml-2 mr-2">
                         <p class="mb-1 small">Основна категория</p>
                         <select class="mdb-select md-form container" id="categorySelect">
-                            @for (int i = 0; i < Model.Categories.Length; i++)
+                            <option>Всички</option>
+                            @foreach (var item in Model.Categories)
                             {
-                                int correctValue = i + 1;
-
-                                if (correctValue == 1)
-                                {
-                                    <option value="@correctValue">
-                                        @Model.Categories[i]
-                                    </option>
-
-                                }
-
-                                else
-                                {
-                                    <option value="@correctValue">
-                                        @Model.Categories[i]
-                                    </option>
-                                }
+                                <option>@item</option>
                             }
                         </select>
                     </div>
@@ -61,24 +47,10 @@
                     <div class="col-6 pr-4 pl-0">
                         <p class="mb-1 small">Населено място</p>
                         <select class="mdb-select md-form container">
-                            @for (int i = 0; i < Model.Cities.Length; i++)
+                            @foreach (var item in Model.Cities)
                             {
-                                if (i == 0)
-                                {
-                                    <option selected="selected" value="@Model.Cities[i]">
-                                        @Model.Cities[i]
-                                    </option>
-
-                                }
-
-                                else
-                                {
-                                    <option value="@Model.Cities[i]">
-                                        @Model.Cities[i]
-                                    </option>
-                                }
+                                <option>@item</option>
                             }
-
                         </select>
                     </div>
                 </div>
@@ -93,22 +65,9 @@
                     <div class="col-3">
                         <p class="mb-1 small">Година</p>
                         <select class="mdb-select md-form container">
-                            @for (int i = 0; i < Model.Years.Length; i++)
+                            @foreach (var item in Model.Years)
                             {
-                                if (i == 0)
-                                {
-                                    <option selected="selected" value="@Model.Years[i]">
-                                        @Model.Years[i]
-                                    </option>
-
-                                }
-
-                                else
-                                {
-                                    <option value="@Model.Years[i]">
-                                        След @Model.Years[i]
-                                    </option>
-                                }
+                                <option>след @item</option>
                             }
                         </select>
                     </div>
@@ -131,19 +90,10 @@
                             <p class="mb-1 small">Двигател</p>
                             <select class="mdb-select md-form container">
                                 <option value="">Всички</option>
-                                <option value="Бензинов">
-                                    Бензинов
-                                </option>
-                                <option value="Дизелов">
-                                    Дизелов
-                                </option>
-                                <option value="Електрически">
-                                    Електрически
-                                </option>
-                                <option value="Хибриден">
-                                    Хибриден
-
-                                </option>
+                                <option value="Бензинов">Бензинов</option>
+                                <option value="Дизелов">Дизелов</option>
+                                <option value="Електрически">Електрически</option>
+                                <option value="Хибриден">Хибриден</option>
                             </select>
                         </div>
                     </div>
@@ -151,16 +101,9 @@
                         <p class="mb-1 small">Скоростна кутия</p>
                         <select class="mdb-select md-form container">
                             <option value="">Всички</option>
-                            <option value="Ръчна">
-                                Ръчна
-                            </option>
-                            <option value="Автоматична">
-                                Автоматична
-                            </option>
-                            <option value="Полуавтоматична">
-                                Полуавтоматична
-
-                            </option>
+                            <option value="Ръчна">Ръчна</option>
+                            <option value="Автоматична">Автоматична</option>
+                            <option value="Полуавтоматична">Полуавтоматична</option>
                         </select>
                     </div>
                     <div class="col-6 pl-0 pr-4">

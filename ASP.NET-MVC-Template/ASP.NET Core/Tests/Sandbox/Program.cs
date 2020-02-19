@@ -17,6 +17,7 @@
     using Sabv.Data.Repositories;
     using Sabv.Data.Seeding;
     using Sabv.Services.Data;
+    using Sabv.Services.Data.Contracts;
     using Sabv.Services.Messaging;
 
     public static class Program
