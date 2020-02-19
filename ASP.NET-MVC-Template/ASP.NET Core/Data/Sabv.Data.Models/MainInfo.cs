@@ -6,7 +6,7 @@
     using Sabv.Data.Common.Models;
     using Sabv.Data.Models.Enums;
 
-    public class MainInfo : BaseModel<string>
+    public class MainInfo : BaseDeletableModel<string>
     {
         public MainInfo()
         {

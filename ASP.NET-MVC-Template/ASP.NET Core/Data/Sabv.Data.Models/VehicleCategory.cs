@@ -6,7 +6,7 @@
 
     using Sabv.Data.Common.Models;
 
-    public class VehicleCategory : BaseModel<string>
+    public class VehicleCategory : BaseDeletableModel<string>
     {
         public VehicleCategory()
         {

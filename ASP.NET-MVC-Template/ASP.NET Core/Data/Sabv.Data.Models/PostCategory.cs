@@ -6,7 +6,7 @@
 
     using Sabv.Data.Common.Models;
 
-    public class PostCategory : BaseModel<string>
+    public class PostCategory : BaseDeletableModel<string>
     {
         public PostCategory()
         {

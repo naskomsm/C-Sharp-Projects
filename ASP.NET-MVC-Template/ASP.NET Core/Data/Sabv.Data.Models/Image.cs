@@ -5,17 +5,12 @@
 
     using Sabv.Data.Common.Models;
 
-    public class Image : BaseModel<string>, IDeletableEntity
+    public class Image : BaseDeletableModel<string>
     {
         public Image()
         {
             this.Id = Guid.NewGuid().ToString();
         }
-
-        // Deletable entity
-        public bool IsDeleted { get; set; }
-
-        public DateTime? DeletedOn { get; set; }
 
         // Specific
         [Required]

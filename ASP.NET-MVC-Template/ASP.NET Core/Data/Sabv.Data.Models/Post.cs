@@ -6,7 +6,7 @@
 
     using Sabv.Data.Common.Models;
 
-    public class Post : BaseModel<string>, IDeletableEntity
+    public class Post : BaseDeletableModel<string>
     {
         public Post()
         {
@@ -15,11 +15,6 @@
             // Collections
             this.Images = new HashSet<Image>();
         }
-
-        // Deletable entity
-        public bool IsDeleted { get; set; }
-
-        public DateTime? DeletedOn { get; set; }
 
         // Post specifics
         [Required]
