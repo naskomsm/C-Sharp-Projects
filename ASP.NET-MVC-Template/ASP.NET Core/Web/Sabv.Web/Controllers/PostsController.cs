@@ -1,20 +1,27 @@
 ﻿namespace Sabv.Web.Controllers
 {
+    using System.Linq;
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Authorization;
-    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
-    using Sabv.Services.Data;
+    using Sabv.Services.Data.Contracts;
     using Sabv.Web.ViewModels.Posts;
 
     public class PostsController : BaseController
     {
         private readonly IDataSetsService dataSetsService;
+        private readonly IPostCategoriesService postCategoriesService;
+        private readonly ICarTypeCategoriesService carTypeCategoriesService;
 
-        public PostsController(IDataSetsService dataSetsService)
+        public PostsController(
+            IDataSetsService dataSetsService,
+            IPostCategoriesService postCategoriesService,
+            ICarTypeCategoriesService carTypeCategoriesService)
         {
             this.dataSetsService = dataSetsService;
+            this.postCategoriesService = postCategoriesService;
+            this.carTypeCategoriesService = carTypeCategoriesService;
         }
 
         [HttpGet]
@@ -27,16 +34,26 @@
         [Authorize]
         public async Task<IActionResult> Create()
         {
-            var allDataSets = await this.dataSetsService.GetAllDataSets();
+            var allDataSets = await this.dataSetsService.GetAllDataSetsAsync();
+
+            var categories = this.postCategoriesService
+               .GetAllCategories()
+               .Select(x => x.Name)
+               .ToArray();
+
+            var carTypeCategories = this.carTypeCategoriesService
+                .GetAllCategories()
+                .Select(x => x.Name)
+                .ToArray();
 
             var model = new SearchPageViewModel()
             {
-                Categories = allDataSets.Categories,
+                Categories = categories,
                 Cities = allDataSets.Cities,
                 Years = allDataSets.Years,
                 Colors = allDataSets.Colors,
                 Features = allDataSets.Features,
-                CarTypeCategories = allDataSets.CarTypeCategories,
+                CarTypeCategories = carTypeCategories,
             };
 
             return this.View(model);
@@ -45,16 +62,26 @@
         [HttpGet]
         public async Task<IActionResult> Search()
         {
-            var allDataSets = await this.dataSetsService.GetAllDataSets();
+            var allDataSets = await this.dataSetsService.GetAllDataSetsAsync();
+
+            var categories = this.postCategoriesService
+               .GetAllCategories()
+               .Select(x => x.Name)
+               .ToArray();
+
+            var carTypeCategories = this.carTypeCategoriesService
+               .GetAllCategories()
+               .Select(x => x.Name)
+               .ToArray();
 
             var model = new SearchPageViewModel()
             {
-                Categories = allDataSets.Categories,
+                Categories = categories,
                 Cities = allDataSets.Cities,
                 Years = allDataSets.Years,
                 Colors = allDataSets.Colors,
                 Features = allDataSets.Features,
-                CarTypeCategories = allDataSets.CarTypeCategories,
+                CarTypeCategories = carTypeCategories,
             };
 
             return this.View(model);
@@ -62,7 +89,7 @@
 
         [HttpGet]
         [Authorize]
-        public IActionResult CheckText(string make, string model)
+        public IActionResult CheckText()
         {
             // A lot of validations for empty fields
 

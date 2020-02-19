@@ -1,4 +1,4 @@
-﻿namespace Sabv.Services.Data
+﻿namespace Sabv.Services.Data.Contracts
 {
     using System.Collections.Generic;
 

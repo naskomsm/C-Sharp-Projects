@@ -4,12 +4,12 @@
     using System.Threading.Tasks;
 
     using Newtonsoft.Json;
-    using Sabv.Web.ViewModels;
-    using Sabv.Web.ViewModels.Posts;
+    using Sabv.Services.Data.Contracts;
+    using Sabv.Services.Datasets.Models;
 
     public class DataSetsService : IDataSetsService
     {
-        public async Task<DataSetsViewModel> GetAllDataSets()
+        public async Task<DataSetsViewModel> GetAllDataSetsAsync()
         {
             var jsonStringCategories = await File.ReadAllTextAsync("./Datasets/Categories.json");
             var jsonStringCities = await File.ReadAllTextAsync("./Datasets/Cities.json");

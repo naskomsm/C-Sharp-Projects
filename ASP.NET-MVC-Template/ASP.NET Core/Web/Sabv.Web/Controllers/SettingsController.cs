@@ -6,7 +6,7 @@
     using Microsoft.AspNetCore.Mvc;
     using Sabv.Data.Common.Repositories;
     using Sabv.Data.Models;
-    using Sabv.Services.Data;
+    using Sabv.Services.Data.Contracts;
     using Sabv.Web.ViewModels.Settings;
 
     public class SettingsController : BaseController

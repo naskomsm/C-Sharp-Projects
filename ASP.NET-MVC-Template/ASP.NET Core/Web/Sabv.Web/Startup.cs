@@ -16,6 +16,7 @@
     using Sabv.Data.Repositories;
     using Sabv.Data.Seeding;
     using Sabv.Services.Data;
+    using Sabv.Services.Data.Contracts;
     using Sabv.Services.Mapping;
     using Sabv.Services.Messaging;
     using Sabv.Web.ViewModels;
@@ -59,6 +60,8 @@
             services.AddTransient<IEmailSender, NullMessageSender>();
             services.AddTransient<ISettingsService, SettingsService>();
             services.AddTransient<IDataSetsService, DataSetsService>();
+            services.AddTransient<IPostCategoriesService, PostCategoriesService>();
+            services.AddTransient<ICarTypeCategoriesService, CarTypeCategoriesService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
