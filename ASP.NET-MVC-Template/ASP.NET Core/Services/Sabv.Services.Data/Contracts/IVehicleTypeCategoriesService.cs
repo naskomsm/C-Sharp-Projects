@@ -6,13 +6,14 @@
     using Sabv.Data.Models;
     using Sabv.Services.Models.VehicleCategories;
 
-    public interface ICarTypeCategoriesService
+    public interface IVehicleTypeCategoriesService
     {
-
         Task Add(string name);
 
         Task<VehicleCategory> GetById(string id);
 
         ICollection<VehicleCategoriesViewModel> GetAllCategories();
+
+        ICollection<string> GetAllCategoriesNames();
     }
 }

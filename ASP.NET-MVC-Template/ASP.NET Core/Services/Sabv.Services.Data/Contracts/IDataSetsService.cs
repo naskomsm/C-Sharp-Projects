@@ -6,6 +6,8 @@
 
     public interface IDataSetsService
     {
-        Task<DataSetsViewModel> GetAllDataSetsAsync();
+        Task<DataSetsViewModel> GetDataForHomePageAsync();
+
+        Task<DataSetsViewModel> GetDataForSearchAndCreatePageAsync();
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace Sabv.Web.Controllers
 {
-    using System.Linq;
+    using System.IO;
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Authorization;
@@ -12,16 +12,16 @@
     {
         private readonly IDataSetsService dataSetsService;
         private readonly IPostCategoriesService postCategoriesService;
-        private readonly ICarTypeCategoriesService carTypeCategoriesService;
+        private readonly IVehicleTypeCategoriesService vehicleTypeCategoriesService;
 
         public PostsController(
             IDataSetsService dataSetsService,
             IPostCategoriesService postCategoriesService,
-            ICarTypeCategoriesService carTypeCategoriesService)
+            IVehicleTypeCategoriesService carTypeCategoriesService)
         {
             this.dataSetsService = dataSetsService;
             this.postCategoriesService = postCategoriesService;
-            this.carTypeCategoriesService = carTypeCategoriesService;
+            this.vehicleTypeCategoriesService = carTypeCategoriesService;
         }
 
         [HttpGet]
@@ -34,17 +34,9 @@
         [Authorize]
         public async Task<IActionResult> Create()
         {
-            var allDataSets = await this.dataSetsService.GetAllDataSetsAsync();
-
-            var categories = this.postCategoriesService
-               .GetAllCategories()
-               .Select(x => x.Name)
-               .ToArray();
-
-            var carTypeCategories = this.carTypeCategoriesService
-                .GetAllCategories()
-                .Select(x => x.Name)
-                .ToArray();
+            var allDataSets = await this.dataSetsService.GetDataForSearchAndCreatePageAsync();
+            var categories = this.postCategoriesService.GetAllCategoriesNames();
+            var carTypeCategories = this.vehicleTypeCategoriesService.GetAllCategoriesNames();
 
             var model = new SearchPageViewModel()
             {
@@ -62,17 +54,9 @@
         [HttpGet]
         public async Task<IActionResult> Search()
         {
-            var allDataSets = await this.dataSetsService.GetAllDataSetsAsync();
-
-            var categories = this.postCategoriesService
-               .GetAllCategories()
-               .Select(x => x.Name)
-               .ToArray();
-
-            var carTypeCategories = this.carTypeCategoriesService
-               .GetAllCategories()
-               .Select(x => x.Name)
-               .ToArray();
+            var allDataSets = await this.dataSetsService.GetDataForSearchAndCreatePageAsync();
+            var categories = this.postCategoriesService.GetAllCategoriesNames();
+            var carTypeCategories = this.vehicleTypeCategoriesService.GetAllCategoriesNames();
 
             var model = new SearchPageViewModel()
             {
@@ -92,7 +76,6 @@
         public IActionResult CheckText()
         {
             // A lot of validations for empty fields
-
             System.Console.WriteLine();
 
             return this.View();
@@ -107,8 +90,14 @@
 
         [HttpPost]
         [Authorize]
-        public IActionResult AddPictures(string arg)
+        public IActionResult AddPictures(string[] myFile)
         {
+            var picture1 = new FileInfo(myFile[0]);
+            var picture2 = new FileInfo(myFile[1]);
+            
+
+
+
             return this.View();
         }
     }

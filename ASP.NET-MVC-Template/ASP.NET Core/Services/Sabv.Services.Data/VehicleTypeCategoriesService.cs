@@ -10,11 +10,11 @@
     using Sabv.Services.Data.Contracts;
     using Sabv.Services.Models.VehicleCategories;
 
-    public class CarTypeCategoriesService : ICarTypeCategoriesService
+    public class VehicleTypeCategoriesService : IVehicleTypeCategoriesService
     {
         private readonly IDeletableEntityRepository<VehicleCategory> vehicleCategory;
 
-        public CarTypeCategoriesService(IDeletableEntityRepository<VehicleCategory> vehicleCategory)
+        public VehicleTypeCategoriesService(IDeletableEntityRepository<VehicleCategory> vehicleCategory)
         {
             this.vehicleCategory = vehicleCategory;
         }
@@ -45,6 +45,14 @@
                 .ToList();
 
             return all;
+        }
+
+        public ICollection<string> GetAllCategoriesNames()
+        {
+            return this.vehicleCategory
+                .All()
+                .Select(x => x.Name)
+                .ToList();
         }
 
         public async Task<VehicleCategory> GetById(string id)

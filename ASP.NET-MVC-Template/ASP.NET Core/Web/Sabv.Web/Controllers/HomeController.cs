@@ -1,7 +1,6 @@
 ﻿namespace Sabv.Web.Controllers
 {
     using System.Diagnostics;
-    using System.Linq;
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Mvc;
@@ -22,11 +21,8 @@
 
         public async Task<IActionResult> Index()
         {
-            var allDataSets = await this.dataSetsService.GetAllDataSetsAsync();
-            var categories = this.postCategoriesService
-                .GetAllCategories()
-                .Select(x => x.Name)
-                .ToArray();
+            var allDataSets = await this.dataSetsService.GetDataForHomePageAsync();
+            var categories = this.postCategoriesService.GetAllCategoriesNames();
 
             var model = new HomePageViewModel()
             {

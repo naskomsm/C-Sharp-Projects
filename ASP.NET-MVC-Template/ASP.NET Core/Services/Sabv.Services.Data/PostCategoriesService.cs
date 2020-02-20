@@ -8,7 +8,6 @@
     using Sabv.Data.Common.Repositories;
     using Sabv.Data.Models;
     using Sabv.Services.Data.Contracts;
-    using Sabv.Services.Mapping;
     using Sabv.Services.Models.PostCategories;
 
     public class PostCategoriesService : IPostCategoriesService
@@ -35,6 +34,7 @@
 
         public ICollection<PostCategoriesViewModel> GetAllCategories()
         {
+            // use mapper later
             var all = this.postCategoryRepository
                 .All()
                 .OrderBy(x => x.CreatedOn)
@@ -48,11 +48,17 @@
             return all;
         }
 
+        public ICollection<string> GetAllCategoriesNames()
+        {
+            return this.postCategoryRepository
+                .All()
+                .Select(x => x.Name)
+                .ToList();
+        }
+
         public async Task<PostCategory> GetById(string id)
         {
-            var entity = await this.postCategoryRepository
-                .GetByIdWithDeletedAsync(id);
-
+            var entity = await this.postCategoryRepository.GetByIdWithDeletedAsync(id);
             return entity;
         }
     }

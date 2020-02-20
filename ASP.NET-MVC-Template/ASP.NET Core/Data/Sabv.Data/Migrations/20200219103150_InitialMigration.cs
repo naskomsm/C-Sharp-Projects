@@ -1,8 +1,9 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
-
-namespace Sabv.Data.Migrations
+﻿namespace Sabv.Data.Migrations
 {
+    using System;
+
+    using Microsoft.EntityFrameworkCore.Migrations;
+
     public partial class InitialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -36,7 +37,7 @@ namespace Sabv.Data.Migrations
                     ElectricMirrors = table.Column<bool>(nullable: false),
                     ElectricWindows = table.Column<bool>(nullable: false),
                     USBAudio = table.Column<bool>(nullable: false),
-                    Airbags = table.Column<bool>(nullable: false)
+                    Airbags = table.Column<bool>(nullable: false),
                 },
                 constraints: table =>
                 {
@@ -57,7 +58,7 @@ namespace Sabv.Data.Migrations
                     TransmissionType = table.Column<int>(nullable: false),
                     HorsePower = table.Column<int>(nullable: false),
                     Mileage = table.Column<double>(nullable: false),
-                    Color = table.Column<string>(maxLength: 15, nullable: false)
+                    Color = table.Column<string>(maxLength: 15, nullable: false),
                 },
                 constraints: table =>
                 {
@@ -73,7 +74,7 @@ namespace Sabv.Data.Migrations
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false),
                     DeletedOn = table.Column<DateTime>(nullable: true),
-                    Name = table.Column<string>(maxLength: 50, nullable: false)
+                    Name = table.Column<string>(maxLength: 50, nullable: false),
                 },
                 constraints: table =>
                 {
@@ -87,7 +88,7 @@ namespace Sabv.Data.Migrations
                     Id = table.Column<string>(nullable: false),
                     CreatedOn = table.Column<DateTime>(nullable: false),
                     ModifiedOn = table.Column<DateTime>(nullable: true),
-                    Name = table.Column<string>(maxLength: 50, nullable: false)
+                    Name = table.Column<string>(maxLength: 50, nullable: false),
                 },
                 constraints: table =>
                 {
@@ -112,7 +113,7 @@ namespace Sabv.Data.Migrations
                     MainInfoId = table.Column<string>(nullable: false),
                     AdditionalInfoId = table.Column<string>(nullable: false),
                     VehicleCategoryId = table.Column<string>(nullable: false),
-                    PostCategoryId = table.Column<string>(nullable: false)
+                    PostCategoryId = table.Column<string>(nullable: false),
                 },
                 constraints: table =>
                 {
@@ -159,7 +160,7 @@ namespace Sabv.Data.Migrations
                     IsDeleted = table.Column<bool>(nullable: false),
                     DeletedOn = table.Column<DateTime>(nullable: true),
                     Title = table.Column<string>(maxLength: 50, nullable: false),
-                    PostId = table.Column<string>(nullable: false)
+                    PostId = table.Column<string>(nullable: false),
                 },
                 constraints: table =>
                 {

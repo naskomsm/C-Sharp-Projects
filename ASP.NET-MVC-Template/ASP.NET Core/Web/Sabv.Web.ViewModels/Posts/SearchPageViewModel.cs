@@ -1,18 +1,19 @@
 ﻿namespace Sabv.Web.ViewModels.Posts
 {
     using Sabv.Services.Datasets.Models;
+    using System.Collections.Generic;
 
     public class SearchPageViewModel
     {
-        public string[] Categories { get; set; }
+        public ICollection<string> Categories { get; set; }
 
-        public string[] Cities { get; set; }
+        public ICollection<string> Cities { get; set; }
 
-        public string[] Years { get; set; }
+        public ICollection<string> Years { get; set; }
 
-        public string[] Colors { get; set; }
+        public ICollection<string> Colors { get; set; }
 
-        public string[] CarTypeCategories { get; set; }
+        public ICollection<string> CarTypeCategories { get; set; }
 
         public VehicleFeatures Features { get; set; }
     }

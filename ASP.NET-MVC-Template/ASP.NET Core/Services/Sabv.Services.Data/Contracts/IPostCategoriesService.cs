@@ -13,5 +13,7 @@
         Task<PostCategory> GetById(string id);
 
         ICollection<PostCategoriesViewModel> GetAllCategories();
+
+        ICollection<string> GetAllCategoriesNames();
     }
 }

@@ -1,11 +1,13 @@
 ﻿namespace Sabv.Web.ViewModels.Home
 {
+    using System.Collections.Generic;
+
     public class HomePageViewModel
     {
-        public string[] Categories { get; set; }
+        public ICollection<string> Categories { get; set; }
 
-        public string[] Cities { get; set; }
+        public ICollection<string> Cities { get; set; }
 
-        public string[] Years { get; set; }
+        public ICollection<string> Years { get; set; }
     }
 }

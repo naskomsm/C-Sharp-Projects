@@ -1,8 +1,9 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
-
-namespace Sabv.Data.Migrations
+﻿namespace Sabv.Data.Migrations
 {
+    using System;
+
+    using Microsoft.EntityFrameworkCore.Migrations;
+
     public partial class ModifiedCarTypeEntity : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
