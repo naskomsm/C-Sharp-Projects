@@ -1,6 +1,5 @@
 ﻿namespace Sabv.Web.Controllers
 {
-    using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
@@ -10,7 +9,7 @@
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.Extensions.FileProviders;
+    using Sabv.Common;
     using Sabv.Services.Data.Contracts;
     using Sabv.Web.ViewModels.Posts;
 
@@ -20,20 +19,17 @@
         private readonly IPostCategoriesService postCategoriesService;
         private readonly IVehicleTypeCategoriesService vehicleTypeCategoriesService;
         private readonly IImagesService imagesService;
-        private readonly IHostingEnvironment hostingEnvironment;
 
         public PostsController(
             IDataSetsService dataSetsService,
             IPostCategoriesService postCategoriesService,
             IVehicleTypeCategoriesService carTypeCategoriesService,
-            IImagesService imagesService,
-            IHostingEnvironment hostingEnvironment)
+            IImagesService imagesService)
         {
             this.dataSetsService = dataSetsService;
             this.postCategoriesService = postCategoriesService;
             this.vehicleTypeCategoriesService = carTypeCategoriesService;
             this.imagesService = imagesService;
-            this.hostingEnvironment = hostingEnvironment;
         }
 
         [HttpGet]
@@ -121,12 +117,19 @@
                 }
             }
 
+            var urls = new List<string>();
             foreach (var path in filePaths)
             {
-                await this.imagesService.UploadFile(path);
+                var url = await this.imagesService.UploadFile(path);
+                url = url.Substring(GlobalConstants.CloudinaryLinkLengthWithoutSuffix);
+                urls.Add(url);
             }
 
-            Console.WriteLine();
+            foreach (var url in urls)
+            {
+                await this.imagesService.AddToBase(url);
+            }
+
             return this.View();
         }
     }

@@ -14,11 +14,9 @@
 
         // Specific
         [Required]
-        [MaxLength(DataValidation.Common.MaxLength)]
-        public string Title { get; set; }
+        public string Url { get; set; }
 
         // Relations
-        [Required]
         public string PostId { get; set; }
 
         public virtual Post Post { get; set; }

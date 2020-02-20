@@ -5,5 +5,7 @@
     public interface IImagesService
     {
         Task<string> UploadFile(string url);
+
+        Task AddToBase(string url);
     }
 }
