@@ -1,7 +1,7 @@
 ﻿namespace Sabv.Web
 {
     using System.Reflection;
-
+    using CloudinaryDotNet;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
@@ -39,6 +39,15 @@
             services.AddDefaultIdentity<ApplicationUser>(IdentityOptionsProvider.GetIdentityOptions)
                 .AddRoles<ApplicationRole>().AddEntityFrameworkStores<ApplicationDbContext>();
 
+            Account cloudinaryCredentials = new Account(
+               this.configuration["Cloudinary:CloudName"],
+               this.configuration["Cloudinary:ApiKey"],
+               this.configuration["Cloudinary:ApiSecret"]);
+
+            Cloudinary cloudinaryUtility = new Cloudinary(cloudinaryCredentials);
+
+            services.AddSingleton(cloudinaryUtility);
+
             services.Configure<CookiePolicyOptions>(
                 options =>
                     {
@@ -61,7 +70,8 @@
             services.AddTransient<ISettingsService, SettingsService>();
             services.AddTransient<IDataSetsService, DataSetsService>();
             services.AddTransient<IPostCategoriesService, PostCategoriesService>();
-            services.AddTransient<ICarTypeCategoriesService, CarTypeCategoriesService>();
+            services.AddTransient<IVehicleTypeCategoriesService, VehicleTypeCategoriesService>();
+            services.AddTransient<IImagesService, ImagesService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
