@@ -39,8 +39,8 @@
         <div class="container row mt-4 text-center">
             <div class="col align-self-center">
                 <h3>Можете да избирате по няколко снимки на веднъж: </h3>
-                <form method="post" action="/Posts/AddPictures">
-                    Изберете файлове: <input type="file" name="myFile" multiple><br><br>
+                <form method="post" action="/Posts/AddPictures" enctype="multipart/form-data">
+                    Изберете файлове: <input type="file" name="files" multiple><br><br>
                     <input class="container" type="submit" value="КАЧИ СНИМКИТЕ" />
                 </form>
             </div>

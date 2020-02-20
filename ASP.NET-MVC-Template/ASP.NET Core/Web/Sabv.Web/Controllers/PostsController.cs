@@ -1,10 +1,16 @@
 ﻿namespace Sabv.Web.Controllers
 {
+    using System;
+    using System.Collections.Generic;
     using System.IO;
+    using System.Linq;
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Hosting;
+    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Extensions.FileProviders;
     using Sabv.Services.Data.Contracts;
     using Sabv.Web.ViewModels.Posts;
 
@@ -13,15 +19,21 @@
         private readonly IDataSetsService dataSetsService;
         private readonly IPostCategoriesService postCategoriesService;
         private readonly IVehicleTypeCategoriesService vehicleTypeCategoriesService;
+        private readonly IImagesService imagesService;
+        private readonly IHostingEnvironment hostingEnvironment;
 
         public PostsController(
             IDataSetsService dataSetsService,
             IPostCategoriesService postCategoriesService,
-            IVehicleTypeCategoriesService carTypeCategoriesService)
+            IVehicleTypeCategoriesService carTypeCategoriesService,
+            IImagesService imagesService,
+            IHostingEnvironment hostingEnvironment)
         {
             this.dataSetsService = dataSetsService;
             this.postCategoriesService = postCategoriesService;
             this.vehicleTypeCategoriesService = carTypeCategoriesService;
+            this.imagesService = imagesService;
+            this.hostingEnvironment = hostingEnvironment;
         }
 
         [HttpGet]
@@ -90,14 +102,31 @@
 
         [HttpPost]
         [Authorize]
-        public IActionResult AddPictures(string[] myFile)
+        public async Task<IActionResult> AddPictures(List<IFormFile> files)
         {
-            var picture1 = new FileInfo(myFile[0]);
-            var picture2 = new FileInfo(myFile[1]);
-            
+            long size = files.Sum(f => f.Length);
 
+            var filePaths = new List<string>();
+            foreach (var formFile in files)
+            {
+                if (formFile.Length > 0)
+                {
+                    var filePath = Path.GetTempFileName();
+                    filePaths.Add(filePath);
 
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await formFile.CopyToAsync(stream);
+                    }
+                }
+            }
 
+            foreach (var path in filePaths)
+            {
+                await this.imagesService.UploadFile(path);
+            }
+
+            Console.WriteLine();
             return this.View();
         }
     }

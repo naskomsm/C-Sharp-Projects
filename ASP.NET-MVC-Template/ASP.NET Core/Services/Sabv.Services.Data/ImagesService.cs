@@ -1,8 +1,9 @@
 ﻿namespace Sabv.Services.Data
 {
-    using System;
+    using System.Threading.Tasks;
 
     using CloudinaryDotNet;
+    using CloudinaryDotNet.Actions;
     using Sabv.Services.Data.Contracts;
 
     public class ImagesService : IImagesService
@@ -14,14 +15,16 @@
             this.cloudinaryUtility = cloudinaryUtility;
         }
 
-        public void UploadFileFromLocal(string fileName)
+        public async Task<string> UploadFile(string url)
         {
-            throw new NotImplementedException();
-        }
+            var uploadParams = new ImageUploadParams()
+            {
+                File = new FileDescription(url),
+            };
 
-        public void UploadFileFromUrl(string url)
-        {
-            throw new NotImplementedException();
+            var uploadResult = await this.cloudinaryUtility.UploadAsync(uploadParams);
+
+            return uploadResult.Uri.ToString();
         }
     }
 }
