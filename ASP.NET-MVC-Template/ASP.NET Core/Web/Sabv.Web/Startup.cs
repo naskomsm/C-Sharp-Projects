@@ -1,6 +1,7 @@
 ﻿namespace Sabv.Web
 {
     using System.Reflection;
+
     using CloudinaryDotNet;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
@@ -72,6 +73,7 @@
             services.AddTransient<IPostCategoriesService, PostCategoriesService>();
             services.AddTransient<IVehicleTypeCategoriesService, VehicleTypeCategoriesService>();
             services.AddTransient<IImagesService, ImagesService>();
+            services.AddTransient<IPostsService, PostsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

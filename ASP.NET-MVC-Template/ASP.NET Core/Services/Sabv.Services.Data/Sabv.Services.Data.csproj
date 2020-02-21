@@ -23,6 +23,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Data\Sabv.Data.Common\Sabv.Data.Common.csproj" />
     <ProjectReference Include="..\..\Data\Sabv.Data.Models\Sabv.Data.Models.csproj" />
+    <ProjectReference Include="..\..\Sabv.Common\Sabv.Common.csproj" />
     <ProjectReference Include="..\..\Web\Sabv.Web.ViewModels\Sabv.Web.ViewModels.csproj" />
     <ProjectReference Include="..\Sabv.Services.Mapping\Sabv.Services.Mapping.csproj" />
     <ProjectReference Include="..\Sabv.Services.Models\Sabv.Services.Models.csproj" />

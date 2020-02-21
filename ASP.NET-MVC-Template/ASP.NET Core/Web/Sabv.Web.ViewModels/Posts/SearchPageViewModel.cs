@@ -1,7 +1,8 @@
 ﻿namespace Sabv.Web.ViewModels.Posts
 {
-    using Sabv.Services.Datasets.Models;
     using System.Collections.Generic;
+
+    using Sabv.Services.Datasets.Models;
 
     public class SearchPageViewModel
     {

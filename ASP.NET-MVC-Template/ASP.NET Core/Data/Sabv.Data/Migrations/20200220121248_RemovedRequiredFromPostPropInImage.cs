@@ -1,7 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
-
-namespace Sabv.Data.Migrations
+﻿namespace Sabv.Data.Migrations
 {
+    using Microsoft.EntityFrameworkCore.Migrations;
+
     public partial class RemovedRequiredFromPostPropInImage : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)

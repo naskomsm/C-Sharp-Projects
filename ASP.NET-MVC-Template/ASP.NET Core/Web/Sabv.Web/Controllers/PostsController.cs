@@ -19,17 +19,20 @@
         private readonly IPostCategoriesService postCategoriesService;
         private readonly IVehicleTypeCategoriesService vehicleTypeCategoriesService;
         private readonly IImagesService imagesService;
+        private readonly IPostsService postsService;
 
         public PostsController(
             IDataSetsService dataSetsService,
             IPostCategoriesService postCategoriesService,
             IVehicleTypeCategoriesService carTypeCategoriesService,
-            IImagesService imagesService)
+            IImagesService imagesService,
+            IPostsService postsService)
         {
             this.dataSetsService = dataSetsService;
             this.postCategoriesService = postCategoriesService;
             this.vehicleTypeCategoriesService = carTypeCategoriesService;
             this.imagesService = imagesService;
+            this.postsService = postsService;
         }
 
         [HttpGet]
@@ -96,6 +99,19 @@
             return this.View();
         }
 
+        [HttpGet]
+        public IActionResult All()
+        {
+            var posts = this.postsService.GetAllPosts();
+
+            var model = new AllPostsViewModel()
+            {
+                Posts = posts,
+            };
+
+            return this.View(model);
+        }
+
         [HttpPost]
         [Authorize]
         public async Task<IActionResult> AddPictures(List<IFormFile> files)
@@ -110,10 +126,8 @@
                     var filePath = Path.GetTempFileName();
                     filePaths.Add(filePath);
 
-                    using (var stream = new FileStream(filePath, FileMode.Create))
-                    {
-                        await formFile.CopyToAsync(stream);
-                    }
+                    using var stream = new FileStream(filePath, FileMode.Create);
+                    await formFile.CopyToAsync(stream);
                 }
             }
 
