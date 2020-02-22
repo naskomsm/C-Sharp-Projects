@@ -6,7 +6,6 @@
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Authorization;
-    using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using Sabv.Common;
@@ -110,6 +109,12 @@
             };
 
             return this.View(model);
+        }
+
+        [HttpGet]
+        public IActionResult Details(string id)
+        {
+            return this.View();
         }
 
         [HttpPost]
