@@ -29,6 +29,7 @@
                 .All()
                 .Select(x => new PostViewModel()
                 {
+                    Id = x.Id,
                     CreatedOn = x.CreatedOn.ToString(), 
                     ImageUrl = GlobalConstants.CloudinaryLinkWithoutSuffix + x.Images.FirstOrDefault().Url,
                     MainInfo = x.MainInfo,

@@ -13,12 +13,20 @@
         {
             <div class="row">
                 <div class="col-4">
-                    <img src="@post.ImageUrl" width="200" height="150">
+                    <span>
+                        <a href="/Posts/Details/@post.Id" target="_blank">
+                            <img src="@post.ImageUrl" width="200" height="150">
+                        </a>
+                    </span>
                 </div>
                 <div class="col-8">
                     <div class="row align-items-start mb-3">
-                        <div class="col-md-4">@post.Name</div>
-                        <div class="col-md-4 offset-md-4">@post.Price лв.</div>
+                        <span>
+                            <a class="col-md-4" href="/Posts/Details/@post.Id" target="_blank">
+                                @post.Name
+                            </a>
+                        </span>
+                        <div class="col-md-4 offset-md-4 font-weight-bold">@post.Price лв.</div>
                     </div>
                     <div class="row align-items-end">
                         <div class="col">

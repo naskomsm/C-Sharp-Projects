@@ -5,9 +5,10 @@
 
 $("#categorySelect").on("change", function () {
     var selectedText = $("#categorySelect option:selected").text().trim();
-    
-    if (selectedText == "Автомобили и Джипове") {
-        $.getJSON("http://192.168.1.5:8080/Makes.json", function (data) {
+    var expectedText = "Автомобили и джипове";
+
+    if (selectedText.toLowerCase() == expectedText.toLowerCase()) {
+        $.getJSON("http://192.168.1.6:8080/Makes.json", function (data) {
             $.each(data, function (key, val) {
                 var optionElement = document.createElement("option");
                 optionElement.innerHTML = val;
@@ -27,7 +28,7 @@ $("#categorySelect").on("change", function () {
 $("#makesSelect").on("change", function () {
     var selectedText = $("#makesSelect option:selected").text().trim();
 
-    $.getJSON("http://192.168.1.5:8080/Models.json", function (data) {
+    $.getJSON("http://192.168.1.6:8080/Models.json", function (data) {
         $.each(data, function (key, val) {
             $("#modelsSelect").html("");
 
