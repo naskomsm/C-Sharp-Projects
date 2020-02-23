@@ -3,17 +3,21 @@
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
+    using System.Security.Claims;
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Sabv.Common;
+    using Sabv.Data.Models;
     using Sabv.Services.Data.Contracts;
     using Sabv.Web.ViewModels.Posts;
 
     public class PostsController : BaseController
     {
+        private readonly UserManager<ApplicationUser> userManager;
         private readonly IDataSetsService dataSetsService;
         private readonly IPostCategoriesService postCategoriesService;
         private readonly IVehicleTypeCategoriesService vehicleTypeCategoriesService;
@@ -21,6 +25,7 @@
         private readonly IPostsService postsService;
 
         public PostsController(
+            UserManager<ApplicationUser> userManager,
             IDataSetsService dataSetsService,
             IPostCategoriesService postCategoriesService,
             IVehicleTypeCategoriesService carTypeCategoriesService,
@@ -32,6 +37,7 @@
             this.vehicleTypeCategoriesService = carTypeCategoriesService;
             this.imagesService = imagesService;
             this.postsService = postsService;
+            this.userManager = userManager;
         }
 
         [HttpGet]
@@ -112,9 +118,56 @@
         }
 
         [HttpGet]
-        public IActionResult Details(string id)
+        public async Task<IActionResult> Details(string id)
         {
-            return this.View();
+            if (id == null)
+            {
+                return this.Redirect("/");
+            }
+
+            var email = this.User.Identity.Name;
+            var user = await this.userManager.FindByEmailAsync(email);
+
+
+            // HERE IS CRASHING.. will fix it later
+            var postDetailsModel = await this.postsService.GetDetailsAsync(id);
+
+            var model = new DetailsViewModel()
+            {
+                Id = postDetailsModel.Id,
+                Name = postDetailsModel.Name,
+                Price = postDetailsModel.Price,
+                Description = postDetailsModel.Description,
+                PhoneNumber = postDetailsModel.PhoneNumber,
+                UserId = user.Id,
+                UserImageId = user.ImageId,
+                ABS = postDetailsModel.ABS,
+                Airbags = postDetailsModel.Airbags,
+                AirSuspension = postDetailsModel.AirSuspension,
+                AllWheelDrive = postDetailsModel.AllWheelDrive,
+                Barter = postDetailsModel.Barter,
+                ClimateControl = postDetailsModel.ClimateControl,
+                Color = postDetailsModel.Color,
+                ElectricMirrors = postDetailsModel.ElectricMirrors,
+                ElectricWindows = postDetailsModel.ElectricWindows,
+                EngineType = postDetailsModel.EngineType.ToString(),
+                FiveDoors = postDetailsModel.FiveDoors,
+                GPS = postDetailsModel.GPS,
+                HorsePower = postDetailsModel.HorsePower,
+                Mileage = postDetailsModel.Mileage,
+                Parktronic = postDetailsModel.Parktronic,
+                RainSensor = postDetailsModel.RainSensor,
+                StartStopFunction = postDetailsModel.StartStopFunction,
+                ThreeDoors = postDetailsModel.ThreeDoors,
+                Town = postDetailsModel.Town,
+                TractionControl = postDetailsModel.TractionControl,
+                TransmissionType = postDetailsModel.TransmissionType.ToString(),
+                Tuned = postDetailsModel.Tuned,
+                USBAudio = postDetailsModel.USBAudio,
+                VehicleCreatedOn = postDetailsModel.VehicleCreatedOn,
+            };
+
+            return this.View(model);
         }
 
         [HttpPost]

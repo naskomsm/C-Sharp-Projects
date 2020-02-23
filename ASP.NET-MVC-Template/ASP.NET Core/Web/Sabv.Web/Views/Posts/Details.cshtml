@@ -1,12 +1,19 @@
-﻿@{
+﻿@model DetailsViewModel
+
+@{
     ViewData["Title"] = "Детайли";
 }
 
-<div class="row font-weight-bold justify-content-center">
-    <h3>ЗАГЛАВИЕ</h3>
+<div class="row font-weight-bold justify-content-between">
+    <div class="col-8">
+        <h3>@Model.Name</h3>
+    </div>
+    <div class="col-4">
+        <h3 class="text-primary">@Model.Price лв.</h3>
+    </div>
 </div>
 
-<div class="row justify-content-center">
+<div class="row justify-content-start">
     <h6>
         <span>
             <a class="col-md-4" href="https://autodata24.com/" target="_blank">
@@ -14,4 +21,131 @@
             </a>
         </span>
     </h6>
+</div>
+
+<div class="row justify-content-center mt-2">
+
+    @*for now its only 1 image*@
+    <div class="col-8">
+        <img src="https://mediapool.bmwgroup.com/cache/P9/201910/P90370495/P90370495-the-all-new-bmw-2-series-gran-coupe-bmw-m235i-xdrive-snapper-rocks-blue-metallic-rim-19-styling-552--2250px.jpg" class="img-thumbnail" width="600" height="150">
+    </div>
+
+    <div class="col-4 text-center">
+        <div class="row mb-2">
+            <div class="col-4">
+                <img src="https://www.kindpng.com/picc/m/24-248729_stockvader-predicted-adig-user-profile-image-png-transparent.png" class="img-thumbnail" width="100" height="50">
+            </div>
+            <div class="col-8">
+                <div class="container text-center mt-3">
+                    София, гр.София
+                    <h5>0899115617</h5>
+                </div>
+            </div>
+        </div>
+
+            <div class="row">
+                <div class="col-6">Дата на производство</div>
+                <div class="col-6">декември 2011г.</div>
+            </div>
+            <div class="row">
+                <div class="col-6">Тип двигател</div>
+                <div class="col-6">Дизелов</div>
+            </div>
+            <div class="row">
+                <div class="col-6">Мощност</div>
+                <div class="col-6">620 к.с.</div>
+            </div>
+            <div class="row">
+                <div class="col-6">Евростандарт</div>
+                <div class="col-6">Евро 5</div>
+            </div>
+            <div class="row">
+                <div class="col-6">Скоростна кутия</div>
+                <div class="col-6">Автоматична</div>
+            </div>
+            <div class="row">
+                <div class="col-6">Категория</div>
+                <div class="col-6">Седан</div>
+            </div>
+            <div class="row">
+                <div class="col-6">Пробег</div>
+                <div class="col-6">150000</div>
+            </div>
+            <div class="row">
+                <div class="col-6">Цвят</div>
+                <div class="col-6">Синя</div>
+            </div>
+        <div class="row">
+            <div class="container">
+                <h6>Запази: <a href="/Posts/AddFavourite"><i class="far fa-star"></i></a></h6>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="container">
+                <h6>Принтирай  <a href="/Posts/AddFavourite"><i class="fas fa-print"></i></a></h6>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="container text-center">
+                <h3>
+                    <a href="https://www.facebook.com/"><i class="fab fa-facebook"></i></a>
+                    <a href="/Posts/AddFavourite"><i class="fab fa-instagram"></i></a>
+                    <a href="/Posts/AddFavourite"><i class="fab fa-linkedin-in"></i></a>
+                </h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+<hr />
+
+<div class="row justify-content-center">
+    <div class="col-3">
+        <div class="ml-2">
+            <p class="mb-1 small">Безопасност</p>
+            <div>random 1</div>
+            <div>random 1</div>
+            <div>random 1</div>
+        </div>
+    </div>
+
+    <div class="col-3">
+        <div class="ml-2">
+            <p class="mb-1 small">Комфорт</p>
+            <div>random 1</div>
+            <div>random 1</div>
+            <div>random 1</div>
+        </div>
+    </div>
+
+    <div class="col-3">
+        <div class="ml-2">
+            <p class="mb-1 small">Екстериор</p>
+            <div>random 1</div>
+            <div>random 1</div>
+            <div>random 1</div>
+        </div>
+    </div>
+
+    <div class="col-3">
+        <div class="ml-2">
+            <p class="mb-1 small">Други</p>
+            <div>random 1</div>
+            <div>random 1</div>
+            <div>random 1</div>
+        </div>
+    </div>
+</div>
+
+<h6 class="mt-5">Допълнителна информация</h6>
+
+<hr />
+
+<div class="row justify-content-center">
+    Нов внос Австрия, отл. техн. и визуално състояние . НЕ Е ПУШЕНО В АВТОМОБИЛА ! ГАРАНЦИЯ за техн. изправност и произход на автомобила , 
+    съдействие за оформяне на документи регистрация и EXPORT на автомобила , тел за контакти - 359888781894 Росен Анев . АВТОМОБИЛИТЕ на автокъща 
+    АНЕВ-Р се намират в двора на автокъща АЛЕКСАНДРА ( 800м. след разклона за с. БЛАТИНО , посока ДУПНИЦА. )ТУК КАЧЕСТВОТО НАДМИНАВА ЦЕНАТА ! 
+    ПЛАЩАТЕ НЕ МАЛКО НО ПОЛУЧАВАТЕ МНОГО !
 </div>

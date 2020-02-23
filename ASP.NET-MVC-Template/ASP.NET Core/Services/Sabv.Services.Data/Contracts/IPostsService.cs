@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
+    using Sabv.Services.Models.Posts;
     using Sabv.Web.ViewModels.Posts;
 
     public interface IPostsService
@@ -11,5 +12,7 @@
 
         // TODO:
         Task AddPost();
+
+        Task<PostDetailsModel> GetDetailsAsync(string id);
     }
 }
