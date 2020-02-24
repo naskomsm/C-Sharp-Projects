@@ -1,6 +1,8 @@
 ﻿namespace Sabv.Services.Data
 {
     using System;
+    using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
 
     using CloudinaryDotNet;
@@ -20,7 +22,7 @@
             this.imageRepository = imageRepository;
         }
 
-        public async Task AddToBase(string url)
+        public async Task AddToBaseAsync(string url)
         {
             var image = new Image()
             {
@@ -33,7 +35,12 @@
             await this.imageRepository.SaveChangesAsync();
         }
 
-        public async Task<string> UploadFile(string url)
+        public ICollection<Image> GetAll()
+        {
+            return this.imageRepository.All().ToList();
+        }
+
+        public async Task<string> UploadFileAsync(string url)
         {
             var uploadParams = new ImageUploadParams()
             {

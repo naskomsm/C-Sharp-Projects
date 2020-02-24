@@ -8,9 +8,9 @@
 
     public interface IPostCategoriesService
     {
-        Task Add(string name);
+        Task AddAsync(string name);
 
-        Task<PostCategory> GetById(string id);
+        Task<PostCategory> GetByIdAsync(string id);
 
         ICollection<PostCategoriesViewModel> GetAllCategories();
 

@@ -11,8 +11,8 @@
         ICollection<PostViewModel> GetAllPosts();
 
         // TODO:
-        Task AddPost();
+        Task AddPostAsync(AddPostModel model);
 
-        Task<PostDetailsModel> GetDetailsAsync(string id);
+        Task<DetailsViewModel> GetDetailsAsync(string id);
     }
 }

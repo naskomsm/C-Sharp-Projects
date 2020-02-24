@@ -19,7 +19,7 @@
             this.vehicleCategory = vehicleCategory;
         }
 
-        public async Task Add(string name)
+        public async Task AddAsync(string name)
         {
             var entity = new VehicleCategory()
             {
@@ -55,7 +55,7 @@
                 .ToList();
         }
 
-        public async Task<VehicleCategory> GetById(string id)
+        public async Task<VehicleCategory> GetByIdAsync(string id)
         {
             var entity = await this.vehicleCategory
                    .GetByIdWithDeletedAsync(id);

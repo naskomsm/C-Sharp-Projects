@@ -1,5 +1,6 @@
 ﻿namespace Sabv.Services.Data
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
@@ -14,15 +15,49 @@
     public class PostsService : IPostsService
     {
         private readonly IDeletableEntityRepository<Post> postRepository;
+        private readonly IDeletableEntityRepository<MainInfo> mainInfoRepository;
+        private readonly IDeletableEntityRepository<AdditionalInfo> additionalInfoRepository;
+        private readonly IDeletableEntityRepository<VehicleCategory> vehicleCategoryRepository;
+        private readonly IDeletableEntityRepository<PostCategory> postCategoryRepository;
 
-        public PostsService(IDeletableEntityRepository<Post> postRepository)
+        public PostsService(
+            IDeletableEntityRepository<Post> postRepository,
+            IDeletableEntityRepository<MainInfo> mainInfoRepository,
+            IDeletableEntityRepository<AdditionalInfo> additionalInfoRepository,
+            IDeletableEntityRepository<VehicleCategory> vehicleCategoryRepository,
+            IDeletableEntityRepository<PostCategory> postCategoryRepository)
         {
             this.postRepository = postRepository;
+            this.mainInfoRepository = mainInfoRepository;
+            this.additionalInfoRepository = additionalInfoRepository;
+            this.vehicleCategoryRepository = vehicleCategoryRepository;
+            this.postCategoryRepository = postCategoryRepository;
         }
 
-        public async Task AddPost()
+        public async Task AddPostAsync(AddPostModel model)
         {
-            throw new System.NotImplementedException();
+            var post = new Post()
+            {
+                MainInfo = await this.mainInfoRepository.GetByIdWithDeletedAsync(model.MainInfoId),
+                AdditionalInfo = await this.additionalInfoRepository.GetByIdWithDeletedAsync(model.AdditionalInfoId),
+                AdditionalInfoId = model.AdditionalInfoId,
+                MainInfoId = model.MainInfoId,
+                CreatedOn = DateTime.UtcNow,
+                ApplicationUserId = model.UserId,
+                Description = model.Description,
+                IsDeleted = false,
+                Name = model.Name,
+                PhoneNumber = model.PhoneNumber,
+                Price = model.Price,
+                VehicleCategoryId = model.VehicleCategoryId,
+                VehicleCategory = await this.vehicleCategoryRepository.GetByIdWithDeletedAsync(model.VehicleCategoryId),
+                PostCategory = await this.postCategoryRepository.GetByIdWithDeletedAsync(model.PostCategoryId),
+                PostCategoryId = model.PostCategoryId,
+                IsFavourite = false,
+            };
+
+            await this.postRepository.AddAsync(post);
+            await this.postRepository.SaveChangesAsync();
         }
 
         public ICollection<PostViewModel> GetAllPosts()
@@ -42,11 +77,11 @@
                 .ToList();
         }
 
-        public async Task<PostDetailsModel> GetDetailsAsync(string id)
+        public async Task<DetailsViewModel> GetDetailsAsync(string id)
         {
             var post = await this.postRepository.GetByIdWithDeletedAsync(id);
 
-            var model = new PostDetailsModel()
+            var model = new DetailsViewModel()
             {
                 ABS = post.AdditionalInfo.ABS,
                 Airbags = post.AdditionalInfo.Airbags,
@@ -77,6 +112,9 @@
                 Tuned = post.AdditionalInfo.Tuned,
                 USBAudio = post.AdditionalInfo.USBAudio,
                 VehicleCreatedOn = post.MainInfo.VehicleCreatedOn,
+                UserId = post.ApplicationUser.Id,
+                UserImageId = post.ApplicationUser.Image.Id,
+                UserImageUrl = post.ApplicationUser.Image.Url,
             };
 
             return model;

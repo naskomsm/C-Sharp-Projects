@@ -8,9 +8,9 @@
 
     public interface IVehicleTypeCategoriesService
     {
-        Task Add(string name);
+        Task AddAsync(string name);
 
-        Task<VehicleCategory> GetById(string id);
+        Task<VehicleCategory> GetByIdAsync(string id);
 
         ICollection<VehicleCategoriesViewModel> GetAllCategories();
 

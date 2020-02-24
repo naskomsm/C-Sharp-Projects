@@ -1,11 +1,16 @@
 ﻿namespace Sabv.Services.Data.Contracts
 {
+    using System.Collections.Generic;
     using System.Threading.Tasks;
+
+    using Sabv.Data.Models;
 
     public interface IImagesService
     {
-        Task<string> UploadFile(string url);
+        ICollection<Image> GetAll();
 
-        Task AddToBase(string url);
+        Task<string> UploadFileAsync(string url);
+
+        Task AddToBaseAsync(string url);
     }
 }

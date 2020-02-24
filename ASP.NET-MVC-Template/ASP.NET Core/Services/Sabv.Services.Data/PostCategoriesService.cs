@@ -19,7 +19,7 @@
             this.postCategoryRepository = postCategoryRepository;
         }
 
-        public async Task Add(string name)
+        public async Task AddAsync(string name)
         {
             var entity = new PostCategory()
             {
@@ -56,7 +56,7 @@
                 .ToList();
         }
 
-        public async Task<PostCategory> GetById(string id)
+        public async Task<PostCategory> GetByIdAsync(string id)
         {
             var entity = await this.postCategoryRepository.GetByIdWithDeletedAsync(id);
             return entity;
