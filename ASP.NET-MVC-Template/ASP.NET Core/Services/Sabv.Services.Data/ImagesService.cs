@@ -22,13 +22,14 @@
             this.imageRepository = imageRepository;
         }
 
-        public async Task AddToBaseAsync(string url)
+        public async Task AddToBaseAsync(string url, string postId)
         {
             var image = new Image()
             {
                 CreatedOn = DateTime.Now,
                 IsDeleted = false,
                 Url = url,
+                PostId = postId,
             };
 
             await this.imageRepository.AddAsync(image);

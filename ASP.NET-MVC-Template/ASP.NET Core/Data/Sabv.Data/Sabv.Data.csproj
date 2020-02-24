@@ -19,6 +19,8 @@
     <Compile Remove="Migrations\20200217101044_Initial.Designer.cs" />
     <Compile Remove="Migrations\20200224120131_ModifiedDbContext.cs" />
     <Compile Remove="Migrations\20200224120131_ModifiedDbContext.Designer.cs" />
+    <Compile Remove="Migrations\20200224120337_ModifiedDbContext.cs" />
+    <Compile Remove="Migrations\20200224120337_ModifiedDbContext.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

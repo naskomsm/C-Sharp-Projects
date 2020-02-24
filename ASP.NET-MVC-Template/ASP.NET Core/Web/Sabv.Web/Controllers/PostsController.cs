@@ -158,7 +158,7 @@
 
             foreach (var url in urls)
             {
-                await this.imagesService.AddToBaseAsync(url);
+                await this.imagesService.AddToBaseAsync(url, null);
             }
 
             return this.View();

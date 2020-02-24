@@ -11,6 +11,6 @@
 
         Task<string> UploadFileAsync(string url);
 
-        Task AddToBaseAsync(string url);
+        Task AddToBaseAsync(string url, string postId);
     }
 }

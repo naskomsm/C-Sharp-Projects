@@ -5,8 +5,10 @@
     using System.Linq;
     using System.Threading.Tasks;
 
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.Extensions.DependencyInjection;
     using Sabv.Common;
+    using Sabv.Data.Models;
     using Sabv.Services.Data.Contracts;
 
     public class ImageSeeder : ISeeder
@@ -15,13 +17,17 @@
         {
             var imageService = serviceProvider.GetRequiredService<IImagesService>();
             var postsService = serviceProvider.GetRequiredService<IPostsService>();
-            await SeedImageAsync(imageService, postsService);
+            var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+
+            await SeedImageAsync(imageService, postsService, userManager);
         }
 
-        private static async Task SeedImageAsync(IImagesService imagesService, IPostsService postsService)
+        private static async Task SeedImageAsync(IImagesService imagesService, IPostsService postsService, UserManager<ApplicationUser> userManager)
         {
+            // user - 0, bmw - 1, audi - 2
             var urls = new List<string>()
             {
+                "https://www.kindpng.com/picc/m/24-248729_stockvader-predicted-adig-user-profile-image-png-transparent.png",
                 "https://ag-spots-2019.o.auroraobjects.eu/2019/01/08/other/2880-1800-crop-bmw-m5-f90-competition-c301108012019101449_1.jpg",
                 "https://promosale.bg/resources/dsc0003.jpg",
             };
@@ -35,16 +41,29 @@
                 trimmedUrls.Add(url);
             }
 
-            foreach (var url in trimmedUrls)
+            var bmwPostId = postsService
+                .GetAllPosts()
+                .Where(x => x.Name.ToLower() == "bmw m5 f90")
+                .FirstOrDefault()
+                .Id;
+
+            var audiPostId = postsService
+               .GetAllPosts()
+               .Where(x => x.Name.ToLower() == "audi rs7")
+               .FirstOrDefault()
+               .Id;
+
+            await imagesService.AddToBaseAsync(trimmedUrls[0], null);
+            await imagesService.AddToBaseAsync(trimmedUrls[1], bmwPostId);
+            await imagesService.AddToBaseAsync(trimmedUrls[2], audiPostId);
+
+            var allUsers = userManager.Users.ToList();
+
+            foreach (var user in allUsers)
             {
-                await imagesService.AddToBaseAsync(url);
+                user.ImageId = imagesService.GetAll().ToArray()[0].Id;
+                user.Image = imagesService.GetAll().ToArray()[0];
             }
-
-            var bmwImage = imagesService.GetAll().ToArray()[1];
-            bmwImage.PostId = postsService.GetAllPosts().ToArray()[1].Id;
-
-            var audiImage = imagesService.GetAll().ToArray()[2];
-            audiImage.PostId = postsService.GetAllPosts().ToArray()[2].Id;
         }
     }
 }
