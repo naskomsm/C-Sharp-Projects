@@ -27,6 +27,13 @@
                           {
                               new RolesSeeder(),
                               new SettingsSeeder(),
+                              new UsersSeeder(),
+                              new AdditionalInfoSeeder(),
+                              new MainInfoSeeder(),
+                              new PostCategoriesSeeder(),
+                              new VehicleCategorySeeder(),
+                              new PostsSeeder(),
+                              new ImageSeeder(),
                           };
 
             foreach (var seeder in seeders)
