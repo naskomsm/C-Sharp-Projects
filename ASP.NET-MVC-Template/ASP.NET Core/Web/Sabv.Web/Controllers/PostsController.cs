@@ -125,48 +125,7 @@
                 return this.Redirect("/");
             }
 
-            var email = this.User.Identity.Name;
-            var user = await this.userManager.FindByEmailAsync(email);
-
-
-            // HERE IS CRASHING.. will fix it later
-            var postDetailsModel = await this.postsService.GetDetailsAsync(id);
-
-            var model = new DetailsViewModel()
-            {
-                Id = postDetailsModel.Id,
-                Name = postDetailsModel.Name,
-                Price = postDetailsModel.Price,
-                Description = postDetailsModel.Description,
-                PhoneNumber = postDetailsModel.PhoneNumber,
-                UserId = user.Id,
-                UserImageId = user.ImageId,
-                ABS = postDetailsModel.ABS,
-                Airbags = postDetailsModel.Airbags,
-                AirSuspension = postDetailsModel.AirSuspension,
-                AllWheelDrive = postDetailsModel.AllWheelDrive,
-                Barter = postDetailsModel.Barter,
-                ClimateControl = postDetailsModel.ClimateControl,
-                Color = postDetailsModel.Color,
-                ElectricMirrors = postDetailsModel.ElectricMirrors,
-                ElectricWindows = postDetailsModel.ElectricWindows,
-                EngineType = postDetailsModel.EngineType.ToString(),
-                FiveDoors = postDetailsModel.FiveDoors,
-                GPS = postDetailsModel.GPS,
-                HorsePower = postDetailsModel.HorsePower,
-                Mileage = postDetailsModel.Mileage,
-                Parktronic = postDetailsModel.Parktronic,
-                RainSensor = postDetailsModel.RainSensor,
-                StartStopFunction = postDetailsModel.StartStopFunction,
-                ThreeDoors = postDetailsModel.ThreeDoors,
-                Town = postDetailsModel.Town,
-                TractionControl = postDetailsModel.TractionControl,
-                TransmissionType = postDetailsModel.TransmissionType.ToString(),
-                Tuned = postDetailsModel.Tuned,
-                USBAudio = postDetailsModel.USBAudio,
-                VehicleCreatedOn = postDetailsModel.VehicleCreatedOn,
-            };
-
+            var model = await this.postsService.GetDetailsAsync(id);
             return this.View(model);
         }
 
@@ -192,14 +151,14 @@
             var urls = new List<string>();
             foreach (var path in filePaths)
             {
-                var url = await this.imagesService.UploadFile(path);
+                var url = await this.imagesService.UploadFileAsync(path);
                 url = url.Substring(GlobalConstants.CloudinaryLinkLengthWithoutSuffix);
                 urls.Add(url);
             }
 
             foreach (var url in urls)
             {
-                await this.imagesService.AddToBase(url);
+                await this.imagesService.AddToBaseAsync(url);
             }
 
             return this.View();

@@ -4,7 +4,7 @@
 
     using Sabv.Data.Common.Models;
 
-    public class AdditionalInfo : BaseModel<string>
+    public class AdditionalInfo : BaseDeletableModel<string>
     {
         public AdditionalInfo()
         {

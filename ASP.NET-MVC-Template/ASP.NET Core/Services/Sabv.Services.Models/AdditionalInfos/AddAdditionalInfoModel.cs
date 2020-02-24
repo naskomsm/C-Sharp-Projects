@@ -1,31 +1,7 @@
-﻿namespace Sabv.Services.Models.Posts
+﻿namespace Sabv.Services.Models.AdditionalInfos
 {
-    using System;
-
-    public class PostDetailsModel
+    public class AddAdditionalInfoModel
     {
-        public string Id { get; set; }
-
-        public string Name { get; set; }
-
-        public decimal Price { get; set; }
-
-        public string PhoneNumber { get; set; }
-
-        public string Description { get; set; }
-
-        public DateTime VehicleCreatedOn { get; set; }
-
-        public string EngineType { get; set; }
-
-        public string TransmissionType { get; set; }
-
-        public int HorsePower { get; set; }
-
-        public double Mileage { get; set; }
-
-        public string Color { get; set; }
-
         public string Town { get; set; }
 
         public bool GPS { get; set; }

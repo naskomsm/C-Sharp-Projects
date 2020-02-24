@@ -25,6 +25,18 @@
 
         public DbSet<Setting> Settings { get; set; }
 
+        //public DbSet<AdditionalInfo> AdditionalInfos { get; set; }
+
+        //public DbSet<MainInfo> MainInfos { get; set; }
+
+        //public DbSet<Image> DbImages { get; set; }
+
+        //public DbSet<Post> Posts { get; set; }
+
+        //public DbSet<PostCategory> PostCategories { get; set; }
+
+        //public DbSet<VehicleCategory> VehicleCategories { get; set; }
+
         public override int SaveChanges() => this.SaveChanges(true);
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)

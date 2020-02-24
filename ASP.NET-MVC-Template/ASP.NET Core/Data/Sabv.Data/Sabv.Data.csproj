@@ -17,6 +17,8 @@
     <Compile Remove="Migrations\20200217093635_Initial.Designer.cs" />
     <Compile Remove="Migrations\20200217101044_Initial.cs" />
     <Compile Remove="Migrations\20200217101044_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20200224120131_ModifiedDbContext.cs" />
+    <Compile Remove="Migrations\20200224120131_ModifiedDbContext.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -49,6 +51,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Sabv.Common\Sabv.Common.csproj" />
+    <ProjectReference Include="..\..\Services\Sabv.Services.Data\Sabv.Services.Data.csproj" />
     <ProjectReference Include="..\Sabv.Data.Common\Sabv.Data.Common.csproj" />
     <ProjectReference Include="..\Sabv.Data.Models\Sabv.Data.Models.csproj" />
   </ItemGroup>

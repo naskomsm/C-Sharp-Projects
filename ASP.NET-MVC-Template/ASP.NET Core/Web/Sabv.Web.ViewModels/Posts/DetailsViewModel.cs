@@ -14,6 +14,8 @@
 
         public string UserImageId { get; set; }
 
+        public string UserImageUrl { get; set; }
+
         public string PhoneNumber { get; set; }
 
         public string Description { get; set; }
