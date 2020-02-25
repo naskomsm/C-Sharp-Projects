@@ -70,6 +70,7 @@ namespace Sabv.Data.Migrations
                     VehicleCreatedOn = table.Column<DateTime>(nullable: false),
                     EngineType = table.Column<int>(nullable: false),
                     TransmissionType = table.Column<int>(nullable: false),
+                    EuroStandard = table.Column<int>(nullable: false),
                     HorsePower = table.Column<int>(nullable: false),
                     Mileage = table.Column<double>(nullable: false),
                     Color = table.Column<string>(maxLength: 15, nullable: false)

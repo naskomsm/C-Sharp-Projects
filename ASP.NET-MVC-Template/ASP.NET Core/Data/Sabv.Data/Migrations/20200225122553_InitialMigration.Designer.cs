@@ -10,7 +10,7 @@ using Sabv.Data;
 namespace Sabv.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200225090853_InitialMigration")]
+    [Migration("20200225122553_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -378,6 +378,9 @@ namespace Sabv.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<int>("EngineType")
+                        .HasColumnType("int");
+
+                    b.Property<int>("EuroStandard")
                         .HasColumnType("int");
 
                     b.Property<int>("HorsePower")

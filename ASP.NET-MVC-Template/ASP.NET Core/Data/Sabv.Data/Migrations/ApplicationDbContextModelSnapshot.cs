@@ -378,6 +378,9 @@ namespace Sabv.Data.Migrations
                     b.Property<int>("EngineType")
                         .HasColumnType("int");
 
+                    b.Property<int>("EuroStandard")
+                        .HasColumnType("int");
+
                     b.Property<int>("HorsePower")
                         .HasColumnType("int");
 

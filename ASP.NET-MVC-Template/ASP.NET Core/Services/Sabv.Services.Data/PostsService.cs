@@ -84,41 +84,22 @@
         public async Task<DetailsViewModel> GetDetailsAsync(string id)
         {
             var post = await this.postRepository.GetByIdWithDeletedAsync(id);
+            var imageUrl = post.Images.FirstOrDefault().Url;
 
             var model = new DetailsViewModel()
             {
-                ABS = post.AdditionalInfo.ABS,
-                Airbags = post.AdditionalInfo.Airbags,
-                AirSuspension = post.AdditionalInfo.AirSuspension,
-                AllWheelDrive = post.AdditionalInfo.AllWheelDrive,
-                Barter = post.AdditionalInfo.Barter,
-                ClimateControl = post.AdditionalInfo.ClimateControl,
-                Color = post.MainInfo.Color,
+                AdditionalInfo = post.AdditionalInfo,
+                MainInfo = post.MainInfo,
                 Description = post.Description,
-                ElectricMirrors = post.AdditionalInfo.ElectricMirrors,
-                ElectricWindows = post.AdditionalInfo.ElectricWindows,
-                EngineType = post.MainInfo.EngineType.ToString(),
-                FiveDoors = post.AdditionalInfo.FiveDoors,
-                GPS = post.AdditionalInfo.GPS,
-                HorsePower = post.MainInfo.HorsePower,
-                Id = post.Id,
-                Mileage = post.MainInfo.Mileage,
-                Name = post.Name,
-                Parktronic = post.AdditionalInfo.Parktronic,
                 PhoneNumber = post.PhoneNumber,
+                PostCategory = post.PostCategory.ToString(),
+                VehicleCategory = post.VehicleCategory.Name,
+                Id = post.Id,
+                ImageUrl = GlobalConstants.CloudinaryLinkWithoutSuffix + imageUrl,
+                Name = post.Name,
                 Price = post.Price,
-                RainSensor = post.AdditionalInfo.RainSensor,
-                StartStopFunction = post.AdditionalInfo.StartStopFunction,
-                ThreeDoors = post.AdditionalInfo.ThreeDoors,
-                Town = post.AdditionalInfo.Town,
-                TractionControl = post.AdditionalInfo.TractionControl,
-                TransmissionType = post.MainInfo.TransmissionType.ToString(),
-                Tuned = post.AdditionalInfo.Tuned,
-                USBAudio = post.AdditionalInfo.USBAudio,
-                VehicleCreatedOn = post.MainInfo.VehicleCreatedOn,
-                UserId = post.ApplicationUser.Id,
-                UserImageId = post.ApplicationUser.Image.Id,
-                UserImageUrl = post.ApplicationUser.Image.Url,
+                UserId = post.ApplicationUserId,
+                UserImageUrl = GlobalConstants.CloudinaryLinkWithoutSuffix + post.ApplicationUser.Image.Url,
             };
 
             return model;

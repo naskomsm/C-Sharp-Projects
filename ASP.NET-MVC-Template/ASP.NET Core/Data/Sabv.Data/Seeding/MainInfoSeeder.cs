@@ -4,7 +4,6 @@
     using System.Threading.Tasks;
 
     using Microsoft.Extensions.DependencyInjection;
-    using Sabv.Services.Data;
     using Sabv.Services.Data.Contracts;
     using Sabv.Services.Models.MainInfos;
 
@@ -21,6 +20,7 @@
             var firstModel = new AddMainInfoModel()
             {
                 Color = "Червено",
+                EuroStandard = 5,
                 EngineType = 0,
                 Horsepower = 625,
                 Mileage = 156444,
@@ -32,6 +32,7 @@
             {
 
                 Color = "Черно",
+                EuroStandard = 5,
                 EngineType = 1,
                 Horsepower = 860,
                 Mileage = 250000,

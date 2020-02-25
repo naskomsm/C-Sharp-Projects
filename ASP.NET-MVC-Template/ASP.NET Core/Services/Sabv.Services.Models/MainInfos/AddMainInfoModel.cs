@@ -14,6 +14,8 @@
 
         public string Color { get; set; }
 
+        public int EuroStandard { get; set; }
+
         public DateTime VehicleCreatedOn { get; set; }
     }
 }

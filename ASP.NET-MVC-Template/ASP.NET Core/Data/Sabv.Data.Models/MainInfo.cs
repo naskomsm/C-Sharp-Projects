@@ -25,6 +25,9 @@
         public TransmissionType TransmissionType { get; set; }
 
         [Required]
+        public EuroStandard EuroStandard { get; set; }
+
+        [Required]
         [Range(DataValidation.Post.MinHorsePower, DataValidation.Post.MaxHorsePower)]
         public int HorsePower { get; set; }
 
