@@ -42,6 +42,6 @@ namespace Sabv.Data.Models
 
         public string ImageId { get; set; }
 
-        public Image Image { get; set; }
+        public virtual Image Image { get; set; }
     }
 }

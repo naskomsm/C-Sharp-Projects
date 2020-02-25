@@ -30,9 +30,9 @@
                     </div>
                     <div class="row align-items-end">
                         <div class="col">
-                            пробег: @post.MainInfo.Mileage, цвят: @post.MainInfo.Color, двигател: @post.MainInfo.EngineType.ToString(),
-                            к.с: @post.MainInfo.HorsePower, скоростна кутия: @post.MainInfo.TransmissionType.ToString(),
-                            година на произв.: @post.MainInfo.VehicleCreatedOn
+                            пробег: @post.MainInfo.Mileage, цвят: @post.MainInfo.Color, двигател: @post.MainInfo.EngineType,
+                            к.с: @post.MainInfo.HorsePower, скоростна кутия: @post.MainInfo.TransmissionType,
+                            година на произв.: @post.MainInfo.VehicleCreatedOn.ToShortDateString()
                         </div>
                     </div>
                 </div>

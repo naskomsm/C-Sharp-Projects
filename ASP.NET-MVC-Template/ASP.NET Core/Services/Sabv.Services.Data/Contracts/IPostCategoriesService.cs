@@ -4,7 +4,6 @@
     using System.Threading.Tasks;
 
     using Sabv.Data.Models;
-    using Sabv.Services.Models.PostCategories;
 
     public interface IPostCategoriesService
     {
@@ -12,7 +11,7 @@
 
         Task<PostCategory> GetByIdAsync(string id);
 
-        ICollection<PostCategoriesViewModel> GetAllCategories();
+        ICollection<PostCategory> GetAllCategories();
 
         ICollection<string> GetAllCategoriesNames();
     }

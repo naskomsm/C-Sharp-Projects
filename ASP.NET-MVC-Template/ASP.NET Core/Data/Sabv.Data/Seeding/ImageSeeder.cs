@@ -41,28 +41,30 @@
                 trimmedUrls.Add(url);
             }
 
-            var bmwPostId = postsService
+            var bmwPost = postsService
                 .GetAllPosts()
                 .Where(x => x.Name.ToLower() == "bmw m5 f90")
-                .FirstOrDefault()
-                .Id;
+                .FirstOrDefault();
 
-            var audiPostId = postsService
+            var audiPost = postsService
                .GetAllPosts()
                .Where(x => x.Name.ToLower() == "audi rs7")
-               .FirstOrDefault()
-               .Id;
+               .FirstOrDefault();
 
             await imagesService.AddToBaseAsync(trimmedUrls[0], null);
-            await imagesService.AddToBaseAsync(trimmedUrls[1], bmwPostId);
-            await imagesService.AddToBaseAsync(trimmedUrls[2], audiPostId);
+            await imagesService.AddToBaseAsync(trimmedUrls[1], bmwPost.Id);
+            await imagesService.AddToBaseAsync(trimmedUrls[2], audiPost.Id);
+
+            var bmwImage = imagesService.GetAll().FirstOrDefault(x => x.PostId == bmwPost.Id);
+            var audiImage = imagesService.GetAll().FirstOrDefault(x => x.PostId == audiPost.Id);
+            var userImage = imagesService.GetAll().FirstOrDefault(x => x.PostId == null);
 
             var allUsers = userManager.Users.ToList();
 
             foreach (var user in allUsers)
             {
-                user.ImageId = imagesService.GetAll().ToArray()[0].Id;
-                user.Image = imagesService.GetAll().ToArray()[0];
+                user.ImageId = userImage.Id;
+                user.Image = userImage;
             }
         }
     }

@@ -25,17 +25,17 @@
 
         public DbSet<Setting> Settings { get; set; }
 
-        //public DbSet<AdditionalInfo> AdditionalInfos { get; set; }
+        public DbSet<AdditionalInfo> AdditionalInfos { get; set; }
 
-        //public DbSet<MainInfo> MainInfos { get; set; }
+        public DbSet<MainInfo> MainInfos { get; set; }
 
-        //public DbSet<Image> DbImages { get; set; }
+        public DbSet<Image> Images { get; set; }
 
-        //public DbSet<Post> Posts { get; set; }
+        public DbSet<Post> Posts { get; set; }
 
-        //public DbSet<PostCategory> PostCategories { get; set; }
+        public DbSet<PostCategory> PostCategories { get; set; }
 
-        //public DbSet<VehicleCategory> VehicleCategories { get; set; }
+        public DbSet<VehicleCategory> VehicleCategories { get; set; }
 
         public override int SaveChanges() => this.SaveChanges(true);
 
@@ -62,6 +62,12 @@
             base.OnModelCreating(builder);
 
             ConfigureUserIdentityRelations(builder);
+            ConfigurePostRelations(builder);
+            ConfigureAdditionalInfoRelations(builder);
+            ConfigureMainInfoRelations(builder);
+            ConfigureImageRelations(builder);
+            ConfigurePostCategoryRelations(builder);
+            ConfigureVehicleCategoryRelations(builder);
 
             EntityIndexesConfiguration.Configure(builder);
 
@@ -106,6 +112,90 @@
                 .WithOne()
                 .HasForeignKey(e => e.UserId)
                 .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
+        }
+
+        private static void ConfigurePostRelations(ModelBuilder builder)
+        {
+            builder.Entity<Post>()
+                 .HasMany(p => p.Images)
+                 .WithOne(i => i.Post)
+                 .HasForeignKey(i => i.PostId)
+                 .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Post>()
+                .HasOne(p => p.ApplicationUser)
+                .WithMany(u => u.Posts)
+                .HasForeignKey(p => p.ApplicationUserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Post>()
+                .HasOne(p => p.MainInfo)
+                .WithMany(mi => mi.Posts)
+                .HasForeignKey(p => p.MainInfoId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Post>()
+                .HasOne(p => p.AdditionalInfo)
+                .WithMany(ai => ai.Posts)
+                .HasForeignKey(p => p.AdditionalInfoId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Post>()
+                .HasOne(p => p.VehicleCategory)
+                .WithMany(vc => vc.Posts)
+                .HasForeignKey(p => p.VehicleCategoryId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Post>()
+                .HasOne(p => p.PostCategory)
+                .WithMany(pc => pc.Posts)
+                .HasForeignKey(p => p.PostCategoryId)
+                .OnDelete(DeleteBehavior.Restrict);
+        }
+
+        private static void ConfigureAdditionalInfoRelations(ModelBuilder builder)
+        {
+            builder.Entity<AdditionalInfo>()
+                .HasMany(ai => ai.Posts)
+                .WithOne(p => p.AdditionalInfo)
+                .HasForeignKey(p => p.AdditionalInfoId)
+                .OnDelete(DeleteBehavior.Restrict);
+        }
+
+        private static void ConfigureMainInfoRelations(ModelBuilder builder)
+        {
+            builder.Entity<MainInfo>()
+               .HasMany(mi => mi.Posts)
+               .WithOne(p => p.MainInfo)
+               .HasForeignKey(p => p.MainInfoId)
+               .OnDelete(DeleteBehavior.Restrict);
+        }
+
+        private static void ConfigureImageRelations(ModelBuilder builder)
+        {
+            builder.Entity<Image>()
+                .HasOne(i => i.Post)
+                .WithMany(p => p.Images)
+                .HasForeignKey(i => i.PostId)
+                .OnDelete(DeleteBehavior.Restrict);
+        }
+
+        private static void ConfigurePostCategoryRelations(ModelBuilder builder)
+        {
+            builder.Entity<PostCategory>()
+                .HasMany(pc => pc.Posts)
+                .WithOne(p => p.PostCategory)
+                .HasForeignKey(p => p.PostCategoryId)
+                .OnDelete(DeleteBehavior.Restrict);
+        }
+
+        private static void ConfigureVehicleCategoryRelations(ModelBuilder builder)
+        {
+            builder.Entity<VehicleCategory>()
+                .HasMany(vc => vc.Posts)
+                .WithOne(p => p.VehicleCategory)
+                .HasForeignKey(p => p.VehicleCategoryId)
                 .OnDelete(DeleteBehavior.Restrict);
         }
 

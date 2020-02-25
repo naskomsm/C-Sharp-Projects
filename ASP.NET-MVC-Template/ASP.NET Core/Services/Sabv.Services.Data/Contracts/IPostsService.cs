@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
+    using Sabv.Data.Models;
     using Sabv.Services.Models.Posts;
     using Sabv.Web.ViewModels.Posts;
 

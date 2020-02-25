@@ -1,6 +1,7 @@
 ﻿namespace Sabv.Data.Models
 {
     using System;
+    using System.Collections.Generic;
 
     using Sabv.Data.Common.Models;
 
@@ -9,6 +10,7 @@
         public AdditionalInfo()
         {
             this.Id = Guid.NewGuid().ToString();
+            this.Posts = new HashSet<Post>();
         }
 
         public string Town { get; set; }
@@ -46,5 +48,7 @@
         public bool USBAudio { get; set; }
 
         public bool Airbags { get; set; }
+
+        public virtual ICollection<Post> Posts { get; set; }
     }
 }

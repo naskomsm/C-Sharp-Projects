@@ -1,6 +1,7 @@
 ﻿namespace Sabv.Data.Models
 {
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
     using Sabv.Data.Common.Models;
@@ -11,6 +12,7 @@
         public MainInfo()
         {
             this.Id = Guid.NewGuid().ToString();
+            this.Posts = new HashSet<Post>();
         }
 
         [Required]
@@ -33,5 +35,7 @@
         [Required]
         [MaxLength(DataValidation.Post.MaxColorLength)]
         public string Color { get; set; }
+
+        public virtual ICollection<Post> Posts { get; set; }
     }
 }

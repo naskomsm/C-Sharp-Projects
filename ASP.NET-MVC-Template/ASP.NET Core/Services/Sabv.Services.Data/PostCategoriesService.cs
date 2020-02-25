@@ -8,7 +8,6 @@
     using Sabv.Data.Common.Repositories;
     using Sabv.Data.Models;
     using Sabv.Services.Data.Contracts;
-    using Sabv.Services.Models.PostCategories;
 
     public class PostCategoriesService : IPostCategoriesService
     {
@@ -32,17 +31,12 @@
             await this.postCategoryRepository.SaveChangesAsync();
         }
 
-        public ICollection<PostCategoriesViewModel> GetAllCategories()
+        public ICollection<PostCategory> GetAllCategories()
         {
             // use mapper later
             var all = this.postCategoryRepository
                 .All()
                 .OrderBy(x => x.CreatedOn)
-                .Select(x => new PostCategoriesViewModel
-                {
-                    Id = x.Id,
-                    Name = x.Name,
-                })
                 .ToList();
 
             return all;

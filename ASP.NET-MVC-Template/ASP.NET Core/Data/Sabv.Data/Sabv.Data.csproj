@@ -21,6 +21,10 @@
     <Compile Remove="Migrations\20200224120131_ModifiedDbContext.Designer.cs" />
     <Compile Remove="Migrations\20200224120337_ModifiedDbContext.cs" />
     <Compile Remove="Migrations\20200224120337_ModifiedDbContext.Designer.cs" />
+    <Compile Remove="Migrations\20200225090758_InitialMigration.cs" />
+    <Compile Remove="Migrations\20200225090758_InitialMigration.Designer.cs" />
+    <Compile Remove="Migrations\20200225093734_AddedMoreConfigurations.cs" />
+    <Compile Remove="Migrations\20200225093734_AddedMoreConfigurations.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -40,6 +44,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="3.1.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.1">
       <PrivateAssets>all</PrivateAssets>

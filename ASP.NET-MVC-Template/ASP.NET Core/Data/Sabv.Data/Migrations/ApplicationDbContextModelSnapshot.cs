@@ -198,7 +198,7 @@ namespace Sabv.Data.Migrations
 
                     b.HasIndex("IsDeleted");
 
-                    b.ToTable("AdditionalInfo");
+                    b.ToTable("AdditionalInfos");
                 });
 
             modelBuilder.Entity("Sabv.Data.Models.ApplicationRole", b =>
@@ -356,7 +356,7 @@ namespace Sabv.Data.Migrations
 
                     b.HasIndex("PostId");
 
-                    b.ToTable("Image");
+                    b.ToTable("Images");
                 });
 
             modelBuilder.Entity("Sabv.Data.Models.MainInfo", b =>
@@ -400,7 +400,7 @@ namespace Sabv.Data.Migrations
 
                     b.HasIndex("IsDeleted");
 
-                    b.ToTable("MainInfo");
+                    b.ToTable("MainInfos");
                 });
 
             modelBuilder.Entity("Sabv.Data.Models.Post", b =>
@@ -473,7 +473,7 @@ namespace Sabv.Data.Migrations
 
                     b.HasIndex("VehicleCategoryId");
 
-                    b.ToTable("Post");
+                    b.ToTable("Posts");
                 });
 
             modelBuilder.Entity("Sabv.Data.Models.PostCategory", b =>
@@ -502,7 +502,7 @@ namespace Sabv.Data.Migrations
 
                     b.HasIndex("IsDeleted");
 
-                    b.ToTable("PostCategory");
+                    b.ToTable("PostCategories");
                 });
 
             modelBuilder.Entity("Sabv.Data.Models.Setting", b =>
@@ -563,7 +563,7 @@ namespace Sabv.Data.Migrations
 
                     b.HasIndex("IsDeleted");
 
-                    b.ToTable("VehicleCategory");
+                    b.ToTable("VehicleCategories");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -628,13 +628,14 @@ namespace Sabv.Data.Migrations
                 {
                     b.HasOne("Sabv.Data.Models.Post", "Post")
                         .WithMany("Images")
-                        .HasForeignKey("PostId");
+                        .HasForeignKey("PostId")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("Sabv.Data.Models.Post", b =>
                 {
                     b.HasOne("Sabv.Data.Models.AdditionalInfo", "AdditionalInfo")
-                        .WithMany()
+                        .WithMany("Posts")
                         .HasForeignKey("AdditionalInfoId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
@@ -646,7 +647,7 @@ namespace Sabv.Data.Migrations
                         .IsRequired();
 
                     b.HasOne("Sabv.Data.Models.MainInfo", "MainInfo")
-                        .WithMany()
+                        .WithMany("Posts")
                         .HasForeignKey("MainInfoId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();

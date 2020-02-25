@@ -10,8 +10,8 @@ using Sabv.Data;
 namespace Sabv.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200219111410_ModifiedCarTypeEntity")]
-    partial class ModifiedCarTypeEntity
+    [Migration("20200225090853_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -151,6 +151,9 @@ namespace Sabv.Data.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
                     b.Property<bool>("ElectricMirrors")
                         .HasColumnType("bit");
 
@@ -161,6 +164,9 @@ namespace Sabv.Data.Migrations
                         .HasColumnType("bit");
 
                     b.Property<bool>("GPS")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
                     b.Property<DateTime?>("ModifiedOn")
@@ -192,7 +198,9 @@ namespace Sabv.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("AdditionalInfo");
+                    b.HasIndex("IsDeleted");
+
+                    b.ToTable("AdditionalInfos");
                 });
 
             modelBuilder.Entity("Sabv.Data.Models.ApplicationRole", b =>
@@ -338,13 +346,11 @@ namespace Sabv.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("PostId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("Title")
+                    b.Property<string>("Url")
                         .IsRequired()
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -352,7 +358,7 @@ namespace Sabv.Data.Migrations
 
                     b.HasIndex("PostId");
 
-                    b.ToTable("Image");
+                    b.ToTable("Images");
                 });
 
             modelBuilder.Entity("Sabv.Data.Models.MainInfo", b =>
@@ -396,7 +402,7 @@ namespace Sabv.Data.Migrations
 
                     b.HasIndex("IsDeleted");
 
-                    b.ToTable("MainInfo");
+                    b.ToTable("MainInfos");
                 });
 
             modelBuilder.Entity("Sabv.Data.Models.Post", b =>
@@ -469,7 +475,7 @@ namespace Sabv.Data.Migrations
 
                     b.HasIndex("VehicleCategoryId");
 
-                    b.ToTable("Post");
+                    b.ToTable("Posts");
                 });
 
             modelBuilder.Entity("Sabv.Data.Models.PostCategory", b =>
@@ -498,7 +504,7 @@ namespace Sabv.Data.Migrations
 
                     b.HasIndex("IsDeleted");
 
-                    b.ToTable("PostCategory");
+                    b.ToTable("PostCategories");
                 });
 
             modelBuilder.Entity("Sabv.Data.Models.Setting", b =>
@@ -559,7 +565,7 @@ namespace Sabv.Data.Migrations
 
                     b.HasIndex("IsDeleted");
 
-                    b.ToTable("VehicleCategory");
+                    b.ToTable("VehicleCategories");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -625,14 +631,13 @@ namespace Sabv.Data.Migrations
                     b.HasOne("Sabv.Data.Models.Post", "Post")
                         .WithMany("Images")
                         .HasForeignKey("PostId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("Sabv.Data.Models.Post", b =>
                 {
                     b.HasOne("Sabv.Data.Models.AdditionalInfo", "AdditionalInfo")
-                        .WithMany()
+                        .WithMany("Posts")
                         .HasForeignKey("AdditionalInfoId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
@@ -644,7 +649,7 @@ namespace Sabv.Data.Migrations
                         .IsRequired();
 
                     b.HasOne("Sabv.Data.Models.MainInfo", "MainInfo")
-                        .WithMany()
+                        .WithMany("Posts")
                         .HasForeignKey("MainInfoId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();

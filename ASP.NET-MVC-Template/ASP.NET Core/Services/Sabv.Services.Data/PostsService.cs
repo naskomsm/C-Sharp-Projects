@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Threading.Tasks;
 
+    using Microsoft.AspNetCore.Identity;
     using Sabv.Common;
     using Sabv.Data.Common.Repositories;
     using Sabv.Data.Models;
@@ -19,19 +20,22 @@
         private readonly IDeletableEntityRepository<AdditionalInfo> additionalInfoRepository;
         private readonly IDeletableEntityRepository<VehicleCategory> vehicleCategoryRepository;
         private readonly IDeletableEntityRepository<PostCategory> postCategoryRepository;
+        private readonly UserManager<ApplicationUser> userManager;
 
         public PostsService(
             IDeletableEntityRepository<Post> postRepository,
             IDeletableEntityRepository<MainInfo> mainInfoRepository,
             IDeletableEntityRepository<AdditionalInfo> additionalInfoRepository,
             IDeletableEntityRepository<VehicleCategory> vehicleCategoryRepository,
-            IDeletableEntityRepository<PostCategory> postCategoryRepository)
+            IDeletableEntityRepository<PostCategory> postCategoryRepository,
+            UserManager<ApplicationUser> userManager)
         {
             this.postRepository = postRepository;
             this.mainInfoRepository = mainInfoRepository;
             this.additionalInfoRepository = additionalInfoRepository;
             this.vehicleCategoryRepository = vehicleCategoryRepository;
             this.postCategoryRepository = postCategoryRepository;
+            this.userManager = userManager;
         }
 
         public async Task AddPostAsync(AddPostModel model)
@@ -63,18 +67,18 @@
         public ICollection<PostViewModel> GetAllPosts()
         {
             return this.postRepository
-                .All()
-                .Select(x => new PostViewModel()
-                {
-                    Id = x.Id,
-                    CreatedOn = x.CreatedOn.ToString(),
-                    ImageUrl = GlobalConstants.CloudinaryLinkWithoutSuffix + x.Images.FirstOrDefault().Url,
-                    MainInfo = x.MainInfo,
-                    Mileage = x.MainInfo.Mileage,
-                    Name = x.Name,
-                    Price = x.Price,
-                })
-                .ToList();
+               .All()
+               .Select(x => new PostViewModel()
+               {
+                   Id = x.Id,
+                   CreatedOn = x.CreatedOn.ToString(),
+                   ImageUrl = GlobalConstants.CloudinaryLinkWithoutSuffix + x.Images.FirstOrDefault().Url,
+                   MainInfo = x.MainInfo,
+                   Mileage = x.MainInfo.Mileage,
+                   Name = x.Name,
+                   Price = x.Price,
+               })
+               .ToList();
         }
 
         public async Task<DetailsViewModel> GetDetailsAsync(string id)
