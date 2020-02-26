@@ -4,6 +4,7 @@
     using System.Threading.Tasks;
 
     using Sabv.Data.Models;
+    using Sabv.Data.Models.AdditionalInfoFiles;
     using Sabv.Services.Models.AdditionalInfos;
 
     public interface IAdditionalInfoService

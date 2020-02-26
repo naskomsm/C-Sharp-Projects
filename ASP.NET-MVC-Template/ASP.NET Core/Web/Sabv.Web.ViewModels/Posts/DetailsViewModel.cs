@@ -1,6 +1,7 @@
 ﻿namespace Sabv.Web.ViewModels.Posts
 {
     using Sabv.Data.Models;
+    using Sabv.Data.Models.AdditionalInfoFiles;
 
     public class DetailsViewModel
     {

@@ -7,6 +7,8 @@
 
     using Sabv.Data.Common.Repositories;
     using Sabv.Data.Models;
+    using Sabv.Data.Models.AdditioalInfoFiles;
+    using Sabv.Data.Models.AdditionalInfoFiles;
     using Sabv.Services.Data.Contracts;
     using Sabv.Services.Models.AdditionalInfos;
 
@@ -23,26 +25,45 @@
         {
             var additionalInfo = new AdditionalInfo()
             {
-                ABS = model.ABS,
-                Airbags = model.Airbags,
-                AirSuspension = model.AirSuspension,
-                AllWheelDrive = model.AllWheelDrive,
-                Barter = model.Barter,
-                ClimateControl = model.ClimateControl,
                 CreatedOn = DateTime.UtcNow,
-                ElectricMirrors = model.ElectricMirrors,
-                ElectricWindows = model.ElectricWindows,
-                FiveDoors = model.FiveDoors,
-                GPS = model.GPS,
                 IsDeleted = false,
-                RainSensor = model.RainSensor,
-                Parktronic = model.Parktronic,
-                ThreeDoors = model.ThreeDoors,
-                StartStopFunction = model.StartStopFunction,
                 Town = model.Town,
-                TractionControl = model.TractionControl,
-                Tuned = model.Tuned,
-                USBAudio = model.USBAudio,
+                ComfortInfo = new ComfortInfo
+                {
+                    AirSuspension = model.AirSuspension,
+                    ClimateControl = model.ClimateControl,
+                    ElectricMirrors = model.ElectricMirrors,
+                    ElectricWindows = model.ElectricWindows,
+                    RainSensor = model.RainSensor,
+                    StartStopFunction = model.StartStopFunction,
+                    USBAudio = model.USBAudio,
+                    IsDeleted = false,
+                    CreatedOn = DateTime.UtcNow,
+                },
+                ExteriorInfo = new ExteriorInfo
+                {
+                    FiveDoors = model.FiveDoors,
+                    ThreeDoors = model.ThreeDoors,
+                    CreatedOn = DateTime.UtcNow,
+                    IsDeleted = false,
+                },
+                OtherInfo = new OtherInfo
+                {
+                    AllWheelDrive = model.AllWheelDrive,
+                    Barter = model.Barter,
+                    Tuned = model.Tuned,
+                    IsDeleted = false,
+                },
+                SafetyInfo = new SafetyInfo
+                {
+                    ABS = model.ABS,
+                    GPS = model.GPS,
+                    Parktronic = model.Parktronic,
+                    TractionControl = model.TractionControl,
+                    Airbags = model.Airbags,
+                    CreatedOn = DateTime.UtcNow,
+                    IsDeleted = false,
+                },
             };
 
             await this.additionalInfoRepo.AddAsync(additionalInfo);

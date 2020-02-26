@@ -10,6 +10,7 @@
     using Microsoft.EntityFrameworkCore;
     using Sabv.Data.Common.Models;
     using Sabv.Data.Models;
+    using Sabv.Data.Models.AdditionalInfoFiles;
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, string>
     {

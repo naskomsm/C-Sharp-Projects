@@ -106,36 +106,40 @@
     <div class="col-3">
         <div class="ml-2">
             <p class="mb-1 small">Безопасност</p>
-            <div>random 1</div>
-            <div>random 1</div>
-            <div>random 1</div>
+            @foreach (var item in Model.AdditionalInfo.SafetyInfo.GetAllTrueProperties)
+            {
+                <div>@item</div>
+            }
         </div>
     </div>
 
     <div class="col-3">
         <div class="ml-2">
             <p class="mb-1 small">Комфорт</p>
-            <div>random 1</div>
-            <div>random 1</div>
-            <div>random 1</div>
+            @foreach (var item in Model.AdditionalInfo.ComfortInfo.GetAllTrueProperties)
+            {
+                <div>@item</div>
+            }
         </div>
     </div>
 
     <div class="col-3">
         <div class="ml-2">
             <p class="mb-1 small">Екстериор</p>
-            <div>random 1</div>
-            <div>random 1</div>
-            <div>random 1</div>
+            @foreach (var item in Model.AdditionalInfo.ExteriorInfo.GetAllTrueProperties)
+            {
+                <div>@item</div>
+            }
         </div>
     </div>
 
     <div class="col-3">
         <div class="ml-2">
             <p class="mb-1 small">Други</p>
-            <div>random 1</div>
-            <div>random 1</div>
-            <div>random 1</div>
+            @foreach (var item in Model.AdditionalInfo.OtherInfo.GetAllTrueProperties)
+            {
+                <div>@item</div>
+            }
         </div>
     </div>
 </div>

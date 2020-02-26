@@ -5,6 +5,7 @@
     using System.ComponentModel.DataAnnotations;
 
     using Sabv.Data.Common.Models;
+    using Sabv.Data.Models.AdditionalInfoFiles;
 
     public class Post : BaseDeletableModel<string>
     {

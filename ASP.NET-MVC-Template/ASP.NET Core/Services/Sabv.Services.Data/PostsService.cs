@@ -9,6 +9,7 @@
     using Sabv.Common;
     using Sabv.Data.Common.Repositories;
     using Sabv.Data.Models;
+    using Sabv.Data.Models.AdditionalInfoFiles;
     using Sabv.Services.Data.Contracts;
     using Sabv.Services.Models.Posts;
     using Sabv.Web.ViewModels.Posts;
