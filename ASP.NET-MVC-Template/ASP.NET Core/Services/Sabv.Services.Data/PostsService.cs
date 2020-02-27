@@ -10,6 +10,7 @@
     using Sabv.Data.Common.Repositories;
     using Sabv.Data.Models;
     using Sabv.Data.Models.AdditionalInfoFiles;
+    using Sabv.Data.Models.Enums;
     using Sabv.Services.Data.Contracts;
     using Sabv.Services.Models.Posts;
     using Sabv.Web.ViewModels.Posts;
@@ -52,6 +53,9 @@
                 Description = model.Description,
                 IsDeleted = false,
                 Name = model.Name,
+                Make = model.Make,
+                Model = model.Model,
+                Currency = (Currency)model.Currency,
                 PhoneNumber = model.PhoneNumber,
                 Price = model.Price,
                 VehicleCategoryId = model.VehicleCategoryId,
@@ -65,20 +69,10 @@
             await this.postRepository.SaveChangesAsync();
         }
 
-        public ICollection<PostViewModel> GetAllPosts()
+        public ICollection<Post> GetAllPosts()
         {
             return this.postRepository
                .All()
-               .Select(x => new PostViewModel()
-               {
-                   Id = x.Id,
-                   CreatedOn = x.CreatedOn.ToString(),
-                   ImageUrl = GlobalConstants.CloudinaryLinkWithoutSuffix + x.Images.FirstOrDefault().Url,
-                   MainInfo = x.MainInfo,
-                   Mileage = x.MainInfo.Mileage,
-                   Name = x.Name,
-                   Price = x.Price,
-               })
                .ToList();
         }
 

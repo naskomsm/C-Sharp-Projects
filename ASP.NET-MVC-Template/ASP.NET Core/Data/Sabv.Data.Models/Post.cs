@@ -6,6 +6,7 @@
 
     using Sabv.Data.Common.Models;
     using Sabv.Data.Models.AdditionalInfoFiles;
+    using Sabv.Data.Models.Enums;
 
     public class Post : BaseDeletableModel<string>
     {
@@ -34,6 +35,15 @@
         [Required]
         [RegularExpression(@"08[789]\d{7}", ErrorMessage = "Invalid phone number!")]
         public string PhoneNumber { get; set; }
+
+        [Required]
+        public string Make { get; set; }
+
+        [Required]
+        public string Model { get; set; }
+
+        [Required]
+        public Currency Currency { get; set; }
 
         // Relations
         [Required]

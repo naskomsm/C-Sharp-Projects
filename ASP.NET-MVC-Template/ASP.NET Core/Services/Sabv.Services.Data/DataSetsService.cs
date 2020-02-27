@@ -11,8 +11,8 @@
     {
         public async Task<DataSetsViewModel> GetDataForHomePageAsync()
         {
-            var jsonStringCities = await File.ReadAllTextAsync("./Datasets/Cities.json");
-            var jsonStringYears = await File.ReadAllTextAsync("./Datasets/Years.json");
+            var jsonStringCities = await File.ReadAllTextAsync("wwwroot/datasets/Cities.json");
+            var jsonStringYears = await File.ReadAllTextAsync("wwwroot/datasets/Years.json");
 
             var parsedDataCities = JsonConvert.DeserializeObject<string[]>(jsonStringCities);
             var parsedDataYears = JsonConvert.DeserializeObject<string[]>(jsonStringYears);
@@ -28,10 +28,10 @@
 
         public async Task<DataSetsViewModel> GetDataForSearchAndCreatePageAsync()
         {
-            var jsonStringCities = await File.ReadAllTextAsync("./Datasets/Cities.json");
-            var jsonStringYears = await File.ReadAllTextAsync("./Datasets/Years.json");
-            var jsonStringColors = await File.ReadAllTextAsync("./Datasets/Colors.json");
-            var jsonStringCarFeatures = await File.ReadAllTextAsync("./Datasets/CarFeatures.json");
+            var jsonStringCities = await File.ReadAllTextAsync("wwwroot/datasets/Cities.json");
+            var jsonStringYears = await File.ReadAllTextAsync("wwwroot/datasets/Years.json");
+            var jsonStringColors = await File.ReadAllTextAsync("wwwroot/datasets/Colors.json");
+            var jsonStringCarFeatures = await File.ReadAllTextAsync("wwwroot/datasets/CarFeatures.json");
 
             var parsedDataCities = JsonConvert.DeserializeObject<string[]>(jsonStringCities);
             var parsedDataYears = JsonConvert.DeserializeObject<string[]>(jsonStringYears);

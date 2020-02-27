@@ -9,7 +9,7 @@
 
     public interface IPostsService
     {
-        ICollection<PostViewModel> GetAllPosts();
+        ICollection<Post> GetAllPosts();
 
         // TODO:
         Task AddPostAsync(AddPostModel model);

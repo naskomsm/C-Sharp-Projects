@@ -4,7 +4,7 @@
     ViewData["Title"] = "Търсене на обява";
 }
 
-<form action="/Posts/SearchPosts" method="get">
+<form action="/Posts/All" method="get">
 
     <div class="row">
         <div class="col container mt-3">
@@ -31,11 +31,11 @@
                     <div class="col-4 pl-5">
                         <p class="mb-1 small">Състояние</p>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                            <input class="form-check-input" type="radio" name="used" value="true">
                             <label class="form-check-label" for="inlineRadio1">Употребяван</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                            <input class="form-check-input" type="radio" name="brandNew" value="true">
                             <label class="form-check-label" for="inlineRadio2">Нов</label>
                         </div>
                     </div>
@@ -55,7 +55,7 @@
                         <div class="ml-2">
                             <p class="mb-1 small">Модел</p>
                             <select class="mdb-select md-form container" id="modelsSelect" name="model">
-                                <option value="1">Всички</option>
+                                <option>Всички</option>
                             </select>
                         </div>
                     </div>
@@ -71,11 +71,11 @@
                         <div class="ml-2">
                             <p class="mb-1 small">Тип двигател</p>
                             <select class="mdb-select md-form container" name="engineType">
-                                <option value="">Всички</option>
-                                <option value="Бензинов">Бензинов</option>
-                                <option value="Дизелов">Дизелов</option>
-                                <option value="Електрически">Електрически</option>
-                                <option value="Хибриден">Хибриден</option>
+                                <option>Всички</option>
+                                <option value="Petrol">Petrol</option>
+                                <option value="Disel">Disel</option>
+                                <option value="Electric">Electric</option>
+                                <option value="Hybrid">Hybrid</option>
                             </select>
                         </div>
                     </div>
@@ -102,13 +102,13 @@
                         <div class="ml-2">
                             <p class="mb-1 small">Евростандарт</p>
                             <select class="mdb-select md-form container" name="eurostandard">
-                                <option value="">Всички</option>
-                                <option value="1">Евро 1</option>
-                                <option value="2">Евро 2</option>
-                                <option value="3">Евро 3</option>
-                                <option value="4">Евро 4</option>
-                                <option value="5">Евро 5</option>
-                                <option value="6">Евро 6</option>
+                                <option>Всички</option>
+                                <option value="1">Euro 1</option>
+                                <option value="2">Euro 2</option>
+                                <option value="3">Euro 3</option>
+                                <option value="4">Euro 4</option>
+                                <option value="5">Euro 5</option>
+                                <option value="6">Euro 6</option>
                             </select>
                         </div>
                     </div>
@@ -117,10 +117,10 @@
                         <div class="ml-2">
                             <p class="mb-1 small">Скоростна кутия</p>
                             <select class="mdb-select md-form container" name="transmissionType">
-                                <option value="">Всички</option>
-                                <option value="Ръчна">Ръчна</option>
-                                <option value="Автоматична">Автоматична</option>
-                                <option value="Полуавтоматична">Полуавтоматична</option>
+                                <option>Всички</option>
+                                <option value="Ръчна">Manual</option>
+                                <option value="Автоматична">Automatic</option>
+                                <option value="Полуавтоматична">Semi Automatic</option>
                             </select>
                         </div>
                     </div>
@@ -159,8 +159,8 @@
                         <div class="ml-2">
                             <p class="mb-1 small">Валута</p>
                             <select class="mdb-select md-form container" name="currency">
-                                <option value="">Всички</option>
-                                <option value="лв.">лв.</option>
+                                <option>Всички</option>
+                                <option value="лв.">LV</option>
                                 <option value="USD">USD</option>
                                 <option value="EUR">EUR</option>
                             </select>
@@ -228,7 +228,7 @@
                             @for (int i = 0; i < Model.Features.Safety.Length; i++)
                             {
                                 var item = Model.Features.Safety[i];
-                                var name = "safety" + i;
+                                var name = item.Replace(" ", string.Empty);
 
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" name="@name" value="true" />
@@ -244,7 +244,7 @@
                             @for (int i = 0; i < Model.Features.Comfort.Length; i++)
                             {
                                 var item = Model.Features.Comfort[i];
-                                var name = "comfort" + i;
+                                var name = item.Replace(" ", string.Empty);
 
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" name="@name" value="true" />
@@ -260,7 +260,7 @@
                             @for (int i = 0; i < Model.Features.Exterior.Length; i++)
                             {
                                 var item = Model.Features.Exterior[i];
-                                var name = "exterior" + i;
+                                var name = item.Replace(" ", string.Empty);
 
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" name="@name" value="true" />
@@ -276,7 +276,7 @@
                             @for (int i = 0; i < Model.Features.Others.Length; i++)
                             {
                                 var item = Model.Features.Others[i];
-                                var name = "others" + i;
+                                var name = item.Replace(" ", string.Empty);
 
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" name="@name" value="true" />

@@ -1,5 +1,6 @@
 ﻿namespace Sabv.Web.Controllers
 {
+    using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
@@ -91,7 +92,6 @@
         public IActionResult CheckText()
         {
             // A lot of validations for empty fields
-            System.Console.WriteLine();
 
             return this.View();
         }
@@ -104,16 +104,202 @@
         }
 
         [HttpGet]
-        public IActionResult All()
+        public IActionResult All(AllInputSearchViewModel inputModel)
         {
-            var posts = this.postsService.GetAllPosts();
+            var posts = this.postsService
+                    .GetAllPosts()
+                    .ToList();
 
-            var model = new AllPostsViewModel()
+            if (inputModel.PostCategory != null && inputModel.PostCategory != "Всички")
             {
-                Posts = posts,
+                posts = this.postsService
+                    .GetAllPosts()
+                    .Where(x => x.PostCategory.Name.ToString().ToLower() == inputModel.PostCategory.ToLower())
+                    .ToList();
+            }
+
+            if (inputModel.Make != null && inputModel.Make != "Всички")
+            {
+                posts = posts
+                    .Where(x => x.Make.ToLower() == inputModel.Make.ToLower())
+                    .ToList();
+            }
+
+            if (inputModel.Model != null && inputModel.Model != "Всички")
+            {
+                posts = posts
+                    .Where(x => x.Model.ToLower() == inputModel.Model.ToLower())
+                    .ToList();
+            }
+
+            if (inputModel.MaxMileage != null)
+            {
+                var isNumber = double.TryParse(inputModel.MaxMileage, out _);
+
+                if (isNumber)
+                {
+                    posts = posts
+                        .Where(x => x.MainInfo.Mileage <= double.Parse(inputModel.MaxMileage))
+                        .ToList();
+                }
+            }
+
+            if (inputModel.EngineType != null && inputModel.EngineType != "Всички")
+            {
+                posts = posts
+                    .Where(x => x.MainInfo.EngineType.ToString().ToLower() == inputModel.EngineType.ToLower())
+                    .ToList();
+            }
+
+            if (inputModel.HorsePowerFrom != null)
+            {
+                var isNumber = double.TryParse(inputModel.HorsePowerFrom, out _);
+
+                if (isNumber)
+                {
+                    posts = posts
+                        .Where(x => x.MainInfo.HorsePower >= double.Parse(inputModel.HorsePowerFrom))
+                        .ToList();
+                }
+            }
+
+            if (inputModel.HorsePowerTo != null)
+            {
+                var isNumber = double.TryParse(inputModel.HorsePowerTo, out _);
+
+                if (isNumber)
+                {
+                    posts = posts
+                        .Where(x => x.MainInfo.HorsePower <= double.Parse(inputModel.HorsePowerTo))
+                        .ToList();
+                }
+            }
+
+            if (inputModel.EuroStandard != null && inputModel.EuroStandard != "Всички")
+            {
+                posts = posts
+                    .Where(x => (int)x.MainInfo.EuroStandard == int.Parse(inputModel.EuroStandard))
+                    .ToList();
+            }
+
+            if (inputModel.TransmissionType != null && inputModel.TransmissionType != "Всички")
+            {
+                posts = posts
+                    .Where(x => x.MainInfo.TransmissionType.ToString().ToLower() == inputModel.TransmissionType.ToLower())
+                    .ToList();
+            }
+
+            if (inputModel.CarCategory != null && inputModel.CarCategory != "Всички")
+            {
+                posts = posts
+                    .Where(x => x.VehicleCategory.Name.ToLower() == inputModel.CarCategory.ToLower())
+                    .ToList();
+            }
+
+            if (inputModel.PriceFrom != null)
+            {
+                var isNumber = decimal.TryParse(inputModel.PriceFrom, out _);
+
+                if (isNumber)
+                {
+                    posts = posts
+                        .Where(x => x.Price >= decimal.Parse(inputModel.PriceFrom))
+                        .ToList();
+                }
+            }
+
+            if (inputModel.PriceTo != null)
+            {
+                var isNumber = decimal.TryParse(inputModel.HorsePowerTo, out _);
+
+                if (isNumber)
+                {
+                    posts = posts
+                        .Where(x => x.Price <= decimal.Parse(inputModel.PriceTo))
+                        .ToList();
+                }
+            }
+
+            if (inputModel.Currency != null && inputModel.Currency != "Всички")
+            {
+                posts = posts
+                    .Where(x => x.Currency.ToString().ToLower() == inputModel.Currency.ToLower())
+                    .ToList();
+            }
+
+            if (inputModel.YearFrom != null)
+            {
+                var modifiedYearFrom = inputModel.YearFrom.Replace("от ", string.Empty);
+                if (modifiedYearFrom != "Всички")
+                {
+                    posts = posts
+                        .Where(x => x.MainInfo.VehicleCreatedOn >= DateTime.Parse(modifiedYearFrom))
+                        .ToList();
+                }
+            }
+
+            if (inputModel.YearTo != null)
+            {
+                var modifiedYearTo = inputModel.YearTo.Replace("до ", string.Empty);
+                if (modifiedYearTo != "Всички")
+                {
+                    posts = posts
+                        .Where(x => x.MainInfo.VehicleCreatedOn <= DateTime.Parse(modifiedYearTo))
+                        .ToList();
+                }
+            }
+
+            if (inputModel.Color != null && inputModel.Color != "Всички")
+            {
+                posts = posts
+                    .Where(x => x.MainInfo.Color.ToLower() == inputModel.Color.ToLower())
+                    .ToList();
+            }
+
+            if (inputModel.Town != null && inputModel.Town != "Всички")
+            {
+                posts = posts
+                    .Where(x => x.AdditionalInfo.Town.ToLower() == inputModel.Town.ToLower())
+                    .ToList();
+            }
+
+            var inputCheckBoxes = inputModel.GetAllTrueProperties.ToList();
+            foreach (var checkedBox in inputCheckBoxes)
+            {
+                posts = posts
+                    .Where(x => x.AdditionalInfo.SafetyInfo.GetAllTrueProperties.Contains(checkedBox))
+                    .ToList();
+
+                posts = posts
+                    .Where(x => x.AdditionalInfo.ComfortInfo.GetAllTrueProperties.Contains(checkedBox))
+                    .ToList();
+
+                posts = posts
+                    .Where(x => x.AdditionalInfo.ExteriorInfo.GetAllTrueProperties.Contains(checkedBox))
+                    .ToList();
+
+                posts = posts
+                    .Where(x => x.AdditionalInfo.OtherInfo.GetAllTrueProperties.Contains(checkedBox))
+                    .ToList();
+            }
+
+            var viewModel = new AllPostsViewModel()
+            {
+                Posts = posts
+                .Select(x => new PostViewModel()
+                {
+                    Id = x.Id,
+                    CreatedOn = x.CreatedOn.ToString(),
+                    ImageUrl = GlobalConstants.CloudinaryLinkWithoutSuffix + x.Images.FirstOrDefault().Url,
+                    MainInfo = x.MainInfo,
+                    Mileage = x.MainInfo.Mileage,
+                    Name = x.Name,
+                    Price = x.Price,
+                })
+                .ToList(),
             };
 
-            return this.View(model);
+            return this.View(viewModel);
         }
 
         [HttpGet]
