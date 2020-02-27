@@ -1,0 +1,29 @@
+﻿[
+  {
+    "Safety": [
+      "GPS",
+      "ABS",
+      "Traction Control",
+      "Parktronic",
+      "Airbags"
+    ],
+    "Comfort": [
+      "Start Stop Function",
+      "Air Suspension",
+      "Climate Control",
+      "Rain Sensor",
+      "Electric Mirrors",
+      "Electric Windows",
+      "USB audio"
+    ],
+    "Exterior": [
+      "Three Doors",
+      "Five Doors"
+    ],
+    "Others": [
+      "All Wheel Drive",
+      "Barter",
+      "Tuning"
+    ]
+  }
+]
