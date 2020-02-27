@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+
     using Sabv.Data.Common.Models;
 
     public class SafetyInfo : BaseDeletableModel<string>
