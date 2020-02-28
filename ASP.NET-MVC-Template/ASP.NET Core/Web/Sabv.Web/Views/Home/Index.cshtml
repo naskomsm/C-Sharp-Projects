@@ -18,7 +18,7 @@
                     <div class="row mt-2 mb-2">
                         <div class="col-6 ml-2 mr-2">
                             <p class="mb-1 small">Основна категория</p>
-                            <select class="mdb-select md-form container" id="categorySelect">
+                            <select class="mdb-select md-form container" id="categorySelect" name="postCategory">
                                 <option>Всички</option>
                                 @foreach (var item in Model.Categories)
                                 {
@@ -33,23 +33,21 @@
                         <div class="col-3">
                             <div class="ml-2">
                                 <p class="mb-1 small">Марка</p>
-                                <select class="mdb-select md-form container" id="makesSelect"></select>
+                                <select class="mdb-select md-form container" id="makesSelect" name="make"></select>
                             </div>
                         </div>
 
-
-                        @*JS?*@
                         <div class="col-3">
                             <p class="mb-1 small">Модел</p>
-                            <select class="mdb-select md-form container" id="modelsSelect">
-                                <option value="1">Всички</option>
+                            <select class="mdb-select md-form container" id="modelsSelect" name="model">
+                                <option>Всички</option>
                             </select>
                         </div>
 
 
                         <div class="col-6 pr-4 pl-0">
                             <p class="mb-1 small">Населено място</p>
-                            <select class="mdb-select md-form container">
+                            <select class="mdb-select md-form container" name="town">
                                 @foreach (var item in Model.Cities)
                                 {
                                     <option>@item</option>
@@ -62,27 +60,26 @@
                         <div class="col-3">
                             <div class="ml-2 mr-2">
                                 <p class="mb-1 small">Maксимална цена</p>
-                                <input class="form-control form-control-sm container" type="text" placeholder="Цена">
+                                <input class="form-control form-control-sm container" type="text" name="priceTo">
                             </div>
                         </div>
                         <div class="col-3">
                             <p class="mb-1 small">Година</p>
-                            <select class="mdb-select md-form container">
+                            <select class="mdb-select md-form container" name="yearFrom">
                                 @foreach (var item in Model.Years)
                                 {
-                                    <option>след @item</option>
+                                    <option>от @item</option>
                                 }
                             </select>
                         </div>
                         <div class="col-6 pl-0 pr-4">
                             <p class="mb-1 small">Подреди резултатите по</p>
                             <select class="mdb-select md-form container">
-                                <option value="1" selected="">Марка/Модел/Цена</option>
-                                <option value="3">Цена</option>
-                                <option value="4">Дата на производство</option>
-                                <option value="5">Пробег</option>
-                                <option value="6">Най-новите обяви</option>
-                                <option value="7">Най-новите обяви от посл. 2 дни</option>
+                                <option value="1">Марка/Модел/Цена</option>
+                                <option value="2">Цена</option>
+                                <option value="3">Дата на производство</option>
+                                <option value="4">Пробег</option>
+                                <option value="5">Най-новите обяви</option>
                             </select>
                         </div>
                     </div>
@@ -90,23 +87,23 @@
                     <div class="row mt-2 mb-2">
                         <div class="col-3">
                             <div class="ml-2 mr-2">
-                                <p class="mb-1 small">Двигател</p>
-                                <select class="mdb-select md-form container">
-                                    <option value="">Всички</option>
-                                    <option value="Бензинов">Бензинов</option>
-                                    <option value="Дизелов">Дизелов</option>
-                                    <option value="Електрически">Електрически</option>
-                                    <option value="Хибриден">Хибриден</option>
+                                <p class="mb-1 small">Тип двигател</p>
+                                <select class="mdb-select md-form container" name="engineType">
+                                    <option>Всички</option>
+                                    <option value="Petrol">Petrol</option>
+                                    <option value="Disel">Disel</option>
+                                    <option value="Electric">Electric</option>
+                                    <option value="Hybrid">Hybrid</option>
                                 </select>
                             </div>
                         </div>
                         <div class="col-3">
                             <p class="mb-1 small">Скоростна кутия</p>
-                            <select class="mdb-select md-form container">
-                                <option value="">Всички</option>
-                                <option value="Ръчна">Ръчна</option>
-                                <option value="Автоматична">Автоматична</option>
-                                <option value="Полуавтоматична">Полуавтоматична</option>
+                            <select class="mdb-select md-form container" name="transmissionType">
+                                <option>Всички</option>
+                                <option value="Manual">Manual</option>
+                                <option value="Automatic">Automatic</option>
+                                <option value="SemiAutomatic">Semi Automatic</option>
                             </select>
                         </div>
                         <div class="col-6 pl-0 pr-4">

@@ -15,7 +15,6 @@
                 <div class="row mt-2 mb-2">
                     <div class="col-4">
                         <div class="ml-2">
-
                             <p class="mb-1 small">Основна категория</p>
                             <select class="mdb-select md-form container" id="categorySelect" name="postCategory">
                                 <option>Всички</option>
@@ -30,17 +29,9 @@
 
                     <div class="col-4 pl-5">
                         <p class="mb-1 small">Състояние</p>
-                        @*<div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="used" value="">
-            <label class="form-check-label" for="inlineRadio1">Употребяван</label>
-        </div>
-        <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="brandNew" value="">
-            <label class="form-check-label" for="inlineRadio2">Нов</label>
-        </div>*@
-                        <input type="radio" id="male" name="condition" value="used">
+                        <input type="radio" id="condition" name="condition" value="used">
                         <label for="male">Употребяван</label>
-                        <input type="radio" id="female" name="condition" value="new">
+                        <input type="radio" id="condition" name="condition" value="new">
                         <label for="female">Нов</label>
                     </div>
 
@@ -122,9 +113,9 @@
                             <p class="mb-1 small">Скоростна кутия</p>
                             <select class="mdb-select md-form container" name="transmissionType">
                                 <option>Всички</option>
-                                <option value="Ръчна">Manual</option>
-                                <option value="Автоматична">Automatic</option>
-                                <option value="Полуавтоматична">Semi Automatic</option>
+                                <option value="Manual">Manual</option>
+                                <option value="Automatic">Automatic</option>
+                                <option value="SemiAutomatic">Semi Automatic</option>
                             </select>
                         </div>
                     </div>
