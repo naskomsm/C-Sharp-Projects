@@ -1,8 +1,9 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
-
-namespace Sabv.Data.Migrations
+﻿namespace Sabv.Data.Migrations
 {
+    using System;
+
+    using Microsoft.EntityFrameworkCore.Migrations;
+
     public partial class SeparetedAdditionalInfoProperties : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -134,7 +135,7 @@ namespace Sabv.Data.Migrations
                     RainSensor = table.Column<bool>(nullable: false),
                     ElectricMirrors = table.Column<bool>(nullable: false),
                     ElectricWindows = table.Column<bool>(nullable: false),
-                    USBAudio = table.Column<bool>(nullable: false)
+                    USBAudio = table.Column<bool>(nullable: false),
                 },
                 constraints: table =>
                 {
@@ -151,7 +152,7 @@ namespace Sabv.Data.Migrations
                     IsDeleted = table.Column<bool>(nullable: false),
                     DeletedOn = table.Column<DateTime>(nullable: true),
                     ThreeDoors = table.Column<bool>(nullable: false),
-                    FiveDoors = table.Column<bool>(nullable: false)
+                    FiveDoors = table.Column<bool>(nullable: false),
                 },
                 constraints: table =>
                 {
@@ -169,7 +170,7 @@ namespace Sabv.Data.Migrations
                     DeletedOn = table.Column<DateTime>(nullable: true),
                     AllWheelDrive = table.Column<bool>(nullable: false),
                     Barter = table.Column<bool>(nullable: false),
-                    Tuned = table.Column<bool>(nullable: false)
+                    Tuned = table.Column<bool>(nullable: false),
                 },
                 constraints: table =>
                 {
@@ -189,7 +190,7 @@ namespace Sabv.Data.Migrations
                     ABS = table.Column<bool>(nullable: false),
                     TractionControl = table.Column<bool>(nullable: false),
                     Parktronic = table.Column<bool>(nullable: false),
-                    Airbags = table.Column<bool>(nullable: false)
+                    Airbags = table.Column<bool>(nullable: false),
                 },
                 constraints: table =>
                 {
