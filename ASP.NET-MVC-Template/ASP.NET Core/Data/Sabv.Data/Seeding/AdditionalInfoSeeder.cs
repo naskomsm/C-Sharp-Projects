@@ -27,7 +27,7 @@
                 ClimateControl = true,
                 FiveDoors = true,
                 Airbags = true,
-                Town = "Ст.Загора",
+                Town = "Стara Загора",
             };
 
             var secondModel = new AddAdditionalInfoModel()

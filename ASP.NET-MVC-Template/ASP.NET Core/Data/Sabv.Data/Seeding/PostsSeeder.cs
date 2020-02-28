@@ -59,7 +59,7 @@
                 Make = "Audi",
                 Currency = 0,
                 Condition = 0,
-                Model = "RS 7",
+                Model = "RS7",
                 Name = "AUDI RS7",
                 PhoneNumber = "0899115617",
                 PostCategoryId = postCategoriesService.GetAllCategories().ToArray()[1].Id,

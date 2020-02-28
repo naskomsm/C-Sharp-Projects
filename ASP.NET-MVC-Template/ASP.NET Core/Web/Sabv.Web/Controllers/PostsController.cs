@@ -12,7 +12,10 @@
     using Microsoft.AspNetCore.Mvc;
     using Sabv.Common;
     using Sabv.Data.Models;
+    using Sabv.Data.Models.Enums;
     using Sabv.Services.Data.Contracts;
+    using Sabv.Services.Models.MainInfos;
+    using Sabv.Services.Models.Posts;
     using Sabv.Web.ViewModels.Posts;
 
     public class PostsController : BaseController
@@ -23,6 +26,7 @@
         private readonly IVehicleTypeCategoriesService vehicleTypeCategoriesService;
         private readonly IImagesService imagesService;
         private readonly IPostsService postsService;
+        private readonly IMainInfoService mainInfoService;
 
         public PostsController(
             UserManager<ApplicationUser> userManager,
@@ -30,13 +34,15 @@
             IPostCategoriesService postCategoriesService,
             IVehicleTypeCategoriesService carTypeCategoriesService,
             IImagesService imagesService,
-            IPostsService postsService)
+            IPostsService postsService,
+            IMainInfoService mainInfoService)
         {
             this.dataSetsService = dataSetsService;
             this.postCategoriesService = postCategoriesService;
             this.vehicleTypeCategoriesService = carTypeCategoriesService;
             this.imagesService = imagesService;
             this.postsService = postsService;
+            this.mainInfoService = mainInfoService;
             this.userManager = userManager;
         }
 
@@ -89,10 +95,8 @@
 
         [HttpGet]
         [Authorize]
-        public IActionResult CheckText()
+        public async Task<IActionResult> CheckText(CheckTextInputModel inputModel)
         {
-            // A lot of validations for empty fields
-
             return this.View();
         }
 
@@ -216,7 +220,7 @@
 
             if (inputModel.PriceTo != null)
             {
-                var isNumber = decimal.TryParse(inputModel.HorsePowerTo, out _);
+                var isNumber = decimal.TryParse(inputModel.PriceTo, out _);
 
                 if (isNumber)
                 {

@@ -30,7 +30,6 @@
 
             var secondModel = new AddMainInfoModel()
             {
-
                 Color = "Черно",
                 EuroStandard = 5,
                 EngineType = 1,

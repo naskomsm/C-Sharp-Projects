@@ -29,6 +29,8 @@
     <Compile Remove="Migrations\20200225093734_AddedMoreConfigurations.Designer.cs" />
     <Compile Remove="Migrations\20200228092215_AddedNewPropertyToPost.cs" />
     <Compile Remove="Migrations\20200228092215_AddedNewPropertyToPost.Designer.cs" />
+    <Compile Remove="Migrations\20200228122518_Random.cs" />
+    <Compile Remove="Migrations\20200228122518_Random.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

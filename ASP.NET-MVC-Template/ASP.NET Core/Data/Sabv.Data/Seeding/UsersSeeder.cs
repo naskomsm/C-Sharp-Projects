@@ -23,7 +23,6 @@
                 UserName = "naskokolev00@gmail.com",
             };
 
-
             var secondUser = new ApplicationUser()
             {
                 Email = "danielivanov99@gmail.com",

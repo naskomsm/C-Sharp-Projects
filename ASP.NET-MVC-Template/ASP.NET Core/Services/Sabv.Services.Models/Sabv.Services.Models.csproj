@@ -5,7 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="PostCategories\" />
+    <Compile Remove="PostCategories\**" />
+    <EmbeddedResource Remove="PostCategories\**" />
+    <None Remove="PostCategories\**" />
   </ItemGroup>
 
 </Project>

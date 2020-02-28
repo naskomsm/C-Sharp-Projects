@@ -31,6 +31,7 @@
                 TransmissionType = (TransmissionType)model.TransmissionType,
                 CreatedOn = DateTime.UtcNow,
                 IsDeleted = false,
+                EuroStandard = (EuroStandard)model.EuroStandard,
                 VehicleCreatedOn = model.VehicleCreatedOn,
             };
 
