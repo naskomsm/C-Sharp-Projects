@@ -27,6 +27,8 @@
     <Compile Remove="Migrations\20200225090853_InitialMigration.Designer.cs" />
     <Compile Remove="Migrations\20200225093734_AddedMoreConfigurations.cs" />
     <Compile Remove="Migrations\20200225093734_AddedMoreConfigurations.Designer.cs" />
+    <Compile Remove="Migrations\20200228092215_AddedNewPropertyToPost.cs" />
+    <Compile Remove="Migrations\20200228092215_AddedNewPropertyToPost.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

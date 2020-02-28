@@ -112,9 +112,15 @@
 
             if (inputModel.PostCategory != null && inputModel.PostCategory != "Всички")
             {
-                posts = this.postsService
-                    .GetAllPosts()
+                posts = posts
                     .Where(x => x.PostCategory.Name.ToString().ToLower() == inputModel.PostCategory.ToLower())
+                    .ToList();
+            }
+
+            if (inputModel.Condition != null)
+            {
+                posts = posts
+                    .Where(x => x.Condition.ToString().ToLower() == inputModel.Condition.ToLower())
                     .ToList();
             }
 
@@ -230,10 +236,12 @@
             if (inputModel.YearFrom != null)
             {
                 var modifiedYearFrom = inputModel.YearFrom.Replace("от ", string.Empty);
+
                 if (modifiedYearFrom != "Всички")
                 {
+                    var year = new DateTime(int.Parse(modifiedYearFrom), 1, 1);
                     posts = posts
-                        .Where(x => x.MainInfo.VehicleCreatedOn >= DateTime.Parse(modifiedYearFrom))
+                        .Where(x => x.MainInfo.VehicleCreatedOn >= year)
                         .ToList();
                 }
             }
@@ -241,10 +249,12 @@
             if (inputModel.YearTo != null)
             {
                 var modifiedYearTo = inputModel.YearTo.Replace("до ", string.Empty);
+
                 if (modifiedYearTo != "Всички")
                 {
+                    var year = new DateTime(int.Parse(modifiedYearTo), 1, 1);
                     posts = posts
-                        .Where(x => x.MainInfo.VehicleCreatedOn <= DateTime.Parse(modifiedYearTo))
+                        .Where(x => x.MainInfo.VehicleCreatedOn <= year)
                         .ToList();
                 }
             }
@@ -264,23 +274,27 @@
             }
 
             var inputCheckBoxes = inputModel.GetAllTrueProperties.ToList();
-            foreach (var checkedBox in inputCheckBoxes)
+
+            for (int i = 0; i < posts.Count; i++)
             {
-                posts = posts
-                    .Where(x => x.AdditionalInfo.SafetyInfo.GetAllTrueProperties.Contains(checkedBox))
-                    .ToList();
+                var post = posts[i];
+                var allTrueProps = post.AdditionalInfo.SafetyInfo.GetAllTrueProperties.ToList();
+                allTrueProps.AddRange(post.AdditionalInfo.OtherInfo.GetAllTrueProperties);
+                allTrueProps.AddRange(post.AdditionalInfo.ExteriorInfo.GetAllTrueProperties);
+                allTrueProps.AddRange(post.AdditionalInfo.ComfortInfo.GetAllTrueProperties);
 
-                posts = posts
-                    .Where(x => x.AdditionalInfo.ComfortInfo.GetAllTrueProperties.Contains(checkedBox))
-                    .ToList();
+                foreach (var checkbox in inputCheckBoxes)
+                {
+                    if (posts.Count == 0)
+                    {
+                        break;
+                    }
 
-                posts = posts
-                    .Where(x => x.AdditionalInfo.ExteriorInfo.GetAllTrueProperties.Contains(checkedBox))
-                    .ToList();
-
-                posts = posts
-                    .Where(x => x.AdditionalInfo.OtherInfo.GetAllTrueProperties.Contains(checkedBox))
-                    .ToList();
+                    if (!allTrueProps.Contains(checkbox))
+                    {
+                        posts.Remove(post);
+                    }
+                }
             }
 
             var viewModel = new AllPostsViewModel()

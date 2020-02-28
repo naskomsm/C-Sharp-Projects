@@ -6,6 +6,8 @@
 
         public string Make { get; set; }
 
+        public int Condition { get; set; }
+
         public int Currency { get; set; }
 
         public string Model { get; set; }

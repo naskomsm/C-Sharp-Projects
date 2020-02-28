@@ -27,6 +27,9 @@
         [Range(DataValidation.Post.MinPrice, DataValidation.Post.MaxPrice)]
         public decimal Price { get; set; }
 
+        [Required]
+        public Condition Condition { get; set; }
+
         [MaxLength(DataValidation.Post.MaxDescriptionLength)]
         public string Description { get; set; }
 
