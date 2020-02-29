@@ -20,7 +20,7 @@
             var firstModel = new AddMainInfoModel()
             {
                 Color = "Червено",
-                EuroStandard = 5,
+                EuroStandard = 1,
                 EngineType = 0,
                 Horsepower = 625,
                 Mileage = 156444,
@@ -31,7 +31,7 @@
             var secondModel = new AddMainInfoModel()
             {
                 Color = "Черно",
-                EuroStandard = 5,
+                EuroStandard = 1,
                 EngineType = 1,
                 Horsepower = 860,
                 Mileage = 250000,

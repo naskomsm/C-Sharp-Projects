@@ -4,7 +4,7 @@
     ViewData["Title"] = "Търсене на обява";
 }
 
-<form action="/Posts/All" method="get">
+<form asp-controller="Posts" asp-action="All" method="get">
 
     <div class="row">
         <div class="col container mt-3">
@@ -25,7 +25,6 @@
                             </select>
                         </div>
                     </div>
-
 
                     <div class="col-4 pl-5">
                         <p class="mb-1 small">Състояние</p>

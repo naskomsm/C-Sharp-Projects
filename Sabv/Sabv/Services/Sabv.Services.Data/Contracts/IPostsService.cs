@@ -15,5 +15,7 @@
         Task AddPostAsync(AddPostModel model);
 
         Task<DetailsViewModel> GetDetailsAsync(string id);
+
+        ICollection<Post> Filter(AllInputSearchViewModel inputModel);
     }
 }

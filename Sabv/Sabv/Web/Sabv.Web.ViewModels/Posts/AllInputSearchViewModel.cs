@@ -1,7 +1,10 @@
 ﻿namespace Sabv.Web.ViewModels.Posts
 {
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     using System.Linq;
+
+    using Sabv.Data.Models;
 
     public class AllInputSearchViewModel
     {
@@ -17,8 +20,10 @@
 
         public string EngineType { get; set; }
 
+        [Range(DataValidation.Post.MinHorsePower, DataValidation.Post.MaxHorsePower)]
         public string HorsePowerFrom { get; set; }
 
+        [Range(DataValidation.Post.MinHorsePower, DataValidation.Post.MaxHorsePower)]
         public string HorsePowerTo { get; set; }
 
         public string EuroStandard { get; set; }
@@ -27,8 +32,10 @@
 
         public string CarCategory { get; set; }
 
+        [Range(DataValidation.Post.MinPrice, DataValidation.Post.MaxPrice)]
         public string PriceFrom { get; set; }
 
+        [Range(DataValidation.Post.MinPrice, DataValidation.Post.MaxPrice)]
         public string PriceTo { get; set; }
 
         public string Currency { get; set; }

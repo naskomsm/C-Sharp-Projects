@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Безплатно публикуване на обява";
 }
 
@@ -39,7 +38,7 @@
         <div class="container row mt-4 text-center">
             <div class="col align-self-center">
                 <h3>Можете да избирате по няколко снимки на веднъж: </h3>
-                <form method="post" action="/Posts/AddPictures" enctype="multipart/form-data">
+                <form method="post" asp-controller="Posts" asp-action="AddPictures" enctype="multipart/form-data">
                     Изберете файлове: <input type="file" name="files" multiple><br><br>
                     <input class="container" type="submit" value="КАЧИ СНИМКИТЕ" />
                 </form>

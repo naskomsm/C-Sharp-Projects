@@ -78,13 +78,13 @@
             </div>
         <div class="row">
             <div class="container">
-                <h6>Запази: <a href="/Posts/AddFavourite/@Model.Id"><i class="far fa-star"></i></a></h6>
+                <h6>Запази: <a asp-controller="Posts" asp-action="AddFavourite" asp-route-id="@Model.Id"><i class="far fa-star"></i></a></h6>
             </div>
         </div>
 
         <div class="row">
             <div class="container">
-                <h6>Принтирай  <a href="/Posts/AddFavourite"><i class="fas fa-print"></i></a></h6>
+                <h6>Принтирай  <a asp-controller="Posts" asp-action="AddFavourite"><i class="fas fa-print"></i></a></h6>
             </div>
         </div>
 
