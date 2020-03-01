@@ -6,7 +6,6 @@
     using System.Threading.Tasks;
 
     using Sabv.Data.Common.Repositories;
-    using Sabv.Data.Models;
     using Sabv.Data.Models.AdditioalInfoFiles;
     using Sabv.Data.Models.AdditionalInfoFiles;
     using Sabv.Services.Data.Contracts;
@@ -21,7 +20,7 @@
             this.additionalInfoRepo = additionalInfoRepo;
         }
 
-        public async Task AddAsync(AddAdditionalInfoModel model)
+        public async Task<string> AddAsync(AddAdditionalInfoModel model)
         {
             var additionalInfo = new AdditionalInfo()
             {
@@ -68,6 +67,8 @@
 
             await this.additionalInfoRepo.AddAsync(additionalInfo);
             await this.additionalInfoRepo.SaveChangesAsync();
+
+            return additionalInfo.Id;
         }
 
         public ICollection<AdditionalInfo> GetAll()

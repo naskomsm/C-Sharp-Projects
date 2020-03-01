@@ -2,7 +2,7 @@
 {
     public enum Currency
     {
-        Lv = 0,
+        LV = 0,
         EUR = 1,
         USD = 2,
     }

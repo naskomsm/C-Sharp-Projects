@@ -11,7 +11,7 @@
     {
         ICollection<AdditionalInfo> GetAll();
 
-        Task AddAsync(AddAdditionalInfoModel model);
+        Task<string> AddAsync(AddAdditionalInfoModel model);
 
         Task<bool> RemoveAsync(string id);
     }

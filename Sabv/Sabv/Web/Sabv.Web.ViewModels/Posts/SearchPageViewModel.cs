@@ -8,6 +8,8 @@
     {
         public ICollection<string> Categories { get; set; }
 
+        public ICollection<string> Months { get; set; }
+
         public ICollection<string> Cities { get; set; }
 
         public ICollection<string> Years { get; set; }

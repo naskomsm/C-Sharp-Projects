@@ -20,7 +20,7 @@
             this.mainInfoRepo = mainInfoRepo;
         }
 
-        public async Task AddAsync(AddMainInfoModel model)
+        public async Task<string> AddAsync(AddMainInfoModel model)
         {
             var mainInfo = new MainInfo()
             {
@@ -37,6 +37,8 @@
 
             await this.mainInfoRepo.AddAsync(mainInfo);
             await this.mainInfoRepo.SaveChangesAsync();
+
+            return mainInfo.Id;
         }
 
         public ICollection<MainInfo> GetAll()

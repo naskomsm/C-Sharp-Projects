@@ -1,8 +1,10 @@
 ﻿namespace Sabv.Web.Controllers
 {
+    using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
+    using System.Security.Claims;
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Authorization;
@@ -12,34 +14,40 @@
     using Sabv.Common;
     using Sabv.Data.Models;
     using Sabv.Services.Data.Contracts;
+    using Sabv.Services.Models.AdditionalInfos;
+    using Sabv.Services.Models.MainInfos;
+    using Sabv.Services.Models.Posts;
     using Sabv.Web.ViewModels.Posts;
 
     public class PostsController : BaseController
     {
-        private readonly UserManager<ApplicationUser> userManager;
+        private readonly IHttpContextAccessor httpContextAccessor;
         private readonly IDataSetsService dataSetsService;
         private readonly IPostCategoriesService postCategoriesService;
         private readonly IVehicleTypeCategoriesService vehicleTypeCategoriesService;
         private readonly IImagesService imagesService;
         private readonly IPostsService postsService;
         private readonly IMainInfoService mainInfoService;
+        private readonly IAdditionalInfoService additionalInfoService;
 
         public PostsController(
-            UserManager<ApplicationUser> userManager,
+            IHttpContextAccessor httpContextAccessor,
             IDataSetsService dataSetsService,
             IPostCategoriesService postCategoriesService,
             IVehicleTypeCategoriesService carTypeCategoriesService,
             IImagesService imagesService,
             IPostsService postsService,
-            IMainInfoService mainInfoService)
+            IMainInfoService mainInfoService,
+            IAdditionalInfoService additionalInfoService)
         {
+            this.httpContextAccessor = httpContextAccessor;
             this.dataSetsService = dataSetsService;
             this.postCategoriesService = postCategoriesService;
             this.vehicleTypeCategoriesService = carTypeCategoriesService;
             this.imagesService = imagesService;
             this.postsService = postsService;
             this.mainInfoService = mainInfoService;
-            this.userManager = userManager;
+            this.additionalInfoService = additionalInfoService;
         }
 
         [HttpGet]
@@ -64,6 +72,7 @@
                 Colors = allDataSets.Colors,
                 Features = allDataSets.Features,
                 CarTypeCategories = carTypeCategories,
+                Months = allDataSets.Months,
             };
 
             return this.View(model);
@@ -88,12 +97,98 @@
 
             return this.View(model);
         }
-        
+
         [HttpGet]
         [Authorize]
         public async Task<IActionResult> CheckText(CheckTextInputModel inputModel)
         {
-            return this.View();
+            if (!this.ModelState.IsValid)
+            {
+                return this.Redirect("Create");
+            }
+
+            var model = new CheckTextViewModel()
+            {
+                Email = inputModel.Email,
+                Make = inputModel.Make,
+                Model = inputModel.Model,
+                Currency = inputModel.Currency,
+                Price = inputModel.Price,
+                CarCategory = inputModel.CarCategory,
+                Town = inputModel.Town,
+                MainInfo = new MainInfo()
+                {
+                    Color = inputModel.Color,
+                    EuroStandard = inputModel.EuroStandard,
+                    TransmissionType = inputModel.TransmissionType,
+                    EngineType = inputModel.EngineType,
+                    HorsePower = inputModel.HorsePower,
+                    Mileage = inputModel.Mileage,
+                    VehicleCreatedOn = new DateTime(inputModel.Year, inputModel.Month, 1),
+                },
+                PhoneNumber = inputModel.MobileNumber,
+                PostCategory = inputModel.PostCategory,
+            };
+
+            var mainInfoAddModel = new AddMainInfoModel()
+            {
+                Color = inputModel.Color,
+                EuroStandard = (int)inputModel.EuroStandard,
+                TransmissionType = (int)inputModel.TransmissionType,
+                EngineType = (int)inputModel.EngineType,
+                Horsepower = inputModel.HorsePower,
+                Mileage = (int)inputModel.Mileage,
+                VehicleCreatedOn = new DateTime(inputModel.Year, inputModel.Month, 1),
+            };
+
+            var additionalInfoAddModel = new AddAdditionalInfoModel()
+            {
+                ABS = inputModel.ABS,
+                Airbags = inputModel.Airbags,
+                GPS = inputModel.GPS,
+                Parktronic = inputModel.Parktronic,
+                TractionControl = inputModel.TractionControl,
+                AllWheelDrive = inputModel.AllWheelDrive,
+                Barter = inputModel.Barter,
+                Tuned = inputModel.Tuned,
+                FiveDoors = inputModel.FiveDoors,
+                ThreeDoors = inputModel.ThreeDoors,
+                AirSuspension = inputModel.AirSuspension,
+                ClimateControl = inputModel.ClimateControl,
+                ElectricMirrors = inputModel.ElectricMirrors,
+                ElectricWindows = inputModel.ElectricWindows,
+                USBAudio = inputModel.USBAudio,
+                RainSensor = inputModel.RainSensor,
+                StartStopFunction = inputModel.StartStopFunction,
+                Town = inputModel.Town,
+            };
+
+            var postCategoryId = this.postCategoriesService.GetAllCategories().FirstOrDefault(x => x.Name == inputModel.PostCategory).Id;
+            var mainInfoId = await this.mainInfoService.AddAsync(mainInfoAddModel);
+            var additionalInfoId = await this.additionalInfoService.AddAsync(additionalInfoAddModel);
+            var vehicleCategoryId = this.vehicleTypeCategoriesService.GetAllCategories().FirstOrDefault(x => x.Name == inputModel.CarCategory).Id;
+            var userId = this.httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+            var postAddModel = new AddPostModel()
+            {
+                Name = inputModel.Make + " " + inputModel.Model + " " + inputModel.Modification,
+                Description = inputModel.Description != null ? inputModel.Description : "Няма описание",
+                PhoneNumber = inputModel.MobileNumber,
+                Price = inputModel.Price,
+                Condition = (int)inputModel.Condition,
+                Model = inputModel.Model,
+                Make = inputModel.Make,
+                Currency = (int)inputModel.Currency,
+                PostCategoryId = postCategoryId,
+                MainInfoId = mainInfoId,
+                AdditionalInfoId = additionalInfoId,
+                VehicleCategoryId = vehicleCategoryId,
+                UserId = userId,
+            };
+
+            await this.postsService.AddPostAsync(postAddModel);
+
+            return this.View(model);
         }
 
         [HttpGet]

@@ -4,6 +4,8 @@
 
     public class DataSetsViewModel
     {
+        public ICollection<string> Months { get; set; }
+
         public ICollection<string> Categories { get; set; }
 
         public ICollection<string> Cities { get; set; }

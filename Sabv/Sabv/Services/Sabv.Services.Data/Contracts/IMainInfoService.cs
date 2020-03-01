@@ -10,7 +10,7 @@
     {
         ICollection<MainInfo> GetAll();
 
-        Task AddAsync(AddMainInfoModel model);
+        Task<string> AddAsync(AddMainInfoModel model);
 
         Task<bool> RemoveAsync(string id);
     }

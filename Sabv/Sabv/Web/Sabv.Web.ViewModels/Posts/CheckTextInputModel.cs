@@ -1,36 +1,45 @@
 ﻿namespace Sabv.Web.ViewModels.Posts
 {
+    using System.ComponentModel.DataAnnotations;
+
+    using Sabv.Data.Models.Enums;
+
     public class CheckTextInputModel
     {
+        [Required]
         public string PostCategory { get; set; }
 
+        [Required]
         public string Make { get; set; }
 
-        public string Condition { get; set; }
+        public Condition Condition { get; set; }
 
+        [Required]
         public string Model { get; set; }
 
         public string Modification { get; set; }
 
-        public string Mileage { get; set; }
+        public double Mileage { get; set; }
 
-        public string EngineType { get; set; }
+        public EngineType EngineType { get; set; }
 
-        public string HorsePower { get; set; }
+        public int HorsePower { get; set; }
 
-        public string EuroStandard { get; set; }
+        public EuroStandard EuroStandard { get; set; }
 
-        public string TransmissionType { get; set; }
+        public TransmissionType TransmissionType { get; set; }
 
         public string CarCategory { get; set; }
 
-        public string Price { get; set; }
+        public decimal Price { get; set; }
 
-        public string Currency { get; set; }
+        public Currency Currency { get; set; }
 
-        public string YearFrom { get; set; }
+        [Required]
+        public int Year { get; set; }
 
-        public string YearTo { get; set; }
+        [Required]
+        public int Month { get; set; }
 
         public string Color { get; set; }
 

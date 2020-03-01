@@ -157,7 +157,7 @@
                             <p class="mb-1 small">Валута</p>
                             <select class="mdb-select md-form container" name="currency">
                                 <option>Всички</option>
-                                <option value="лв.">LV</option>
+                                <option value="LV">LV</option>
                                 <option value="USD">USD</option>
                                 <option value="EUR">EUR</option>
                             </select>
@@ -166,11 +166,14 @@
 
                     <div class="col-3">
                         <div class="ml-2">
-                            <p class="mb-1 small">Година на производство (От)</p>
-                            <select class="mdb-select md-form container" name="yearFrom">
-                                @foreach (var item in Model.Years)
+                            <p class="mb-1 small">Месец</p>
+                            <select class="mdb-select md-form container" name="month">
+                                @for (int i = 0; i < Model.Months.Count; i++)
                                 {
-                                    <option>от @item</option>
+                                    var value = i + 1;
+                                    var item = Model.Months.ToArray()[i];
+
+                                    <option value="@value">@item</option>
                                 }
                             </select>
                         </div>
@@ -178,11 +181,11 @@
 
                     <div class="col-3 pl-0 pr-4">
                         <div class="ml-2">
-                            <p class="mb-1 small">(До)</p>
-                            <select class="mdb-select md-form container" name="yearTo">
+                            <p class="mb-1 small">Година на производство</p>
+                            <select class="mdb-select md-form container" name="year">
                                 @foreach (var item in Model.Years)
                                 {
-                                    <option>до @item</option>
+                                    <option>@item</option>
                                 }
                             </select>
                         </div>
