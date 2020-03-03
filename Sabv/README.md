@@ -3,6 +3,6 @@ Sabv is a multipage application build entirely on the latest .NET technologies s
 course ASP.NET Core.
 
 #### Using a template for ASP.NET Core with repositories, services, models mapping and DI and StyleCop warnings fixed.
-##### Authors
+##### Authors of template
 - [Nikolay Kostov](https://github.com/NikolayIT)
 - [Vladislav Karamfilov](https://github.com/vladislav-karamfilov)
