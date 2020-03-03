@@ -1,0 +1,166 @@
+﻿@using Sabv.Web.ViewModels.Home
+
+@model HomePageViewModel
+
+@{
+    ViewData["Title"] = "Начална страница";
+    string selectedOption = ViewBag.SelectedOption;
+}
+
+<form asp-controller="Posts" asp-action="All" method="get">
+    <div class="row">
+        <div class="col-8">
+            <div class="col">
+                <h6 id="pageHeader"></h6>
+                <hr />
+                <div>
+
+                    <div class="row mt-2 mb-2">
+                        <div class="col-6 ml-2 mr-2">
+                            <p class="mb-1 small">Основна категория</p>
+                            <select class="mdb-select md-form container" id="categorySelect" name="postCategory">
+                                <option>Всички</option>
+                                @foreach (var category in Model.Categories)
+                                {
+                                    <option>@category.Name</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row mt-2 mb-2">
+
+                        <div class="col-3">
+                            <div class="ml-2">
+                                <p class="mb-1 small">Марка</p>
+                                <select class="mdb-select md-form container" id="makesSelect" name="make">
+                                    <option>Всички</option>
+                                    @foreach (var make in Model.Makes)
+                                    {
+                                        <option value="@make.Id">@make.Name</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-3">
+                            <p class="mb-1 small">Модел</p>
+                            <select class="mdb-select md-form container" id="modelsSelect" name="model">
+                                <option>Всички</option>
+                            </select>
+                        </div>
+
+                        <div class="col-6 pr-4 pl-0">
+                            <p class="mb-1 small">Населено място</p>
+                            <select class="mdb-select md-form container" name="town">
+                                <option>Всички</option>
+                                @foreach (var city in Model.Cities)
+                                {
+                                    <option>@city.Name</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row mt-2 mb-2">
+                        <div class="col-3">
+                            <div class="ml-2 mr-2">
+                                <p class="mb-1 small">Maксимална цена</p>
+                                <input class="form-control form-control-sm container" type="text" name="priceTo">
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <p class="mb-1 small">Година</p>
+                            <select class="mdb-select md-form container" name="yearFrom">
+                                <option>Всички</option>
+                                @for (int i = 2021; i >= 1990; i--)
+                                {
+                                    <option>от @i</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="col-6 pl-0 pr-4">
+                            <p class="mb-1 small">Подреди резултатите по</p>
+                            <select class="mdb-select md-form container">
+                                <option value="1">Марка/Модел/Цена</option>
+                                <option value="2">Цена</option>
+                                <option value="3">Дата на производство</option>
+                                <option value="4">Пробег</option>
+                                <option value="5">Най-новите обяви</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row mt-2 mb-2">
+                        <div class="col-3">
+                            <div class="ml-2 mr-2">
+                                <p class="mb-1 small">Тип двигател</p>
+                                <select class="mdb-select md-form container" name="engineType">
+                                    <option>Всички</option>
+                                    <option value="1">Бензин</option>
+                                    <option value="2">Дизел</option>
+                                    <option value="3">Електрически</option>
+                                    <option value="4">Хибриден</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <p class="mb-1 small">Скоростна кутия</p>
+                            <select class="mdb-select md-form container" name="transmissionType">
+                                <option>Всички</option>
+                                <option value="1">Ръчна</option>
+                                <option value="2">Автоматична</option>
+                            </select>
+                        </div>
+                        <div class="col-6 pl-0 pr-4">
+                            <input class="container" style="margin-top:20px;" type="submit" value="ТЪРСИ" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col mt-3">
+                <h6>Най-новите обяви за Автомобили и Джипове</h6>
+                <hr />
+                <div class="row">
+                    <div class="col-6 container" style="border-style: groove ;border-color: cornflowerblue;">
+                        aaa
+                    </div>
+                    <div class="col-6 container" style="border-style: groove ;border-color: cornflowerblue;">
+                        aaa
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-6 container" style="border-style: groove ;border-color: cornflowerblue;">
+                        aaa
+                    </div>
+                    <div class="col-6 container" style="border-style: groove ;border-color: cornflowerblue;">
+                        aaa
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-6 container" style="border-style: groove ;border-color: cornflowerblue;">
+                        aaa
+                    </div>
+                    <div class="col-6 container" style="border-style: groove ;border-color: cornflowerblue;">
+                        aaa
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-4">
+            <h6>Последни новини и факти</h6>
+            <hr />
+            <div class="row" style="border-style: groove ;border-color: cornflowerblue;">aaa</div>
+            <div class="row" style="border-style: groove ;border-color: cornflowerblue;">aaa</div>
+            <div class="row" style="border-style: groove ;border-color: cornflowerblue;">aaa</div>
+            <div class="row" style="border-style: groove ;border-color: cornflowerblue;">aaa</div>
+            <div class="row" style="border-style: groove ;border-color: cornflowerblue;">aaa</div>
+            <div class="row" style="border-style: groove ;border-color: cornflowerblue;">aaa</div>
+            <div class="row" style="border-style: groove ;border-color: cornflowerblue;">aaa</div>
+        </div>
+    </div>
+</form>

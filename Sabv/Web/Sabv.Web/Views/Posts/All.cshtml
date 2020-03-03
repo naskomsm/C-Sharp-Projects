@@ -1,0 +1,46 @@
+﻿@using Sabv.Web.ViewModels.Posts
+@using Sabv.Common
+@using Sabv.Services.Data
+
+@model AllPostsViewModel
+
+@inject IImageService imageService
+
+@{
+    ViewData["Title"] = "Обяви";
+}
+
+<div class="row">
+    <div class="col">
+        <h6>Обяви</h6>
+        <hr />
+        @foreach (var post in Model.Posts)
+        {
+            <div class="row">
+                <div class="col-4">
+                    <span>
+                        <a asp-controller="Posts" asp-action="Details" asp-route-id="@post.Id">
+                            <img src="@GlobalConstants.BaseCloudinaryLink@imageService.GetById(@post.Images.FirstOrDefault(x => x.PostId == post.Id).ImageId).Url" class="img-thumbnail" width="200" height="150">
+                        </a>
+                    </span>
+                </div>
+                <div class="col-8">
+                    <div class="row align-items-start mb-3">
+                        <span>
+                            <a class="col-md-4" asp-controller="Posts" asp-action="Details" asp-route-id="@post.Id">@post.Name</a>
+                        </span>
+                        <div class="col-md-4 offset-md-4 font-weight-bold">@post.Price лв.</div>
+                    </div>
+                    <div class="row align-items-end">
+                        <div class="col">
+                            пробег: @post.Mileage, цвят: @post.Color, двигател: @post.EngineType,
+                            к.с: @post.Horsepower, скоростна кутия: @post.TransmissionType,
+                            година на произв.: @post.ManufactureDate
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr />
+        }
+    </div>
+</div>

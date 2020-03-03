@@ -1,0 +1,159 @@
+﻿@using Sabv.Web.ViewModels.Posts
+@using Sabv.Common
+@using Sabv.Services.Data
+
+@model DetailsViewModel
+
+@inject IImageService imageService
+
+@{
+    ViewData["Title"] = "Детайли";
+}
+
+<div class="row font-weight-bold justify-content-between">
+    <div class="col-8">
+        <h3>@Model.Name</h3>
+    </div>
+    <div class="col-4">
+        <h3 class="text-primary">@Model.Price лв.</h3>
+    </div>
+</div>
+
+<div class="row justify-content-start">
+    <h6>
+        <span>
+            <a class="col-md-4" href="https://autodata24.com/" target="_blank">
+                /Технически характеристики и разход на гориво/
+            </a>
+        </span>
+    </h6>
+</div>
+
+<div class="row justify-content-center mt-2">
+
+    @*for now its only 1 image*@
+    <div class="col-8">
+        <img src="@GlobalConstants.BaseCloudinaryLink@imageService.GetById(Model.Images.FirstOrDefault(x => x.PostId == Model.Id).ImageId).Url" class="img-thumbnail" width="600" height="150">
+    </div>
+
+    <div class="col-4 text-center">
+        <div class="row mb-2">
+            <div class="col-4">
+                <img src="" class="img-thumbnail" width="100" height="50">
+            </div>
+            <div class="col-8">
+                <div class="container text-center mt-3">
+                    @Model.City.Name, гр.@Model.City.Name
+                    <h5>@Model.PhoneNumber</h5>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-6">Дата на производство</div>
+            <div class="col-6">@Model.VehicleManufactureDate</div>
+        </div>
+        <div class="row">
+            <div class="col-6">Тип двигател</div>
+            <div class="col-6">@Model.EngineType</div>
+        </div>
+        <div class="row">
+            <div class="col-6">Мощност</div>
+            <div class="col-6">@Model.Horsepower к.с.</div>
+        </div>
+        <div class="row">
+            <div class="col-6">Евростандарт</div>
+            <div class="col-6">Евро @Model.Eurostandard</div>
+        </div>
+        <div class="row">
+            <div class="col-6">Скоростна кутия</div>
+            <div class="col-6">@Model.TransmissionType</div>
+        </div>
+        <div class="row">
+            <div class="col-6">Категория</div>
+            <div class="col-6">@Model.VehicleCategory.Name</div>
+        </div>
+        <div class="row">
+            <div class="col-6">Пробег</div>
+            <div class="col-6">@Model.Mileage</div>
+        </div>
+        <div class="row">
+            <div class="col-6">Цвят</div>
+            <div class="col-6">@Model.Color</div>
+        </div>
+        <div class="row">
+            <div class="container">
+                <h6>Запази: <a asp-controller="Posts" asp-action="AddFavourite" asp-route-id="@Model.Id"><i class="far fa-star"></i></a></h6>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="container">
+                <h6>Принтирай  <a asp-controller="Posts" asp-action="AddFavourite"><i class="fas fa-print"></i></a></h6>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="container text-center">
+                <h3>
+                    <a href="https://www.facebook.com/"><i class="fab fa-facebook"></i></a>
+                    <a href="/Posts/AddFavourite"><i class="fab fa-instagram"></i></a>
+                    <a href="/Posts/AddFavourite"><i class="fab fa-linkedin-in"></i></a>
+                </h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+<hr />
+
+<div class="row justify-content-center">
+
+    <div class="col-3">
+        <div class="ml-2">
+            <p class="mb-1 small">Безопасност</p>
+            @foreach (var item in Model.Safety.GetAllTrueProperties)
+            {
+                <div>@item</div>
+            }
+        </div>
+    </div>
+
+    <div class="col-3">
+        <div class="ml-2">
+            <p class="mb-1 small">Комфорт</p>
+            @foreach (var item in Model.Comfort.GetAllTrueProperties)
+            {
+                <div>@item</div>
+            }
+        </div>
+    </div>
+
+    <div class="col-3">
+        <div class="ml-2">
+            <p class="mb-1 small">Екстериор</p>
+            @foreach (var item in Model.Exterior.GetAllTrueProperties)
+            {
+                <div>@item</div>
+            }
+        </div>
+    </div>
+
+    <div class="col-3">
+        <div class="ml-2">
+            <p class="mb-1 small">Други</p>
+            @foreach (var item in Model.Other.GetAllTrueProperties)
+            {
+                <div>@item</div>
+            }
+        </div>
+    </div>
+</div>
+
+<h6 class="mt-5">Допълнителна информация</h6>
+
+<hr />
+
+<div class="row justify-content-center">
+    @Model.Description
+</div>
