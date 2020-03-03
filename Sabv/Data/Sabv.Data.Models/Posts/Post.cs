@@ -10,6 +10,7 @@
     using Sabv.Data.Models.Extras;
     using Sabv.Data.Models.Images;
     using Sabv.Data.Models.Makes;
+    using Sabv.Data.Models.Models;
     using Sabv.Data.Models.PostsImages;
     using Sabv.Data.Models.Users;
 
@@ -55,6 +56,10 @@
         public int MakeId { get; set; }
 
         public virtual Make Make { get; set; }
+
+        public int ModelId { get; set; }
+
+        public virtual Model Model { get; set; }
 
         public int CityId { get; set; }
 

@@ -15,5 +15,7 @@
         Task AddAsync(Post post);
 
         DetailsViewModel GetDetails(int id);
+
+        IEnumerable<Post> GetLatestPosts();
     }
 }

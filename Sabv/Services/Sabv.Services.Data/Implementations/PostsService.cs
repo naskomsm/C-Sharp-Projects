@@ -84,5 +84,10 @@
 
             return model;
         }
+
+        public IEnumerable<Post> GetLatestPosts()
+        {
+            return this.GetAll().OrderBy(x => x.CreatedOn).Take(6);
+        }
     }
 }

@@ -32,15 +32,16 @@
 
             await makesService.AddAsync(new Make()
             {
-                Name = "Mercedes",
+                Name = "Opel",
                 CreatedOn = DateTime.UtcNow,
             });
 
             await makesService.AddAsync(new Make()
             {
-                Name = "Opel",
+                Name = "Mercedes",
                 CreatedOn = DateTime.UtcNow,
             });
+
         }
     }
 }

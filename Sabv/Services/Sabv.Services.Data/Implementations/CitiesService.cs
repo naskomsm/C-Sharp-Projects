@@ -29,7 +29,7 @@
 
         public City GetById(int id)
         {
-            return this.cityRepo.All().FirstOrDefault();
+            return this.cityRepo.All().FirstOrDefault(x => x.Id == id);
         }
     }
 }

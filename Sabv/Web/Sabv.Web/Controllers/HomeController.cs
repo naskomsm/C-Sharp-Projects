@@ -16,17 +16,20 @@
         private readonly IMakesService makesService;
         private readonly ICitiesService citiesService;
         private readonly IModelsService modelsService;
+        private readonly IPostsService postsService;
 
         public HomeController(
             ICategoryService categoryService,
             IMakesService makesService,
             ICitiesService citiesService,
-            IModelsService modelsService)
+            IModelsService modelsService,
+            IPostsService postsService)
         {
             this.categoryService = categoryService;
             this.makesService = makesService;
             this.citiesService = citiesService;
             this.modelsService = modelsService;
+            this.postsService = postsService;
         }
 
         [HttpGet]
@@ -36,6 +39,7 @@
             var makes = this.makesService.GetAll();
             var cities = this.citiesService.GetAll();
             var models = this.modelsService.GetAll();
+            var latestPosts = this.postsService.GetLatestPosts();
 
             var settings = new JsonSerializerSettings()
             {
@@ -54,6 +58,7 @@
                 Categories = categories,
                 Makes = makes,
                 Cities = cities,
+                LatestPosts = latestPosts,
             };
 
             return this.View(model);

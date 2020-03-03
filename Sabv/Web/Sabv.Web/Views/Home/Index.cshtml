@@ -1,6 +1,10 @@
 ﻿@using Sabv.Web.ViewModels.Home
+@using Sabv.Common
+@using Sabv.Services.Data
 
 @model HomePageViewModel
+
+@inject IImageService imageService
 
 @{
     ViewData["Title"] = "Начална страница";
@@ -123,29 +127,57 @@
                 <h6>Най-новите обяви за Автомобили и Джипове</h6>
                 <hr />
                 <div class="row">
-                    <div class="col-6 container" style="border-style: groove ;border-color: cornflowerblue;">
-                        aaa
+                    <div class="col-6 container">
+                        <div class="col-6 float-left">
+                            <img src="@GlobalConstants.BaseCloudinaryLink@imageService.GetById(@Model.LatestPosts.ToArray()[0].Images.FirstOrDefault(x => x.PostId == Model.LatestPosts.ToArray()[0].Id).ImageId).Url" class="img-thumbnail">
+                        </div>
+
+                        <div class="col-6 float-right">
+                            <div class="row text-primary">@Model.LatestPosts.ToArray()[0].Name</div>
+                            <div class="row"><h6>@Model.LatestPosts.ToArray()[0].Price лв.</h6></div>
+                            <div class="row"><small>@Model.LatestPosts.ToArray()[0].Mileage км</small></div>
+                            <div class="row"><small>@Model.LatestPosts.ToArray()[0].City.Name</small></div>
+                        </div>
                     </div>
-                    <div class="col-6 container" style="border-style: groove ;border-color: cornflowerblue;">
-                        aaa
+
+                    <div class="col-6 container">
+                        <div class="col-6 float-left">
+                            <img src="@GlobalConstants.BaseCloudinaryLink@imageService.GetById(@Model.LatestPosts.ToArray()[1].Images.FirstOrDefault(x => x.PostId == Model.LatestPosts.ToArray()[1].Id).ImageId).Url" class="img-thumbnail">
+                        </div>
+
+                        <div class="col-6 float-right">
+                            <div class="row text-primary">@Model.LatestPosts.ToArray()[1].Name</div>
+                            <div class="row"><h6>@Model.LatestPosts.ToArray()[1].Price лв.</h6></div>
+                            <div class="row"><small>@Model.LatestPosts.ToArray()[1].Mileage км</small></div>
+                            <div class="row"><small>@Model.LatestPosts.ToArray()[1].City.Name</small></div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-6 container">
+                        <div class="col-6 float-left">
+                            <img src="@GlobalConstants.BaseCloudinaryLink@imageService.GetById(@Model.LatestPosts.ToArray()[2].Images.FirstOrDefault(x => x.PostId == Model.LatestPosts.ToArray()[2].Id).ImageId).Url" class="img-thumbnail">
+                        </div>
+
+                        <div class="col-6 float-right">
+                            <div class="row text-primary">@Model.LatestPosts.ToArray()[2].Name</div>
+                            <div class="row"><h6>@Model.LatestPosts.ToArray()[2].Price лв.</h6></div>
+                            <div class="row"><small>@Model.LatestPosts.ToArray()[2].Mileage км</small></div>
+                            <div class="row"><small>@Model.LatestPosts.ToArray()[2].City.Name</small></div>
+                        </div>
+                    </div>
+                    <div class="col-6 container">
                     </div>
                 </div>
 
                 <div class="row">
-                    <div class="col-6 container" style="border-style: groove ;border-color: cornflowerblue;">
-                        aaa
+                    <div class="col-6 container">
+                        
                     </div>
-                    <div class="col-6 container" style="border-style: groove ;border-color: cornflowerblue;">
-                        aaa
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-6 container" style="border-style: groove ;border-color: cornflowerblue;">
-                        aaa
-                    </div>
-                    <div class="col-6 container" style="border-style: groove ;border-color: cornflowerblue;">
-                        aaa
+                    <div class="col-6 container">
+                        
                     </div>
                 </div>
             </div>
