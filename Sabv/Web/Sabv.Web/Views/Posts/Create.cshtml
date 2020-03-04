@@ -7,7 +7,7 @@
     ViewData["Title"] = "Безплатно публикуване на обява";
 }
 
-<form asp-controller="Posts" asp-action="CheckText" method="post">
+<form asp-controller="Posts" asp-action="Create" method="post">
 
     <div class="row">
 
@@ -35,7 +35,7 @@
                     <div class="col-4">
                         <div class="ml-2">
                             <p class="mb-1 small">Основна категория</p>
-                            <select class="mdb-select md-form container" id="categorySelect" name="postCategory">
+                            <select class="mdb-select md-form container" id="categorySelect" name="category">
                                 <option>Всички</option>
                                 @foreach (var category in Model.Categories)
                                 {
@@ -138,7 +138,7 @@
                     <div class="col-3 pl-0 pr-4">
                         <div class="ml-2">
                             <p class="mb-1 small">Категория</p>
-                            <select class="mdb-select md-form container" name="carCategory">
+                            <select class="mdb-select md-form container" name="vehicleCategory">
                                 <option>Всички</option>
                                 @foreach (var vehicleCategory in Model.VehicleCategories)
                                 {
@@ -215,7 +215,7 @@
                     <div class="col-6">
                         <div class="ml-2">
                             <p class="mb-1 small">Населено място</p>
-                            <select class="mdb-select md-form container" name="town">
+                            <select class="mdb-select md-form container" name="city">
                                 <option>Всички</option>
                                 @foreach (var city in Model.Cities)
                                 {
@@ -249,7 +249,7 @@
 
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" name="@safety.Name" value="true" />
-                                    <label class="form-check-label">@safety.Name.</label>
+                                    <label class="form-check-label">@safety.Name</label>
                                 </div>
                             }
                         </div>
@@ -329,7 +329,7 @@
                     <div class="col-4">
                         <div class="ml-2">
                             <p class="mb-1 small">Мобилен телефон</p>
-                            <input class="form-control form-control-sm" type="text" name="mobileNumber">
+                            <input class="form-control form-control-sm" type="text" name="phoneNumber">
                         </div>
                     </div>
 

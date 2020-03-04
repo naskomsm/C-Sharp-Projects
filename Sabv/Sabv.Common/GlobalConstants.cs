@@ -15,5 +15,7 @@
         public const string MakesAndModelsJsonPath = "wwwroot/datasets/MakesAndItsModels.json";
 
         public const string MonthsJsonPath = "wwwroot/datasets/Months.json";
+
+        public const int DefaultImageId = 1;
     }
 }

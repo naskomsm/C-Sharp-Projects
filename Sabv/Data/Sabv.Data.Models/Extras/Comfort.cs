@@ -1,9 +1,9 @@
 ﻿namespace Sabv.Data.Models.Extras
 {
-    using System.Collections.Generic;
-    using System.Linq;
 
     using Sabv.Data.Common.Models;
+    using System.Collections.Generic;
+    using System.Linq;
 
     public class Comfort : BaseModel<int>
     {

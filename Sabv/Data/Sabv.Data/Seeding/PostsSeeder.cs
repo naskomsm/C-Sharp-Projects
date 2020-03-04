@@ -25,7 +25,6 @@
             var citiesService = serviceProvider.GetRequiredService<ICitiesService>();
             var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
             var cloudinary = serviceProvider.GetRequiredService<ICloudinaryService>();
-            var imagesService = serviceProvider.GetRequiredService<IImageService>();
             var modelsService = serviceProvider.GetRequiredService<IModelsService>();
 
             await SeedPostsAsync(
@@ -37,7 +36,6 @@
                 citiesService,
                 userManager,
                 cloudinary,
-                imagesService,
                 modelsService);
         }
 
@@ -50,7 +48,6 @@
             ICitiesService citiesService,
             UserManager<ApplicationUser> userManager,
             ICloudinaryService cloudinaryService,
-            IImageService imageService,
             IModelsService modelsService)
         {
             var opelImageUrl = "https://autodata24.com/i/opel/astra/astra-gtc-h/large/5e7bcd18438ab7940b0bb84b9734134f.jpg";
@@ -170,8 +167,8 @@
                 Safety = extrasService.GetByIdSafety(1),
                 SafetyId = 1,
                 TransmissionType = TransmissionType.Manual,
-                VehicleCategory = vehicleCategoryService.GetById(1),
-                VehicleCategoryId = 1,
+                VehicleCategory = vehicleCategoryService.GetById(3),
+                VehicleCategoryId = 3,
             };
 
             firstPost.Images.Add(new PostImage { ImageId = 2, Post = firstPost });

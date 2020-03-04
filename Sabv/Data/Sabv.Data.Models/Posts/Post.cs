@@ -27,6 +27,8 @@
 
         public string PhoneNumber { get; set; }
 
+        public string Email { get; set; }
+
         public string Description { get; set; }
 
         public DateTime ManufactureDate { get; set; }
@@ -43,7 +45,7 @@
 
         public virtual VehicleCategory VehicleCategory { get; set; }
 
-        public string Condition { get; set; }
+        public Condition Condition { get; set; }
 
         public int Mileage { get; set; }
 

@@ -1,5 +1,6 @@
 ﻿namespace Sabv.Data.Models.Extras
 {
+
     using Sabv.Data.Common.Models;
     using System.Collections.Generic;
     using System.Linq;
