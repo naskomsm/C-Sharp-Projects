@@ -10,6 +10,8 @@
 
     public class CheckTextViewModel
     {
+        public int PostId { get; set; }
+
         public Category Category { get; set; }
 
         public string PhoneNumber { get; set; }

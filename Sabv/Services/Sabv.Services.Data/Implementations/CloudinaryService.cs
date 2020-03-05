@@ -22,8 +22,10 @@
             this.imageService = imageService;
         }
 
-        public async Task UploadAsync(ICollection<IFormFile> files)
+        public async Task<ICollection<Image>> UploadAsync(ICollection<IFormFile> files)
         {
+            var imagesToReturn = new List<Image>();
+
             foreach (var file in files)
             {
                 byte[] destinationImage;
@@ -41,16 +43,23 @@
                 var result = await this.cloudinary.UploadAsync(uploadParams);
                 var url = result.Uri.ToString();
                 var urlDb = url.Replace(GlobalConstants.BaseCloudinaryLink, string.Empty);
-                await this.imageService.AddAsync(new Image()
+
+                var image = new Image()
                 {
-                   CreatedOn = DateTime.UtcNow,
-                   IsDeleted = false,
-                   Url = urlDb,
-                });
+                    CreatedOn = DateTime.UtcNow,
+                    IsDeleted = false,
+                    Url = urlDb,
+                };
+
+                await this.imageService.AddAsync(image);
+
+                imagesToReturn.Add(image);
             }
+
+            return imagesToReturn;
         }
 
-        public async Task UploadAsync(string url)
+        public async Task<Image> UploadAsync(string url)
         {
             var uploadParams = new ImageUploadParams()
             {
@@ -60,12 +69,17 @@
             var result = await this.cloudinary.UploadAsync(uploadParams);
             var resultUrl = result.Uri.ToString();
             var urlDb = resultUrl.Replace(GlobalConstants.BaseCloudinaryLink, string.Empty);
-            await this.imageService.AddAsync(new Image()
+
+            var image = new Image()
             {
                 CreatedOn = DateTime.UtcNow,
                 IsDeleted = false,
                 Url = urlDb,
-            });
+            };
+
+            await this.imageService.AddAsync(image);
+
+            return image;
         }
     }
 }

@@ -48,12 +48,12 @@
 
                     <div class="row">
                         <div class="col-6">Марка:</div>
-                        <div class="col-6">@Model.Make</div>
+                        <div class="col-6">@Model.Make.Name</div>
                     </div>
 
                     <div class="row">
                         <div class="col-6">Модел:</div>
-                        <div class="col-6">@Model.Model</div>
+                        <div class="col-6">@Model.Model.Name</div>
                     </div>
 
                     <div class="row">
@@ -88,7 +88,7 @@
 
                     <div class="row">
                         <div class="col-6">Дата на производство:</div>
-                        <div class="col-6">@Model.ManufactureDate.Month  @Model.ManufactureDate.Year г.</div>
+                        <div class="col-6">@Model.ManufactureDate.ToString("MM/yyyy") г.</div>
                     </div>
 
                     <div class="row">
@@ -107,7 +107,9 @@
                             <input onclick="window.history.back();" class="container" style="margin-top:20px;" type="button" value="ПРОМЕНИ ТЕКСТА" />
                         </div>
                         <div class="col-6">
-                            <input onclick="window.location='/Posts/Images';" class="container" style="margin-top:20px;" type="button" value="ДОБАВИ СНИМКИ И ВИДЕО" />
+                            <form asp-controller="Posts" asp-action="Images" asp-route-id="@Model.PostId" method="post">
+                                <input class="container" style="margin-top:20px;" type="submit" value="ДОБАВИ СНИМКИ И ВИДЕО" />
+                            </form>
                         </div>
                     </div>
                 </div>

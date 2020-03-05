@@ -9,6 +9,7 @@
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Routing;
     using Newtonsoft.Json;
     using Sabv.Common;
     using Sabv.Data.Models.Cities;
@@ -26,6 +27,7 @@
         private readonly IExtrasService extrasService;
         private readonly IVehicleCategoryService vehicleCategoryService;
         private readonly IImageService imageService;
+        private readonly IPostImagesService postImagesService;
         private readonly UserManager<ApplicationUser> userManager;
         private readonly ICategoryService categoryService;
         private readonly IMakesService makesService;
@@ -42,7 +44,8 @@
             IExtrasService extrasService,
             IVehicleCategoryService vehicleCategoryService,
             UserManager<ApplicationUser> userManager,
-            IImageService imageService)
+            IImageService imageService,
+            IPostImagesService postImagesService)
         {
             this.postsService = postsService;
             this.categoryService = categoryService;
@@ -53,6 +56,7 @@
             this.extrasService = extrasService;
             this.vehicleCategoryService = vehicleCategoryService;
             this.imageService = imageService;
+            this.postImagesService = postImagesService;
             this.userManager = userManager;
         }
 
@@ -138,9 +142,8 @@
         [Authorize]
         public async Task<IActionResult> Create(CreatePageInputModel inputModel)
         {
-            // TODO
-            // FIX CURRENT USER DONT WORK!!!
-
+            var email = this.HttpContext.User.Identities.FirstOrDefault().Name;
+            var user = await this.userManager.FindByEmailAsync(email);
 
             var city = this.citiesService.GetAll().FirstOrDefault(x => x.Name == inputModel.City);
             var category = this.categoryService.GetAll().FirstOrDefault(x => x.Name == inputModel.Category);
@@ -150,8 +153,8 @@
 
             var post = new Post()
             {
-                //ApplicationUser = user,
-                //ApplicationUserId = user.Id,
+                ApplicationUser = user,
+                ApplicationUserId = user.Id,
                 Category = category,
                 CategoryId = category.Id,
                 City = city,
@@ -225,7 +228,7 @@
                 VehicleCategory = vehicleCategory,
                 VehicleCategoryId = vehicleCategory.Id,
                 Mileage = inputModel.Mileage,
-                Name = inputModel.Make + " " + inputModel.Model + " " + inputModel.Modification,
+                Name = make.Name + " " + model.Name + " " + inputModel.Modification,
             };
 
             await this.postsService.AddAsync(post);
@@ -239,9 +242,11 @@
             };
 
             post.Images.Add(defaultPostImage);
+            await this.postImagesService.AddAsync(defaultPostImage);
 
             var checkTextViewModel = new CheckTextViewModel()
             {
+                PostId = post.Id,
                 Category = post.Category,
                 VehicleCategory = post.VehicleCategory,
                 TransmissionType = post.TransmissionType,
@@ -259,14 +264,33 @@
                 City = post.City,
             };
 
-            return this.RedirectToAction("CheckText", new { checkTextViewModel });
+            return this.View("CheckText", checkTextViewModel);
         }
 
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> Images(List<IFormFile> files)
+        public async Task<IActionResult> Images(List<IFormFile> files, int id)
         {
-            await this.cloudinaryService.UploadAsync(files);
+            var images = await this.cloudinaryService.UploadAsync(files);
+
+            if (images.Count > 0)
+            {
+                var isDefaultImageRemoved = await this.postImagesService.RemoveAsync(id, GlobalConstants.DefaultImageId);
+
+                if (isDefaultImageRemoved)
+                {
+                    foreach (var image in images)
+                    {
+                        await this.postImagesService.AddAsync(new PostImage()
+                        {
+                            Image = image,
+                            ImageId = image.Id,
+                            Post = this.postsService.GetById(id),
+                            PostId = id,
+                        });
+                    }
+                }
+            }
 
             return this.View();
         }

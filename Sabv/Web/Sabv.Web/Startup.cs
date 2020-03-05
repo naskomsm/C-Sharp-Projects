@@ -81,6 +81,7 @@
             services.AddTransient<IVehicleCategoryService, VehicleCategoryService>();
             services.AddTransient<ICloudinaryService, CloudinaryService>();
             services.AddTransient<IImageService, ImageService>();
+            services.AddTransient<IPostImagesService, PostImagesService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -98,7 +99,7 @@
                     dbContext.Database.Migrate();
                 }
 
-                //new ApplicationDbContextSeeder().SeedAsync(dbContext, serviceScope.ServiceProvider).GetAwaiter().GetResult();
+                new ApplicationDbContextSeeder().SeedAsync(dbContext, serviceScope.ServiceProvider).GetAwaiter().GetResult();
             }
 
             if (env.IsDevelopment())

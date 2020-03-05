@@ -10,8 +10,8 @@ using Sabv.Data;
 namespace Sabv.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200304131555_InitializingDbSets")]
-    partial class InitializingDbSets
+    [Migration("20200305090653_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

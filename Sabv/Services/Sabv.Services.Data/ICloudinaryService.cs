@@ -4,11 +4,12 @@
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Http;
+    using Sabv.Data.Models.Images;
 
     public interface ICloudinaryService
     {
-        Task UploadAsync(ICollection<IFormFile> files);
+        Task<ICollection<Image>> UploadAsync(ICollection<IFormFile> files);
 
-        Task UploadAsync(string url);
+        Task<Image> UploadAsync(string url);
     }
 }
