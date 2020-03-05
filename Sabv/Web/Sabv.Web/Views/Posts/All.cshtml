@@ -29,7 +29,7 @@
                         <span>
                             <a class="col-md-4" asp-controller="Posts" asp-action="Details" asp-route-id="@post.Id">@post.Name</a>
                         </span>
-                        <div class="col-md-4 offset-md-4 font-weight-bold">@post.Price лв.</div>
+                        <div class="col-md-4 offset-md-4 font-weight-bold">@post.Price @post.Currency.ToString()</div>
                     </div>
                     <div class="row align-items-end">
                         <div class="col">

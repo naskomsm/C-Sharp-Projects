@@ -128,56 +128,76 @@
                 <hr />
                 <div class="row">
                     <div class="col-6 container">
-                        <div class="col-6 float-left">
-                            <img src="@GlobalConstants.BaseCloudinaryLink@imageService.GetById(@Model.LatestPosts.ToArray()[0].Images.FirstOrDefault(x => x.PostId == Model.LatestPosts.ToArray()[0].Id).ImageId).Url" class="img-thumbnail">
-                        </div>
+                        <a asp-controller="Posts" asp-action="Details" asp-route-id="@Model.LatestPosts.ToArray()[0].Id">
+                            <div class="col-6 float-left">
+                                <img src="@GlobalConstants.BaseCloudinaryLink@imageService.GetById(@Model.LatestPosts.ToArray()[0].Images.FirstOrDefault(x => x.PostId == Model.LatestPosts.ToArray()[0].Id).ImageId).Url" class="img-thumbnail">
+                            </div>
 
-                        <div class="col-6 float-right">
-                            <div class="row text-primary">@Model.LatestPosts.ToArray()[0].Name</div>
-                            <div class="row"><h6>@Model.LatestPosts.ToArray()[0].Price лв.</h6></div>
-                            <div class="row"><small>@Model.LatestPosts.ToArray()[0].Mileage км</small></div>
-                            <div class="row"><small>@Model.LatestPosts.ToArray()[0].City.Name</small></div>
-                        </div>
+                            <div class="col-6 float-right">
+                                <div class="row text-primary">@Model.LatestPosts.ToArray()[0].Name</div>
+                                <div class="row"><h6>@Model.LatestPosts.ToArray()[0].Price @Model.LatestPosts.ToArray()[0].Currency.ToString()</h6></div>
+                                <div class="row"><small>@Model.LatestPosts.ToArray()[0].Mileage км</small></div>
+                                <div class="row"><small>@Model.LatestPosts.ToArray()[0].City.Name</small></div>
+                            </div>
+                        </a>
                     </div>
 
                     <div class="col-6 container">
-                        <div class="col-6 float-left">
-                            <img src="@GlobalConstants.BaseCloudinaryLink@imageService.GetById(@Model.LatestPosts.ToArray()[1].Images.FirstOrDefault(x => x.PostId == Model.LatestPosts.ToArray()[1].Id).ImageId).Url" class="img-thumbnail">
-                        </div>
+                        <a asp-controller="Posts" asp-action="Details" asp-route-id="@Model.LatestPosts.ToArray()[1].Id">
+                            <div class="col-6 float-left">
+                                <img src="@GlobalConstants.BaseCloudinaryLink@imageService.GetById(@Model.LatestPosts.ToArray()[1].Images.FirstOrDefault(x => x.PostId == Model.LatestPosts.ToArray()[1].Id).ImageId).Url" class="img-thumbnail">
+                            </div>
 
-                        <div class="col-6 float-right">
-                            <div class="row text-primary">@Model.LatestPosts.ToArray()[1].Name</div>
-                            <div class="row"><h6>@Model.LatestPosts.ToArray()[1].Price лв.</h6></div>
-                            <div class="row"><small>@Model.LatestPosts.ToArray()[1].Mileage км</small></div>
-                            <div class="row"><small>@Model.LatestPosts.ToArray()[1].City.Name</small></div>
-                        </div>
+                            <div class="col-6 float-right">
+                                <div class="row text-primary">@Model.LatestPosts.ToArray()[1].Name</div>
+                                <div class="row"><h6>@Model.LatestPosts.ToArray()[1].Price @Model.LatestPosts.ToArray()[1].Currency.ToString()</h6></div>
+                                <div class="row"><small>@Model.LatestPosts.ToArray()[1].Mileage км</small></div>
+                                <div class="row"><small>@Model.LatestPosts.ToArray()[1].City.Name</small></div>
+                            </div>
+                        </a>
                     </div>
 
                 </div>
 
                 <div class="row">
                     <div class="col-6 container">
-                        <div class="col-6 float-left">
-                            <img src="@GlobalConstants.BaseCloudinaryLink@imageService.GetById(@Model.LatestPosts.ToArray()[2].Images.FirstOrDefault(x => x.PostId == Model.LatestPosts.ToArray()[2].Id).ImageId).Url" class="img-thumbnail">
-                        </div>
+                        <a asp-controller="Posts" asp-action="Details" asp-route-id="@Model.LatestPosts.ToArray()[2].Id">
+                            <div class="col-6 float-left">
+                                <img src="@GlobalConstants.BaseCloudinaryLink@imageService.GetById(@Model.LatestPosts.ToArray()[2].Images.FirstOrDefault(x => x.PostId == Model.LatestPosts.ToArray()[2].Id).ImageId).Url" class="img-thumbnail">
+                            </div>
 
-                        <div class="col-6 float-right">
-                            <div class="row text-primary">@Model.LatestPosts.ToArray()[2].Name</div>
-                            <div class="row"><h6>@Model.LatestPosts.ToArray()[2].Price лв.</h6></div>
-                            <div class="row"><small>@Model.LatestPosts.ToArray()[2].Mileage км</small></div>
-                            <div class="row"><small>@Model.LatestPosts.ToArray()[2].City.Name</small></div>
-                        </div>
+                            <div class="col-6 float-right">
+                                <div class="row text-primary">@Model.LatestPosts.ToArray()[2].Name</div>
+                                <div class="row"><h6>@Model.LatestPosts.ToArray()[2].Price @Model.LatestPosts.ToArray()[2].Currency.ToString()</h6></div>
+                                <div class="row"><small>@Model.LatestPosts.ToArray()[2].Mileage км</small></div>
+                                <div class="row"><small>@Model.LatestPosts.ToArray()[2].City.Name</small></div>
+                            </div>
+                        </a>
                     </div>
+
+
                     <div class="col-6 container">
+                        @*<a asp-controller="Posts" asp-action="Details" asp-route-id="@Model.LatestPosts.ToArray()[3].Id">
+                            <div class="col-6 float-left">
+                                <img src="@GlobalConstants.BaseCloudinaryLink@imageService.GetById(@Model.LatestPosts.ToArray()[3].Images.FirstOrDefault(x => x.PostId == Model.LatestPosts.ToArray()[3].Id).ImageId).Url" class="img-thumbnail">
+                            </div>
+
+                            <div class="col-6 float-right">
+                                <div class="row text-primary">@Model.LatestPosts.ToArray()[3].Name</div>
+                                <div class="row"><h6>@Model.LatestPosts.ToArray()[3].Price @Model.LatestPosts.ToArray()[3].Currency.ToString()</h6></div>
+                                <div class="row"><small>@Model.LatestPosts.ToArray()[3].Mileage км</small></div>
+                                <div class="row"><small>@Model.LatestPosts.ToArray()[3].City.Name</small></div>
+                            </div>
+                        </a>*@
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-6 container">
-                        
+
                     </div>
                     <div class="col-6 container">
-                        
+
                     </div>
                 </div>
             </div>

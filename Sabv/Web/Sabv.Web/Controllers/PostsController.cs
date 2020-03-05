@@ -3,16 +3,13 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Security.Claims;
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.AspNetCore.Routing;
     using Newtonsoft.Json;
     using Sabv.Common;
-    using Sabv.Data.Models.Cities;
     using Sabv.Data.Models.Extras;
     using Sabv.Data.Models.Posts;
     using Sabv.Data.Models.PostsImages;
@@ -292,7 +289,7 @@
                 }
             }
 
-            return this.View();
+            return this.RedirectToAction("Details", "Posts", new { id });
         }
     }
 }

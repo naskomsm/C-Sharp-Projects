@@ -22,6 +22,7 @@ $("#makesSelect").on("change", function () {
 });
 
 $("#pageHeader").html("Всички");
+
 $("#categorySelect").on("change", function () {
     var selectedText = $("#categorySelect option:selected").text().trim();
     $("#pageHeader").html(selectedText);

@@ -25,6 +25,8 @@
 
         public decimal Price { get; set; }
 
+        public Currency Currency { get; set; }
+
         public string PhoneNumber { get; set; }
 
         public string Email { get; set; }

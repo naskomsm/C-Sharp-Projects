@@ -22,7 +22,7 @@
 <div class="row">
 
     <div class="col container mt-3">
-        <h6>Публикуване на безплатна обява - {Post category} - Добавяне на снимки и видео (Стъпка 3)</h6>
+        <h6>Публикуване на безплатна обява - Добавяне на снимки и видео (Стъпка 3)</h6>
         <hr />
 
         <div class="container row text-center" style="border-style: groove;border-color: silver;background-color: #DFF1FF">
@@ -38,7 +38,7 @@
         <div class="container row mt-4 text-center">
             <div class="col align-self-center">
                 <h3>Можете да избирате по няколко снимки на веднъж: </h3>
-                <form method="post" asp-controller="Posts" asp-action="Images" enctype="multipart/form-data">
+                <form method="post" asp-controller="Posts" asp-action="Images"  enctype="multipart/form-data">
                     Изберете файлове: <input type="file" name="files" multiple><br><br>
                     <input class="container" type="submit" value="КАЧИ СНИМКИТЕ" />
                 </form>

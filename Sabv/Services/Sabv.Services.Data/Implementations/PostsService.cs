@@ -61,6 +61,7 @@
 
             var model = new DetailsViewModel()
             {
+                Currency = post.Currency,
                 City = this.cityRepo.All().FirstOrDefault(x => x.Id == post.CityId),
                 Exterior = this.exteriorRepo.All().FirstOrDefault(x => x.Id == post.ExteriorId),
                 Color = post.Color,

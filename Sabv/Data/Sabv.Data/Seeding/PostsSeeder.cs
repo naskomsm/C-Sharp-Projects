@@ -62,6 +62,9 @@
 
             var firstPost = new Post()
             {
+                Condition = Condition.Used,
+                Currency = Currency.LV,
+                Email = "firstEmail@abv.bg",
                 ApplicationUserId = userManager.Users.ToArray()[0].Id,
                 ApplicationUser = userManager.Users.ToArray()[0],
                 Category = categoryService.GetById(1),
@@ -99,6 +102,9 @@
 
             var secondPost = new Post()
             {
+                Condition = Condition.Used,
+                Currency = Currency.EUR,
+                Email = "secondEmail@abv.bg",
                 ApplicationUserId = userManager.Users.ToArray()[0].Id,
                 ApplicationUser = userManager.Users.ToArray()[0],
                 Category = categoryService.GetById(1),
@@ -136,6 +142,9 @@
 
             var thirdPost = new Post()
             {
+                Condition = Condition.New,
+                Currency = Currency.USD,
+                Email = "thirdEmail@abv.bg",
                 ApplicationUserId = userManager.Users.ToArray()[0].Id,
                 ApplicationUser = userManager.Users.ToArray()[0],
                 Category = categoryService.GetById(1),
