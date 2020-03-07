@@ -1,13 +1,9 @@
-﻿@using Sabv.Web.ViewModels.Posts
-@using Sabv.Common
-@using Sabv.Services.Data
-
-@model DetailsViewModel
-
-@inject IImageService imageService
+﻿@using Sabv.Common
+@using Sabv.Web.ViewModels.Posts
+@model PostDetailsViewModel
 
 @{
-    ViewData["Title"] = "Детайли";
+    this.ViewData["Title"] = "Details";
 }
 
 <div class="row font-weight-bold justify-content-between">
@@ -23,7 +19,7 @@
     <h6>
         <span>
             <a class="col-md-4" href="https://autodata24.com/" target="_blank">
-                /Технически характеристики и разход на гориво/
+                More cars
             </a>
         </span>
     </h6>
@@ -33,63 +29,63 @@
 
     @*for now its only 1 image*@
     <div class="col-8">
-        <img src="@GlobalConstants.BaseCloudinaryLink@imageService.GetById(Model.Images.FirstOrDefault(x => x.PostId == Model.Id).ImageId).Url" class="img-thumbnail" width="600" height="150">
+        <img src="@GlobalConstants.BaseCloudinaryLink@Model.Images.FirstOrDefault().Image.Url" class="img-thumbnail" width="600" height="150">
     </div>
 
     <div class="col-4 text-center">
         <div class="row mb-2">
             <div class="col-4">
-                <img src="" class="img-thumbnail" width="100" height="50">
+                <img src="@GlobalConstants.BaseCloudinaryLink@Model.User.Image.Url" class="img-thumbnail" width="100" height="50">
             </div>
             <div class="col-8">
                 <div class="container text-center mt-3">
-                    @Model.City.Name, гр.@Model.City.Name
+                    @Model.City.Name
                     <h5>@Model.PhoneNumber</h5>
                 </div>
             </div>
         </div>
 
         <div class="row">
-            <div class="col-6">Дата на производство</div>
-            <div class="col-6">@Model.VehicleManufactureDate</div>
+            <div class="col-6">Manufacture date</div>
+            <div class="col-6">@Model.ManufactureDate.ToString("MM/dd/yyyy")</div>
         </div>
         <div class="row">
-            <div class="col-6">Тип двигател</div>
-            <div class="col-6">@Model.EngineType</div>
+            <div class="col-6">Engine type</div>
+            <div class="col-6">@Model.EngineType.ToString()</div>
         </div>
         <div class="row">
-            <div class="col-6">Мощност</div>
-            <div class="col-6">@Model.Horsepower к.с.</div>
+            <div class="col-6">Horsepower</div>
+            <div class="col-6">@Model.Horsepower</div>
         </div>
         <div class="row">
-            <div class="col-6">Евростандарт</div>
-            <div class="col-6">Евро @Model.Eurostandard</div>
+            <div class="col-6">Eurostandard</div>
+            <div class="col-6">Euro @((int)Model.Eurostandard)</div>
         </div>
         <div class="row">
-            <div class="col-6">Скоростна кутия</div>
-            <div class="col-6">@Model.TransmissionType</div>
+            <div class="col-6">Transmission type</div>
+            <div class="col-6">@Model.TransmissionType.ToString()</div>
         </div>
         <div class="row">
-            <div class="col-6">Категория</div>
+            <div class="col-6">Category</div>
             <div class="col-6">@Model.VehicleCategory.Name</div>
         </div>
         <div class="row">
-            <div class="col-6">Пробег</div>
+            <div class="col-6">Mileage</div>
             <div class="col-6">@Model.Mileage</div>
         </div>
         <div class="row">
-            <div class="col-6">Цвят</div>
-            <div class="col-6">@Model.Color</div>
+            <div class="col-6">Color</div>
+            <div class="col-6">@Model.Color.Name</div>
         </div>
         <div class="row">
             <div class="container">
-                <h6>Запази: <a asp-controller="Posts" asp-action="AddFavourite" asp-route-id="@Model.Id"><i class="far fa-star"></i></a></h6>
+                <h6>Add to favourites: <a asp-controller="Posts" asp-action="AddFavourite" asp-route-id="@Model.Id"><i class="far fa-star"></i></a></h6>
             </div>
         </div>
 
         <div class="row">
             <div class="container">
-                <h6>Принтирай  <a asp-controller="Posts" asp-action="AddFavourite"><i class="fas fa-print"></i></a></h6>
+                <h6>Print  <a asp-controller="Posts" asp-action="AddFavourite"><i class="fas fa-print"></i></a></h6>
             </div>
         </div>
 
@@ -101,51 +97,6 @@
                     <a href="/Posts/AddFavourite"><i class="fab fa-linkedin-in"></i></a>
                 </h3>
             </div>
-        </div>
-    </div>
-</div>
-
-<hr />
-
-<div class="row justify-content-center">
-
-    <div class="col-3">
-        <div class="ml-2">
-            <p class="mb-1 small">Безопасност</p>
-            @foreach (var item in Model.Safety.GetAllTrueProperties)
-            {
-                <div>@item</div>
-            }
-        </div>
-    </div>
-
-    <div class="col-3">
-        <div class="ml-2">
-            <p class="mb-1 small">Комфорт</p>
-            @foreach (var item in Model.Comfort.GetAllTrueProperties)
-            {
-                <div>@item</div>
-            }
-        </div>
-    </div>
-
-    <div class="col-3">
-        <div class="ml-2">
-            <p class="mb-1 small">Екстериор</p>
-            @foreach (var item in Model.Exterior.GetAllTrueProperties)
-            {
-                <div>@item</div>
-            }
-        </div>
-    </div>
-
-    <div class="col-3">
-        <div class="ml-2">
-            <p class="mb-1 small">Други</p>
-            @foreach (var item in Model.Other.GetAllTrueProperties)
-            {
-                <div>@item</div>
-            }
         </div>
     </div>
 </div>

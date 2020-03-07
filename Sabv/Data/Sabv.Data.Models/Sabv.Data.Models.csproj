@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Services\Sabv.Services.Mapping\Sabv.Services.Mapping.csproj" />
     <ProjectReference Include="..\Sabv.Data.Common\Sabv.Data.Common.csproj" />
   </ItemGroup>
   

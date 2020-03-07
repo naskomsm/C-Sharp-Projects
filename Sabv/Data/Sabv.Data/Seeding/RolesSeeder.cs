@@ -4,10 +4,11 @@
     using System.Linq;
     using System.Threading.Tasks;
 
+    using Sabv.Common;
+    using Sabv.Data.Models;
+
     using Microsoft.AspNetCore.Identity;
     using Microsoft.Extensions.DependencyInjection;
-    using Sabv.Common;
-    using Sabv.Data.Models.Users.Roles;
 
     internal class RolesSeeder : ISeeder
     {

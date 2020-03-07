@@ -3,19 +3,21 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
-    using Sabv.Data.Models.Posts;
+    using Sabv.Data.Models;
     using Sabv.Web.ViewModels.Posts;
 
     public interface IPostsService
     {
+        IEnumerable<T> GetAll<T>();
+
+        IEnumerable<T> GetLatest<T>(int postCount);
+
         IEnumerable<Post> GetAll();
 
-        Post GetById(int id);
+        T GetDetails<T>(int id);
 
-        Task AddAsync(Post post);
+        IEnumerable<Post> Filter(PostDetailsInputModel inputModel);
 
-        DetailsViewModel GetDetails(int id);
-
-        IEnumerable<Post> GetLatestPosts();
+        Task AddAsync(Post postToAdd);
     }
 }

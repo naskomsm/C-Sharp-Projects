@@ -26,14 +26,14 @@
             var seeders = new List<ISeeder>
                           {
                               new RolesSeeder(),
-                              new SettingsSeeder(),
-                              new CategoriesSeeder(),
-                              new CitiesSeeder(),
+                              new ImagesSeeder(),
                               new UsersSeeder(),
-                              new ExtrasSeeder(),
+                              new CategorySeeder(),
+                              new CitiesSeeder(),
+                              new ColorSeeder(),
                               new MakesSeeder(),
                               new ModelsSeeder(),
-                              new VehicleCategoriesSeeder(),
+                              new VehicleCategorySeeder(),
                               new PostsSeeder(),
                           };
 

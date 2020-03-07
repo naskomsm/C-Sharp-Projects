@@ -6,7 +6,7 @@ $("#makesSelect").on("change", function () {
         $("#modelsSelect").html("");
 
         var optionElement = document.createElement("option");
-        optionElement.innerHTML = "Всички";
+        optionElement.innerHTML = "All";
         $("#modelsSelect").append(optionElement);
 
         var filtered = data.filter(function (model) {
@@ -21,7 +21,7 @@ $("#makesSelect").on("change", function () {
     })
 });
 
-$("#pageHeader").html("Всички");
+$("#pageHeader").html("All");
 
 $("#categorySelect").on("change", function () {
     var selectedText = $("#categorySelect option:selected").text().trim();

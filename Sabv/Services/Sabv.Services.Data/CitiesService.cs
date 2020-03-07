@@ -1,0 +1,38 @@
+﻿namespace Sabv.Services.Data
+{
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using Sabv.Data.Common.Repositories;
+    using Sabv.Data.Models;
+    using Sabv.Services.Mapping;
+
+    public class CitiesService : ICitiesService
+    {
+        private readonly IDeletableEntityRepository<City> citiesRepo;
+
+        public CitiesService(IDeletableEntityRepository<City> citiesRepo)
+        {
+            this.citiesRepo = citiesRepo;
+        }
+
+        public async Task AddAsync(string name)
+        {
+            await this.citiesRepo.AddAsync(new City()
+            {
+                Name = name,
+            });
+        }
+
+        public IEnumerable<T> GetAll<T>()
+        {
+            return this.citiesRepo.All().OrderBy(x => x.Name).To<T>().ToList();
+        }
+
+        public IEnumerable<City> GetAll()
+        {
+            return this.citiesRepo.All().OrderBy(x => x.Name).ToList();
+        }
+    }
+}

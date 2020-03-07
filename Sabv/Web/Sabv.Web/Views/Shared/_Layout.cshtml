@@ -1,5 +1,4 @@
 ﻿@using Sabv.Common
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,13 +28,16 @@
                     <partial name="_LoginPartial" />
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Posts" asp-action="Create">Публикуване</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Posts" asp-action="Search">Търсене</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Posts" asp-action="Search">Search</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" href="https://fakti.bg/dnes">Новини</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Posts" asp-action="Create">Create</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="All">Users</a>
                         </li>
                     </ul>
                 </div>

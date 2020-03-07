@@ -1,19 +1,17 @@
 ﻿namespace Sabv.Services.Data
 {
+    using Sabv.Data.Models;
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
-    using Sabv.Data.Models.Makes;
-    using Sabv.Data.Models.Models;
-
     public interface IMakesService
     {
+        IEnumerable<T> GetAll<T>();
+
+        Make GetMakeByName(string name);
+
         IEnumerable<Make> GetAll();
 
-        Make GetById(int id);
-
-        IEnumerable<Model> GetAllModels(int makeId);
-
-        Task AddAsync(Make make);
+        Task AddAsync(string name);
     }
 }

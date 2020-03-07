@@ -1,36 +1,43 @@
 ﻿namespace Sabv.Data.Seeding
 {
     using System;
+    using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Identity;
     using Microsoft.Extensions.DependencyInjection;
-    using Sabv.Data.Models.Users;
+    using Sabv.Data.Models;
+    using Sabv.Services.Data;
 
     public class UsersSeeder : ISeeder
     {
         public async Task SeedAsync(ApplicationDbContext dbContext, IServiceProvider serviceProvider)
         {
+            if (dbContext.Users.Any())
+            {
+                return;
+            }
+
             var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
-            await SeedUsersAsync(userManager);
-        }
+            var imagesService = serviceProvider.GetRequiredService<IImagesService>();
 
-        private static async Task SeedUsersAsync(UserManager<ApplicationUser> userManager)
-        {
-            var firstUser = new ApplicationUser()
+            var emails = new List<string>() { "naskokolev00@gmail.com", "dochka_koleva@abv.bg", "danielIvanov99@gmail.com" };
+            var password = "123456";
+
+            var defaultProfileImage = imagesService.GetAll().ToArray()[0];
+
+            foreach (var email in emails)
             {
-                Email = "naskokolev00@gmail.com",
-                UserName = "naskokolev00@gmail.com",
-            };
-
-            var secondUser = new ApplicationUser()
-            {
-                Email = "danielivanov99@gmail.com",
-                UserName = "danielivanov99@gmail.com",
-            };
-
-            await userManager.CreateAsync(firstUser, "random123");
-            await userManager.CreateAsync(secondUser, "random123");
+                await userManager.CreateAsync(
+                    new ApplicationUser()
+                    {
+                        Email = email,
+                        UserName = email,
+                        Image = defaultProfileImage,
+                        ImageId = defaultProfileImage.Id,
+                    }, password);
+            }
         }
     }
 }

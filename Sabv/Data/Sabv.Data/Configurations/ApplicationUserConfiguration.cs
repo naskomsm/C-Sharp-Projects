@@ -1,8 +1,8 @@
 ﻿namespace Sabv.Data.Configurations
 {
+    using Sabv.Data.Models;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
-    using Sabv.Data.Models.Users;
 
     public class ApplicationUserConfiguration : IEntityTypeConfiguration<ApplicationUser>
     {

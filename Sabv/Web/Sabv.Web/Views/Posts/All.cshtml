@@ -1,18 +1,14 @@
-﻿@using Sabv.Web.ViewModels.Posts
-@using Sabv.Common
-@using Sabv.Services.Data
-
-@model AllPostsViewModel
-
-@inject IImageService imageService
+﻿@using Sabv.Common
+@using Sabv.Web.ViewModels.Posts
+@model AllPageViewModel
 
 @{
-    ViewData["Title"] = "Обяви";
+    this.ViewData["Title"] = "All";
 }
 
 <div class="row">
     <div class="col">
-        <h6>Обяви</h6>
+        <h6>Posts</h6>
         <hr />
         @foreach (var post in Model.Posts)
         {
@@ -20,7 +16,7 @@
                 <div class="col-4">
                     <span>
                         <a asp-controller="Posts" asp-action="Details" asp-route-id="@post.Id">
-                            <img src="@GlobalConstants.BaseCloudinaryLink@imageService.GetById(@post.Images.FirstOrDefault(x => x.PostId == post.Id).ImageId).Url" class="img-thumbnail" width="200" height="150">
+                            <img src="@GlobalConstants.BaseCloudinaryLink@post.Images.FirstOrDefault().Image.Url" class="img-thumbnail" width="200" height="150">
                         </a>
                     </span>
                 </div>
@@ -33,9 +29,9 @@
                     </div>
                     <div class="row align-items-end">
                         <div class="col">
-                            пробег: @post.Mileage, цвят: @post.Color, двигател: @post.EngineType,
+                            пробег: @post.Mileage, цвят: @post.Color.Name, двигател: @post.EngineType,
                             к.с: @post.Horsepower, скоростна кутия: @post.TransmissionType,
-                            година на произв.: @post.ManufactureDate
+                            година на произв.: @post.ManufactureDate.ToString("MM/dd/yyyy")
                         </div>
                     </div>
                 </div>

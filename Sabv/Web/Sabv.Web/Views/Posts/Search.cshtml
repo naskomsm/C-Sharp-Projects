@@ -1,0 +1,237 @@
+﻿@using Sabv.Common
+@using Sabv.Web.ViewModels.Posts
+@model SearchViewModel
+@{
+    this.ViewData["Title"] = "Search";
+}
+
+<form asp-controller="Posts" asp-action="Search" method="post">
+
+    <div class="row">
+        <div class="col container mt-3">
+            <h6 id="pageHeader">Search in SellAndBuyVehicles</h6>
+            <hr />
+            <div>
+
+                <div class="row mt-2 mb-2">
+                    <div class="col-4">
+                        <div class="ml-2">
+                            <p class="mb-1 small">Post category</p>
+                            <select class="mdb-select md-form container" id="categorySelect" name="postCategory">
+                                <option>All</option>
+                                @foreach (var item in Model.Categories)
+                                {
+                                    <option>@item.Name</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-4 pl-5">
+                        <p class="mb-1 small">Condition</p>
+                        <input type="radio" id="condition" name="condition" value="Used" checked>
+                        <label for="2">Used</label>
+                        <input type="radio" id="condition" name="condition" value="New">
+                        <label for="1">New</label>
+                    </div>
+
+                </div>
+
+                <div class="row mt-2 mb-2">
+
+                    <div class="col-3">
+                        <div class="ml-2">
+                            <p class="mb-1 small">Make</p>
+                            <select class="mdb-select md-form container" id="makesSelect" name="make">
+                                <option value="0">All</option>
+                                @foreach (var make in Model.Makes)
+                                {
+                                    <option value="@make.Id">@make.Name</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-3">
+                        <div class="ml-2">
+                            <p class="mb-1 small">Model</p>
+                            <select class="mdb-select md-form container" id="modelsSelect" name="model">
+                                <option>All</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-3">
+                        <div class="ml-2">
+                            <p class="mb-1 small">Max mileage in km</p>
+                            <input class="form-control form-control-sm container" type="number" name="maxMileage" min="5">
+                        </div>
+                    </div>
+
+                    <div class="col-3 pl-0 pr-4">
+                        <div class="ml-2">
+                            <p class="mb-1 small">Engine type</p>
+                            <select class="mdb-select md-form container" name="engineType">
+                                <option>All</option>
+                                <option value="Petrol">Petrol</option>
+                                <option value="Disel">Disel</option>
+                                <option value="Electric">Electric</option>
+                                <option value="Hybrid">Hybrid</option>
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row mt-2 mb-2">
+
+                    <div class="col-2">
+                        <div class="ml-2">
+                            <p class="mb-1 small">Horsepower (from)</p>
+                            <input class="form-control form-control-sm container" type="number" name="horsePowerFrom" min="1" max="3000">
+                        </div>
+                    </div>
+
+                    <div class="col-2">
+                        <div class="ml-2">
+                            <p class="mb-1 small">To</p>
+                            <input class="form-control form-control-sm container" type="number" name="horsePowerTo" min="1" max="3000">
+                        </div>
+                    </div>
+
+                    <div class="col-2">
+                        <div class="ml-2">
+                            <p class="mb-1 small">Eurostandard</p>
+                            <select class="mdb-select md-form container" name="eurostandard">
+                                <option>All</option>
+                                <option value="1">Euro 1</option>
+                                <option value="2">Euro 2</option>
+                                <option value="3">Euro 3</option>
+                                <option value="4">Euro 4</option>
+                                <option value="5">Euro 5</option>
+                                <option value="6">Euro 6</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-3">
+                        <div class="ml-2">
+                            <p class="mb-1 small">Transmission type</p>
+                            <select class="mdb-select md-form container" name="transmissionType">
+                                <option>All</option>
+                                <option value="Manual">Manual</option>
+                                <option value="Automatic">Automatic</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-3 pl-0 pr-4">
+                        <div class="ml-2">
+                            <p class="mb-1 small">Category</p>
+                            <select class="mdb-select md-form container" name="carCategory">
+                                <option>All</option>
+                                @foreach (var item in Model.VehicleCategories)
+                                {
+                                    <option>@item.Name</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row mt-2 mb-2">
+                    <div class="col-2">
+                        <div class="ml-2">
+                            <p class="mb-1 small">Price (From)</p>
+                            <input class="form-control form-control-sm container" type="number" name="priceFrom"  min="200" max="10000000">
+                        </div>
+                    </div>
+
+                    <div class="col-2">
+                        <div class="ml-2">
+                            <p class="mb-1 small">To</p>
+                            <input class="form-control form-control-sm container" type="number" name="priceTo"  min="200" max="10000000">
+                        </div>
+                    </div>
+
+                    <div class="col-2">
+                        <div class="ml-2">
+                            <p class="mb-1 small">Currency</p>
+                            <select class="mdb-select md-form container" name="currency">
+                                <option>All</option>
+                                <option value="LV">LV</option>
+                                <option value="USD">USD</option>
+                                <option value="EUR">EUR</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-3">
+                        <div class="ml-2">
+                            <p class="mb-1 small">Manufacture date (from)</p>
+                            <select class="mdb-select md-form container" name="yearFrom">
+                                <option>All</option>
+                                @for (int i = 1990; i < 2020; i++)
+                                {
+                                    <option>@i</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-3 pl-0 pr-4">
+                        <div class="ml-2">
+                            <p class="mb-1 small">to</p>
+                            <select class="mdb-select md-form container" name="yearTo">
+                                <option>All</option>
+                                @for (int i = 1990; i < 2020; i++)
+                                {
+                                    <option>@i</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row mt-2 mb-2">
+                    <div class="col-6">
+                        <div class="ml-2">
+                            <p class="mb-1 small">Color</p>
+                            <select class="mdb-select md-form container" name="color">
+                                <option>All</option>
+                                @foreach (var item in Model.Colors)
+                                {
+                                    <option>@item.Name</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-6 pl-0 pr-4">
+                        <div class="ml-2">
+                            <p class="mb-1 small">City</p>
+                            <select class="mdb-select md-form container" name="town">
+                                <option>All</option>
+                                @foreach (var item in Model.Cities)
+                                {
+                                    <option>@item.Name</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row mt-4 mb-2">
+                    <div class="col-md-4 offset-md-4 pl-0 pr-4">
+                        <div class="ml-2">
+                            <input class="container" style="margin-top:20px;" type="submit" value="ТЪРСИ" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

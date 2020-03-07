@@ -10,16 +10,6 @@
     using Microsoft.EntityFrameworkCore;
     using Sabv.Data.Common.Models;
     using Sabv.Data.Models;
-    using Sabv.Data.Models.Categories;
-    using Sabv.Data.Models.Cities;
-    using Sabv.Data.Models.Extras;
-    using Sabv.Data.Models.Images;
-    using Sabv.Data.Models.Makes;
-    using Sabv.Data.Models.Models;
-    using Sabv.Data.Models.Posts;
-    using Sabv.Data.Models.PostsImages;
-    using Sabv.Data.Models.Users;
-    using Sabv.Data.Models.Users.Roles;
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, string>
     {
@@ -33,29 +23,21 @@
         {
         }
 
-        public DbSet<Setting> Settings { get; set; }
-
         public DbSet<City> Cities { get; set; }
 
         public DbSet<Make> Makes { get; set; }
+
+        public DbSet<Color> Colors { get; set; }
 
         public DbSet<Model> Models { get; set; }
 
         public DbSet<Category> Categories { get; set; }
 
-        public DbSet<VehicleCategory> VehicleCategory { get; set; }
+        public DbSet<VehicleCategory> VehicleCategories { get; set; }
 
         public DbSet<Image> Images { get; set; }
 
         public DbSet<Post> Posts { get; set; }
-
-        public DbSet<Comfort> Comforts { get; set; }
-
-        public DbSet<Exterior> Exteriors { get; set; }
-
-        public DbSet<Other> Others { get; set; }
-
-        public DbSet<Safety> Safeties { get; set; }
 
         public DbSet<PostImage> PostImages { get; set; }
 

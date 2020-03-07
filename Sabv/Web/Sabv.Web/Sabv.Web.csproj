@@ -20,12 +20,12 @@
 
   <ItemGroup>
     <PackageReference Include="CloudinaryDotNet" Version="1.10.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="3.1.2" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.1" />
     <PackageReference Include="BuildBundlerMinifier" Version="3.2.435" />
     <PackageReference Include="Microsoft.Web.LibraryManager.Build" Version="2.0.96" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.2" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.2" />
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.164" PrivateAssets="all">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
@@ -40,11 +40,5 @@
     <ProjectReference Include="..\..\Services\Sabv.Services\Sabv.Services.csproj" />
     <ProjectReference Include="..\Sabv.Web.Infrastructure\Sabv.Web.Infrastructure.csproj" />
     <ProjectReference Include="..\Sabv.Web.ViewModels\Sabv.Web.ViewModels.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Update="wwwroot\datasets\MakesAndItsModels.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
 </Project>

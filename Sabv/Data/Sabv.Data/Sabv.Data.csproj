@@ -46,8 +46,4 @@
     <ProjectReference Include="..\Sabv.Data.Models\Sabv.Data.Models.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Migrations\" />
-  </ItemGroup>
-
 </Project>

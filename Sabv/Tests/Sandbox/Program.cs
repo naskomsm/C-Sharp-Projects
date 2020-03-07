@@ -5,21 +5,21 @@
     using System.IO;
     using System.Threading.Tasks;
 
+    using Sabv.Data;
+    using Sabv.Data.Common;
+    using Sabv.Data.Common.Repositories;
+    using Sabv.Data.Models;
+    using Sabv.Data.Repositories;
+    using Sabv.Data.Seeding;
+    using Sabv.Services.Data;
+    using Sabv.Services.Messaging;
+
     using CommandLine;
+
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
-    using Sabv.Data;
-    using Sabv.Data.Common;
-    using Sabv.Data.Common.Repositories;
-    using Sabv.Data.Models.Users;
-    using Sabv.Data.Models.Users.Roles;
-    using Sabv.Data.Repositories;
-    using Sabv.Data.Seeding;
-    using Sabv.Services.Data;
-    using Sabv.Services.Data.Implementations;
-    using Sabv.Services.Messaging;
 
     public static class Program
     {
@@ -52,10 +52,6 @@
         {
             var sw = Stopwatch.StartNew();
 
-            var settingsService = serviceProvider.GetService<ISettingsService>();
-            Console.WriteLine($"Count of settings: {settingsService.GetCount()}");
-
-            Console.WriteLine(sw.Elapsed);
             return await Task.FromResult(0);
         }
 
@@ -81,7 +77,6 @@
 
             // Application services
             services.AddTransient<IEmailSender, NullMessageSender>();
-            services.AddTransient<ISettingsService, SettingsService>();
         }
     }
 }

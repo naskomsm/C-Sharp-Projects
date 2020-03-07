@@ -1,295 +1,87 @@
 ﻿namespace Sabv.Web.Controllers
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-    using Microsoft.AspNetCore.Authorization;
-    using Microsoft.AspNetCore.Http;
-    using Microsoft.AspNetCore.Identity;
+
     using Microsoft.AspNetCore.Mvc;
-    using Newtonsoft.Json;
-    using Sabv.Common;
-    using Sabv.Data.Models.Extras;
-    using Sabv.Data.Models.Posts;
-    using Sabv.Data.Models.PostsImages;
-    using Sabv.Data.Models.Users;
     using Sabv.Services.Data;
+    using Sabv.Services.Mapping;
     using Sabv.Web.ViewModels.Posts;
 
     public class PostsController : BaseController
     {
         private readonly IPostsService postsService;
-        private readonly ICloudinaryService cloudinaryService;
-        private readonly IExtrasService extrasService;
-        private readonly IVehicleCategoryService vehicleCategoryService;
-        private readonly IImageService imageService;
-        private readonly IPostImagesService postImagesService;
-        private readonly UserManager<ApplicationUser> userManager;
-        private readonly ICategoryService categoryService;
-        private readonly IMakesService makesService;
         private readonly ICitiesService citiesService;
+        private readonly ICategoriesService categoriesService;
+        private readonly IMakesService makesService;
         private readonly IModelsService modelsService;
+        private readonly IVehicleCategoriesService vehicleCategoriesService;
+        private readonly IColorService colorService;
+        private readonly IJsonService jsonService;
 
         public PostsController(
-            ICategoryService categoryService,
-            IMakesService makesService,
-            ICitiesService citiesService,
-            IModelsService modelsService,
             IPostsService postsService,
-            ICloudinaryService cloudinaryService,
-            IExtrasService extrasService,
-            IVehicleCategoryService vehicleCategoryService,
-            UserManager<ApplicationUser> userManager,
-            IImageService imageService,
-            IPostImagesService postImagesService)
+            ICitiesService citiesService,
+            ICategoriesService categoriesService,
+            IMakesService makesService,
+            IModelsService modelsService,
+            IVehicleCategoriesService vehicleCategoriesService,
+            IColorService colorService,
+            IJsonService jsonService)
         {
             this.postsService = postsService;
-            this.categoryService = categoryService;
-            this.makesService = makesService;
             this.citiesService = citiesService;
+            this.categoriesService = categoriesService;
+            this.makesService = makesService;
             this.modelsService = modelsService;
-            this.cloudinaryService = cloudinaryService;
-            this.extrasService = extrasService;
-            this.vehicleCategoryService = vehicleCategoryService;
-            this.imageService = imageService;
-            this.postImagesService = postImagesService;
-            this.userManager = userManager;
-        }
-
-        [HttpGet]
-        public IActionResult All()
-        {
-            var posts = this.postsService.GetAll();
-
-            var model = new AllPostsViewModel()
-            {
-                Posts = posts,
-            };
-
-            return this.View(model);
+            this.vehicleCategoriesService = vehicleCategoriesService;
+            this.colorService = colorService;
+            this.jsonService = jsonService;
         }
 
         [HttpGet]
         public IActionResult Details(int id)
         {
-            var model = this.postsService.GetDetails(id);
-
+            var model = this.postsService.GetDetails<PostDetailsViewModel>(id);
             return this.View(model);
         }
 
         [HttpGet]
-        [Authorize]
-        public IActionResult Images()
+        public async Task<IActionResult> Search()
         {
-            return this.View();
-        }
+            await this.jsonService.WriteInJsonMakesAsync(this.modelsService.GetAll().ToArray());
 
-        [HttpGet]
-        public IActionResult CheckText(CheckTextViewModel checkTextViewModel)
-        {
-            return this.View(checkTextViewModel);
-        }
-
-        [HttpGet]
-        [Authorize]
-        public async Task<IActionResult> Create()
-        {
-            var categories = this.categoryService.GetAll();
-            var makes = this.makesService.GetAll();
-            var cities = this.citiesService.GetAll();
-            var models = this.modelsService.GetAll();
-
-            var settings = new JsonSerializerSettings()
+            var model = new SearchViewModel()
             {
-                ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
-            };
-
-            string json = JsonConvert.SerializeObject(models.ToArray(), settings);
-            string content = System.IO.File.ReadAllText(GlobalConstants.MakesAndModelsJsonPath);
-            if (!content.Contains(json))
-            {
-                System.IO.File.WriteAllText(GlobalConstants.MakesAndModelsJsonPath, json);
-            }
-
-            var jsonStringColors = await System.IO.File.ReadAllTextAsync(GlobalConstants.ColorsJsonPath);
-            var jsonStringMonths = await System.IO.File.ReadAllTextAsync(GlobalConstants.MonthsJsonPath);
-
-            var parsedDataColors = JsonConvert.DeserializeObject<string[]>(jsonStringColors);
-            var parsedDataMonths = JsonConvert.DeserializeObject<string[]>(jsonStringMonths);
-
-            var model = new CreatePageViewModel()
-            {
-                Categories = categories,
-                Cities = cities,
-                Makes = makes,
-                Colors = parsedDataColors,
-                Comfort = this.extrasService.GetAllComforts().FirstOrDefault(),
-                Exterior = this.extrasService.GetAllExteriors().FirstOrDefault(),
-                Other = this.extrasService.GetAllOthers().FirstOrDefault(),
-                Safety = this.extrasService.GetAllSafeties().FirstOrDefault(),
-                Months = parsedDataMonths,
-                VehicleCategories = this.vehicleCategoryService.GetAll(),
+                Categories = this.categoriesService.GetAll().ToList(),
+                Cities = this.citiesService.GetAll().ToList(),
+                Colors = this.colorService.GetAll().ToList(),
+                Makes = this.makesService.GetAll().ToList(),
+                VehicleCategories = this.vehicleCategoriesService.GetAll().ToList(),
             };
 
             return this.View(model);
         }
 
         [HttpPost]
-        [Authorize]
-        public async Task<IActionResult> Create(CreatePageInputModel inputModel)
+        public IActionResult Search(PostDetailsInputModel inputModel)
         {
-            var email = this.HttpContext.User.Identities.FirstOrDefault().Name;
-            var user = await this.userManager.FindByEmailAsync(email);
+            var filteredPosts = this.postsService.Filter(inputModel).AsQueryable();
 
-            var city = this.citiesService.GetAll().FirstOrDefault(x => x.Name == inputModel.City);
-            var category = this.categoryService.GetAll().FirstOrDefault(x => x.Name == inputModel.Category);
-            var make = this.makesService.GetById(int.Parse(inputModel.Make));
-            var model = this.modelsService.GetAll().FirstOrDefault(x => x.Name == inputModel.Model);
-            var vehicleCategory = this.vehicleCategoryService.GetAll().FirstOrDefault(x => x.Name == inputModel.VehicleCategory);
 
-            var post = new Post()
+            var viewmodel = new AllPageViewModel()
             {
-                ApplicationUser = user,
-                ApplicationUserId = user.Id,
-                Category = category,
-                CategoryId = category.Id,
-                City = city,
-                CityId = city.Id,
-                Color = inputModel.Color,
-                Comfort = new Comfort()
-                {
-                    ACC = inputModel.ACC,
-                    Airmatic = inputModel.Airmatic,
-                    ASS = inputModel.ASS,
-                    Bluetooth = inputModel.Bluetooth,
-                    BordComputer = inputModel.BordComputer,
-                    DVD = inputModel.DVD,
-                    ElectricWindows = inputModel.ElectricWindows,
-                    ElectricMirrors = inputModel.ElectricMirrors,
-                    Navigation = inputModel.Navigation,
-                    Steptronic = inputModel.Steptronic,
-                    USB = inputModel.USB,
-                    SeatHeat = inputModel.SeatHeat,
-                    LightSensor = inputModel.LightSensor,
-                    Keyless = inputModel.Keyless,
-                    EPS = inputModel.EPS,
-                },
-                Exterior = new Exterior()
-                {
-                    FourDoors = inputModel.FourDoors,
-                    Rims = inputModel.Rims,
-                    LED = inputModel.LED,
-                    Metalic = inputModel.Metalic,
-                },
-                Other = new Other()
-                {
-                    AllWheelDrive = inputModel.AllWheelDrive,
-                    LongBase = inputModel.LongBase,
-                    Service = inputModel.Service,
-                },
-                Safety = new Safety()
-                {
-                    ABS = inputModel.ABS,
-                    HDC = inputModel.HDC,
-                    ESP = inputModel.ESP,
-                    TPMS = inputModel.TPMS,
-                    EBD = inputModel.EBD,
-                    DSA = inputModel.DSA,
-                    Distronic = inputModel.Distronic,
-                    PDC = inputModel.PDC,
-                    Isofix = inputModel.Isofix,
-                    AFL = inputModel.AFL,
-                    Airbags = inputModel.Airbags,
-                    ASC = inputModel.ASC,
-                    ASR = inputModel.ASR,
-                    BAS = inputModel.BAS,
-                    DBS = inputModel.DBS,
-                },
-                Horsepower = inputModel.Horsepower,
-                Make = make,
-                MakeId = make.Id,
-                Model = model,
-                ModelId = model.Id,
-                EngineType = inputModel.EngineType,
-                Eurostandard = inputModel.Eurostandard,
-                ManufactureDate = new DateTime(inputModel.Year, inputModel.Month, 1),
-                Description = inputModel.Descripton ?? "Няма описание",
-                Condition = inputModel.Condition,
-                CreatedOn = DateTime.UtcNow,
-                Email = inputModel.Email,
-                IsDeleted = false,
-                PhoneNumber = inputModel.PhoneNumber,
-                Price = inputModel.Price,
-                TransmissionType = inputModel.TransmissionType,
-                VehicleCategory = vehicleCategory,
-                VehicleCategoryId = vehicleCategory.Id,
-                Mileage = inputModel.Mileage,
-                Name = make.Name + " " + model.Name + " " + inputModel.Modification,
+                Posts = filteredPosts.To<AllPagePostViewModel>().ToList(),
             };
 
-            await this.postsService.AddAsync(post);
-
-            var defaultPostImage = new PostImage()
-            {
-                Image = this.imageService.GetById(GlobalConstants.DefaultImageId),
-                ImageId = GlobalConstants.DefaultImageId,
-                Post = post,
-                PostId = post.Id,
-            };
-
-            post.Images.Add(defaultPostImage);
-            await this.postImagesService.AddAsync(defaultPostImage);
-
-            var checkTextViewModel = new CheckTextViewModel()
-            {
-                PostId = post.Id,
-                Category = post.Category,
-                VehicleCategory = post.VehicleCategory,
-                TransmissionType = post.TransmissionType,
-                Eurostandard = post.Eurostandard,
-                EngineType = post.EngineType,
-                Color = post.Color,
-                Currency = inputModel.Currency,
-                Email = post.Email,
-                Make = post.Make,
-                ManufactureDate = post.ManufactureDate,
-                Mileage = post.Mileage,
-                Model = post.Model,
-                PhoneNumber = post.PhoneNumber,
-                Price = post.Price,
-                City = post.City,
-            };
-
-            return this.View("CheckText", checkTextViewModel);
+            return this.View("All", viewmodel);
         }
 
-        [HttpPost]
-        [Authorize]
-        public async Task<IActionResult> Images(List<IFormFile> files, int id)
+        [HttpGet]
+        public IActionResult All(AllPageViewModel viewmodel)
         {
-            var images = await this.cloudinaryService.UploadAsync(files);
-
-            if (images.Count > 0)
-            {
-                var isDefaultImageRemoved = await this.postImagesService.RemoveAsync(id, GlobalConstants.DefaultImageId);
-
-                if (isDefaultImageRemoved)
-                {
-                    foreach (var image in images)
-                    {
-                        await this.postImagesService.AddAsync(new PostImage()
-                        {
-                            Image = image,
-                            ImageId = image.Id,
-                            Post = this.postsService.GetById(id),
-                            PostId = id,
-                        });
-                    }
-                }
-            }
-
-            return this.RedirectToAction("Details", "Posts", new { id });
+            return this.View(viewmodel);
         }
     }
 }

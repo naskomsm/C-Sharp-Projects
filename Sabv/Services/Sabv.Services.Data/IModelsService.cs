@@ -3,14 +3,14 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
-    using Sabv.Data.Models.Models;
+    using Sabv.Data.Models;
 
     public interface IModelsService
     {
+        IEnumerable<T> GetAll<T>();
+
+        Task AddAsync(string name, Make make);
+
         IEnumerable<Model> GetAll();
-
-        Model GetById(int id);
-
-        Task AddAsync(Model model);
     }
 }

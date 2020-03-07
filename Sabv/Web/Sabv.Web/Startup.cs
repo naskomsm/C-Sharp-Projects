@@ -1,7 +1,6 @@
 ﻿namespace Sabv.Web
 {
     using System.Reflection;
-
     using CloudinaryDotNet;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
@@ -13,12 +12,10 @@
     using Sabv.Data;
     using Sabv.Data.Common;
     using Sabv.Data.Common.Repositories;
-    using Sabv.Data.Models.Users;
-    using Sabv.Data.Models.Users.Roles;
+    using Sabv.Data.Models;
     using Sabv.Data.Repositories;
     using Sabv.Data.Seeding;
     using Sabv.Services.Data;
-    using Sabv.Services.Data.Implementations;
     using Sabv.Services.Mapping;
     using Sabv.Services.Messaging;
     using Sabv.Web.ViewModels;
@@ -61,7 +58,6 @@
             services.AddRazorPages();
 
             services.AddSingleton(this.configuration);
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             // Data repositories
             services.AddScoped(typeof(IDeletableEntityRepository<>), typeof(EfDeletableEntityRepository<>));
@@ -70,18 +66,16 @@
 
             // Application services
             services.AddTransient<IEmailSender, NullMessageSender>();
-            services.AddTransient<ISettingsService, SettingsService>();
-
-            services.AddTransient<ICategoryService, CategoryService>();
-            services.AddTransient<IMakesService, MakesService>();
-            services.AddTransient<ICitiesService, CitiesService>();
-            services.AddTransient<IModelsService, ModelsService>();
+            services.AddTransient<ICategoriesService, CategoriesService>();
             services.AddTransient<IPostsService, PostsService>();
-            services.AddTransient<IExtrasService, ExtrasService>();
-            services.AddTransient<IVehicleCategoryService, VehicleCategoryService>();
+            services.AddTransient<ICitiesService, CitiesService>();
+            services.AddTransient<IColorService, ColorService>();
+            services.AddTransient<IMakesService, MakesService>();
+            services.AddTransient<IModelsService, ModelsService>();
+            services.AddTransient<IVehicleCategoriesService, VehicleCategoriesService>();
+            services.AddTransient<IImagesService, ImagesService>();
             services.AddTransient<ICloudinaryService, CloudinaryService>();
-            services.AddTransient<IImageService, ImageService>();
-            services.AddTransient<IPostImagesService, PostImagesService>();
+            services.AddTransient<IJsonService, JsonService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -99,7 +93,7 @@
                     dbContext.Database.Migrate();
                 }
 
-                //new ApplicationDbContextSeeder().SeedAsync(dbContext, serviceScope.ServiceProvider).GetAwaiter().GetResult();
+                new ApplicationDbContextSeeder().SeedAsync(dbContext, serviceScope.ServiceProvider).GetAwaiter().GetResult();
             }
 
             if (env.IsDevelopment())

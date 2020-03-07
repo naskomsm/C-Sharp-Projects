@@ -2,7 +2,7 @@
 {
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
-    using Sabv.Data.Models.PostsImages;
+    using Sabv.Data.Models;
 
     public class PostsImagesConfiguration : IEntityTypeConfiguration<PostImage>
     {
