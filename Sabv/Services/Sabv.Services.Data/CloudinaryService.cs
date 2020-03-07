@@ -52,7 +52,7 @@
             };
 
             var result = await this.cloudinary.UploadAsync(uploadParams);
-            var resultUrl = result.Uri.ToString();
+            var resultUrl = result.SecureUri.ToString();
             var urlDb = resultUrl.Replace(GlobalConstants.BaseCloudinaryLink, string.Empty);
 
             await this.imagesService.AddAsync(urlDb);

@@ -69,7 +69,6 @@
         {
             var filteredPosts = this.postsService.Filter(inputModel).AsQueryable();
 
-
             var viewmodel = new AllPageViewModel()
             {
                 Posts = filteredPosts.To<AllPagePostViewModel>().ToList(),
