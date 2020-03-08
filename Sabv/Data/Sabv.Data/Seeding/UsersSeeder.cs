@@ -25,7 +25,7 @@
             var emails = new List<string>() { "naskokolev00@gmail.com", "dochka_koleva@abv.bg", "danielIvanov99@gmail.com" };
             var password = "123456";
 
-            var defaultProfileImage = imagesService.GetAll().ToArray()[0];
+            var defaultProfileImage = imagesService.GetAll().ToArray()[3];
 
             foreach (var email in emails)
             {

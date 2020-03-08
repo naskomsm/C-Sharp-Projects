@@ -37,7 +37,7 @@
             var colors = colorsService.GetAll().ToArray();
             var makes = makesService.GetAll().ToArray();
             var models = modelsService.GetAll().ToArray();
-            var images = imagesService.GetAll().ToArray();
+            var images = imagesService.GetAll().Skip(4).ToArray();
 
             var user = await userManager.FindByNameAsync("naskokolev00@gmail.com");
 
@@ -92,7 +92,7 @@
 
             for (int i = 0; i < allPosts.Count; i++)
             {
-                var image = images[i + 1];
+                var image = images[i];
                 var post = allPosts[i];
 
                 var postImage = new PostImage()

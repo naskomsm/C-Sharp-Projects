@@ -1,7 +1,7 @@
 ﻿namespace Sabv.Web.Controllers
 {
     using System.Diagnostics;
-
+    using System.Linq;
     using Microsoft.AspNetCore.Mvc;
     using Sabv.Services.Data;
     using Sabv.Web.ViewModels;
@@ -10,18 +10,29 @@
     public class HomeController : BaseController
     {
         private readonly IPostsService postsService;
+        private readonly ICategoriesService categoriesService;
+        private readonly IImagesService imagesService;
 
-        public HomeController(IPostsService postsService)
+        public HomeController(IPostsService postsService, ICategoriesService categoriesService, IImagesService imagesService)
         {
             this.postsService = postsService;
+            this.categoriesService = categoriesService;
+            this.imagesService = imagesService;
         }
 
         [HttpGet]
         public IActionResult Index()
         {
-            var model = new IndexViewModel()
+            //var model = new IndexViewModel()
+            //{
+            //    Posts = this.postsService.GetLatest<PostIndexViewModel>(6),
+            //};
+
+            var model = new IndexTestViewModel()
             {
-                Posts = this.postsService.GetLatest<PostIndexViewModel>(6),
+                Categories = this.categoriesService.GetAll(),
+                FirstThreeImages = this.imagesService.GetAll().Take(3),
+                Posts = this.postsService.GetAll().Take(6),
             };
 
             return this.View(model);

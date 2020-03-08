@@ -17,11 +17,13 @@
             this.categoryRepo = categoryRepo;
         }
 
-        public async Task AddAsync(string name)
+        public async Task AddAsync(string name, Image image)
         {
             await this.categoryRepo.AddAsync(new Category()
             {
                 Name = name,
+                Image = image,
+                ImageId = image.Id,
             });
 
             await this.categoryRepo.SaveChangesAsync();

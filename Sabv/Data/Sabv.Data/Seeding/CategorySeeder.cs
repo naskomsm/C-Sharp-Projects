@@ -17,13 +17,21 @@
                 return;
             }
 
-            var service = serviceProvider.GetRequiredService<ICategoriesService>();
+            var categoriesService = serviceProvider.GetRequiredService<ICategoriesService>();
+            var cloudinaryService = serviceProvider.GetRequiredService<ICloudinaryService>();
 
-            var categoryNames = new List<string>() { "Автомобили и джипове", "Бусове", "Камиони", "Мотоциклети" };
-
-            foreach (var name in categoryNames)
+            var categories = new List<(string Name, string ImageUrl)>()
             {
-                await service.AddAsync(name);
+                ("Cars and jeeps", "https://previews.123rf.com/images/igoun/igoun1810/igoun181000081/109842072-car-vector-icon-isolated-simple-front-car-logo-illustration-sign.jpg"),
+                ("Buses", "https://previews.123rf.com/images/aayam4d/aayam4d1901/aayam4d190100220/126178120-bus-icon-bus-vector-art-illustration.jpg"),
+                ("Trucks",  "https://getdrawings.com/vectors/delivery-truck-vector-free-download-9.png"),
+                ("Motorcycles", "https://image.freepik.com/free-vector/motorcycle-vector-logo_20448-45.jpg"),
+            };
+
+            foreach (var (name, imageUrl) in categories)
+            {
+                var image = await cloudinaryService.UploadAsync(imageUrl);
+                await categoriesService.AddAsync(name, image);
             }
         }
     }

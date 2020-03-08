@@ -1,13 +1,19 @@
 ﻿namespace Sabv.Data.Configurations
 {
-    using Sabv.Data.Models;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
+    using Sabv.Data.Models;
 
     public class ApplicationUserConfiguration : IEntityTypeConfiguration<ApplicationUser>
     {
         public void Configure(EntityTypeBuilder<ApplicationUser> appUser)
         {
+            appUser
+                .HasMany(u => u.Posts)
+                .WithOne(p => p.User)
+                .HasForeignKey(p => p.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
             appUser
                 .HasMany(e => e.Claims)
                 .WithOne()

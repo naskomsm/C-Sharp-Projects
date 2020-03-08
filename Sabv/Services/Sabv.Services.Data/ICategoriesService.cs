@@ -13,6 +13,6 @@
 
         Category GetCategoryByName(string name);
 
-        Task AddAsync(string name);
+        Task AddAsync(string name, Image image);
     }
 }

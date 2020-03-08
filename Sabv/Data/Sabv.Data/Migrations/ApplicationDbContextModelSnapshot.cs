@@ -261,6 +261,9 @@ namespace Sabv.Data.Migrations
                     b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("ImageId")
+                        .HasColumnType("int");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -271,6 +274,8 @@ namespace Sabv.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ImageId");
 
                     b.HasIndex("IsDeleted");
 
@@ -631,6 +636,15 @@ namespace Sabv.Data.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Sabv.Data.Models.Category", b =>
+                {
+                    b.HasOne("Sabv.Data.Models.Image", "Image")
+                        .WithMany()
+                        .HasForeignKey("ImageId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Sabv.Data.Models.Model", b =>
                 {
                     b.HasOne("Sabv.Data.Models.Make", "Make")
@@ -674,7 +688,8 @@ namespace Sabv.Data.Migrations
 
                     b.HasOne("Sabv.Data.Models.ApplicationUser", "User")
                         .WithMany("Posts")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Sabv.Data.Models.VehicleCategory", "VehicleCategory")
                         .WithMany()
