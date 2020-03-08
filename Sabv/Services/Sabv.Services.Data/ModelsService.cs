@@ -25,6 +25,8 @@
                 Make = make,
                 MakeId = make.Id,
             });
+
+            await this.modelsRepo.SaveChangesAsync();
         }
 
         public IEnumerable<T> GetAll<T>()
@@ -35,6 +37,11 @@
         public IEnumerable<Model> GetAll()
         {
             return this.modelsRepo.All().OrderBy(x => x.Name).ToList();
+        }
+
+        public Model GetModelByName(string name)
+        {
+            return this.modelsRepo.All().FirstOrDefault(x => x.Name.ToLower() == name.ToLower());
         }
     }
 }

@@ -24,6 +24,7 @@
         public async Task AddAsync(Post postToAdd)
         {
             await this.postsRepo.AddAsync(postToAdd);
+            await this.postsRepo.SaveChangesAsync();
         }
 
         public IEnumerable<T> GetAll<T>()

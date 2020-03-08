@@ -1,6 +1,6 @@
 ﻿namespace Sabv.Web.ViewModels.Posts
 {
-    public class PostDetailsInputModel 
+    public class PostDetailsInputModel
     {
         public string PostCategory { get; set; }
 

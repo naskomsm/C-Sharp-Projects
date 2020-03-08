@@ -23,6 +23,8 @@
             {
                 Name = name,
             });
+
+            await this.citiesRepo.SaveChangesAsync();
         }
 
         public IEnumerable<T> GetAll<T>()
@@ -33,6 +35,11 @@
         public IEnumerable<City> GetAll()
         {
             return this.citiesRepo.All().OrderBy(x => x.Name).ToList();
+        }
+
+        public City GetCityByName(string name)
+        {
+            return this.citiesRepo.All().FirstOrDefault(x => x.Name.ToLower() == name.ToLower());
         }
     }
 }

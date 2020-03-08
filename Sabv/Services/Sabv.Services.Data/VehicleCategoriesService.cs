@@ -23,6 +23,8 @@
             {
                 Name = name,
             });
+
+            await this.vehicleCategoriesRepo.SaveChangesAsync();
         }
 
         public IEnumerable<T> GetAll<T>()

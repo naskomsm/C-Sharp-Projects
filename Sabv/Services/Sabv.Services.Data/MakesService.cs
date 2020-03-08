@@ -35,6 +35,11 @@
             return this.makesRepo.All().OrderBy(x => x.Name).ToList();
         }
 
+        public Make GetMakeById(int id)
+        {
+            return this.makesRepo.All().FirstOrDefault(x => x.Id == id);
+        }
+
         public Make GetMakeByName(string name)
         {
             return this.makesRepo.All().FirstOrDefault(x => x.Name.ToLower() == name.ToLower());

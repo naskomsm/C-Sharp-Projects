@@ -1,14 +1,17 @@
 ﻿namespace Sabv.Services.Data
 {
-    using Sabv.Data.Models;
     using System.Collections.Generic;
     using System.Threading.Tasks;
+
+    using Sabv.Data.Models;
 
     public interface ICitiesService
     {
         IEnumerable<T> GetAll<T>();
 
         IEnumerable<City> GetAll();
+
+        City GetCityByName(string name);
 
         Task AddAsync(string name);
     }

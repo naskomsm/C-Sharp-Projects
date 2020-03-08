@@ -11,6 +11,8 @@
 
         Task AddAsync(string name, Make make);
 
+        Model GetModelByName(string name);
+
         IEnumerable<Model> GetAll();
     }
 }

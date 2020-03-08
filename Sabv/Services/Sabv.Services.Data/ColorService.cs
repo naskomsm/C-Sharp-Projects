@@ -23,6 +23,8 @@
             {
                 Name = name,
             });
+
+            await this.colorRepo.SaveChangesAsync();
         }
 
         public IEnumerable<T> GetAll<T>()

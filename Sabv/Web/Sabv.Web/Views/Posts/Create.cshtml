@@ -1,0 +1,234 @@
+﻿@using Sabv.Common
+
+@{
+    this.ViewData["Title"] = "Create";
+}
+
+<form asp-controller="Posts" asp-action="Create" method="post" enctype="multipart/form-data">
+
+    <div class="row">
+        <div class="col container mt-3">
+            <h6 id="pageHeader">Crate post</h6>
+            <hr />
+            <div>
+
+                <div class="row mt-2 mb-2">
+                    <div class="col-4">
+                        <div class="ml-2">
+                            <p class="mb-1 small">Post category</p>
+                            <select class="mdb-select md-form container" id="categorySelect" name="postCategory">
+                                <option>All</option>
+                                @foreach (var item in Model.Categories)
+                                {
+                                    <option>@item.Name</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-4 pl-5">
+                        <p class="mb-1 small">Condition</p>
+                        <input type="radio" id="condition" name="condition" value="Used" checked>
+                        <label for="2">Used</label>
+                        <input type="radio" id="condition" name="condition" value="New">
+                        <label for="1">New</label>
+                    </div>
+                </div>
+
+                <div class="row mt-2 mb-2">
+
+                    <div class="col-3">
+                        <div class="ml-2">
+                            <p class="mb-1 small">Make</p>
+                            <select class="mdb-select md-form container" id="makesSelect" name="make">
+                                <option value="0">All</option>
+                                @foreach (var make in Model.Makes)
+                                {
+                                    <option value="@make.Id">@make.Name</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-3">
+                        <div class="ml-2">
+                            <p class="mb-1 small">Model</p>
+                            <select class="mdb-select md-form container" id="modelsSelect" name="model">
+                                <option>All</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-3">
+                        <div class="ml-2">
+                            <p class="mb-1 small">Modification</p>
+                            <input class="form-control form-control-sm container" type="text" name="modification">
+                        </div>
+                    </div>
+
+                    <div class="col-3 pl-0 pr-4">
+                        <div class="ml-2">
+                            <p class="mb-1 small">Engine type</p>
+                            <select class="mdb-select md-form container" name="engineType">
+                                <option>All</option>
+                                <option value="Petrol">Petrol</option>
+                                <option value="Disel">Disel</option>
+                                <option value="Electric">Electric</option>
+                                <option value="Hybrid">Hybrid</option>
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row mt-2 mb-2">
+
+                    <div class="col-3">
+                        <div class="ml-2">
+                            <p class="mb-1 small">Horsepower</p>
+                            <input class="form-control form-control-sm container" type="number" name="horsePower" min="1" max="3000">
+                        </div>
+                    </div>
+
+                    <div class="col-3">
+                        <div class="ml-2">
+                            <p class="mb-1 small">Eurostandard</p>
+                            <select class="mdb-select md-form container" name="eurostandard">
+                                <option>All</option>
+                                <option value="1">Euro 1</option>
+                                <option value="2">Euro 2</option>
+                                <option value="3">Euro 3</option>
+                                <option value="4">Euro 4</option>
+                                <option value="5">Euro 5</option>
+                                <option value="6">Euro 6</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-3">
+                        <div class="ml-2">
+                            <p class="mb-1 small">Transmission type</p>
+                            <select class="mdb-select md-form container" name="transmissionType">
+                                <option>All</option>
+                                <option value="Manual">Manual</option>
+                                <option value="Automatic">Automatic</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-3 pl-0 pr-4">
+                        <div class="ml-2">
+                            <p class="mb-1 small">Category</p>
+                            <select class="mdb-select md-form container" name="vehicleCategory">
+                                <option>All</option>
+                                @foreach (var item in Model.VehicleCategories)
+                                {
+                                    <option>@item.Name</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row mt-2 mb-2">
+                    <div class="col-3">
+                        <div class="ml-2">
+                            <p class="mb-1 small">Price</p>
+                            <input class="form-control form-control-sm container" type="number" name="price" min="200" max="10000000">
+                        </div>
+                    </div>
+
+                    <div class="col-3">
+                        <div class="ml-2">
+                            <p class="mb-1 small">Currency</p>
+                            <select class="mdb-select md-form container" name="currency">
+                                <option>All</option>
+                                <option value="LV">LV</option>
+                                <option value="USD">USD</option>
+                                <option value="EUR">EUR</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-3">
+                        <div class="ml-2">
+                            <p class="mb-1 small">Manufacture date</p>
+                            <select class="mdb-select md-form container" name="year">
+                                <option>All</option>
+                                @for (int i = 1990; i < 2020; i++)
+                                {
+                                    <option>@i</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-3 pl-0 pr-4">
+                        <div class="ml-2">
+                            <p class="mb-1 small">Color</p>
+                            <select class="mdb-select md-form container" name="color">
+                                <option>All</option>
+                                @foreach (var item in Model.Colors)
+                                {
+                                    <option>@item.Name</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row mt-2 mb-2">
+                    <div class="col-6">
+                        <div class="ml-2">
+                            <p class="mb-1 small">City</p>
+                            <select class="mdb-select md-form container" name="town">
+                                <option>All</option>
+                                @foreach (var item in Model.Cities)
+                                {
+                                    <option>@item.Name</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-6">
+                        <div class="ml-2">
+                            <p class="mb-1 small">Mileage</p>
+                            <input class="form-control form-control-sm container" type="number" name="mileage" min="5">
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row mt-4 mb-2">
+                    <div class="col-md-4">
+                        <p class="mb-1 small">Additional information</p>
+                        <div class="form-group">
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="description"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <p class="mb-1 small">Mobile number</p>
+                        <input class="form-control form-control-sm" type="text" name="phoneNumber">
+                    </div>
+
+                    <div class="col-md-4">
+                        <p class="mb-1 small">Email</p>
+                        <input class="form-control form-control-sm" type="email" name="email">
+                    </div>
+                </div>
+
+                <div class="row mt-4 mb-2">
+                    <div class="col-md-6">
+                        <button class="btn btn-primary btn-lg btn-block" type="submit" value="Create">Create</button>
+                    </div>
+                    <div class="col-md-6">
+                        Select files: <input type="file" name="files" multiple><br><br>
+                    </div>
+                </div>
+            </div>
+        </div>
+</form>

@@ -8,8 +8,8 @@
 
     public interface ICloudinaryService
     {
-        Task UploadAsync(ICollection<IFormFile> files);
+        Task<ICollection<Image>> UploadAsync(ICollection<IFormFile> files);
 
-        Task UploadAsync(string url);
+        Task<Image> UploadAsync(string url);
     }
 }

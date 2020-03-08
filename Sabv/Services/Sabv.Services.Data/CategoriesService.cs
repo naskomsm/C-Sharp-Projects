@@ -23,6 +23,8 @@
             {
                 Name = name,
             });
+
+            await this.categoryRepo.SaveChangesAsync();
         }
 
         public IEnumerable<T> GetAll<T>()

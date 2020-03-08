@@ -23,6 +23,8 @@
             {
                 Url = url,
             });
+
+            await this.imagesRepo.SaveChangesAsync();
         }
 
         public IEnumerable<T> GetAll<T>()
