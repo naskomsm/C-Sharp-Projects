@@ -23,12 +23,7 @@
         [HttpGet]
         public IActionResult Index()
         {
-            //var model = new IndexViewModel()
-            //{
-            //    Posts = this.postsService.GetLatest<PostIndexViewModel>(6),
-            //};
-
-            var model = new IndexTestViewModel()
+            var model = new IndexViewModel()
             {
                 Categories = this.categoriesService.GetAll(),
                 FirstThreeImages = this.imagesService.GetAll().Take(3),

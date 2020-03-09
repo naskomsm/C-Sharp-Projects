@@ -11,6 +11,7 @@
         public Post()
         {
             this.Images = new HashSet<PostImage>();
+            this.Comments = new HashSet<Comment>();
         }
 
         public string Name { get; set; }
@@ -67,6 +68,8 @@
         public int CityId { get; set; }
 
         public virtual City City { get; set; }
+
+        public virtual ICollection<Comment> Comments { get; set; }
 
         public virtual ICollection<PostImage> Images { get; set; }
     }

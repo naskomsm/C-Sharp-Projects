@@ -1,38 +1,11 @@
 ﻿@using Sabv.Common
 @using Sabv.Web.ViewModels.Home
 
-@model IndexTestViewModel
+@model IndexViewModel
 
 @{
     this.ViewData["Title"] = "Home";
 }
-
-@*<div class="text-center">
-        <h1 class="display-4 mb-1">Welcome to @GlobalConstants.SystemName!</h1>
-        <h1 class="display-4 mb-3">Some of the latest posts to look!</h1>
-
-        <div class="row">
-            @foreach (var post in Model.Posts)
-            {
-                <div class="col-md-4 mb-3">
-                    <div class="card" style="width: 18rem;">
-                        <img class="card-img-top" src="@GlobalConstants.BaseCloudinaryLink@post.Images.FirstOrDefault().Image.Url" alt="Card image cap" height="200">
-                        <div class="card-body">
-                            <h5 class="card-title">@post.Name</h5>
-                            <p class="card-text">Town - @post.City.Name</p>
-                            <p class="card-text">Mileage - @post.Mileage km.</p>
-                            <p class="card-text text-primary">Цена - @post.Price @post.Currency.ToString()</p>
-                            <a href="Posts/Details/@post.Id" class="btn btn-primary">Go to post</a>
-                        </div>
-                    </div>
-                </div>
-            }
-        </div>
-    </div>*@
-
-
-
-
 
 <div class="container">
 
@@ -44,7 +17,7 @@
             <div class="list-group">
                 @foreach (var category in Model.Categories)
                 {
-                    <a href="Categories/@category.Id" class="list-group-item">@category.Name</a>
+                    <a href="Categories/@category.Name" class="list-group-item">@category.Name</a>
                 }
             </div>
 
@@ -115,7 +88,5 @@
             </div>
         </div>
     </div>
-
-
 
     @*MAYBE ADD CHAT WITH OTHER USERS HERE*@

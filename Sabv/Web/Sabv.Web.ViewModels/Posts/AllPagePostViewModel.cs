@@ -29,6 +29,8 @@
 
         public DateTime ManufactureDate { get; set; }
 
+        public Category Category { get; set; }
+
         public ICollection<PostImage> Images { get; set; }
     }
 }

@@ -93,9 +93,9 @@
         }
 
         [HttpGet]
-        public IActionResult All(AllPageViewModel viewmodel)
+        public IActionResult All(AllPageViewModel viewModel)
         {
-            return this.View(viewmodel);
+            return this.View(viewModel);
         }
 
         [HttpGet]

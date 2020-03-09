@@ -77,6 +77,7 @@
             services.AddTransient<IImagesService, ImagesService>();
             services.AddTransient<ICloudinaryService, CloudinaryService>();
             services.AddTransient<IJsonService, JsonService>();
+            services.AddTransient<ICommentsService, CommentsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -121,6 +122,7 @@
                 endpoints =>
                     {
                         endpoints.MapControllerRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+                        endpoints.MapControllerRoute("postsByCategories", "Categories/{name:minlength(3)}", new { controller = "Categories", action = "PostsByCategories" });
                         endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapRazorPages();
                     });
