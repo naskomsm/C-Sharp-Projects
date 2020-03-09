@@ -1,4 +1,8 @@
 ﻿@using Sabv.Common
+@using Sabv.Web.ViewModels.Comments
+
+@model CommentViewModel
+
 <link href="~/css/comments.css" rel="stylesheet" asp-append-version="true" />
 
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
@@ -6,129 +10,53 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8">
-                <form>
-                    <h3 class="float-left">New Comment</h3>
-                    <button type="submit" class="btn btn-normal float-right">Submit</button>
-                    <fieldset>
-                        <div class="row">
-                            <div class="col-md-3 col-xl-2 hidden-xsd-none d-sm-block">
-                                <img class="img-fluid" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" width="93" height="93">
+
+                @if(Model.User != null)
+                {
+                    <form asp-controller="Comments" asp-action="Create" method="post" asp-route-postId="@Model.PostId">
+                        <button type="submit" class="btn btn-normal float-right">Submit</button>
+                        <fieldset>
+                            <div class="row">
+                                <div class="col-md-3 col-xl-2 hidden-xsd-none d-sm-block">
+                                    <img class="img-fluid" src="@GlobalConstants.BaseCloudinaryLink@Model.User.Image.Url" alt="" width="93" height="93">
+                                </div>
+                                <div class="form-group col-12 col-md-9 col-xl-10">
+                                    <textarea class="form-control" id="message" name="content" placeholder="Your message" required></textarea>
+                                </div>
                             </div>
-                            <div class="form-group col-12 col-md-9 col-xl-10">
-                                <textarea class="form-control" id="message" placeholder="Your message" required></textarea>
-                            </div>
+                        </fieldset>
+                    </form>
+                }
+
+                <h3>@Model.Comments.ToList().Count Comments</h3>
+
+
+                @foreach (var comment in Model.Comments.OrderByDescending(x => x.Likes))
+                {
+                    <div class="media">
+                        <a class="float-left mr-4" href="#"><img class="media-object" src="@GlobalConstants.BaseCloudinaryLink@comment.User.Image.Url" alt=""></a>
+                        <div class="media-body">
+                            <h4 class="media-heading">@comment.User.UserName.Substring(0, comment.User.UserName.IndexOf("@"))</h4>
+                            <p>
+                                @comment.Content
+                            </p>
+                            <ul class="list-unstyled list-inline media-detail float-left">
+                                <li class="list-inline-item"><i class="fa fa-calendar"></i>@comment.CreatedOn.ToString("MM/dd/yyyy")</li>
+                                <li class="list-inline-item"><i class="fa fa-thumbs-up"></i>@comment.Likes</li>
+                            </ul>
+                            <ul class="list-unstyled list-inline media-detail float-right">
+                                <li class="list-inline-item">
+                                    <a asp-controller="Comments" asp-action="Like" asp-route-id="@comment.Id" asp-route-postId="@Model.PostId">Like</a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a href="">Reply</a>
+                                </li>
+                            </ul>
                         </div>
-                    </fieldset>
-                </form>
-                <h3>4 Comments</h3>
-                <!-- COMMENT 1 - START -->
-                <div class="media">
-                    <a class="float-left mr-4" href="#"><img class="media-object" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt=""></a>
-                    <div class="media-body">
-                        <h4 class="media-heading">John Doe</h4>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor
-                            sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur
-                            adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor
-                            sit amet, consectetur adipiscing elit.
-                        </p>
-                        <ul class="list-unstyled list-inline media-detail float-left">
-                            <li class="list-inline-item"><i class="fa fa-calendar"></i>27/02/2014</li>
-                            <li class="list-inline-item"><i class="fa fa-thumbs-up"></i>13</li>
-                        </ul>
-                        <ul class="list-unstyled list-inline media-detail float-right">
-                            <li class="list-inline-item">
-                                <a href="">Like</a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a href="">Reply</a>
-                            </li>
-                        </ul>
                     </div>
-                </div>
-                <!-- COMMENT 1 - END -->
-                <!-- COMMENT 2 - START -->
-                <div class="media">
-                    <a class="float-left mr-4" href="#"><img class="media-object" src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="" width="93" height="93"></a>
-                    <div class="media-body">
-                        <h4 class="media-heading">John Doe</h4>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor
-                            sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur
-                            adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor
-                            sit amet, consectetur adipiscing elit.
-                        </p>
-                        <ul class="list-unstyled list-inline media-detail float-left">
-                            <li class="list-inline-item"><i class="fa fa-calendar"></i>27/02/2014</li>
-                            <li class="list-inline-item"><i class="fa fa-thumbs-up"></i>13</li>
-                        </ul>
-                        <ul class="list-unstyled list-inline media-detail float-right">
-                            <li class="list-inline-item">
-                                <a href="">Like</a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a href="">Reply</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- COMMENT 2 - END -->
-                <!-- COMMENT 3 - START -->
-                <div class="media">
-                    <a class="float-left mr-4" href="#"><img class="media-object" src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="" width="93" height="93"></a>
-                    <div class="media-body">
-                        <h4 class="media-heading">John Doe</h4>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor
-                            sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur
-                            adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor
-                            sit amet, consectetur adipiscing elit.
-                        </p>
-                        <ul class="list-unstyled list-inline media-detail float-left">
-                            <li class="list-inline-item"><i class="fa fa-calendar"></i>27/02/2014</li>
-                            <li class="list-inline-item"><i class="fa fa-thumbs-up"></i>13</li>
-                        </ul>
-                        <ul class="list-unstyled list-inline media-detail float-right">
-                            <li class="list-inline-item">
-                                <a href="">Like</a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a href="">Reply</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- COMMENT 3 - END -->
-                <!-- COMMENT 4 - START -->
-                <div class="media">
-                    <a class="float-left mr-4" href="#"><img class="media-object" src="https://bootdey.com/img/Content/avatar/avatar4.png" alt="" width="93" height="93"></a>
-                    <div class="media-body">
-                        <h4 class="media-heading">John Doe</h4>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor
-                            sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur
-                            adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor
-                            sit amet, consectetur adipiscing elit.
-                        </p>
-                        <ul class="list-unstyled list-inline media-detail float-left">
-                            <li class="list-inline-item"><i class="fa fa-calendar"></i>27/02/2014</li>
-                            <li class="list-inline-item"><i class="fa fa-thumbs-up"></i>13</li>
-                        </ul>
-                        <ul class="list-unstyled list-inline media-detail float-right">
-                            <li class="list-inline-item">
-                                <a href="">Like</a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a href="">Reply</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- COMMENT 4 - END -->
+                }
+
+
             </div>
         </div>
     </div>

@@ -27,6 +27,8 @@
                 Post = post,
                 PostId = post.Id,
             });
+
+            await this.commentRepo.SaveChangesAsync();
         }
 
         public IEnumerable<T> GetAll<T>()
@@ -37,6 +39,14 @@
         public IEnumerable<Comment> GetAll()
         {
             return this.commentRepo.All().ToList();
+        }
+
+        public async Task Like(int id)
+        {
+            var comment = this.commentRepo.All().FirstOrDefault(x => x.Id == id);
+            comment.Likes++;
+
+            await this.commentRepo.SaveChangesAsync();
         }
     }
 }

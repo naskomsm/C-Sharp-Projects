@@ -13,6 +13,7 @@
     using Sabv.Data.Models.Enums;
     using Sabv.Services.Data;
     using Sabv.Services.Mapping;
+    using Sabv.Web.ViewModels.Comments;
     using Sabv.Web.ViewModels.Posts;
 
     public class PostsController : BaseController
@@ -28,6 +29,7 @@
         private readonly UserManager<ApplicationUser> userManager;
         private readonly ICloudinaryService cloudinaryService;
         private readonly ApplicationDbContext dbContext;
+        private readonly ICommentsService commentsService;
 
         public PostsController(
             IPostsService postsService,
@@ -40,7 +42,8 @@
             IJsonService jsonService,
             UserManager<ApplicationUser> userManager,
             ICloudinaryService cloudinaryService,
-            ApplicationDbContext dbContext)
+            ApplicationDbContext dbContext,
+            ICommentsService commentsService)
         {
             this.postsService = postsService;
             this.citiesService = citiesService;
@@ -53,12 +56,36 @@
             this.userManager = userManager;
             this.cloudinaryService = cloudinaryService;
             this.dbContext = dbContext;
+            this.commentsService = commentsService;
         }
 
         [HttpGet]
-        public IActionResult Details(int id)
+        public async Task<IActionResult> Details(int id)
         {
-            var model = this.postsService.GetDetails<PostDetailsViewModel>(id);
+            var postDetails = this.postsService.GetDetails<PostDetailsViewModel>(id);
+            var commentViewModel = new CommentViewModel()
+            {
+                Comments = this.commentsService.GetAll().Where(x => x.PostId == id),
+                PostId = id,
+            };
+
+            if (!this.User.Identity.IsAuthenticated)
+            {
+                commentViewModel.User = null;
+            }
+            else
+            {
+                var email = this.HttpContext.User.Identities.FirstOrDefault().Name;
+                var user = await this.userManager.FindByEmailAsync(email);
+                commentViewModel.User = user;
+            }
+
+            var model = new PostDetailsAndCommentsViewModel()
+            {
+                PostDetails = postDetails,
+                CommentViewModel = commentViewModel,
+            };
+
             return this.View(model);
         }
 
