@@ -1,7 +1,0 @@
-IndexViewModel
-Image
-Name
-Price
-Mileage
-City
-PostId

@@ -38,6 +38,7 @@
             return this.RedirectToAction("Details", "Posts", new { id = postId });
         }
 
+        [Authorize]
         public async Task<IActionResult> Like(int id, int postId)
         {
             await this.commentsService.Like(id);
