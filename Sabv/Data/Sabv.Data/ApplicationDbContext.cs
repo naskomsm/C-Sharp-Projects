@@ -33,6 +33,8 @@
 
         public DbSet<Category> Categories { get; set; }
 
+        public DbSet<Message> Messages { get; set; }
+
         public DbSet<VehicleCategory> VehicleCategories { get; set; }
 
         public DbSet<Image> Images { get; set; }

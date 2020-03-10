@@ -7,7 +7,6 @@
 
     public interface IImagesService
     {
-
         IEnumerable<T> GetAll<T>();
 
         IEnumerable<Image> GetAll();

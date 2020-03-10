@@ -2,6 +2,7 @@
 {
     using System.Diagnostics;
     using System.Linq;
+
     using Microsoft.AspNetCore.Mvc;
     using Sabv.Services.Data;
     using Sabv.Web.ViewModels;
@@ -31,6 +32,12 @@
             };
 
             return this.View(model);
+        }
+
+        [HttpGet]
+        public IActionResult ChatView()
+        {
+            return this.View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

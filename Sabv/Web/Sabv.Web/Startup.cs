@@ -18,6 +18,7 @@
     using Sabv.Services.Data;
     using Sabv.Services.Mapping;
     using Sabv.Services.Messaging;
+    using Sabv.Web.Hubs;
     using Sabv.Web.ViewModels;
 
     public class Startup
@@ -56,6 +57,7 @@
 
             services.AddControllersWithViews();
             services.AddRazorPages();
+            services.AddSignalR();
 
             services.AddSingleton(this.configuration);
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
@@ -112,6 +114,11 @@
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
+
+            app.UseSignalR(route =>
+            {
+                route.MapHub<ChatHub>("/Home/Chat");
+            });
 
             app.UseRouting();
 
