@@ -1,5 +1,6 @@
 ﻿namespace Sabv.Data.Models
 {
+    using System;
     using System.ComponentModel.DataAnnotations;
 
     using Sabv.Data.Common.Models;

@@ -1,0 +1,48 @@
+﻿@using Sabv.Common
+@using Sabv.Web.ViewModels.Chat
+@model ChatViewModel
+
+<section class="content-item" id="comments">
+    <div class="container">
+
+
+        <div class="row">
+            <div class="col-md-8">
+                <div id="chat">
+                    @foreach (var message in Model.Messages)
+                    {
+                        <div class="media">
+                            <a class="float-left mr-4" href="#"><img class="media-object" src="@GlobalConstants.BaseCloudinaryLink@message.User.Image.Url" alt="" width="93" height="93"></a>
+                            <div class="media-body">
+                                <h4 class="media-heading">@message.User.UserName.Substring(0, message.User.UserName.IndexOf("@"))</h4>
+                                <p>
+                                    @message.Content
+                                </p>
+                                <ul class="list-unstyled list-inline media-detail float-left">
+                                    <li class="list-inline-item" id="when"><i class="fa fa-calendar"></i>@message.CreatedOn.ToString("MM/dd/yyyy hh:mm tt")</li>
+                                </ul>
+                            </div>
+                        </div>
+                    }
+                </div>
+
+                    <fieldset>
+                        <div class="row">
+                            <div class="col-md-3 col-xl-2 hidden-xsd-none d-sm-block">
+                                <a href="">
+                                    <img class="media-object" src="@GlobalConstants.BaseCloudinaryLink@Model.User.Image.Url" alt="" width="93" height="93">
+                                </a>
+                            </div>
+                            <div class="form-group col-12 col-md-9 col-xl-10">
+                                <textarea class="form-control" id="message" name="content" placeholder="Your message" required></textarea>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <button id="submitButton" class="btn btn-primary float-right">Send</button>
+
+            </div>
+        </div>
+
+
+    </div>
+</section>

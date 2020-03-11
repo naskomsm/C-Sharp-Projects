@@ -1,4 +1,4 @@
-﻿{
+{
   "version": "1.0",
   "defaultProvider": "jsdelivr",
   "libraries": [
@@ -34,6 +34,25 @@
       "files": [
         "dist/jquery.validate.unobtrusive.js",
         "dist/jquery.validate.unobtrusive.min.js"
+      ]
+    },
+    {
+      "provider": "cdnjs",
+      "library": "signalr.js@2.4.0",
+      "destination": "wwwroot/lib/signalr.js/"
+    },
+    {
+      "provider": "cdnjs",
+      "library": "microsoft-signalr@3.1.2",
+      "destination": "wwwroot/lib/microsoft-signalr/"
+    },
+    {
+      "provider": "unpkg",
+      "library": "@microsoft/signalr@latest",
+      "destination": "wwwroot/js/signalr",
+      "files": [
+        "dist/browser/signalr.js",
+        "dist/browser/signalr.min.js"
       ]
     }
   ]

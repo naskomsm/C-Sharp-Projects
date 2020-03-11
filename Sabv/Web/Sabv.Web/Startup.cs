@@ -80,6 +80,7 @@
             services.AddTransient<ICloudinaryService, CloudinaryService>();
             services.AddTransient<IJsonService, JsonService>();
             services.AddTransient<ICommentsService, CommentsService>();
+            services.AddTransient<IMessagesService, MessagesService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -115,11 +116,6 @@
             app.UseStaticFiles();
             app.UseCookiePolicy();
 
-            app.UseSignalR(route =>
-            {
-                route.MapHub<ChatHub>("/Home/Chat");
-            });
-
             app.UseRouting();
 
             app.UseAuthentication();
@@ -128,9 +124,11 @@
             app.UseEndpoints(
                 endpoints =>
                     {
+                        endpoints.MapHub<ChatHub>("/chathub");
                         endpoints.MapControllerRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapControllerRoute("postsByCategories", "Categories/{name:minlength(3)}", new { controller = "Categories", action = "PostsByCategories" });
                         endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
+                        endpoints.MapControllerRoute("chatSystem", "Chat", new { controller = "Chat", action = "chat" });
                         endpoints.MapRazorPages();
                     });
         }
