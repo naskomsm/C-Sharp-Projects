@@ -6,6 +6,15 @@ There are three roles - guest, registered user, admin. The guest can only browse
 should register or login into existing account. The already logged in user can create posts, add other posts to his favourites, track his own post status
 etc. Admin can see all posts from all users and modify them, he can also create and delete a post.
 
+## Frameworks and services used
+```
+SignalR
+Cloudinary
+.NET Core 3.x
+.EF Core
+```
+
+
 ## To be able to run the app you will need
 ```
 .NET Core 3.x
