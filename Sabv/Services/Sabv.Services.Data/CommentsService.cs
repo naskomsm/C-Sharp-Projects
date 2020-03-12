@@ -17,18 +17,21 @@
             this.commentRepo = commentRepo;
         }
 
-        public async Task AddAsync(string content, ApplicationUser user, Post post)
+        public async Task<int> AddAsync(string content, ApplicationUser user, Post post)
         {
-            await this.commentRepo.AddAsync(new Comment()
+            var comment = new Comment()
             {
                 Content = content,
                 User = user,
                 UserId = user.Id,
                 Post = post,
                 PostId = post.Id,
-            });
+            };
 
+            await this.commentRepo.AddAsync(comment);
             await this.commentRepo.SaveChangesAsync();
+
+            return comment.Id;
         }
 
         public IEnumerable<T> GetAll<T>()

@@ -128,7 +128,6 @@
                         endpoints.MapControllerRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapControllerRoute("postsByCategories", "Categories/{name:minlength(3)}", new { controller = "Categories", action = "PostsByCategories" });
                         endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
-                        endpoints.MapControllerRoute("chatSystem", "Chat", new { controller = "Chat", action = "chat" });
                         endpoints.MapRazorPages();
                     });
         }

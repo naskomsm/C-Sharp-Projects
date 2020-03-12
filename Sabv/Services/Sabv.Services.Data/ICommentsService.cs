@@ -11,7 +11,7 @@
 
         IEnumerable<Comment> GetAll();
 
-        Task AddAsync(string content, ApplicationUser user, Post post);
+        Task<int> AddAsync(string content, ApplicationUser user, Post post);
 
         Task Like(int id);
     }

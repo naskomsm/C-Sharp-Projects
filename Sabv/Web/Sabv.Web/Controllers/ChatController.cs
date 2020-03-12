@@ -2,6 +2,7 @@
 {
     using System.Linq;
     using System.Threading.Tasks;
+
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
@@ -23,7 +24,7 @@
 
         [Authorize]
         [HttpGet]
-        public async Task<IActionResult> Chat()
+        public async Task<IActionResult> Main()
         {
             var email = this.HttpContext.User.Identities.FirstOrDefault().Name;
 
@@ -36,7 +37,7 @@
             this.ViewBag.CurrentUser = model.User;
             this.ViewBag.CurrentUserImage = GlobalConstants.BaseCloudinaryLink + model.User.Image.Url;
 
-            return this.View(model);
+            return this.View("Chat", model);
         }
     }
 }

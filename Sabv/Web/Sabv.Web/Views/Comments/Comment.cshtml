@@ -9,27 +9,26 @@
 <section class="content-item" id="comments">
     <div class="container">
         <div class="row">
-            <div class="col-md-8">
+            <div id="commentsSection" class="col-md-8">
 
-                @if(Model.User != null)
+                @if (Model.User != null)
                 {
-                    <form asp-controller="Comments" asp-action="Create" method="post" asp-route-postId="@Model.PostId">
-                        <button type="submit" class="btn btn-normal float-right">Submit</button>
-                        <fieldset>
-                            <div class="row">
-                                <div class="col-md-3 col-xl-2 hidden-xsd-none d-sm-block">
-                                    <img class="img-fluid" src="@GlobalConstants.BaseCloudinaryLink@Model.User.Image.Url" alt="" width="93" height="93">
-                                </div>
-                                <div class="form-group col-12 col-md-9 col-xl-10">
-                                    <textarea class="form-control" id="message" name="content" placeholder="Your message" required></textarea>
-                                </div>
+                    <button id="commentBtn" type="submit" class="btn btn-success float-right ml-3">Submit</button>
+                    <fieldset>
+                        <div class="row">
+                            <div class="col-md-3 col-xl-2 hidden-xsd-none d-sm-block">
+                                <img class="img-fluid" src="@GlobalConstants.BaseCloudinaryLink@Model.User.Image.Url" alt="" width="93" height="93">
                             </div>
-                        </fieldset>
-                    </form>
+                            <div class="form-group col-12 col-md-9 col-xl-10">
+                                <textarea class="form-control" id="message" name="content" placeholder="Your message" required></textarea>
+                            </div>
+                        </div>
+                    </fieldset>
                 }
 
-                <h3>@Model.Comments.ToList().Count Comments</h3>
+                <h3 id="commentsCount">@Model.Comments.ToList().Count Comments</h3>
 
+                <textarea id="postId" hidden>@Model.PostId</textarea>
 
                 @foreach (var comment in Model.Comments.OrderByDescending(x => x.Likes))
                 {
@@ -41,15 +40,13 @@
                                 @comment.Content
                             </p>
                             <ul class="list-unstyled list-inline media-detail float-left">
-                                <li class="list-inline-item"><i class="fa fa-calendar"></i>@comment.CreatedOn.ToString("MM/dd/yyyy")</li>
-                                <li class="list-inline-item"><i class="fa fa-thumbs-up"></i>@comment.Likes</li>
+                                <li class="list-inline-item"><i class="fa fa-calendar"></i>@comment.CreatedOn.ToString("MM/dd/yyyy hh:mm tt")</li>
+                                <li id="likesCount" class="list-inline-item"><i class="fa fa-thumbs-up"></i>@comment.Likes</li>
                             </ul>
                             <ul class="list-unstyled list-inline media-detail float-right">
                                 <li class="list-inline-item">
-                                    <a asp-controller="Comments" asp-action="Like" asp-route-id="@comment.Id" asp-route-postId="@Model.PostId">Like</a>
-                                </li>
-                                <li class="list-inline-item">
-                                    <a href="">Reply</a>
+                                    <textarea id="currentCommentId" hidden>@comment.Id</textarea>
+                                    <button class="btn btn-primary" type="submit" name="likeBtn">Like</button>
                                 </li>
                             </ul>
                         </div>
