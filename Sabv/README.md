@@ -10,14 +10,7 @@ etc. Admin can see all posts from all users and modify them, he can also create 
 ```
 SignalR
 Cloudinary
-.NET Core 3.x
-.EF Core
-```
-
-
-## To be able to run the app you will need
-```
-.NET Core 3.x
+.NET Core 3.1
 .EF Core
 ```
 
