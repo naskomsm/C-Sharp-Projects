@@ -26,8 +26,6 @@
         [HttpGet]
         public async Task<IActionResult> Main()
         {
-            //var email = this.HttpContext.User.Identities.FirstOrDefault().Name;
-
             var model = new ChatViewModel()
             {
                 Messages = this.messagesService.GetAll().ToList(),

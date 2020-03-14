@@ -29,7 +29,6 @@
         [Authorize]
         public async Task<IActionResult> Create(string content, int postId)
         {
-            //var email = this.HttpContext.User.Identities.FirstOrDefault().Name;
             var user = await this.userManager.GetUserAsync(this.User);
             var post = this.postsService.GetAll().FirstOrDefault(x => x.Id == postId);
 

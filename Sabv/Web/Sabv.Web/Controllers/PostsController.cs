@@ -76,7 +76,6 @@
             }
             else
             {
-                //var email = this.HttpContext.User.Identities.FirstOrDefault().Name;
                 var user = await this.userManager.GetUserAsync(this.User);
                 commentViewModel.User = user;
             }
@@ -110,11 +109,6 @@
         [HttpPost]
         public IActionResult Search(PostDetailsInputModel inputModel)
         {
-            if (!this.ModelState.IsValid)
-            {
-                return this.Error();
-            }
-
             var filteredPosts = this.postsService.Filter(inputModel).AsQueryable();
 
             var viewmodel = new AllPageViewModel()
@@ -153,7 +147,7 @@
         {
             if (!this.ModelState.IsValid)
             {
-                return this.Error();
+                return this.Create();
             }
 
             var category = this.categoriesService.GetCategoryByName(inputModel.PostCategory);
@@ -163,7 +157,6 @@
             var model = this.modelsService.GetModelByName(inputModel.Model);
             var vehicleCategory = this.vehicleCategoriesService.GetVehicleCategoryByName(inputModel.VehicleCategory);
 
-            //var email = this.HttpContext.User.Identities.FirstOrDefault().Name;
             var user = await this.userManager.GetUserAsync(this.User);
 
             var condition = (Condition)Enum.Parse(typeof(Condition), inputModel.Condition, true);
