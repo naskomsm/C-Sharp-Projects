@@ -37,7 +37,7 @@ connection.on("ReceiveMessage", function (username, message, currentUserImageUrl
     li.className = "list-inline-item";
     li.id = 'when';
     var currentdate = new Date();
-    
+
     let iForLi = document.createElement('i');
     iForLi.className = "fa fa-calendar";
 
@@ -50,8 +50,8 @@ connection.on("ReceiveMessage", function (username, message, currentUserImageUrl
     li.innerHTML +=
         (currentdate.getMonth() + 1) + "/"
         + currentdate.getDate() + "/"
-    + currentdate.getFullYear() + " "
-    + currentdate.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true, timeZone: 'UTC' })
+        + currentdate.getFullYear() + " "
+        + currentdate.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true, timeZone: 'UTC' })
 
     ul.appendChild(li);
 
@@ -196,13 +196,21 @@ $("#commentBtn").on("click", function () {
 
 document.getElementsByName("likeBtn").forEach(function (button) {
     button.addEventListener('click', function (e) {
+        if (sessionStorage.getItem('status') != null) {
+            var commentId = e.target.parentElement.children[0].innerHTML;
+            var likesCount = Number(e.target.parentElement.parentElement.parentElement.children[2].children[1].innerHTML.replace('<i class="fa fa-thumbs-up"></i>', ""));
+            likesCount++;
+            e.target.parentElement.parentElement.parentElement.children[2].children[1].innerHTML = '<i class="fa fa-thumbs-up"></i>' + likesCount;
 
-        var commentId = e.target.parentElement.children[0].innerHTML;
-        var likesCount = Number(e.target.parentElement.parentElement.parentElement.children[2].children[1].innerHTML.replace('<i class="fa fa-thumbs-up"></i>', ""));
-        likesCount++;
-        e.target.parentElement.parentElement.parentElement.children[2].children[1].innerHTML = '<i class="fa fa-thumbs-up"></i>' + likesCount;
-
-        connection.invoke("LikeComment", commentId);
+            connection.invoke("LikeComment", commentId);
+        }
     });
 });
 
+$("#loginBtn").on("click", function () {
+    sessionStorage.setItem('status', 'loggedIn');
+});
+
+$("#logoutBtn").on("click", function () {
+    sessionStorage.removeItem('status');
+});

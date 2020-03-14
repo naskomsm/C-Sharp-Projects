@@ -26,12 +26,12 @@
         [HttpGet]
         public async Task<IActionResult> Main()
         {
-            var email = this.HttpContext.User.Identities.FirstOrDefault().Name;
+            //var email = this.HttpContext.User.Identities.FirstOrDefault().Name;
 
             var model = new ChatViewModel()
             {
                 Messages = this.messagesService.GetAll().ToList(),
-                User = await this.userManager.FindByEmailAsync(email),
+                User = await this.userManager.GetUserAsync(this.User),
             };
 
             this.ViewBag.CurrentUser = model.User;

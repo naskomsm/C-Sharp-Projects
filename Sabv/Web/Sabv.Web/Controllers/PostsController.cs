@@ -76,8 +76,8 @@
             }
             else
             {
-                var email = this.HttpContext.User.Identities.FirstOrDefault().Name;
-                var user = await this.userManager.FindByEmailAsync(email);
+                //var email = this.HttpContext.User.Identities.FirstOrDefault().Name;
+                var user = await this.userManager.GetUserAsync(this.User);
                 commentViewModel.User = user;
             }
 
@@ -163,8 +163,8 @@
             var model = this.modelsService.GetModelByName(inputModel.Model);
             var vehicleCategory = this.vehicleCategoriesService.GetVehicleCategoryByName(inputModel.VehicleCategory);
 
-            var email = this.HttpContext.User.Identities.FirstOrDefault().Name;
-            var user = await this.userManager.FindByEmailAsync(email);
+            //var email = this.HttpContext.User.Identities.FirstOrDefault().Name;
+            var user = await this.userManager.GetUserAsync(this.User);
 
             var condition = (Condition)Enum.Parse(typeof(Condition), inputModel.Condition, true);
             var currency = (Currency)Enum.Parse(typeof(Currency), inputModel.Currency, true);
