@@ -3,6 +3,7 @@
     using System.Linq;
 
     using Microsoft.AspNetCore.Mvc;
+    using Sabv.Common;
     using Sabv.Services.Data;
     using Sabv.Web.ViewModels.Posts;
 
@@ -18,7 +19,10 @@
         [HttpGet]
         public IActionResult PostsByCategories(string name)
         {
-            var postsByCategories = this.postsService.GetAll<AllPagePostViewModel>().Where(x => x.Category.Name == name).ToList();
+            var postsByCategories = this.postsService
+                .GetAll<AllPagePostViewModel>()
+                .Where(x => x.Category.Name == name)
+                .ToList();
 
             var viewModel = new AllPageViewModel()
             {

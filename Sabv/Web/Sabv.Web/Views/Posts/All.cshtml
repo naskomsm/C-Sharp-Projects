@@ -1,6 +1,8 @@
 ﻿@using Sabv.Common
 @using Sabv.Web.ViewModels.Posts
-@model AllPageViewModel
+@using cloudscribe.Pagination.Models
+
+@model PagedResult<AllPagePostViewModel>
 
 @{
     this.ViewData["Title"] = "All";
@@ -9,8 +11,24 @@
 <div class="row">
     <div class="col">
         <h6>Posts</h6>
+
+        <cs-pager cs-paging-pagenumber="Model.PageNumber"
+                  cs-paging-totalitems="Model.TotalItems"
+                  cs-paging-pagesize="Model.PageSize"
+                  cs-pagenumber-param="pagenumber"
+                  asp-controller="Posts"
+                  asp-action="All"
+                  cs-pager-li-current-class="page-item active"
+                  cs-pager-li-other-class="page-item"
+                  cs-pager-li-non-active-class="page-item disabled"
+                  cs-pager-link-current-class="page-link"
+                  cs-pager-link-other-class="page-link">
+
+        </cs-pager>
+
+
         <hr />
-        @foreach (var post in Model.Posts)
+        @foreach (var post in Model.Data)
         {
             <div class="row">
                 <div class="col-4">
@@ -37,6 +55,20 @@
                 </div>
             </div>
             <hr />
+
+            <cs-pager cs-paging-pagenumber="Model.PageNumber"
+                      cs-paging-totalitems="Model.TotalItems"
+                      cs-paging-pagesize="Model.PageSize"
+                      cs-pagenumber-param="pagenumber"
+                      asp-controller="Posts"
+                      asp-action="All"
+                      cs-pager-li-current-class="page-item active"
+                      cs-pager-li-other-class="page-item"
+                      cs-pager-li-non-active-class="page-item disabled"
+                      cs-pager-link-current-class="page-link"
+                      cs-pager-link-other-class="page-link">
+
+            </cs-pager>
         }
     </div>
 </div>

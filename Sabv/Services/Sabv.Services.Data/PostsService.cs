@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Threading.Tasks;
 
+    using Sabv.Common;
     using Sabv.Data.Common.Repositories;
     using Sabv.Data.Models;
     using Sabv.Services.Mapping;
@@ -183,6 +184,11 @@
             }
 
             return posts;
+        }
+
+        public int Total()
+        {
+            return this.postsRepo.All().Count();
         }
     }
 }

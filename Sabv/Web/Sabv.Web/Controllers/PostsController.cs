@@ -16,6 +16,8 @@
     using Sabv.Services.Mapping;
     using Sabv.Web.ViewModels.Comments;
     using Sabv.Web.ViewModels.Posts;
+    using cloudscribe.Pagination.Models;
+    using Microsoft.EntityFrameworkCore;
 
     public class PostsController : BaseController
     {
@@ -106,23 +108,27 @@
             return this.View(model);
         }
 
-        [HttpPost]
-        public IActionResult Search(PostDetailsInputModel inputModel)
+        [HttpGet]
+        public IActionResult All(PostDetailsInputModel inputModel, int pageNumber = 1, int pageSize = 15)
         {
-            var filteredPosts = this.postsService.Filter(inputModel).AsQueryable();
+            var excludeRecords = (pageSize * pageNumber) - pageSize;
 
-            var viewmodel = new AllPageViewModel()
+            var posts = this.postsService
+                .Filter(inputModel)
+                .AsQueryable()
+                .Skip(excludeRecords)
+                .Take(pageSize)
+                .To<AllPagePostViewModel>();
+
+            var model = new PagedResult<AllPagePostViewModel>()
             {
-                Posts = filteredPosts.To<AllPagePostViewModel>().ToList(),
+                Data = posts.AsNoTracking().ToList(),
+                TotalItems = this.postsService.Filter(inputModel).Count(),
+                PageNumber = pageNumber,
+                PageSize = pageSize,
             };
 
-            return this.View("All", viewmodel);
-        }
-
-        [HttpGet]
-        public IActionResult All(AllPageViewModel viewModel)
-        {
-            return this.View(viewModel);
+            return this.View("All", model);
         }
 
         [HttpGet]

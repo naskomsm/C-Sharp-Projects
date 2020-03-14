@@ -19,5 +19,7 @@
         IEnumerable<Post> Filter(PostDetailsInputModel inputModel);
 
         Task AddAsync(Post postToAdd);
+
+        int Total();
     }
 }

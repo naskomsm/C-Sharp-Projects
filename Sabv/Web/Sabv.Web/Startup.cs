@@ -32,6 +32,7 @@
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
+        [System.Obsolete]
         public void ConfigureServices(IServiceCollection services)
         {
             // Antiforgery Token
@@ -61,7 +62,10 @@
 
             services.AddControllersWithViews();
             services.AddRazorPages();
+
+            // External
             services.AddSignalR();
+            services.AddCloudscribePagination();
 
             services.AddSingleton(this.configuration);
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
