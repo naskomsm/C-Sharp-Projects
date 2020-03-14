@@ -15,6 +15,7 @@
             this.postsService = postsService;
         }
 
+        [HttpGet]
         public IActionResult PostsByCategories(string name)
         {
             var postsByCategories = this.postsService.GetAll<AllPagePostViewModel>().Where(x => x.Category.Name == name).ToList();

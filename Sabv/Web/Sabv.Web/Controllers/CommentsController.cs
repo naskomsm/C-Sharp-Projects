@@ -25,8 +25,8 @@
             this.postsService = postsService;
         }
 
-        [Authorize]
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Create(string content, int postId)
         {
             var email = this.HttpContext.User.Identities.FirstOrDefault().Name;

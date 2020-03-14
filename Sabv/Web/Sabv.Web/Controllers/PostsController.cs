@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Identity;
@@ -109,6 +110,11 @@
         [HttpPost]
         public IActionResult Search(PostDetailsInputModel inputModel)
         {
+            if (!this.ModelState.IsValid)
+            {
+                return this.Error();
+            }
+
             var filteredPosts = this.postsService.Filter(inputModel).AsQueryable();
 
             var viewmodel = new AllPageViewModel()
@@ -145,6 +151,11 @@
         [Authorize]
         public async Task<IActionResult> Create(CreatePageInputModel inputModel, ICollection<IFormFile> files)
         {
+            if (!this.ModelState.IsValid)
+            {
+                return this.Error();
+            }
+
             var category = this.categoriesService.GetCategoryByName(inputModel.PostCategory);
             var city = this.citiesService.GetCityByName(inputModel.Town);
             var color = this.colorService.GetColorByName(inputModel.Color);
