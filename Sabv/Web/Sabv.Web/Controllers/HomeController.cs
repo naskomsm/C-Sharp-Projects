@@ -33,6 +33,12 @@
         }
 
         [HttpGet]
+        public IActionResult About()
+        {
+            return this.View();
+        }
+
+        [HttpGet]
         public IActionResult ChatView()
         {
             return this.View();

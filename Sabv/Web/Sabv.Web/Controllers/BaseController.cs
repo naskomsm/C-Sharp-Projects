@@ -1,9 +1,9 @@
 ﻿namespace Sabv.Web.Controllers
 {
+    using System.Diagnostics;
+
     using Microsoft.AspNetCore.Mvc;
     using Sabv.Web.ViewModels;
-
-    using System.Diagnostics;
 
     public class BaseController : Controller
     {
