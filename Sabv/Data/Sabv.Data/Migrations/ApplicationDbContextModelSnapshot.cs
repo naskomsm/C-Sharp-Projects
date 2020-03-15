@@ -261,6 +261,9 @@ namespace Sabv.Data.Migrations
                     b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("ImageId")
                         .HasColumnType("int");
 
@@ -466,9 +469,6 @@ namespace Sabv.Data.Migrations
                     b.Property<string>("UserId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("When")
-                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
