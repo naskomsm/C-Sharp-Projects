@@ -18,3 +18,18 @@ Cloudinary
 ```
 localhost:5000
 ```
+
+## Important
+```
+The app is filled with some sample data, the car models and makes wont be relevant. The seeding methods are using
+random values from Db to create fake posts and show the potential of the website.
+```
+
+![Image of home page](https://imgur.com/bhgnOdN)
+![Image of post details page](https://imgur.com/bQ7v7rP)
+![Image of about page](https://imgur.com/3Hx3j7N)
+![Image of category page](https://imgur.com/ksB6Hbb)
+![Image of chat page](https://imgur.com/MhzpjgA)
+![Image of create page](https://imgur.com/COFkAE5)
+![Image of search page](https://imgur.com/IRV9BPo)
+![Image of all page](https://imgur.com/x1uVM7C)
