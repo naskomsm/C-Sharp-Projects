@@ -10,6 +10,7 @@ etc. Admin can see all posts from all users and modify them, he can also create 
 ```
 SignalR
 Cloudinary
+CloudscribePagination
 .NET Core 3.1
 .EF Core
 ```
