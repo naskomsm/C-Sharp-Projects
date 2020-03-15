@@ -25,11 +25,11 @@ The app is filled with some sample data, the car models and makes wont be releva
 random values from Db to create fake posts and show the potential of the website.
 ```
 
-![Image of home page](https://imgur.com/bhgnOdN)
-![Image of post details page](https://imgur.com/bQ7v7rP)
-![Image of about page](https://imgur.com/3Hx3j7N)
-![Image of category page](https://imgur.com/ksB6Hbb)
-![Image of chat page](https://imgur.com/MhzpjgA)
-![Image of create page](https://imgur.com/COFkAE5)
-![Image of search page](https://imgur.com/IRV9BPo)
-![Image of all page](https://imgur.com/x1uVM7C)
+![HomePage](https://user-images.githubusercontent.com/44707978/76702090-ac1bfc00-66cf-11ea-8f6e-2e640271462f.PNG)
+![DetailsPage](https://user-images.githubusercontent.com/44707978/76702104-c5bd4380-66cf-11ea-8c3d-4774b8fb9061.PNG)
+![AboutPage](https://user-images.githubusercontent.com/44707978/76702107-ce157e80-66cf-11ea-8ac9-8f04b281a858.PNG)
+![CategoryPage](https://user-images.githubusercontent.com/44707978/76702109-d53c8c80-66cf-11ea-9857-ee1193eb4cae.PNG)
+![ChatPage](https://user-images.githubusercontent.com/44707978/76702110-dc639a80-66cf-11ea-96bb-31e6c75f05ef.PNG)
+![CreatePage](https://user-images.githubusercontent.com/44707978/76702113-e38aa880-66cf-11ea-9a68-5be8f4f5bd60.PNG)
+![SearchPage](https://user-images.githubusercontent.com/44707978/76702123-fef5b380-66cf-11ea-9d18-e7bf901a07d9.PNG)
+![AllPage](https://user-images.githubusercontent.com/44707978/76702127-07e68500-66d0-11ea-933a-29ba39954845.PNG)
