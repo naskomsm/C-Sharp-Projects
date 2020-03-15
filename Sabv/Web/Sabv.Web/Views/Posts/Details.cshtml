@@ -74,7 +74,8 @@
             </div>
             <div class="col-8">
                 <div class="container text-center mt-3">
-                    @Model.PostDetails.City.Name
+                    <div>User: @Model.PostDetails.User.UserName.Substring(0, Model.PostDetails.User.UserName.IndexOf("@"))</div>
+                    <div>Town: @Model.PostDetails.City.Name</div>
                     <h5>@Model.PostDetails.PhoneNumber</h5>
                 </div>
             </div>
