@@ -80,6 +80,8 @@
             </div>
         </div>
 
+        <hr />
+
         <div class="row">
             <div class="col-6">Manufacture date</div>
             <div class="col-6">@Model.PostDetails.ManufactureDate.ToString("MM/dd/yyyy")</div>
@@ -112,6 +114,9 @@
             <div class="col-6">Color</div>
             <div class="col-6">@Model.PostDetails.Color.Name</div>
         </div>
+
+        <hr />
+
         <div class="row">
             <div class="container">
                 <h6>Add to favourites: <a asp-controller="Posts" asp-action="AddFavourite" asp-route-id="@Model.PostDetails.Id"><i class="fa fa-star"></i></a></h6>

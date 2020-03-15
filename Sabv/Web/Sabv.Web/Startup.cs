@@ -134,7 +134,7 @@
                     {
                         endpoints.MapHub<ChatHub>("/chathub");
                         endpoints.MapControllerRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
-                        endpoints.MapControllerRoute("postsByCategories", "Categories/{name:minlength(3)}", new { controller = "Categories", action = "PostsByCategories" });
+                        endpoints.MapControllerRoute("postsByCategories", "Categories/{name:minlength(3)}", new { controller = "Categories", action = "Display" });
                         endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapRazorPages();
                     });

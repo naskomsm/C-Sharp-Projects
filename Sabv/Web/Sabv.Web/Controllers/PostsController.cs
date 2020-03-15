@@ -156,6 +156,11 @@
                 return this.Create();
             }
 
+            if (files.Count < 1)
+            {
+                return this.Create();
+            }
+
             var category = this.categoriesService.GetCategoryByName(inputModel.PostCategory);
             var city = this.citiesService.GetCityByName(inputModel.Town);
             var color = this.colorService.GetColorByName(inputModel.Color);

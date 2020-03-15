@@ -1,35 +1,30 @@
 ﻿namespace Sabv.Web.Controllers
 {
-    using System.Linq;
-
     using Microsoft.AspNetCore.Mvc;
-    using Sabv.Common;
     using Sabv.Services.Data;
-    using Sabv.Web.ViewModels.Posts;
+    using Sabv.Web.ViewModels.Category;
 
     public class CategoriesController : BaseController
     {
-        private readonly IPostsService postsService;
+        private readonly ICategoriesService categoriesService;
 
-        public CategoriesController(IPostsService postsService)
+        public CategoriesController(ICategoriesService categoriesService)
         {
-            this.postsService = postsService;
+            this.categoriesService = categoriesService;
         }
 
         [HttpGet]
-        public IActionResult PostsByCategories(string name)
+        public IActionResult Display(string name)
         {
-            var postsByCategories = this.postsService
-                .GetAll<AllPagePostViewModel>()
-                .Where(x => x.Category.Name == name)
-                .ToList();
-
-            var viewModel = new AllPageViewModel()
+            var category = this.categoriesService.GetCategoryByName(name);
+            var model = new CategoryViewModel()
             {
-                Posts = postsByCategories,
+                Description = category.Description,
+                Image = category.Image,
+                Name = category.Name,
             };
 
-            return this.View("../Posts/All", viewModel);
+            return this.View("CategoryView", model);
         }
     }
 }

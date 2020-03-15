@@ -21,16 +21,16 @@
 
             var categoriesNames = new List<string>()
             {
-               "Ван",
-               "Джип",
-               "Кабрио",
-               "Комби",
-               "Купе",
-               "Миниван",
-               "Пикап",
-               "Седан",
-               "Стреч лимузина",
-               "Хечбек",
+               "Van",
+               "Jeep",
+               "Convertible",
+               "Combi",
+               "Coupe",
+               "Minivan",
+               "Pickup",
+               "Sedan",
+               "Stretch limousine",
+               "Hatchback",
             };
 
             foreach (var name in categoriesNames)
