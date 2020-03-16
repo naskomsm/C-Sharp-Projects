@@ -190,5 +190,12 @@
         {
             return this.postsRepo.All().Count();
         }
+
+        public async Task DeleteAsync(int id)
+        {
+            var entity = this.postsRepo.All().FirstOrDefault(x => x.Id == id);
+            this.postsRepo.Delete(entity);
+            await this.postsRepo.SaveChangesAsync();
+        }
     }
 }

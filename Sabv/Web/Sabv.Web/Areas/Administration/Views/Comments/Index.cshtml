@@ -1,4 +1,7 @@
-﻿<form method="post">
+﻿@using Sabv.Web.ViewModels.Comments
+@model CommentsAdminPanel
+
+<form method="post">
     <table class="table table-striped">
         <thead>
             <tr>
@@ -11,16 +14,19 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <th scope="row">3</th>
-                <td>Gosho</td>
-                <td>01.01.2020</td>
-                <td>Comment bro just a comment...</td>
-                <td>
-                    <a href="/Administration/Comment/Delete" class="btn btn-danger">Delete</a>
-                </td>
-            </tr>
+            @foreach (var comment in Model.Comments)
+            {
+                <tr>
+                    <th scope="row">@comment.Id</th>
+                    <th scope="row">@comment.Post.Id</th>
+                    <td>@comment.User.UserName.Substring(0, comment.User.UserName.IndexOf("@"))</td>
+                    <td>@comment.CreatedOn.ToString("MM/dd/yyyy hh:mm tt")</td>
+                    <td>@comment.Content</td>
+                    <td>
+                        <a href="/Administration/Comments/Delete/@comment.Id" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+            }
         </tbody>
     </table>
 </form>

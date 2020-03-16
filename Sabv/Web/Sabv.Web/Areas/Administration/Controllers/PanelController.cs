@@ -6,8 +6,7 @@
     using Sabv.Web.Controllers;
 
     [Area("Administration")]
-    [Authorize(Roles = GlobalConstants.User.AdminRole)]
-    [Authorize(Roles = GlobalConstants.User.ModeratorRole)]
+    [Authorize(Roles = "Admin,Moderator")]
     public class PanelController : BaseController
     {
         public IActionResult Index()

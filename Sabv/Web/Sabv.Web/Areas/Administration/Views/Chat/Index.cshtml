@@ -1,4 +1,8 @@
-﻿<form method="post">
+﻿@using Sabv.Web.ViewModels.Chat
+
+@model MessagesAdminPanel
+
+<form method="post">
     <table class="table table-striped">
         <thead>
             <tr>
@@ -10,15 +14,18 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Gosho</td>
-                <td>01.01.2020</td>
-                <td>zdr kp</td>
-                <td>
-                    <a href="/Administration/Chat/Delete" class="btn btn-danger">Delete</a>
-                </td>
-            </tr>
+            @foreach (var message in Model.Messages)
+            {
+                <tr>
+                    <th scope="row">@message.Id</th>
+                    <td>@message.User.UserName.Substring(0, message.User.UserName.IndexOf("@"))</td>
+                    <td>@message.CreatedOn.ToString("MM/dd/yyyy hh:mm tt")</td>
+                    <td>@message.Content</td>
+                    <td>
+                        <a href="/Administration/Chat/Delete/@message.Id" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+            }
         </tbody>
     </table>
 </form>

@@ -20,6 +20,8 @@
 
         Task AddAsync(Post postToAdd);
 
+        Task DeleteAsync(int id);
+
         int Total();
     }
 }
