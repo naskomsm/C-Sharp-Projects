@@ -7,6 +7,7 @@
 
     using Microsoft.AspNetCore.Identity;
     using Microsoft.Extensions.DependencyInjection;
+    using Sabv.Common;
     using Sabv.Data.Models;
     using Sabv.Services.Data;
 
@@ -23,21 +24,40 @@
             var imagesService = serviceProvider.GetRequiredService<IImagesService>();
 
             var emails = new List<string>() { "naskokolev00@gmail.com", "dochka_koleva@abv.bg", "danielIvanov99@gmail.com" };
-            var password = "123456";
 
-            var defaultProfileImage = imagesService.GetAll().ToArray()[3];
+            var defaultProfileImage = imagesService.GetAll().ToArray()[GlobalConstants.User.DefaultImageIndex];
 
-            foreach (var email in emails)
+            var naskoKolev = new ApplicationUser()
             {
-                await userManager.CreateAsync(
-                    new ApplicationUser()
-                    {
-                        Email = email,
-                        UserName = email,
-                        Image = defaultProfileImage,
-                        ImageId = defaultProfileImage.Id,
-                    }, password);
-            }
+                Email = emails[0],
+                UserName = emails[0],
+                Image = defaultProfileImage,
+                ImageId = defaultProfileImage.Id,
+            };
+
+            var dochkaKoleva = new ApplicationUser()
+            {
+                Email = emails[1],
+                UserName = emails[1],
+                Image = defaultProfileImage,
+                ImageId = defaultProfileImage.Id,
+            };
+
+            var danielIvanov = new ApplicationUser()
+            {
+                Email = emails[2],
+                UserName = emails[2],
+                Image = defaultProfileImage,
+                ImageId = defaultProfileImage.Id,
+            };
+
+            await userManager.CreateAsync(naskoKolev, GlobalConstants.User.DefaultPassword);
+            await userManager.CreateAsync(dochkaKoleva, GlobalConstants.User.DefaultPassword);
+            await userManager.CreateAsync(danielIvanov, GlobalConstants.User.DefaultPassword);
+
+            await userManager.AddToRoleAsync(naskoKolev, GlobalConstants.User.AdminRole);
+            await userManager.AddToRoleAsync(dochkaKoleva, GlobalConstants.User.ModeratorRole);
+            await userManager.AddToRoleAsync(danielIvanov, GlobalConstants.User.UserRole);
         }
     }
 }

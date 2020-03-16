@@ -10,10 +10,10 @@
         <li class="nav-item">
             <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @(this.User.Identity.Name.Substring(0, this.User.Identity.Name.IndexOf("@")))!</a>
         </li>
-        if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+        if (this.User.IsInRole(GlobalConstants.User.AdminRole))
         {
             <li class="nav-item">
-                <a class="nav-link text-dark" asp-area="Administration" asp-controller="Dashboard" asp-action="Index" title="Admin">Admin</a>
+                <a class="nav-link text-dark" asp-area="Administration" asp-controller="Panel" asp-action="Index" title="Admin">Admin</a>
             </li>
         }
         <li class="nav-item">
