@@ -14,5 +14,7 @@
         Task<int> AddAsync(string content, ApplicationUser user, Post post);
 
         Task Like(int id);
+
+        Task DeleteAsync(int id);
     }
 }

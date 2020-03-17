@@ -1,4 +1,5 @@
 ﻿@using Sabv.Web.ViewModels.Comments
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @model CommentsAdminPanel
 
 <form method="post">
@@ -23,7 +24,7 @@
                     <td>@comment.CreatedOn.ToString("MM/dd/yyyy hh:mm tt")</td>
                     <td>@comment.Content</td>
                     <td>
-                        <a href="/Administration/Comments/Delete/@comment.Id" class="btn btn-danger">Delete</a>
+                        <a asp-area="Administration" asp-controller="Comments" asp-action="Delete" asp-route-id="@comment.Id" class="btn btn-danger">Delete</a>
                     </td>
                 </tr>
             }

@@ -32,6 +32,11 @@
         [Authorize]
         public async Task SendMessage(string message)
         {
+            if (message.Trim().Length < 1)
+            {
+                return;
+            }
+
             var user = await this.userManager.GetUserAsync(this.Context.User);
             var currentUserImageUrl = GlobalConstants.BaseCloudinaryLink + user.Image.Url;
 
@@ -43,6 +48,11 @@
         [Authorize]
         public async Task SendComment(string content, string postId)
         {
+            if (content.Trim().Length < 1)
+            {
+                return;
+            }
+
             var user = await this.userManager.GetUserAsync(this.Context.User);
             var currentUserImageUrl = GlobalConstants.BaseCloudinaryLink + user.Image.Url;
 

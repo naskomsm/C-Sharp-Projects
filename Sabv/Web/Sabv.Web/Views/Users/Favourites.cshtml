@@ -1,0 +1,77 @@
+﻿@using Sabv.Common
+@using Sabv.Web.ViewModels.Favourites
+@using cloudscribe.Pagination.Models
+
+@model PagedResult<FavouriteViewModel>
+
+@{
+    this.ViewData["Title"] = "Favourites";
+}
+
+<div class="row">
+    <div class="col">
+        <h6>Favourites</h6>
+
+        <cs-pager cs-paging-pagenumber="Model.PageNumber"
+                  cs-paging-totalitems="Model.TotalItems"
+                  cs-paging-pagesize="Model.PageSize"
+                  cs-pagenumber-param="pagenumber"
+                  asp-controller="Posts"
+                  asp-action="All"
+                  cs-pager-li-current-class="page-item active"
+                  cs-pager-li-other-class="page-item"
+                  cs-pager-li-non-active-class="page-item disabled"
+                  cs-pager-link-current-class="page-link"
+                  cs-pager-link-other-class="page-link">
+
+        </cs-pager>
+
+
+        <hr />
+        @foreach (var post in Model.Data)
+        {
+            <div class="row">
+                <div class="col-4">
+                    <span>
+                        <a asp-controller="Posts" asp-action="Details" asp-route-id="@post.Id">
+                            <img src="@GlobalConstants.BaseCloudinaryLink@post.Images.FirstOrDefault().Image.Url" class="img-thumbnail" width="200" height="150">
+                        </a>
+                    </span>
+                </div>
+                <div class="col-8">
+                    <div class="row align-items-start mb-3">
+                        <span>
+                            <a class="col-md-4" asp-controller="Posts" asp-action="Details" asp-route-id="@post.Id">@post.Name</a>
+                        </span>
+                        <div class="col-md-4 offset-md-4 font-weight-bold">@post.Price @post.Currency.ToString()</div>
+                    </div>
+                    <div class="row align-items-end">
+                        <div class="col">
+                            Mileage: @post.Mileage, Color: @post.Color.Name, Engine: @post.EngineType,
+                            Horsepower: @post.Horsepower, Transmission type: @post.TransmissionType,
+                            Manufacture date: @post.ManufactureDate.ToString("MM/dd/yyyy")
+                            <form method="get">
+                                <button asp-controller="Users" asp-action="RemoveFavourite" asp-route-id="@post.Id" type="submit" class="btn btn-danger">Remove</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr />
+        }
+
+        <cs-pager cs-paging-pagenumber="Model.PageNumber"
+                  cs-paging-totalitems="Model.TotalItems"
+                  cs-paging-pagesize="Model.PageSize"
+                  cs-pagenumber-param="pagenumber"
+                  asp-controller="Posts"
+                  asp-action="All"
+                  cs-pager-li-current-class="page-item active"
+                  cs-pager-li-other-class="page-item"
+                  cs-pager-li-non-active-class="page-item disabled"
+                  cs-pager-link-current-class="page-link"
+                  cs-pager-link-other-class="page-link">
+
+        </cs-pager>
+    </div>
+</div>

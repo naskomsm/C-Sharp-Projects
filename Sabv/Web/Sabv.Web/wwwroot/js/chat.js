@@ -183,6 +183,10 @@ $("#submitButton").on("click", function () {
     var message = $("#message").val();
     $("#message").val("");
 
+    if (message.trim().length < 1) {
+        alert("Message should not be empty!");
+    }
+
     connection.invoke("SendMessage", message);
 });
 
@@ -190,6 +194,10 @@ $("#commentBtn").on("click", function () {
     var content = $("#message").val();
     var postId = $("#postId").val();
     $("#message").val("");
+
+    if (content.trim().length < 1) {
+        alert("Comment should not be empty!");
+    }
 
     connection.invoke("SendComment", content, postId);
 })

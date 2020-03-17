@@ -34,6 +34,13 @@
             return comment.Id;
         }
 
+        public async Task DeleteAsync(int id)
+        {
+            var entity = this.commentRepo.All().FirstOrDefault(x => x.Id == id);
+            this.commentRepo.Delete(entity);
+            await this.commentRepo.SaveChangesAsync();
+        }
+
         public IEnumerable<T> GetAll<T>()
         {
             return this.commentRepo.All().To<T>().ToList();

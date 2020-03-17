@@ -1,5 +1,5 @@
 ﻿@using Sabv.Web.ViewModels.Chat
-
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @model MessagesAdminPanel
 
 <form method="post">
@@ -22,7 +22,7 @@
                     <td>@message.CreatedOn.ToString("MM/dd/yyyy hh:mm tt")</td>
                     <td>@message.Content</td>
                     <td>
-                        <a href="/Administration/Chat/Delete/@message.Id" class="btn btn-danger">Delete</a>
+                        <a asp-area="Administration" asp-controller="Chat" asp-action="Delete" asp-route-id="@message.Id" class="btn btn-danger">Delete</a>
                     </td>
                 </tr>
             }

@@ -29,10 +29,13 @@
         [Authorize]
         public async Task<IActionResult> Create(string content, int postId)
         {
-            var user = await this.userManager.GetUserAsync(this.User);
-            var post = this.postsService.GetAll().FirstOrDefault(x => x.Id == postId);
+            if (content.Trim().Length >= 1)
+            {
+                var user = await this.userManager.GetUserAsync(this.User);
+                var post = this.postsService.GetAll().FirstOrDefault(x => x.Id == postId);
 
-            await this.commentsService.AddAsync(content, user, post);
+                await this.commentsService.AddAsync(content, user, post);
+            }
 
             return this.RedirectToAction("Details", "Posts", new { id = postId });
         }

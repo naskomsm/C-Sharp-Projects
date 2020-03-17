@@ -35,6 +35,8 @@
 
         public DbSet<Message> Messages { get; set; }
 
+        public DbSet<Favourite> Favourites { get; set; }
+
         public DbSet<VehicleCategory> VehicleCategories { get; set; }
 
         public DbSet<Image> Images { get; set; }

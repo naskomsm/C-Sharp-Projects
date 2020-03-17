@@ -90,6 +90,7 @@
             services.AddTransient<IJsonService, JsonService>();
             services.AddTransient<ICommentsService, CommentsService>();
             services.AddTransient<IMessagesService, MessagesService>();
+            services.AddTransient<IFavouritesService, FavouritesService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

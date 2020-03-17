@@ -29,6 +29,13 @@
             await this.messagesRepo.SaveChangesAsync();
         }
 
+        public async Task DeleteAsync(int id)
+        {
+            var entity = this.messagesRepo.All().FirstOrDefault(x => x.Id == id);
+            this.messagesRepo.Delete(entity);
+            await this.messagesRepo.SaveChangesAsync();
+        }
+
         public IEnumerable<T> GetAll<T>()
         {
             return this.messagesRepo.All().To<T>().ToList();

@@ -12,5 +12,7 @@
         IEnumerable<Message> GetAll();
 
         Task AddAsync(string content, ApplicationUser user);
+
+        Task DeleteAsync(int id);
     }
 }
