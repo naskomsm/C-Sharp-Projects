@@ -1,7 +1,7 @@
 # Sabv - SellAndBuyVehicles
 Sabv is a multipage application build entirely on the latest .NET technologies such as ASP.NET Core 3.x & Entity Framework Core as a project for university 
 course ASP.NET Core. The main purpose is to provide user-friendly web platform where users can browse different posts containing information about vehicles
-according to their needs. 
+according to their needs. The application have chat where users can chat with each other, comments on posts and administration.
 There are four roles - guest, registered user, admin, moderator. The guest can only browse through the posts but in order to create one he 
 should register or login into existing account. The already logged in user can browse, create posts, add other posts to his favourites, track his own post status
 etc. The moderator can delete chat messages, comments and can do everything that a regular user can. Admin is the same as moderator, but he can also delete posts.
