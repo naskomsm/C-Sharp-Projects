@@ -164,7 +164,7 @@
             var category = this.categoriesService.GetCategoryByName(inputModel.PostCategory);
             var city = this.citiesService.GetCityByName(inputModel.Town);
             var color = this.colorService.GetColorByName(inputModel.Color);
-            var make = this.makesService.GetMakeById(inputModel.Make);
+            var make = this.makesService.GetMakeById(inputModel.Make.Value);
             var model = this.modelsService.GetModelByName(inputModel.Model);
             var vehicleCategory = this.vehicleCategoriesService.GetVehicleCategoryByName(inputModel.VehicleCategory);
 
@@ -192,14 +192,14 @@
                 Currency = currency,
                 EngineType = engineType,
                 Description = inputModel.Description,
-                Horsepower = inputModel.Horsepower,
+                Horsepower = inputModel.Horsepower.Value,
                 Email = inputModel.Email,
                 Eurostandard = eurostandard,
                 TransmissionType = transmissionType,
-                ManufactureDate = new DateTime(inputModel.Year, 1, 1),
-                Mileage = inputModel.Mileage,
+                ManufactureDate = new DateTime(inputModel.Year.Value, 1, 1),
+                Mileage = inputModel.Mileage.Value,
                 Name = make.Name + " " + model.Name + " " + inputModel.Modification,
-                Price = inputModel.Price,
+                Price = inputModel.Price.Value,
                 VehicleCategory = vehicleCategory,
                 VehicleCategoryId = vehicleCategory.Id,
                 PhoneNumber = inputModel.PhoneNumber,
