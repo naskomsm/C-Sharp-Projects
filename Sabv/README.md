@@ -9,6 +9,7 @@ etc. The moderator can delete chat messages, comments and can do everything that
 ## Frameworks and services used
 ```
 SignalR
+SendGrid
 Cloudinary
 CloudscribePagination
 .NET Core 3.1
