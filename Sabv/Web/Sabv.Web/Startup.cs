@@ -45,15 +45,6 @@
             services.AddDefaultIdentity<ApplicationUser>(IdentityOptionsProvider.GetIdentityOptions)
                 .AddRoles<ApplicationRole>().AddEntityFrameworkStores<ApplicationDbContext>();
 
-            Account cloudinaryCredentials = new Account(
-              this.configuration["Cloudinary:CloudName"],
-              this.configuration["Cloudinary:ApiKey"],
-              this.configuration["Cloudinary:ApiSecret"]);
-
-            Cloudinary cloudinary = new Cloudinary(cloudinaryCredentials);
-
-            services.AddSingleton(cloudinary);
-
             services.Configure<CookiePolicyOptions>(
                 options =>
                     {
@@ -68,6 +59,16 @@
             services.AddSignalR();
             services.AddCloudscribePagination();
 
+            Account cloudinaryCredentials = new Account(
+              this.configuration["Cloudinary:CloudName"],
+              this.configuration["Cloudinary:ApiKey"],
+              this.configuration["Cloudinary:ApiSecret"]);
+            Cloudinary cloudinary = new Cloudinary(cloudinaryCredentials);
+            services.AddSingleton(cloudinary);
+
+            SendGridEmailSender emailSender = new SendGridEmailSender(this.configuration["SendGrid:ApiKey"]);
+            services.AddSingleton(emailSender);
+
             services.AddSingleton(this.configuration);
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
@@ -77,7 +78,6 @@
             services.AddScoped<IDbQueryRunner, DbQueryRunner>();
 
             // Application services
-            services.AddTransient<IEmailSender, NullMessageSender>();
             services.AddTransient<ICategoriesService, CategoriesService>();
             services.AddTransient<IPostsService, PostsService>();
             services.AddTransient<ICitiesService, CitiesService>();
