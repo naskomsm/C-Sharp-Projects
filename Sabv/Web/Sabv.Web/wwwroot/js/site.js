@@ -27,3 +27,14 @@ $("#categorySelect").on("change", function () {
     var selectedText = $("#categorySelect option:selected").text().trim();
     $("#pageHeader").html(selectedText);
 });
+
+// Selected files
+$("input#files").change(function () {
+    var files = $(this)[0].files;
+    if (files.length < 1) {
+        alert("You have to upload at least 1 image.")
+    }
+    else if (files.length > 10) {
+        alert("You can upload max to 10 images.");
+    }
+});
