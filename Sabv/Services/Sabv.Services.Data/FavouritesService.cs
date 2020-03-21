@@ -1,5 +1,6 @@
 ﻿namespace Sabv.Services.Data
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
@@ -21,7 +22,7 @@
         {
             if (this.favouritesRepo.All().Any(x => x.PostId == postId && x.UserId == userId))
             {
-                return;
+                throw new ArgumentException("This post is already in favourites.");
             }
 
             await this.favouritesRepo.AddAsync(new Favourite()
@@ -46,6 +47,12 @@
         public async Task Remove(int postId, string userId)
         {
             var entity = this.favouritesRepo.All().FirstOrDefault(x => x.PostId == postId && x.UserId == userId);
+
+            if (entity == null)
+            {
+                throw new ArgumentNullException("Entity cannot be null.");
+            }
+
             this.favouritesRepo.Delete(entity);
             await this.favouritesRepo.SaveChangesAsync();
         }

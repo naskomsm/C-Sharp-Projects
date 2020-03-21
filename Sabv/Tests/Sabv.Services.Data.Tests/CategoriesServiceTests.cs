@@ -45,6 +45,7 @@
 
         [Theory]
         [InlineData(null)]
+        [InlineData("")]
         public async Task AddAsyncShouldThrowNullException(string name)
         {
             var options = new DbContextOptionsBuilder<ApplicationDbContext>()
@@ -58,6 +59,7 @@
 
         [Theory]
         [InlineData(null)]
+        [InlineData("")]
         public void GetByNameShouldThrowNullException(string name)
         {
             var options = new DbContextOptionsBuilder<ApplicationDbContext>()

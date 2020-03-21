@@ -20,9 +20,9 @@
 
         public async Task AddAsync(string name, Image image, string description)
         {
-            if (name == null)
+            if (string.IsNullOrEmpty(name))
             {
-                throw new ArgumentNullException("Name cannot be null");
+                throw new ArgumentNullException("Name cannot be null or empty.");
             }
 
             await this.categoryRepo.AddAsync(new Category()
@@ -48,9 +48,9 @@
 
         public Category GetCategoryByName(string name)
         {
-            if (name == null)
+            if (string.IsNullOrEmpty(name))
             {
-                throw new ArgumentNullException("Name cannot be null");
+                throw new ArgumentNullException("Name cannot be null or empty.");
             }
 
             return this.categoryRepo.All().FirstOrDefault(x => x.Name.ToLower() == name.ToLower());

@@ -20,9 +20,9 @@
 
         public async Task AddAsync(string name)
         {
-            if (name == null)
+            if (string.IsNullOrEmpty(name))
             {
-                throw new ArgumentNullException("Name cannot be null.");
+                throw new ArgumentNullException("Name cannot be null or empty.");
             }
 
             await this.colorRepo.AddAsync(new Color()
@@ -45,9 +45,9 @@
 
         public Color GetColorByName(string name)
         {
-            if (name == null)
+            if (string.IsNullOrEmpty(name))
             {
-                throw new ArgumentNullException("Name cannot be null.");
+                throw new ArgumentNullException("Name cannot be null or empty.");
             }
 
             return this.colorRepo.All().FirstOrDefault(x => x.Name.ToLower() == name.ToLower());

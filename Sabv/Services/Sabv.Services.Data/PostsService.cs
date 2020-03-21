@@ -24,6 +24,11 @@
 
         public async Task AddAsync(Post postToAdd)
         {
+            if (postToAdd == null)
+            {
+                throw new ArgumentNullException("Post cannot be null.");
+            }
+
             await this.postsRepo.AddAsync(postToAdd);
             await this.postsRepo.SaveChangesAsync();
         }
@@ -40,11 +45,22 @@
 
         public T GetDetails<T>(int id)
         {
-            return this.postsRepo.All().Where(x => x.Id == id).To<T>().FirstOrDefault();
+            var entity = this.postsRepo.All().Where(x => x.Id == id).To<T>().FirstOrDefault();
+            if (entity == null)
+            {
+                throw new ArgumentNullException("Entity with given id not found.");
+            }
+
+            return entity;
         }
 
         public IEnumerable<T> GetLatest<T>(int postCount)
         {
+            if (postCount <= 0)
+            {
+                throw new ArgumentNullException("Invalid post count.");
+            }
+
             return this.postsRepo.All().OrderBy(x => x.CreatedOn).Take(postCount).To<T>().ToList();
         }
 
@@ -194,6 +210,12 @@
         public async Task DeleteAsync(int id)
         {
             var entity = this.postsRepo.All().FirstOrDefault(x => x.Id == id);
+
+            if (entity == null)
+            {
+                throw new ArgumentNullException("Entity with given id cannot be found.");
+            }
+
             this.postsRepo.Delete(entity);
             await this.postsRepo.SaveChangesAsync();
         }

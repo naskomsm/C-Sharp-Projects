@@ -1,5 +1,6 @@
 ﻿namespace Sabv.Services.Data
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
@@ -19,6 +20,21 @@
 
         public async Task<int> AddAsync(string content, ApplicationUser user, Post post)
         {
+            if (string.IsNullOrEmpty(content))
+            {
+                throw new ArgumentNullException("Content cannot be null or empty.");
+            }
+
+            if (user == null)
+            {
+                throw new ArgumentNullException("User cannot be null.");
+            }
+
+            if (post == null)
+            {
+                throw new ArgumentNullException("Post cannot be null.");
+            }
+
             var comment = new Comment()
             {
                 Content = content,
@@ -37,6 +53,12 @@
         public async Task DeleteAsync(int id)
         {
             var entity = this.commentRepo.All().FirstOrDefault(x => x.Id == id);
+
+            if (entity == null)
+            {
+                throw new ArgumentNullException("Not existing entity with given id.");
+            }
+
             this.commentRepo.Delete(entity);
             await this.commentRepo.SaveChangesAsync();
         }
@@ -54,6 +76,12 @@
         public async Task Like(int id)
         {
             var comment = this.commentRepo.All().FirstOrDefault(x => x.Id == id);
+
+            if (comment == null)
+            {
+                throw new ArgumentNullException("Not existing comment with given id.");
+            }
+
             comment.Likes++;
 
             await this.commentRepo.SaveChangesAsync();
