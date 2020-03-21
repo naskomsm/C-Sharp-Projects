@@ -10,36 +10,36 @@
     using Sabv.Data.Repositories;
     using Xunit;
 
-    public class CategoriesServiceTests
+    public class ColorsServiceTests
     {
         [Theory]
-        [InlineData("Cars and Jeeps")]
-        [InlineData("Buses")]
+        [InlineData("Blue")]
+        [InlineData("Red")]
         public async Task GetByNameShouldWork(string name)
         {
             var options = new DbContextOptionsBuilder<ApplicationDbContext>()
                 .UseInMemoryDatabase(databaseName: "GetByName").Options;
             var dbContext = new ApplicationDbContext(options);
 
-            var repository = new EfDeletableEntityRepository<Category>(dbContext);
-            var service = new CategoriesService(repository);
-            await service.AddAsync(name, new Image() { Url = "https://miau.bg/files/lib/600x350/agresive-cat1.jpg" }, "description");
+            var repository = new EfDeletableEntityRepository<Color>(dbContext);
+            var service = new ColorService(repository);
+            await service.AddAsync(name);
 
-            Assert.Equal(name, service.GetCategoryByName(name).Name);
+            Assert.Equal(name, service.GetColorByName(name).Name);
         }
 
         [Theory]
-        [InlineData("Cars and Jeeps")]
-        [InlineData("Buses")]
+        [InlineData("Black")]
+        [InlineData("White")]
         public async Task AddAsyncShouldWork(string name)
         {
             var options = new DbContextOptionsBuilder<ApplicationDbContext>()
                 .UseInMemoryDatabase(databaseName: "AddAsync").Options;
             var dbContext = new ApplicationDbContext(options);
 
-            var repository = new EfDeletableEntityRepository<Category>(dbContext);
-            var service = new CategoriesService(repository);
-            await service.AddAsync(name, new Image() { Url = "https://miau.bg/files/lib/600x350/agresive-cat1.jpg" }, "description");
+            var repository = new EfDeletableEntityRepository<Color>(dbContext);
+            var service = new ColorService(repository);
+            await service.AddAsync(name);
             Assert.True(repository.All().Any(x => x.Name == name));
         }
 
@@ -51,9 +51,9 @@
                 .UseInMemoryDatabase(databaseName: "AddAsync").Options;
             var dbContext = new ApplicationDbContext(options);
 
-            var repository = new EfDeletableEntityRepository<Category>(dbContext);
-            var service = new CategoriesService(repository);
-            await Assert.ThrowsAsync<ArgumentNullException>(() => service.AddAsync(name, new Image() { Url = "https://miau.bg/files/lib/600x350/agresive-cat1.jpg" }, "description"));
+            var repository = new EfDeletableEntityRepository<Color>(dbContext);
+            var service = new ColorService(repository);
+            await Assert.ThrowsAsync<ArgumentNullException>(() => service.AddAsync(name));
         }
 
         [Theory]
@@ -64,11 +64,10 @@
                 .UseInMemoryDatabase(databaseName: "AddAsync").Options;
             var dbContext = new ApplicationDbContext(options);
 
-            var repository = new EfDeletableEntityRepository<Category>(dbContext);
-            var service = new CategoriesService(repository);
-            Assert.Throws<ArgumentNullException>(() => service.GetCategoryByName(name));
+            var repository = new EfDeletableEntityRepository<Color>(dbContext);
+            var service = new ColorService(repository);
+            Assert.Throws<ArgumentNullException>(() => service.GetColorByName(name));
         }
-
 
         [Fact]
         public async Task GetAllShouldWork()
@@ -76,13 +75,13 @@
             var options = new DbContextOptionsBuilder<ApplicationDbContext>()
             .UseInMemoryDatabase(databaseName: "GetAll").Options;
             var dbContext = new ApplicationDbContext(options);
-            dbContext.Categories.Add(new Category());
-            dbContext.Categories.Add(new Category());
-            dbContext.Categories.Add(new Category());
+            dbContext.Colors.Add(new Color());
+            dbContext.Colors.Add(new Color());
+            dbContext.Colors.Add(new Color());
             await dbContext.SaveChangesAsync();
 
-            var repository = new EfDeletableEntityRepository<Category>(dbContext);
-            var service = new CategoriesService(repository);
+            var repository = new EfDeletableEntityRepository<Color>(dbContext);
+            var service = new ColorService(repository);
             Assert.Equal(3, service.GetAll().Count());
         }
     }

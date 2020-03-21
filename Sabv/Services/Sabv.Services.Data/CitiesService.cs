@@ -1,5 +1,6 @@
 ﻿namespace Sabv.Services.Data
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
@@ -19,6 +20,11 @@
 
         public async Task AddAsync(string name)
         {
+            if (name == null)
+            {
+                throw new ArgumentNullException("Name cannot be null.");
+            }
+
             await this.citiesRepo.AddAsync(new City()
             {
                 Name = name,
@@ -39,6 +45,11 @@
 
         public City GetCityByName(string name)
         {
+            if (name == null)
+            {
+                throw new ArgumentNullException("Name cannot be null.");
+            }
+
             return this.citiesRepo.All().FirstOrDefault(x => x.Name.ToLower() == name.ToLower());
         }
     }
