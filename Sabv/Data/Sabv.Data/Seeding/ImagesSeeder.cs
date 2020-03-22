@@ -44,7 +44,7 @@
                 "https://akm-img-a-in.tosshub.com/sites/btmt/images/stories/maruti_suzuki_s_presso_660_191119010952.jpg",
                 "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ9EsC21HFBiPvb9DC3Po9ofW_9WhQ_CJckB_feuH3bwgJj5pcx",
                 "https://www.bentleymotors.com/content/dam/bentley/Master/homepage%20carousel/Continental-GT-Mullliner-Convertible-studio-front-34-hpc-1920x1080.jpg/_jcr_content/renditions/Continental-GT-Mullliner-Convertible-studio-front-34-hpc-1024x576.jpg.image_file.700.394.file/Continental-GT-Mullliner-Convertible-studio-front-34-hpc-1024x576.jpg",
-                "https://images.cnbctv18.com/wp-content/uploads/2020/01/MB-AVTR-1.jpg",
+                "https://www.monitor.bg/web/files/articles/170504/gallery/Opel-Astra-1.jpg",
             };
 
             foreach (var link in links)

@@ -19,7 +19,7 @@
 
             var service = serviceProvider.GetRequiredService<IMakesService>();
 
-            var makesNames = new List<string>() 
+            var makesNames = new List<string>()
             {
                 "AC",
                 "Acura",
@@ -98,7 +98,6 @@
                 "McLaren",
                 "Mercedes-Benz",
                 "Mercury",
-                "Mg",
                 "Microcar",
                 "Mini",
                 "Mitsubishi",

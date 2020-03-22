@@ -20,8 +20,6 @@
             var categoriesService = serviceProvider.GetRequiredService<ICategoriesService>();
             var cloudinaryService = serviceProvider.GetRequiredService<ICloudinaryService>();
 
-
-
             var categories = new List<(string Name, string ImageUrl, string Description)>()
             {
                 ("Cars and jeeps", "https://clipartart.com/images/car-clipart-image-7.png", @" A car (or automobile) is a wheeled motor vehicle used for transportation. Most definitions of cars say that they run primarily on roads, 

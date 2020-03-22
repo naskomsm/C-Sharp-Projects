@@ -71,7 +71,6 @@
             Assert.Throws<ArgumentNullException>(() => service.GetCategoryByName(name));
         }
 
-
         [Fact]
         public async Task GetAllShouldWork()
         {

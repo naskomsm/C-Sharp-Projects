@@ -57,7 +57,6 @@
         public async Task<IActionResult> SendEmail(EmailContactInputModel inputModel)
         {
             await this.emailSender.SendEmailAsync(inputModel.From, inputModel.FromName, GlobalConstants.SystemEmail, inputModel.Subject, inputModel.Message);
-
             return this.RedirectToAction("About", "Home");
         }
     }

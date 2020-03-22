@@ -31,7 +31,6 @@
         private readonly IJsonService jsonService;
         private readonly UserManager<ApplicationUser> userManager;
         private readonly ICloudinaryService cloudinaryService;
-        private readonly ApplicationDbContext dbContext;
         private readonly ICommentsService commentsService;
 
         public PostsController(
@@ -45,7 +44,6 @@
             IJsonService jsonService,
             UserManager<ApplicationUser> userManager,
             ICloudinaryService cloudinaryService,
-            ApplicationDbContext dbContext,
             ICommentsService commentsService)
         {
             this.postsService = postsService;
@@ -58,7 +56,6 @@
             this.jsonService = jsonService;
             this.userManager = userManager;
             this.cloudinaryService = cloudinaryService;
-            this.dbContext = dbContext;
             this.commentsService = commentsService;
         }
 
@@ -208,7 +205,6 @@
             };
 
             await this.postsService.AddAsync(post);
-
             var images = await this.cloudinaryService.UploadAsync(files);
 
             foreach (var image in images)
@@ -221,10 +217,8 @@
                     PostId = post.Id,
                 };
 
-                post.Images.Add(postImage);
+                await this.postsService.AddImageToPost(post.Id, postImage);
             }
-
-            await this.dbContext.SaveChangesAsync();
 
             return this.RedirectToAction("Details", "Posts", new { id = post.Id });
         }

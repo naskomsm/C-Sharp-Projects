@@ -1,8 +1,9 @@
 ﻿namespace Sabv.Services.Data
 {
-    using Sabv.Data.Models;
     using System.Collections.Generic;
     using System.Threading.Tasks;
+
+    using Sabv.Data.Models;
 
     public interface IColorService
     {

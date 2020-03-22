@@ -23,5 +23,7 @@
         Task DeleteAsync(int id);
 
         int Total();
+
+        Task AddImageToPost(int postId, PostImage postImage);
     }
 }

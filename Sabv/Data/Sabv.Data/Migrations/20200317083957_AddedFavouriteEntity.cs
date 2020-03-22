@@ -1,8 +1,9 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
-
-namespace Sabv.Data.Migrations
+﻿namespace Sabv.Data.Migrations
 {
+    using System;
+
+    using Microsoft.EntityFrameworkCore.Migrations;
+
     public partial class AddedFavouriteEntity : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -19,7 +20,7 @@ namespace Sabv.Data.Migrations
                     DeletedOn = table.Column<DateTime>(nullable: true),
                     UserId = table.Column<int>(nullable: false),
                     UserId1 = table.Column<string>(nullable: true),
-                    PostId = table.Column<int>(nullable: false)
+                    PostId = table.Column<int>(nullable: false),
                 },
                 constraints: table =>
                 {

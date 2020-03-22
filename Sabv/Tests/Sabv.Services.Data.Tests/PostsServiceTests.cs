@@ -7,7 +7,6 @@
     using Microsoft.EntityFrameworkCore;
     using Sabv.Data;
     using Sabv.Data.Models;
-    using Sabv.Data.Models.Enums;
     using Sabv.Data.Repositories;
     using Xunit;
 
@@ -86,37 +85,32 @@
             Assert.Single(postsService.GetAll());
         }
 
-        // TODO FIX THIS
-        public async Task GetLatestShouldWork()
-        {
-            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
-            .UseInMemoryDatabase(databaseName: "GetLatestShouldWork").Options;
-            var dbContext = new ApplicationDbContext(options);
+        // public async Task GetLatestShouldWork()
+        // {
+        //    var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+        //    .UseInMemoryDatabase(databaseName: "GetLatestShouldWork").Options;
+        //    var dbContext = new ApplicationDbContext(options);
 
-            var postsRepo = new EfDeletableEntityRepository<Post>(dbContext);
-            var makesRepo = new EfDeletableEntityRepository<Make>(dbContext);
-            var makesService = new MakesService(makesRepo);
-            var postsService = new PostsService(postsRepo, makesService);
+        // var postsRepo = new EfDeletableEntityRepository<Post>(dbContext);
+        //    var makesRepo = new EfDeletableEntityRepository<Make>(dbContext);
+        //    var makesService = new MakesService(makesRepo);
+        //    var postsService = new PostsService(postsRepo, makesService);
 
-            await postsService.AddAsync(new Post());
-            Assert.Single(postsService.GetLatest<Post>(1));
-        }
+        // await postsService.AddAsync(new Post());
+        //    Assert.Single(postsService.GetLatest<Post>(1));
+        // }
 
-        //TODO FIX THIS
-        public async Task GetDetailsShouldWork()
-        {
-            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
-            .UseInMemoryDatabase(databaseName: "GetLatestShouldWork").Options;
-            var dbContext = new ApplicationDbContext(options);
+        // public async Task GetDetailsShouldWork()
+        // {
+        //    var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+        //    .UseInMemoryDatabase(databaseName: "GetLatestShouldWork").Options;
+        //    var dbContext = new ApplicationDbContext(options);
 
-            var postsRepo = new EfDeletableEntityRepository<Post>(dbContext);
-            var makesRepo = new EfDeletableEntityRepository<Make>(dbContext);
-            var makesService = new MakesService(makesRepo);
-            var postsService = new PostsService(postsRepo, makesService);
-
-            // TODO:
-        }
-
+        // var postsRepo = new EfDeletableEntityRepository<Post>(dbContext);
+        //    var makesRepo = new EfDeletableEntityRepository<Make>(dbContext);
+        //    var makesService = new MakesService(makesRepo);
+        //    var postsService = new PostsService(postsRepo, makesService);
+        // }
         [Fact]
         public async Task DeleteAsyncShouldThrowNullExceptionForNotFound()
         {

@@ -219,5 +219,12 @@
             this.postsRepo.Delete(entity);
             await this.postsRepo.SaveChangesAsync();
         }
+
+        public async Task AddImageToPost(int postId, PostImage postImage)
+        {
+            var post = this.GetAll().FirstOrDefault(x => x.Id == postId);
+            post.Images.Add(postImage);
+            await this.postsRepo.SaveChangesAsync();
+        }
     }
 }

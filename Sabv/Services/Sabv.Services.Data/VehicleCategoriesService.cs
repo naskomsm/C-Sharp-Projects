@@ -1,5 +1,6 @@
 ﻿namespace Sabv.Services.Data
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
@@ -19,6 +20,11 @@
 
         public async Task AddAsync(string name)
         {
+            if (string.IsNullOrEmpty(name))
+            {
+                throw new ArgumentNullException("Name cannot be null or empty.");
+            }
+
             await this.vehicleCategoriesRepo.AddAsync(new VehicleCategory()
             {
                 Name = name,
@@ -39,6 +45,11 @@
 
         public VehicleCategory GetVehicleCategoryByName(string name)
         {
+            if (string.IsNullOrEmpty(name))
+            {
+                throw new ArgumentNullException("Name cannot be null or empty.");
+            }
+
             return this.vehicleCategoriesRepo.All().FirstOrDefault(x => x.Name.ToLower() == name.ToLower());
         }
     }

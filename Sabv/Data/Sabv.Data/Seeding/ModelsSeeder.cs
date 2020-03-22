@@ -20,7 +20,7 @@
             var modelsService = serviceProvider.GetRequiredService<IModelsService>();
             var makesService = serviceProvider.GetRequiredService<IMakesService>();
 
-            var models = new Dictionary<string, List<string>>() 
+            var models = new Dictionary<string, List<string>>()
             {
                 {
                     "BMW", new List<string>()
