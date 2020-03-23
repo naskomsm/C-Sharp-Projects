@@ -14,13 +14,13 @@
         private readonly IPostsService postsService;
         private readonly ICategoriesService categoriesService;
         private readonly IImagesService imagesService;
-        private readonly SendGridEmailSender emailSender;
+        private readonly IEmailSender emailSender;
 
         public HomeController(
             IPostsService postsService,
             ICategoriesService categoriesService,
             IImagesService imagesService,
-            SendGridEmailSender emailSender)
+            IEmailSender emailSender)
         {
             this.postsService = postsService;
             this.categoriesService = categoriesService;
@@ -54,10 +54,15 @@
         }
 
         [HttpPost]
-        public async Task<IActionResult> SendEmail(EmailContactInputModel inputModel)
+        public async Task<IActionResult> SendEmailAsync(EmailContactInputModel inputModel)
         {
+            if (!this.ModelState.IsValid)
+            {
+                return this.RedirectToAction("About", "Home");
+            }
+
             await this.emailSender.SendEmailAsync(inputModel.From, inputModel.FromName, GlobalConstants.SystemEmail, inputModel.Subject, inputModel.Message);
-            return this.RedirectToAction("About", "Home");
+            return this.RedirectToAction("Index", "Home");
         }
     }
 }

@@ -66,9 +66,6 @@
             Cloudinary cloudinary = new Cloudinary(cloudinaryCredentials);
             services.AddSingleton(cloudinary);
 
-            SendGridEmailSender emailSender = new SendGridEmailSender(this.configuration["SendGrid:ApiKey"]);
-            services.AddSingleton(emailSender);
-
             services.AddSingleton(this.configuration);
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
@@ -91,6 +88,7 @@
             services.AddTransient<ICommentsService, CommentsService>();
             services.AddTransient<IMessagesService, MessagesService>();
             services.AddTransient<IFavouritesService, FavouritesService>();
+            services.AddTransient<IEmailSender>(x => new SendGridEmailSender(this.configuration["SendGrid:ApiKey"]));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

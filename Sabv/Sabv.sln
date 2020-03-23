@@ -39,7 +39,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sabv.Web.Tests", "Tests\Sab
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sabv.Web.ViewModels", "Web\Sabv.Web.ViewModels\Sabv.Web.ViewModels.csproj", "{13B7AACB-9C85-4409-8D4B-95A67D0DFFF7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sabv.Controllers.Tests", "Tests\Sabv.Controllers.Tests\Sabv.Controllers.Tests\Sabv.Controllers.Tests.csproj", "{28F85D3C-B805-40CE-B3D7-42E9E8ED4E0D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sabv.Controllers.Tests", "Tests\Sabv.Controllers.Tests\Sabv.Controllers.Tests\Sabv.Controllers.Tests\Sabv.Controllers.Tests.csproj", "{DFC65DC4-D021-4EBA-8E37-36A03D7863FD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3CBF7F5B-CFB0-4947-BF33-6F077FE6825E}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -103,10 +108,10 @@ Global
 		{13B7AACB-9C85-4409-8D4B-95A67D0DFFF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{13B7AACB-9C85-4409-8D4B-95A67D0DFFF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{13B7AACB-9C85-4409-8D4B-95A67D0DFFF7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{28F85D3C-B805-40CE-B3D7-42E9E8ED4E0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{28F85D3C-B805-40CE-B3D7-42E9E8ED4E0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{28F85D3C-B805-40CE-B3D7-42E9E8ED4E0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{28F85D3C-B805-40CE-B3D7-42E9E8ED4E0D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DFC65DC4-D021-4EBA-8E37-36A03D7863FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DFC65DC4-D021-4EBA-8E37-36A03D7863FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DFC65DC4-D021-4EBA-8E37-36A03D7863FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DFC65DC4-D021-4EBA-8E37-36A03D7863FD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -125,7 +130,7 @@ Global
 		{901AB2DA-6E52-4FB2-91F0-58EB0115F2F7} = {7A731632-6714-44E2-A9E4-069EBA9E666C}
 		{3EE06C6E-C8F3-418A-A309-8AC81976A074} = {7A731632-6714-44E2-A9E4-069EBA9E666C}
 		{13B7AACB-9C85-4409-8D4B-95A67D0DFFF7} = {E389DEB6-5F90-444B-A054-12A10D39C76F}
-		{28F85D3C-B805-40CE-B3D7-42E9E8ED4E0D} = {7A731632-6714-44E2-A9E4-069EBA9E666C}
+		{DFC65DC4-D021-4EBA-8E37-36A03D7863FD} = {7A731632-6714-44E2-A9E4-069EBA9E666C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {384484BE-4680-4529-9CC2-AD37BA4D12D1}
