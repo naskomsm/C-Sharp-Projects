@@ -1,10 +1,9 @@
-﻿namespace Sabv.Data.Migrations
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
+
+namespace Sabv.Data.Migrations
 {
-    using System;
-
-    using Microsoft.EntityFrameworkCore.Migrations;
-
-    public partial class AddInitialMigration : Migration
+    public partial class AddOneMigrationForAll : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -19,7 +18,7 @@
                     CreatedOn = table.Column<DateTime>(nullable: false),
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false),
-                    DeletedOn = table.Column<DateTime>(nullable: true),
+                    DeletedOn = table.Column<DateTime>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -36,7 +35,7 @@
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false),
                     DeletedOn = table.Column<DateTime>(nullable: true),
-                    Name = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -53,7 +52,7 @@
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false),
                     DeletedOn = table.Column<DateTime>(nullable: true),
-                    Name = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -70,7 +69,7 @@
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false),
                     DeletedOn = table.Column<DateTime>(nullable: true),
-                    Url = table.Column<string>(nullable: true),
+                    Url = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -87,7 +86,7 @@
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false),
                     DeletedOn = table.Column<DateTime>(nullable: true),
-                    Name = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -104,7 +103,7 @@
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false),
                     DeletedOn = table.Column<DateTime>(nullable: true),
-                    Name = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -119,7 +118,7 @@
                         .Annotation("SqlServer:Identity", "1, 1"),
                     RoleId = table.Column<string>(nullable: false),
                     ClaimType = table.Column<string>(nullable: true),
-                    ClaimValue = table.Column<string>(nullable: true),
+                    ClaimValue = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -155,7 +154,7 @@
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false),
                     DeletedOn = table.Column<DateTime>(nullable: true),
-                    ImageId = table.Column<int>(nullable: false),
+                    ImageId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -180,7 +179,7 @@
                     DeletedOn = table.Column<DateTime>(nullable: true),
                     Name = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
-                    ImageId = table.Column<int>(nullable: false),
+                    ImageId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -204,7 +203,7 @@
                     IsDeleted = table.Column<bool>(nullable: false),
                     DeletedOn = table.Column<DateTime>(nullable: true),
                     Name = table.Column<string>(nullable: true),
-                    MakeId = table.Column<int>(nullable: false),
+                    MakeId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -225,7 +224,7 @@
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<string>(nullable: false),
                     ClaimType = table.Column<string>(nullable: true),
-                    ClaimValue = table.Column<string>(nullable: true),
+                    ClaimValue = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -245,7 +244,7 @@
                     LoginProvider = table.Column<string>(nullable: false),
                     ProviderKey = table.Column<string>(nullable: false),
                     ProviderDisplayName = table.Column<string>(nullable: true),
-                    UserId = table.Column<string>(nullable: false),
+                    UserId = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -263,7 +262,7 @@
                 columns: table => new
                 {
                     UserId = table.Column<string>(nullable: false),
-                    RoleId = table.Column<string>(nullable: false),
+                    RoleId = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -289,7 +288,7 @@
                     UserId = table.Column<string>(nullable: false),
                     LoginProvider = table.Column<string>(nullable: false),
                     Name = table.Column<string>(nullable: false),
-                    Value = table.Column<string>(nullable: true),
+                    Value = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -313,7 +312,7 @@
                     IsDeleted = table.Column<bool>(nullable: false),
                     DeletedOn = table.Column<DateTime>(nullable: true),
                     UserId = table.Column<string>(nullable: false),
-                    Content = table.Column<string>(nullable: false),
+                    Content = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -355,7 +354,7 @@
                     ColorId = table.Column<int>(nullable: false),
                     MakeId = table.Column<int>(nullable: false),
                     ModelId = table.Column<int>(nullable: false),
-                    CityId = table.Column<int>(nullable: false),
+                    CityId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -417,7 +416,7 @@
                     Content = table.Column<string>(nullable: true),
                     Likes = table.Column<int>(nullable: false),
                     PostId = table.Column<int>(nullable: false),
-                    UserId = table.Column<string>(nullable: true),
+                    UserId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -437,11 +436,41 @@
                 });
 
             migrationBuilder.CreateTable(
+                name: "Favourites",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CreatedOn = table.Column<DateTime>(nullable: false),
+                    ModifiedOn = table.Column<DateTime>(nullable: true),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    DeletedOn = table.Column<DateTime>(nullable: true),
+                    UserId = table.Column<string>(nullable: true),
+                    PostId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Favourites", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Favourites_Posts_PostId",
+                        column: x => x.PostId,
+                        principalTable: "Posts",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Favourites_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "PostImages",
                 columns: table => new
                 {
                     PostId = table.Column<int>(nullable: false),
-                    ImageId = table.Column<int>(nullable: false),
+                    ImageId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -550,6 +579,21 @@
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Favourites_IsDeleted",
+                table: "Favourites",
+                column: "IsDeleted");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Favourites_PostId",
+                table: "Favourites",
+                column: "PostId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Favourites_UserId",
+                table: "Favourites",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Images_IsDeleted",
                 table: "Images",
                 column: "IsDeleted");
@@ -649,6 +693,9 @@
 
             migrationBuilder.DropTable(
                 name: "Comments");
+
+            migrationBuilder.DropTable(
+                name: "Favourites");
 
             migrationBuilder.DropTable(
                 name: "Messages");

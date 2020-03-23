@@ -15,7 +15,9 @@
     using Microsoft.AspNetCore.Mvc.RazorPages;
     using Microsoft.AspNetCore.WebUtilities;
     using Microsoft.Extensions.Logging;
+    using Sabv.Common;
     using Sabv.Data.Models;
+    using Sabv.Services.Data;
 
     [AllowAnonymous]
     public class RegisterModel : PageModel
@@ -24,17 +26,20 @@
         private readonly UserManager<ApplicationUser> userManager;
         private readonly ILogger<RegisterModel> logger;
         private readonly IEmailSender emailSender;
+        private readonly IImagesService imagesService;
 
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            IImagesService imagesService)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.logger = logger;
             this.emailSender = emailSender;
+            this.imagesService = imagesService;
         }
 
         [BindProperty]
@@ -56,7 +61,9 @@
             this.ExternalLogins = (await this.signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (this.ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = this.Input.Email, Email = this.Input.Email };
+                var defaultProfileImage = this.imagesService.GetAll().ToArray()[GlobalConstants.User.DefaultImageIndex];
+
+                var user = new ApplicationUser { UserName = this.Input.Email, Email = this.Input.Email, Image = defaultProfileImage, ImageId = defaultProfileImage.Id };
                 var result = await this.userManager.CreateAsync(user, this.Input.Password);
                 if (result.Succeeded)
                 {

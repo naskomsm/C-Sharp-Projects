@@ -10,8 +10,8 @@ using Sabv.Data;
 namespace Sabv.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200315113246_AddInitialMigration")]
-    partial class AddInitialMigration
+    [Migration("20200323143218_AddOneMigrationForAll")]
+    partial class AddOneMigrationForAll
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -387,6 +387,42 @@ namespace Sabv.Data.Migrations
                     b.ToTable("Comments");
                 });
 
+            modelBuilder.Entity("Sabv.Data.Models.Favourite", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("PostId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.HasIndex("PostId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Favourites");
+                });
+
             modelBuilder.Entity("Sabv.Data.Models.Image", b =>
                 {
                     b.Property<int>("Id")
@@ -738,6 +774,19 @@ namespace Sabv.Data.Migrations
 
                     b.HasOne("Sabv.Data.Models.ApplicationUser", "User")
                         .WithMany("Comments")
+                        .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("Sabv.Data.Models.Favourite", b =>
+                {
+                    b.HasOne("Sabv.Data.Models.Post", "Post")
+                        .WithMany()
+                        .HasForeignKey("PostId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Sabv.Data.Models.ApplicationUser", "User")
+                        .WithMany()
                         .HasForeignKey("UserId");
                 });
 
