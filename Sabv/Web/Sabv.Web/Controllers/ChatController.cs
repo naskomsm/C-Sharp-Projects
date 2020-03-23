@@ -1,6 +1,8 @@
 ﻿namespace Sabv.Web.Controllers
 {
     using System.Linq;
+    using System.Security.Claims;
+    using System.Threading;
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Authorization;
@@ -26,14 +28,16 @@
         [HttpGet]
         public async Task<IActionResult> Main()
         {
+            var random = this.User ?? (ClaimsPrincipal)Thread.CurrentPrincipal;
+
             var model = new ChatViewModel()
             {
                 Messages = this.messagesService.GetAll().ToList(),
-                User = await this.userManager.GetUserAsync(this.User),
+                User = await this.userManager.GetUserAsync(random),
             };
 
             this.ViewBag.CurrentUser = model.User;
-            this.ViewBag.CurrentUserImage = GlobalConstants.BaseCloudinaryLink + model.User.Image.Url;
+            this.ViewBag.CurrentUserImage = GlobalConstants.BaseCloudinaryLink + model.User?.Image.Url;
 
             return this.View("Chat", model);
         }
