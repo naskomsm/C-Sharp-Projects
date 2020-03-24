@@ -6,11 +6,11 @@
     using System.Security.Claims;
     using System.Threading;
     using System.Threading.Tasks;
+
     using AutoMapper;
     using cloudscribe.Pagination.Models;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.AspNetCore.Mvc.Filters;
     using Moq;
     using Sabv.Data.Models;
     using Sabv.Data.Models.Enums;
@@ -205,7 +205,7 @@
                         Price = 155,
                         Mileage = 155555,
                         Horsepower = 1555,
-                        User = new ApplicationUser() {Id = "123456", UserName = "random@abv.bg", Email = "random@abv.bg"},
+                        User = new ApplicationUser() { Id = "123456", UserName = "random@abv.bg", Email = "random@abv.bg" },
                         UserId = "123456",
                         Currency = Currency.EUR,
                         EngineType = EngineType.Disel,
