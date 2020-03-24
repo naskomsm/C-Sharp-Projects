@@ -1,6 +1,8 @@
 ﻿namespace Sabv.Web.Controllers
 {
     using System.Linq;
+    using System.Security.Claims;
+    using System.Threading;
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Authorization;
@@ -27,11 +29,12 @@
 
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> Create(string content, int postId)
+        public async Task<IActionResult> CreateAsync(string content, int postId)
         {
             if (content.Trim().Length >= 1)
             {
-                var user = await this.userManager.GetUserAsync(this.User);
+                var userChecker = this.User ?? (ClaimsPrincipal)Thread.CurrentPrincipal;
+                var user = await this.userManager.GetUserAsync(userChecker);
                 var post = this.postsService.GetAll().FirstOrDefault(x => x.Id == postId);
 
                 await this.commentsService.AddAsync(content, user, post);
@@ -41,7 +44,7 @@
         }
 
         [Authorize]
-        public async Task<IActionResult> Like(int id, int postId)
+        public async Task<IActionResult> LikeAsync(int id, int postId)
         {
             await this.commentsService.Like(id);
             return this.RedirectToAction("Details", "Posts", new { id = postId });

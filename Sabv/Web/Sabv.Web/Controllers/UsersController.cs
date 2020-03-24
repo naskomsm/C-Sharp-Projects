@@ -1,6 +1,8 @@
 ﻿namespace Sabv.Web.Controllers
 {
     using System.Linq;
+    using System.Security.Claims;
+    using System.Threading;
     using System.Threading.Tasks;
 
     using cloudscribe.Pagination.Models;
@@ -30,7 +32,9 @@
         {
             var excludeRecords = (pageSize * pageNumber) - pageSize;
 
-            var user = await this.userManager.GetUserAsync(this.User);
+            var userChecker = this.User ?? (ClaimsPrincipal)Thread.CurrentPrincipal;
+            var user = await this.userManager.GetUserAsync(userChecker);
+
             var favouritePosts = this.favouritesService
                 .GetAllUserFavourites(user.Id)
                 .Where(x => x.Post != null)
@@ -53,18 +57,20 @@
 
         [HttpGet]
         [Authorize]
-        public async Task<IActionResult> AddFavourite(int id)
+        public async Task<IActionResult> AddFavouriteAsync(int id)
         {
-            var user = await this.userManager.GetUserAsync(this.User);
+            var userChecker = this.User ?? (ClaimsPrincipal)Thread.CurrentPrincipal;
+            var user = await this.userManager.GetUserAsync(userChecker);
             await this.favouritesService.AddAsync(id, user.Id);
             return this.RedirectToAction("Details", "Posts", new { id });
         }
 
         [HttpGet]
         [Authorize]
-        public async Task<IActionResult> RemoveFavourite(int id)
+        public async Task<IActionResult> RemoveFavouriteAsync(int id)
         {
-            var user = await this.userManager.GetUserAsync(this.User);
+            var userChecker = this.User ?? (ClaimsPrincipal)Thread.CurrentPrincipal;
+            var user = await this.userManager.GetUserAsync(userChecker);
             await this.favouritesService.Remove(id, user.Id);
             return this.RedirectToAction("Favourites", "Users");
         }

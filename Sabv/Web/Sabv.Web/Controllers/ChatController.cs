@@ -28,12 +28,12 @@
         [HttpGet]
         public async Task<IActionResult> Main()
         {
-            var random = this.User ?? (ClaimsPrincipal)Thread.CurrentPrincipal;
+            var user = this.User ?? (ClaimsPrincipal)Thread.CurrentPrincipal;
 
             var model = new ChatViewModel()
             {
                 Messages = this.messagesService.GetAll().ToList(),
-                User = await this.userManager.GetUserAsync(random),
+                User = await this.userManager.GetUserAsync(user),
             };
 
             this.ViewBag.CurrentUser = model.User;
