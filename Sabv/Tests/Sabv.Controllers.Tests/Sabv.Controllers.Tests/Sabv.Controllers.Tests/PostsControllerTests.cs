@@ -13,25 +13,32 @@
     using Sabv.Services.Data;
     using Sabv.Web.Controllers;
     using Sabv.Web.ViewModels.Comments;
+    using Sabv.Web.ViewModels.Posts;
     using Xunit;
 
-    public class CommentsControllerTests
+
+    public class PostsControllerTests
     {
         [Fact]
-        public async Task CreateCommentShouldWork()
+        public async Task DetailsShouldWork()
         {
             // Arrange
+            var mockCitiesService = new Mock<ICitiesService>();
+            var mockMakesService = new Mock<IMakesService>();
+            var mockCategoriesService = new Mock<ICategoriesService>();
+            var mockModelsService = new Mock<IModelsService>();
+            var mockVehicleCategoriesService = new Mock<IVehicleCategoriesService>();
+            var mockColorsService = new Mock<IColorService>();
+            var mockJsonsService = new Mock<IJsonService>();
+            var mockCloudinaryService = new Mock<ICloudinaryService>();
+
             var mockUserManager = this.GetMockUserManager();
             var mockCommentsService = new Mock<ICommentsService>();
             var mockPostsService = new Mock<IPostsService>();
 
             mockCommentsService
-                .Setup(mc => mc.AddAsync("content", new ApplicationUser(), new Post()))
-                .Returns(Task.FromResult(1));
-
-            mockPostsService
-                .Setup(mp => mp.GetAll())
-                .Returns(this.GetAllPosts());
+               .Setup(mc => mc.GetAll())
+               .Returns(this.GetAllComments());
 
             var claims = new List<Claim>()
             {
@@ -50,38 +57,30 @@
             mockUserManager.Setup(mu => mu.GetUserAsync(principal))
                 .Returns(Task.FromResult(new ApplicationUser() { UserName = "MyName@abv.bg", Image = new Image() { Url = GlobalConstants.BaseCloudinaryLink + "testUrl" } }));
 
-            var controller = new CommentsController(mockUserManager.Object, mockCommentsService.Object, mockPostsService.Object);
-
             // Act
-            var input = new CommentInputModel() { Content = "content", PostId = 1 };
-            var result = await controller.Create(input);
+            var controller = new PostsController(
+                mockPostsService.Object,
+                mockCitiesService.Object,
+                mockCategoriesService.Object,
+                mockMakesService.Object,
+                mockModelsService.Object,
+                mockVehicleCategoriesService.Object,
+                mockColorsService.Object,
+                mockJsonsService.Object,
+                mockUserManager.Object,
+                mockCloudinaryService.Object,
+                mockCommentsService.Object);
 
             // Assert
-            var type = Assert.IsAssignableFrom<ActionResult<CommentResponseModel>>(result);
-            Assert.Equal("MyName", result.Value.Username);
-            Assert.Equal("content", result.Value.Content);
-        }
+            var result = await controller.Details(1);
 
-        [Fact]
-        public async Task LikeAsyncShouldWork()
-        {
-            // Arrange
-            var mockUserManager = this.GetMockUserManager();
-            var mockCommentsService = new Mock<ICommentsService>();
-            var mockPostsService = new Mock<IPostsService>();
-
-            mockCommentsService
-                .Setup(mc => mc.Like(1))
-                .Returns(Task.CompletedTask);
-
-            var controller = new CommentsController(mockUserManager.Object, mockCommentsService.Object, mockPostsService.Object);
-
-            // Act
-            var result = await controller.Like(1);
-
-            // Assert
-            var type = Assert.IsType<int>(result);
-            Assert.Equal(1, result);
+            var viewResult = Assert.IsType<ViewResult>(result);
+            var model = Assert.IsAssignableFrom<PostDetailsAndCommentsViewModel>(viewResult.ViewData.Model);
+            Assert.Null(model.PostDetails);
+            Assert.NotNull(model.CommentViewModel);
+            Assert.Single(model.CommentViewModel.Comments);
+            Assert.Equal(1, model.CommentViewModel.PostId);
+            Assert.Equal("MyName@abv.bg", model.CommentViewModel.User.UserName);
         }
 
         private Mock<UserManager<ApplicationUser>> GetMockUserManager()
@@ -91,13 +90,13 @@
                 userStoreMock.Object, null, null, null, null, null, null, null, null);
         }
 
-        private IEnumerable<Post> GetAllPosts()
+        private IEnumerable<Comment> GetAllComments()
         {
-            return new List<Post>()
+            return new List<Comment>()
             {
-                new Post() { Id = 1 },
-                new Post() { Id = 2 },
-                new Post() { Id = 3 },
+                new Comment() { Id = 1, PostId = 1 },
+                new Comment() { Id = 2, PostId = 2 },
+                new Comment() { Id = 3, PostId = 3 },
             };
         }
     }

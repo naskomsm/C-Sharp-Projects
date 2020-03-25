@@ -3,6 +3,8 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Security.Claims;
+    using System.Threading;
     using System.Threading.Tasks;
 
     using cloudscribe.Pagination.Models;
@@ -63,21 +65,15 @@
         public async Task<IActionResult> Details(int id)
         {
             var postDetails = this.postsService.GetDetails<PostDetailsViewModel>(id);
+            var userChecker = this.User ?? (ClaimsPrincipal)Thread.CurrentPrincipal;
+            var user = await this.userManager.GetUserAsync(userChecker);
+
             var commentViewModel = new CommentViewModel()
             {
                 Comments = this.commentsService.GetAll().Where(x => x.PostId == id),
                 PostId = id,
+                User = user,
             };
-
-            if (!this.User.Identity.IsAuthenticated)
-            {
-                commentViewModel.User = null;
-            }
-            else
-            {
-                var user = await this.userManager.GetUserAsync(this.User);
-                commentViewModel.User = user;
-            }
 
             var model = new PostDetailsAndCommentsViewModel()
             {

@@ -33,6 +33,11 @@
         [Authorize]
         public async Task<ActionResult<CommentResponseModel>> Create(CommentInputModel input)
         {
+            if (!this.ModelState.IsValid)
+            {
+                return this.RedirectToAction("Details", "Posts", new { id = input.PostId });
+            }
+
             var userChecker = this.User ?? (ClaimsPrincipal)Thread.CurrentPrincipal;
             var user = await this.userManager.GetUserAsync(userChecker);
             var post = this.postsService.GetAll().FirstOrDefault(x => x.Id == input.PostId);
