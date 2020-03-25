@@ -26,19 +26,19 @@
                     }
                 </div>
 
-                    <fieldset>
-                        <div class="row">
-                            <div class="col-md-3 col-xl-2 hidden-xsd-none d-sm-block">
-                                <a href="">
-                                    <img class="media-object" src="@GlobalConstants.BaseCloudinaryLink@Model.User.Image.Url" alt="" width="93" height="93">
-                                </a>
-                            </div>
-                            <div class="form-group col-12 col-md-9 col-xl-10">
-                                <textarea class="form-control" id="message" name="content" placeholder="Your message" required></textarea>
-                            </div>
+                <fieldset>
+                    <div class="row">
+                        <div class="col-md-3 col-xl-2 hidden-xsd-none d-sm-block">
+                            <a href="">
+                                <img class="media-object" src="@GlobalConstants.BaseCloudinaryLink@Model.User.Image.Url" alt="" width="93" height="93">
+                            </a>
                         </div>
-                    </fieldset>
-                    <button id="submitButton" class="btn btn-primary float-right">Send</button>
+                        <div class="form-group col-12 col-md-9 col-xl-10">
+                            <textarea class="form-control" id="message" name="content" placeholder="Your message" required></textarea>
+                        </div>
+                    </div>
+                </fieldset>
+                <button id="submitButton" class="btn btn-primary float-right">Send</button>
 
             </div>
         </div>
@@ -46,3 +46,8 @@
 
     </div>
 </section>
+
+@*No need to load chat.js in others views rather than this*@
+<script src="~/lib/jquery/dist/jquery.js" asp-append-version="true"></script>
+<script src="~/js/signalr/dist/browser/signalr.js"></script>
+<script src="~/js/chat.js"></script>
