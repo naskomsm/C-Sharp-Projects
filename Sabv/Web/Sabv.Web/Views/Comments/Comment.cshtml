@@ -13,7 +13,8 @@
 
                 @if (Model.User != null)
                 {
-                    <button id="commentBtn" type="submit" class="btn btn-success float-right ml-3">Submit</button>
+                    <form id="commentsForm" method="post"></form>
+                    <button id="commentBtn" type="button" class="btn btn-success float-right ml-3">Submit</button>
                     <fieldset>
                         <div class="row">
                             <div class="col-md-3 col-xl-2 hidden-xsd-none d-sm-block">
@@ -41,12 +42,12 @@
                             </p>
                             <ul class="list-unstyled list-inline media-detail float-left">
                                 <li class="list-inline-item"><i class="fa fa-calendar"></i>@comment.CreatedOn.ToString("MM/dd/yyyy hh:mm tt")</li>
-                                <li id="likesCount" class="list-inline-item"><i class="fa fa-thumbs-up"></i>@comment.Likes</li>
+                                <li id="comment(@comment.Id)Likes" class="list-inline-item"><i class="fa fa-thumbs-up"></i>@comment.Likes</li>
                             </ul>
                             <ul class="list-unstyled list-inline media-detail float-right">
                                 <li class="list-inline-item">
                                     <textarea id="currentCommentId" hidden>@comment.Id</textarea>
-                                    <button class="btn btn-primary" type="submit" name="likeBtn">Like</button>
+                                    <button onclick="giveLike(@comment.Id)" class="btn btn-primary" type="submit" name="likeBtn">Like</button>
                                 </li>
                             </ul>
                         </div>

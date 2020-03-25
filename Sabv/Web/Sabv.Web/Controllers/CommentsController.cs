@@ -8,8 +8,10 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
+    using Sabv.Common;
     using Sabv.Data.Models;
     using Sabv.Services.Data;
+    using Sabv.Web.ViewModels.Comments;
 
     public class CommentsController : BaseController
     {
@@ -27,27 +29,25 @@
             this.postsService = postsService;
         }
 
-        [HttpPost]
+        [HttpGet]
         [Authorize]
-        public async Task<IActionResult> CreateAsync(string content, int postId)
+        public async Task<ActionResult<CommentResponseModel>> Create(CommentInputModel input)
         {
-            if (content.Trim().Length >= 1)
-            {
-                var userChecker = this.User ?? (ClaimsPrincipal)Thread.CurrentPrincipal;
-                var user = await this.userManager.GetUserAsync(userChecker);
-                var post = this.postsService.GetAll().FirstOrDefault(x => x.Id == postId);
+            var userChecker = this.User ?? (ClaimsPrincipal)Thread.CurrentPrincipal;
+            var user = await this.userManager.GetUserAsync(userChecker);
+            var post = this.postsService.GetAll().FirstOrDefault(x => x.Id == input.PostId);
 
-                await this.commentsService.AddAsync(content, user, post);
-            }
+            var commentId = await this.commentsService.AddAsync(input.Content, user, post);
 
-            return this.RedirectToAction("Details", "Posts", new { id = postId });
+            return new CommentResponseModel { Content = input.Content, CommentId = commentId, Username = user.UserName.Substring(0, user.UserName.IndexOf("@")), CurrentUserImageUrl = GlobalConstants.BaseCloudinaryLink + user.Image.Url, PostId = input.PostId };
         }
 
+        [HttpGet]
         [Authorize]
-        public async Task<IActionResult> LikeAsync(int id, int postId)
+        public async Task<int> Like(int commentId)
         {
-            await this.commentsService.Like(id);
-            return this.RedirectToAction("Details", "Posts", new { id = postId });
+            await this.commentsService.Like(commentId);
+            return commentId;
         }
     }
 }
