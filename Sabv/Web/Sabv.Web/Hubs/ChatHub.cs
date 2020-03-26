@@ -5,7 +5,6 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.SignalR;
-    using Sabv.Common;
     using Sabv.Data.Models;
     using Sabv.Services.Data;
 
@@ -31,11 +30,11 @@
             }
 
             var user = await this.userManager.GetUserAsync(this.Context.User);
-            var currentUserImageUrl = GlobalConstants.BaseCloudinaryLink + user.Image.Url;
+            var currentUserImageUrl = user.Image.Url;
 
             await this.messagesService.AddAsync(message, user);
 
-            await this.Clients.All.SendAsync("ReceiveMessage", user.UserName.Substring(0, user.UserName.IndexOf("@")), message, currentUserImageUrl);
+            await this.Clients.All.SendAsync("ReceiveMessage", user.UserName, message, currentUserImageUrl);
         }
     }
 }

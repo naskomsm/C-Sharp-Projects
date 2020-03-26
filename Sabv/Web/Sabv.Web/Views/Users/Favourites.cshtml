@@ -1,5 +1,4 @@
-﻿@using Sabv.Common
-@using Sabv.Web.ViewModels.Favourites
+﻿@using Sabv.Web.ViewModels.Favourites
 @using cloudscribe.Pagination.Models
 
 @model PagedResult<FavouriteViewModel>
@@ -34,7 +33,7 @@
                 <div class="col-4">
                     <span>
                         <a asp-controller="Posts" asp-action="Details" asp-route-id="@post.Id">
-                            <img src="@GlobalConstants.BaseCloudinaryLink@post.Images.FirstOrDefault().Image.Url" class="img-thumbnail" width="200" height="150">
+                            <img src="@post.Images.FirstOrDefault().Image.Url" class="img-thumbnail" width="200" height="150">
                         </a>
                     </span>
                 </div>

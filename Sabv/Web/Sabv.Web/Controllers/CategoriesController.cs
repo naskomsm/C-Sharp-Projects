@@ -17,10 +17,11 @@
         public IActionResult Display(string name)
         {
             var category = this.categoriesService.GetCategoryByName(name);
+
             var model = new CategoryViewModel()
             {
                 Description = category.Description,
-                Image = category.Image,
+                ImageUrl = category.Image.Url,
                 Name = category.Name,
             };
 

@@ -1,5 +1,4 @@
-﻿@using Sabv.Common
-@using Sabv.Web.ViewModels.Chat
+﻿@using Sabv.Web.ViewModels.Chat
 @model ChatViewModel
 
 <section class="content-item" id="comments">
@@ -12,9 +11,9 @@
                     @foreach (var message in Model.Messages)
                     {
                         <div class="media">
-                            <a class="float-left mr-4" href="#"><img class="media-object" src="@GlobalConstants.BaseCloudinaryLink@message.User.Image.Url" alt="" width="93" height="93"></a>
+                            <a class="float-left mr-4" href="#"><img class="media-object" src="@message.User.Image.Url" alt="" width="93" height="93"></a>
                             <div class="media-body">
-                                <h4 class="media-heading">@message.User.UserName.Substring(0, message.User.UserName.IndexOf("@"))</h4>
+                                <h4 class="media-heading">@message.User.UserName</h4>
                                 <p>
                                     @message.Content
                                 </p>
@@ -30,7 +29,7 @@
                     <div class="row">
                         <div class="col-md-3 col-xl-2 hidden-xsd-none d-sm-block">
                             <a href="">
-                                <img class="media-object" src="@GlobalConstants.BaseCloudinaryLink@Model.User.Image.Url" alt="" width="93" height="93">
+                                <img class="media-object" src="@Model.User.Image.Url" alt="" width="93" height="93">
                             </a>
                         </div>
                         <div class="form-group col-12 col-md-9 col-xl-10">

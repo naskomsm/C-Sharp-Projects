@@ -8,7 +8,6 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
-    using Sabv.Common;
     using Sabv.Data.Models;
     using Sabv.Services.Data;
     using Sabv.Web.ViewModels.Chat;
@@ -36,8 +35,8 @@
                 User = await this.userManager.GetUserAsync(user),
             };
 
-            this.ViewBag.CurrentUser = model.User;
-            this.ViewBag.CurrentUserImage = GlobalConstants.BaseCloudinaryLink + model.User?.Image.Url;
+            //this.ViewBag.CurrentUser = model.User;
+            //this.ViewBag.CurrentUserImage = model.User?.Image.Url;
 
             return this.View("Chat", model);
         }

@@ -44,7 +44,7 @@
 
             var commentId = await this.commentsService.AddAsync(input.Content, user, post);
 
-            return new CommentResponseModel { Content = input.Content, CommentId = commentId, Username = user.UserName.Substring(0, user.UserName.IndexOf("@")), CurrentUserImageUrl = GlobalConstants.BaseCloudinaryLink + user.Image.Url, PostId = input.PostId };
+            return new CommentResponseModel { Content = input.Content, CommentId = commentId, Username = user.UserName, CurrentUserImageUrl = user.Image.Url, PostId = input.PostId };
         }
 
         [HttpGet]

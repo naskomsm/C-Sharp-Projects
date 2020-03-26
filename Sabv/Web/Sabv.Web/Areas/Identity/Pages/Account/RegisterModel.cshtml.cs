@@ -63,7 +63,7 @@
             {
                 var defaultProfileImage = this.imagesService.GetAll().ToArray()[GlobalConstants.User.DefaultImageIndex];
 
-                var user = new ApplicationUser { UserName = this.Input.Email, Email = this.Input.Email, Image = defaultProfileImage, ImageId = defaultProfileImage.Id };
+                var user = new ApplicationUser { UserName = this.Input.UserName, Email = this.Input.Email, Image = defaultProfileImage, ImageId = defaultProfileImage.Id };
                 var result = await this.userManager.CreateAsync(user, this.Input.Password);
                 if (result.Succeeded)
                 {
@@ -110,6 +110,11 @@
             [EmailAddress]
             [Display(Name = "Email")]
             public string Email { get; set; }
+
+            [Required]
+            [MinLength(3)]
+            [Display(Name = "Username")]
+            public string UserName { get; set; }
 
             [Required]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]

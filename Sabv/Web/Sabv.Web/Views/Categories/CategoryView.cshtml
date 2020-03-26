@@ -1,10 +1,9 @@
-﻿@using Sabv.Common
-@using Sabv.Web.ViewModels.Category
+﻿@using Sabv.Web.ViewModels.Category
 
 @model CategoryViewModel
 
 <div class="card mb-3">
-    <img class="card-img-top" src="@GlobalConstants.BaseCloudinaryLink@Model.Image.Url" alt="Card image cap">
+    <img class="card-img-top" src="@Model.ImageUrl" alt="Card image cap">
     <div class="card-body">
         <h5 class="card-title">@Model.Name</h5>
         <p class="card-text">@Model.Description</p>

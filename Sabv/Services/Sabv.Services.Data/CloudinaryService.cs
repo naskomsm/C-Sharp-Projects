@@ -7,7 +7,6 @@
     using CloudinaryDotNet;
     using CloudinaryDotNet.Actions;
     using Microsoft.AspNetCore.Http;
-    using Sabv.Common;
     using Sabv.Data.Models;
 
     public class CloudinaryService : ICloudinaryService
@@ -41,14 +40,13 @@
 
                 var result = await this.cloudinary.UploadAsync(uploadParams);
                 var url = result.SecureUri.ToString();
-                var urlDb = url.Replace(GlobalConstants.BaseCloudinaryLink, string.Empty);
 
                 var image = new Image()
                 {
-                    Url = urlDb,
+                    Url = url,
                 };
 
-                await this.imagesService.AddAsync(urlDb);
+                await this.imagesService.AddAsync(url);
 
                 imagesToReturn.Add(image);
             }
@@ -64,15 +62,14 @@
             };
 
             var result = await this.cloudinary.UploadAsync(uploadParams);
-            var resultUrl = result.SecureUri.ToString();
-            var urlDb = resultUrl.Replace(GlobalConstants.BaseCloudinaryLink, string.Empty);
+            var urlToAdd = result.SecureUri.ToString();
 
             var image = new Image()
             {
-                Url = urlDb,
+                Url = urlToAdd,
             };
 
-            await this.imagesService.AddAsync(urlDb);
+            await this.imagesService.AddAsync(urlToAdd);
 
             return image;
         }
