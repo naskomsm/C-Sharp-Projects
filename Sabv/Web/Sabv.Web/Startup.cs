@@ -84,7 +84,6 @@
             services.AddTransient<IVehicleCategoriesService, VehicleCategoriesService>();
             services.AddTransient<IImagesService, ImagesService>();
             services.AddTransient<ICloudinaryService, CloudinaryService>();
-            services.AddTransient<IJsonService, JsonService>();
             services.AddTransient<ICommentsService, CommentsService>();
             services.AddTransient<IMessagesService, MessagesService>();
             services.AddTransient<IFavouritesService, FavouritesService>();

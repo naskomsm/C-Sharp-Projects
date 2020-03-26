@@ -19,6 +19,7 @@
     using Sabv.Services.Data;
     using Sabv.Services.Mapping;
     using Sabv.Web.ViewModels.Comments;
+    using Sabv.Web.ViewModels.Models;
     using Sabv.Web.ViewModels.Posts;
 
     public class PostsController : BaseController
@@ -30,7 +31,6 @@
         private readonly IModelsService modelsService;
         private readonly IVehicleCategoriesService vehicleCategoriesService;
         private readonly IColorService colorService;
-        private readonly IJsonService jsonService;
         private readonly UserManager<ApplicationUser> userManager;
         private readonly ICloudinaryService cloudinaryService;
         private readonly ICommentsService commentsService;
@@ -43,7 +43,6 @@
             IModelsService modelsService,
             IVehicleCategoriesService vehicleCategoriesService,
             IColorService colorService,
-            IJsonService jsonService,
             UserManager<ApplicationUser> userManager,
             ICloudinaryService cloudinaryService,
             ICommentsService commentsService)
@@ -55,10 +54,16 @@
             this.modelsService = modelsService;
             this.vehicleCategoriesService = vehicleCategoriesService;
             this.colorService = colorService;
-            this.jsonService = jsonService;
             this.userManager = userManager;
             this.cloudinaryService = cloudinaryService;
             this.commentsService = commentsService;
+        }
+
+        [HttpGet]
+        public ActionResult<ICollection<ModelsReturnModel>> AllModels()
+        {
+            var models = this.modelsService.GetAll<ModelsReturnModel>().ToList();
+            return models;
         }
 
         [HttpGet]
@@ -85,10 +90,8 @@
         }
 
         [HttpGet]
-        public async Task<IActionResult> Search()
+        public IActionResult Search()
         {
-            await this.jsonService.WriteInJsonMakesAsync(this.modelsService.GetAll().ToArray());
-
             var model = new SearchViewModel()
             {
                 Categories = this.categoriesService.GetAll().ToList(),

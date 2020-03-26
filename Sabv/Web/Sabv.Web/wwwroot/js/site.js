@@ -1,24 +1,26 @@
-﻿// Car models
+﻿// Car models Ajax
 $("#makesSelect").on("change", function () {
     var selectedMakeId = $("#makesSelect option:selected").val();
 
-    $.getJSON("../datasets/MakesAndItsModels.json", function (data) {
-        $("#modelsSelect").html("");
+    // Clear dropdown
+    $("#modelsSelect").html("");
+    var optionElement = document.createElement("option");
+    optionElement.innerHTML = "All";
+    $("#modelsSelect").append(optionElement);
 
-        var optionElement = document.createElement("option");
-        optionElement.innerHTML = "All";
-        $("#modelsSelect").append(optionElement);
-
+    $.get({
+        url: "/Posts/AllModels",
+    }).done(function (data) {
         var filtered = data.filter(function (model) {
-            return model.MakeId == selectedMakeId;
+            return model.makeId == selectedMakeId;
         });
 
         $.each(filtered, function (key, value) {
             var optionElement = document.createElement("option");
-            optionElement.innerHTML = value.Name;
+            optionElement.innerHTML = value.name;
             $("#modelsSelect").append(optionElement);
-        })
-    })
+        });
+    });
 });
 
 $("#pageHeader").html("All");
