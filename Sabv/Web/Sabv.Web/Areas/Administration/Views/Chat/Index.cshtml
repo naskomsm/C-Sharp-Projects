@@ -18,7 +18,7 @@
             {
                 <tr>
                     <th scope="row">@message.Id</th>
-                    <td>@message.User.UserName.Substring(0, message.User.UserName.IndexOf("@"))</td>
+                    <td>@message.User.UserName</td>
                     <td>@message.CreatedOn.ToString("MM/dd/yyyy hh:mm tt")</td>
                     <td>@message.Content</td>
                     <td>

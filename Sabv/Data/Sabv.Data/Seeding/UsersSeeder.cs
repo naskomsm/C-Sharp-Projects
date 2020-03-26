@@ -23,41 +23,41 @@
             var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
             var imagesService = serviceProvider.GetRequiredService<IImagesService>();
 
-            var emails = new List<string>() { "naskokolev00@gmail.com", "dochka_koleva@abv.bg", "danielIvanov99@gmail.com" };
+            var emails = new List<string>() { "admin@gmail.com", "moderator@gmail.com", "user@gmail.com" };
 
             var defaultProfileImage = imagesService.GetAll().ToArray()[GlobalConstants.User.DefaultImageIndex];
 
-            var naskoKolev = new ApplicationUser()
+            var admin = new ApplicationUser()
             {
                 Email = emails[0],
-                UserName = emails[0],
+                UserName = "GOD",
                 Image = defaultProfileImage,
                 ImageId = defaultProfileImage.Id,
             };
 
-            var dochkaKoleva = new ApplicationUser()
+            var moderator = new ApplicationUser()
             {
                 Email = emails[1],
-                UserName = emails[1],
+                UserName = "Child of GOD",
                 Image = defaultProfileImage,
                 ImageId = defaultProfileImage.Id,
             };
 
-            var danielIvanov = new ApplicationUser()
+            var user = new ApplicationUser()
             {
                 Email = emails[2],
-                UserName = emails[2],
+                UserName = "Peasant",
                 Image = defaultProfileImage,
                 ImageId = defaultProfileImage.Id,
             };
 
-            await userManager.CreateAsync(naskoKolev, GlobalConstants.User.DefaultPassword);
-            await userManager.CreateAsync(dochkaKoleva, GlobalConstants.User.DefaultPassword);
-            await userManager.CreateAsync(danielIvanov, GlobalConstants.User.DefaultPassword);
+            await userManager.CreateAsync(admin, GlobalConstants.User.DefaultPassword);
+            await userManager.CreateAsync(moderator, GlobalConstants.User.DefaultPassword);
+            await userManager.CreateAsync(user, GlobalConstants.User.DefaultPassword);
 
-            await userManager.AddToRoleAsync(naskoKolev, GlobalConstants.User.AdminRole);
-            await userManager.AddToRoleAsync(dochkaKoleva, GlobalConstants.User.ModeratorRole);
-            await userManager.AddToRoleAsync(danielIvanov, GlobalConstants.User.UserRole);
+            await userManager.AddToRoleAsync(admin, GlobalConstants.User.AdminRole);
+            await userManager.AddToRoleAsync(moderator, GlobalConstants.User.ModeratorRole);
+            await userManager.AddToRoleAsync(user, GlobalConstants.User.UserRole);
         }
     }
 }

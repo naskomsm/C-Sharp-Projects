@@ -20,7 +20,7 @@
                 <tr>
                     <th scope="row">@comment.Id</th>
                     <th scope="row">@comment.Post.Id</th>
-                    <td>@comment.User.UserName.Substring(0, comment.User.UserName.IndexOf("@"))</td>
+                    <td>@comment.User.UserName</td>
                     <td>@comment.CreatedOn.ToString("MM/dd/yyyy hh:mm tt")</td>
                     <td>@comment.Content</td>
                     <td>

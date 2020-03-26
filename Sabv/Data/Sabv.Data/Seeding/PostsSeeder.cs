@@ -39,7 +39,7 @@
             var models = modelsService.GetAll().ToArray();
             var images = imagesService.GetAll().Skip(4).ToArray();
 
-            var user = await userManager.FindByNameAsync("naskokolev00@gmail.com");
+            var user = await userManager.FindByNameAsync("admin");
 
             var random = new Random();
 
