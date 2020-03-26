@@ -60,6 +60,7 @@
         }
 
         [HttpGet]
+        [Route("/Api/AllModels")]
         public ActionResult<ICollection<ModelsReturnModel>> AllModels()
         {
             var models = this.modelsService.GetAll<ModelsReturnModel>().ToList();

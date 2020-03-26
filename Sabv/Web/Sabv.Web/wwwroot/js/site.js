@@ -9,7 +9,7 @@ $("#makesSelect").on("change", function () {
     $("#modelsSelect").append(optionElement);
 
     $.get({
-        url: "/Posts/AllModels",
+        url: "/Api/AllModels",
     }).done(function (data) {
         var filtered = data.filter(function (model) {
             return model.makeId == selectedMakeId;
