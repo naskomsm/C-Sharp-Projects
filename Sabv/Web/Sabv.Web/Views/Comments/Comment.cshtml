@@ -1,5 +1,4 @@
-﻿@using Sabv.Common
-@using Sabv.Web.ViewModels.Comments
+﻿@using Sabv.Web.ViewModels.Comments
 
 @model CommentViewModel
 
@@ -31,10 +30,10 @@
 
                 <textarea id="postId" hidden>@Model.PostId</textarea>
 
-                @foreach (var comment in Model.Comments.OrderByDescending(x => x.Likes))
+                @foreach (var comment in Model.Comments)
                 {
                     <div class="media">
-                        <a class="float-left mr-4" href="#"><img class="media-object" src="@comment.User.Image.Url" alt=""></a>
+                        <img class="media-object float-left mr-4" src="@comment.User.Image.Url" alt="">
                         <div class="media-body">
                             <h4 class="media-heading">@comment.User.UserName</h4>
                             <p>

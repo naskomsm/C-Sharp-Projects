@@ -45,6 +45,8 @@ $("#commentBtn").click(function () {
     var content = $("#message").val();
     var postId = $("#postId").val();
 
+    $("#message").val("");
+
     $.get({
         url: "/Comments/Create",
         data: { content: content, postId: parseInt(postId) }
