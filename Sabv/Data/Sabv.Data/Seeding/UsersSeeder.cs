@@ -27,7 +27,7 @@
 
             var defaultProfileImage = imagesService.GetAll().ToArray()[GlobalConstants.User.DefaultImageIndex];
 
-            var admin = new ApplicationUser()
+            var firstUser = new ApplicationUser()
             {
                 Email = emails[0],
                 UserName = "GOD",
@@ -35,15 +35,15 @@
                 ImageId = defaultProfileImage.Id,
             };
 
-            var moderator = new ApplicationUser()
+            var secondUser = new ApplicationUser()
             {
                 Email = emails[1],
-                UserName = "Child of GOD",
+                UserName = "GodsChild",
                 Image = defaultProfileImage,
                 ImageId = defaultProfileImage.Id,
             };
 
-            var user = new ApplicationUser()
+            var thirdUser = new ApplicationUser()
             {
                 Email = emails[2],
                 UserName = "Peasant",
@@ -51,13 +51,13 @@
                 ImageId = defaultProfileImage.Id,
             };
 
-            await userManager.CreateAsync(admin, GlobalConstants.User.DefaultPassword);
-            await userManager.CreateAsync(moderator, GlobalConstants.User.DefaultPassword);
-            await userManager.CreateAsync(user, GlobalConstants.User.DefaultPassword);
+            await userManager.CreateAsync(firstUser, GlobalConstants.User.DefaultPassword);
+            await userManager.CreateAsync(secondUser, GlobalConstants.User.DefaultPassword);
+            await userManager.CreateAsync(thirdUser, GlobalConstants.User.DefaultPassword);
 
-            await userManager.AddToRoleAsync(admin, GlobalConstants.User.AdminRole);
-            await userManager.AddToRoleAsync(moderator, GlobalConstants.User.ModeratorRole);
-            await userManager.AddToRoleAsync(user, GlobalConstants.User.UserRole);
+            await userManager.AddToRoleAsync(firstUser, GlobalConstants.User.AdminRole);
+            await userManager.AddToRoleAsync(secondUser, GlobalConstants.User.ModeratorRole);
+            await userManager.AddToRoleAsync(thirdUser, GlobalConstants.User.UserRole);
         }
     }
 }

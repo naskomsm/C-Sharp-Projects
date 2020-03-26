@@ -19,32 +19,55 @@
 
             var service = serviceProvider.GetRequiredService<ICloudinaryService>();
 
+            // first 4 are default
+            // 0 - 3 BMW M5 E60
+            // 4 - 8 Audi RS7 RS 7 Sportback
+            // 9 - 13 Mercedes-Benz S600
+            // 14 - 18 BMW M3 F80
+            // 19 - 22 BMW M5 F10
+            // 23 - 27 Audi RS6 C7
+            // 28 - 32 Mercedes-Benz G-Class G500
+
             var links = new List<string>()
             {
                 "http://www.acornexclusivecars.com/Acorn-Exclusive-Cars-Audi-A6-900x350.png",
                 "https://irp-cdn.multiscreensite.com/30709730/dms3rep/multi/desktop/slide-2-900x350.jpg",
                 "https://irp-cdn.multiscreensite.com/30709730/dms3rep/multi/desktop/slide-1-900x350.jpg",
                 "https://www.kindpng.com/picc/m/24-248729_stockvader-predicted-adig-user-profile-image-png-transparent.png",
-                "https://images.unsplash.com/photo-1523676060187-f55189a71f5e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80",
-                "https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Kohlhof_Wagen.JPG/1200px-Kohlhof_Wagen.JPG",
-                "https://drop.ndtv.com/albums/AUTO/porsche-taycan-turbo/6401200x900_1_640x480.jpg",
-                "https://media.wired.com/photos/5d09594a62bcb0c9752779d9/master/pass/Transpo_G70_TA-518126.jpg",
-                "https://imgd.aeplcdn.com/1056x594/cw/ec/35455/Hyundai-Venue-Exterior-154436.jpg?wm=0&q=85",
-                "https://www.autocar.co.uk/sites/autocar.co.uk/files/styles/body-image/public/911-road-3629a.jpg?itok=m6x23Go0",
-                "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSDB-cL-RAxvDvp4cfrr9RNRfhC0irTC_s_rbF-xaiZDQbkvzTM",
-                "https://f1.media.brightcove.com/8/1078702682/1078702682_6004950245001_6004956161001-vs.jpg?pubId=1078702682&videoId=6004956161001",
-                "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTi3YqLy1HrsAuSkXyfJeY26kufypah1Epbl2bQC6bw-MK2Mf62",
-                "https://static-ssl.businessinsider.com/image/5d9b5bff52887931e8497a36-1405/141222twnmustang.jp2",
-                "https://www.bentleymotors.com/content/dam/bentley/Master/homepage%20carousel/Bentley-Mulliner-Bacalar-front-three-quarter-hpc-1920x1080.jpg/_jcr_content/renditions/Bentley-Mulliner-Bacalar-front-three-quarter-hpc-1024x576.jpg.image_file.700.394.file/Bentley-Mulliner-Bacalar-front-three-quarter-hpc-1024x576.jpg",
-                "https://lionrentacar.bg/data/ufiles/images/cars/image/tn/peugeot%20508%20for%20rent-1.jpeg",
-                "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQFlxlTgo6tVYuoeOumJ3fGzMis1jkstMS_DbjWM6xbYuqtuKIX",
-                "https://lionrentacar.bg/data/ufiles/images/cars/image/tn/308-2019.jpg",
-                "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSA-8sp-CDy11F9aTb6sweZ1ygR1WO2ObZ5scIfdLW0pyPxKH5F",
-                "https://www.topgear.com/sites/default/files/images/cars-road-test/2019/12/8265f91b5587b4cf28695e35507c1f0f/_dsc3905.jpg",
-                "https://akm-img-a-in.tosshub.com/sites/btmt/images/stories/maruti_suzuki_s_presso_660_191119010952.jpg",
-                "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ9EsC21HFBiPvb9DC3Po9ofW_9WhQ_CJckB_feuH3bwgJj5pcx",
-                "https://www.bentleymotors.com/content/dam/bentley/Master/homepage%20carousel/Continental-GT-Mullliner-Convertible-studio-front-34-hpc-1920x1080.jpg/_jcr_content/renditions/Continental-GT-Mullliner-Convertible-studio-front-34-hpc-1024x576.jpg.image_file.700.394.file/Continental-GT-Mullliner-Convertible-studio-front-34-hpc-1024x576.jpg",
-                "https://www.monitor.bg/web/files/articles/170504/gallery/Opel-Astra-1.jpg",
+
+                "https://bg.autodata24.com/i/bmw/m5/m5-e60/large/516cad2b6f6521b3ff16ffc1547d3029.jpg",
+                "https://bg.autodata24.com/i/bmw/m5/m5-e60/large/20a25cb2b439604fe5db3c205f7e11b5.jpg",
+                "https://bg.autodata24.com/i/bmw/m5/m5-e60/large/55728f87f5f5323e66adae0de09952e3.jpg",
+                "https://bg.autodata24.com/i/bmw/m5/m5-e60/large/1fe1536f178a88853c1f2d616cf1c180.jpg",
+
+                "https://bg.autodata24.com/i/audi/rs7/rs-7-sportback-4g/large/af4fb54791132b1e2890f2d5737a3981.jpg",
+                "https://bg.autodata24.com/i/audi/rs7/rs-7-sportback-4g/large/4b093ebf18151e547bcfda5e637bbcb9.jpg",
+                "https://bg.autodata24.com/i/audi/rs7/rs-7-sportback-4g/large/c1502a20c5d7810882332cbf39fa5cbc.jpg",
+                "https://bg.autodata24.com/i/audi/rs7/rs-7-sportback-4g/large/5b60bfe59876406953fded62fa014e90.jpg",
+
+                "https://bg.autodata24.com/i/mercedes-benz/s-klasse/s-klasse-vi-w222-c217/large/8a512208f77b64ba07190e7b25e97c7a.jpg",
+                "https://bg.autodata24.com/i/mercedes-benz/s-klasse/s-klasse-vi-w222-c217/large/c8eb481aaf462584aaf6b4be638355d2.jpg",
+                "https://bg.autodata24.com/i/mercedes-benz/s-klasse/s-klasse-vi-w222-c217/large/68a5de22f0f5d45cf3670a154011f394.jpg",
+                "https://bg.autodata24.com/i/mercedes-benz/s-klasse/s-klasse-vi-w222-c217/large/cb70d7936d0c9d620fea9d9d6dd2f44e.jpg",
+
+                "https://bg.autodata24.com/i/bmw/m3/bmw-v-f80/large/953bcb9191bbe673ce1d210545ae721d.jpg",
+                "https://bg.autodata24.com/i/bmw/m3/bmw-v-f80/large/0b62907693cf1aa1c9576ab92bf7e02f.jpg",
+                "https://bg.autodata24.com/i/bmw/m3/bmw-v-f80/large/d6f9727a89ff6ecf6c3bb82de31a1934.jpg",
+                "https://bg.autodata24.com/i/bmw/m3/bmw-v-f80/large/4ec24b153ea8c310bcfa517a52545e1d.jpg",
+
+                "https://bg.autodata24.com/i/bmw/m5/m5-f10/large/fd3db2e8917ab0938c3c6db4fbfb4519.jpg",
+                "https://bg.autodata24.com/i/bmw/m5/m5-f10/large/2ab6aee51f14e4916d1c71dfa31d6a25.jpg",
+                "https://bg.autodata24.com/i/bmw/m5/m5-f10/large/1c2e122f204fa3462b8236ecfb23b9f7.jpg",
+
+                "https://bg.autodata24.com/i/audi/rs6/rs6-c7/large/bc607798eb3d18141e696a0efaa9af48.jpg",
+                "https://bg.autodata24.com/i/audi/rs6/rs6-c7/large/b49e953050c30af263882210b33e9560.jpg",
+                "https://bg.autodata24.com/i/audi/rs6/rs6-c7/large/e20a62a75dd86809d780e9be2c24d869.jpg",
+                "https://bg.autodata24.com/i/audi/rs6/rs6-c7/large/32feebdcfd9399361784d3b1c29850f4.jpg",
+
+                "https://bg.autodata24.com/i/mercedes-benz/g-klasse/g-classe-w464/large/6b222dc469f717318595308f2cd3ea6d.jpg",
+                "https://bg.autodata24.com/i/mercedes-benz/g-klasse/g-classe-w464/large/af1012dc200da711e662ee5a623d276b.jpg",
+                "https://bg.autodata24.com/i/mercedes-benz/g-klasse/g-classe-w464/large/5b5c63bb7413526f64a69c5999289685.jpg",
+                "https://bg.autodata24.com/i/mercedes-benz/g-klasse/g-classe-w464/large/af42812abd7dbb4ff8d5581071b8aad3.jpg",
             };
 
             foreach (var link in links)
