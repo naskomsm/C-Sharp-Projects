@@ -64,16 +64,12 @@ function attachCommentToDom(username, content, currentUserImageUrl, commentId) {
     let outerDiv = document.createElement('div');
     outerDiv.className = "media";
 
-    let aElement = document.createElement('a');
-    aElement.className = "float-left mr-4";
-    aElement.href = "#";
-
-    let imageForAElement = document.createElement('img');
-    imageForAElement.className = "media-object";
-    imageForAElement.src = currentUserImageUrl;
-    imageForAElement.alt = "";
-    imageForAElement.width = "93";
-    imageForAElement.height = "93";
+    let imageElement = document.createElement('img');
+    imageElement.className = "float-left mr-4 media-object";
+    imageElement.src = currentUserImageUrl;
+    imageElement.alt = "";
+    imageElement.width = "93";
+    imageElement.height = "93";
 
     let innerDiv = document.createElement('div');
     innerDiv.className = "media-body";
@@ -124,8 +120,7 @@ function attachCommentToDom(username, content, currentUserImageUrl, commentId) {
     });
 
     // Appendings
-    aElement.appendChild(imageForAElement);
-    outerDiv.appendChild(aElement);
+    outerDiv.appendChild(imageElement);
 
     li.appendChild(iForLi);
 
@@ -156,12 +151,17 @@ function attachCommentToDom(username, content, currentUserImageUrl, commentId) {
 };
 
 function giveLike(commentId) {
-    $.get({
-        url: "/Comments/Like",
-        data: { commentId: parseInt(commentId) },
-    }).done(function (data) {
-        updateLikesDOM(data);
-    });
+    if (CheckLoggedIn() == false) {
+        window.location.href = "/Identity/Account/Login";
+    }
+    else {
+        $.get({
+            url: "/Comments/Like",
+            data: { commentId: parseInt(commentId) },
+        }).done(function (data) {
+            updateLikesDOM(data);
+        });
+    }
 };
 
 function updateLikesDOM(commentId) {
@@ -173,3 +173,33 @@ function updateLikesDOM(commentId) {
 
     element.innerHTML = '<i class="fa fa-thumbs-up"></i>' + updatedLikes;
 };
+
+function getCookie(name) {
+    var dc = document.cookie;
+    var prefix = name + "=";
+    var begin = dc.indexOf("; " + prefix);
+    if (begin == -1) {
+        begin = dc.indexOf(prefix);
+        if (begin != 0) return null;
+    }
+    else {
+        begin += 2;
+        var end = document.cookie.indexOf(";", begin);
+        if (end == -1) {
+            end = dc.length;
+        }
+    }
+
+    return decodeURI(dc.substring(begin + prefix.length, end));
+}
+
+function CheckLoggedIn() {
+    var customLoginCookie = getCookie("Username");
+
+    if (customLoginCookie == null) {
+        return false;
+    }
+    else {
+        return true;
+    }
+}
