@@ -48,7 +48,7 @@
             Thread.CurrentPrincipal = principal;
 
             mockUserManager.Setup(mu => mu.GetUserAsync(principal))
-                .Returns(Task.FromResult(new ApplicationUser() { UserName = "MyName@abv.bg", Image = new Image() { Url = GlobalConstants.BaseCloudinaryLink + "testUrl" } }));
+                .Returns(Task.FromResult(new ApplicationUser() { UserName = "MyName", Image = new Image() { Url = "testUrl" } }));
 
             var controller = new CommentsController(mockUserManager.Object, mockCommentsService.Object, mockPostsService.Object);
 

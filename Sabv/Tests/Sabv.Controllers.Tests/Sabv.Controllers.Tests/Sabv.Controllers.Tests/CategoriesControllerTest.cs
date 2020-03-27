@@ -16,7 +16,7 @@
             // Assert
             var mockCategoriesService = new Mock<ICategoriesService>();
             mockCategoriesService.Setup(mc => mc.GetCategoryByName("Cars and jeeps"))
-                .Returns(new Category() { Name = "Cars and jeeps", Description = "test description" });
+                .Returns(new Category() { Name = "Cars and jeeps", Description = "test description", Image = new Image() { Url = "testUrl" } });
             var controller = new CategoriesController(mockCategoriesService.Object);
 
             // Act

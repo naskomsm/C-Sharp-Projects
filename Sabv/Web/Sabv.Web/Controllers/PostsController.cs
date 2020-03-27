@@ -165,7 +165,8 @@
             var model = this.modelsService.GetModelByName(inputModel.Model);
             var vehicleCategory = this.vehicleCategoriesService.GetVehicleCategoryByName(inputModel.VehicleCategory);
 
-            var user = await this.userManager.GetUserAsync(this.User);
+            var userChecker = this.User ?? (ClaimsPrincipal)Thread.CurrentPrincipal;
+            var user = await this.userManager.GetUserAsync(userChecker);
 
             var condition = (Condition)Enum.Parse(typeof(Condition), inputModel.Condition, true);
             var currency = (Currency)Enum.Parse(typeof(Currency), inputModel.Currency, true);

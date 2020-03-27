@@ -35,9 +35,6 @@
                 User = await this.userManager.GetUserAsync(user),
             };
 
-            //this.ViewBag.CurrentUser = model.User;
-            //this.ViewBag.CurrentUserImage = model.User?.Image.Url;
-
             return this.View("Chat", model);
         }
     }
