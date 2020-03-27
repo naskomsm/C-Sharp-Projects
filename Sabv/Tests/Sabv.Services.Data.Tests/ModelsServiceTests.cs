@@ -3,11 +3,13 @@
     using System;
     using System.Linq;
     using System.Threading.Tasks;
-
+    using AutoMapper;
     using Microsoft.EntityFrameworkCore;
     using Sabv.Data;
     using Sabv.Data.Models;
     using Sabv.Data.Repositories;
+    using Sabv.Services.Mapping;
+    using Sabv.Web.ViewModels.Models;
     using Xunit;
 
     public class ModelsServiceTests
@@ -26,6 +28,22 @@
             var repository = new EfDeletableEntityRepository<Model>(dbContext);
             var service = new ModelsService(repository);
             Assert.Equal(3, service.GetAll().Count());
+        }
+
+        [Fact]
+        public async Task GetAllGenericShouldWork()
+        {
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+            .UseInMemoryDatabase(databaseName: "GetAllGenericShouldWork").Options;
+            var dbContext = new ApplicationDbContext(options);
+            dbContext.Models.Add(new Model() { Name = "1", MakeId = 1 });
+            dbContext.Models.Add(new Model() { Name = "2", MakeId = 2 });
+            dbContext.Models.Add(new Model() { Name = "3", MakeId = 3 });
+            await dbContext.SaveChangesAsync();
+
+            var repository = new EfDeletableEntityRepository<Model>(dbContext);
+            var service = new ModelsService(repository);
+            Assert.Equal(3, service.GetAll<ModelsReturnModel>().Count());
         }
 
         [Theory]

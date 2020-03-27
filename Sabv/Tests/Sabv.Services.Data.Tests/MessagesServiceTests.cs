@@ -4,14 +4,32 @@
     using System.Linq;
     using System.Threading.Tasks;
 
+    using AutoMapper;
     using Microsoft.EntityFrameworkCore;
     using Sabv.Data;
     using Sabv.Data.Models;
     using Sabv.Data.Repositories;
+    using Sabv.Services.Mapping;
     using Xunit;
 
     public class MessagesServiceTests
     {
+        [Fact]
+        public async Task GetAllGenericShouldWork()
+        {
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+            .UseInMemoryDatabase(databaseName: "GetAllGenericShouldWork").Options;
+            var dbContext = new ApplicationDbContext(options);
+            dbContext.Messages.Add(new Message());
+            dbContext.Messages.Add(new Message());
+            dbContext.Messages.Add(new Message());
+            await dbContext.SaveChangesAsync();
+
+            var repository = new EfDeletableEntityRepository<Message>(dbContext);
+            var service = new MessagesService(repository);
+            Assert.Equal(3, service.GetAll<MessageModel>().Count());
+        }
+
         [Fact]
         public async Task GetAllShouldWork()
         {
@@ -92,6 +110,11 @@
             var service = new MessagesService(repository);
 
             await Assert.ThrowsAsync<ArgumentNullException>(() => service.DeleteAsync(1));
+        }
+
+        public class MessageModel
+        {
+            public int Id { get; set; }
         }
     }
 }

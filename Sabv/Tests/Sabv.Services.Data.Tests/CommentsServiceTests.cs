@@ -4,13 +4,16 @@
     using System.Linq;
     using System.Threading.Tasks;
 
+    using AutoMapper;
     using Microsoft.EntityFrameworkCore;
     using Sabv.Data;
     using Sabv.Data.Models;
     using Sabv.Data.Repositories;
+    using Sabv.Services.Mapping;
+    using Sabv.Web.ViewModels.Comments;
     using Xunit;
 
-    public class CommentsServiceTests
+    public class CommentsServiceTests : BaseClass
     {
         [Theory]
         [InlineData("Hello bro")]
@@ -137,6 +140,22 @@
             var repository = new EfDeletableEntityRepository<Comment>(dbContext);
             var service = new CommentsService(repository);
             Assert.Equal(3, service.GetAll().Count());
+        }
+
+        [Fact]
+        public async Task GetAllGenericShouldWork()
+        {
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+            .UseInMemoryDatabase(databaseName: "GetAllGeneric").Options;
+            var dbContext = new ApplicationDbContext(options);
+            dbContext.Comments.Add(new Comment() { PostId = 1, User = new ApplicationUser() });
+            dbContext.Comments.Add(new Comment() { PostId = 2, User = new ApplicationUser() });
+            dbContext.Comments.Add(new Comment() { PostId = 3, User = new ApplicationUser() });
+            await dbContext.SaveChangesAsync();
+
+            var repository = new EfDeletableEntityRepository<Comment>(dbContext);
+            var service = new CommentsService(repository);
+            Assert.Equal(3, service.GetAll<CommentViewModel>().Count());
         }
     }
 }

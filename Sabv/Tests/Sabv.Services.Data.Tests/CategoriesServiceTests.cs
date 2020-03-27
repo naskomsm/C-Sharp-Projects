@@ -4,13 +4,16 @@
     using System.Linq;
     using System.Threading.Tasks;
 
+    using AutoMapper;
     using Microsoft.EntityFrameworkCore;
     using Sabv.Data;
     using Sabv.Data.Models;
     using Sabv.Data.Repositories;
+    using Sabv.Services.Mapping;
+    using Sabv.Web.ViewModels.Category;
     using Xunit;
 
-    public class CategoriesServiceTests
+    public class CategoriesServiceTests : BaseClass
     {
         [Theory]
         [InlineData("Cars and Jeeps")]
@@ -85,6 +88,22 @@
             var repository = new EfDeletableEntityRepository<Category>(dbContext);
             var service = new CategoriesService(repository);
             Assert.Equal(3, service.GetAll().Count());
+        }
+
+        [Fact]
+        public async Task GetAllGenericShouldWork()
+        {
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+            .UseInMemoryDatabase(databaseName: "GetAllGenericCategories").Options;
+            var dbContext = new ApplicationDbContext(options);
+            dbContext.Categories.Add(new Category() { Name = "cat1", Image = new Image() { Url = "url" }, Description = "test" });
+            dbContext.Categories.Add(new Category() { Name = "cat2", Image = new Image() { Url = "url" }, Description = "test" });
+            dbContext.Categories.Add(new Category() { Name = "cat3", Image = new Image() { Url = "url" }, Description = "test" });
+            await dbContext.SaveChangesAsync();
+
+            var repository = new EfDeletableEntityRepository<Category>(dbContext);
+            var service = new CategoriesService(repository);
+            Assert.Equal(3, service.GetAll<CategoryViewModel>().Count());
         }
     }
 }

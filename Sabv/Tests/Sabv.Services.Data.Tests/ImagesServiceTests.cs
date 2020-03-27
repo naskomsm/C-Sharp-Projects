@@ -3,7 +3,6 @@
     using System;
     using System.Linq;
     using System.Threading.Tasks;
-
     using Microsoft.EntityFrameworkCore;
     using Sabv.Data;
     using Sabv.Data.Models;
@@ -26,6 +25,22 @@
             var repository = new EfDeletableEntityRepository<Image>(dbContext);
             var service = new ImagesService(repository);
             Assert.Equal(3, service.GetAll().Count());
+        }
+
+        [Fact]
+        public async Task GetAllGenericShouldWork()
+        {
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+            .UseInMemoryDatabase(databaseName: "GetAllGenericShouldWork").Options;
+            var dbContext = new ApplicationDbContext(options);
+            dbContext.Images.Add(new Image());
+            dbContext.Images.Add(new Image());
+            dbContext.Images.Add(new Image());
+            await dbContext.SaveChangesAsync();
+
+            var repository = new EfDeletableEntityRepository<Image>(dbContext);
+            var service = new ImagesService(repository);
+            Assert.Equal(3, service.GetAll<Image>().Count());
         }
 
         [Fact]

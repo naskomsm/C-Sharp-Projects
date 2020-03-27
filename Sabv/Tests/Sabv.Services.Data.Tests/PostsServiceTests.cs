@@ -1,13 +1,17 @@
 ﻿namespace Sabv.Services.Data.Tests
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-
+    using AutoMapper;
+    using Mapping;
     using Microsoft.EntityFrameworkCore;
     using Sabv.Data;
     using Sabv.Data.Models;
+    using Sabv.Data.Models.Enums;
     using Sabv.Data.Repositories;
+    using Sabv.Web.ViewModels.Posts;
     using Xunit;
 
     public class PostsServiceTests
@@ -111,6 +115,56 @@
         //    var makesService = new MakesService(makesRepo);
         //    var postsService = new PostsService(postsRepo, makesService);
         // }
+
+        [Fact]
+        public async Task GetDetailsShouldWork()
+        {
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Post, PostDetailsViewModel>();
+            });
+
+            var mapper = new Mapper(config);
+            mapper.Map(typeof(Post), typeof(PostDetailsViewModel));
+
+            AutoMapperConfig.MapperInstance = mapper;
+
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+           .UseInMemoryDatabase(databaseName: "GetLatestShouldWork").Options;
+            var dbContext = new ApplicationDbContext(options);
+
+            var post = new Post()
+            {
+                Id = 1,
+                Name = "random name",
+                Price = 53222,
+                Currency = Currency.LV,
+                Mileage = 25123,
+                Color = new Color(),
+                EngineType = EngineType.Disel,
+                Horsepower = 255,
+                TransmissionType = TransmissionType.Automatic,
+                ManufactureDate = DateTime.Now,
+                Category = new Category(),
+                User = new ApplicationUser(),
+                PhoneNumber = "0894756154",
+                Description = "random",
+                VehicleCategory = new VehicleCategory(),
+                Condition = Condition.New,
+            };
+
+            dbContext.Posts.Add(post);
+            await dbContext.SaveChangesAsync();
+
+            var postsRepo = new EfDeletableEntityRepository<Post>(dbContext);
+            var makesRepo = new EfDeletableEntityRepository<Make>(dbContext);
+            var makesService = new MakesService(makesRepo);
+            var postsService = new PostsService(postsRepo, makesService);
+
+            var expected = new List<Post>() { post }.AsQueryable().To<PostDetailsViewModel>();
+            Assert.Same(expected.FirstOrDefault(), postsService.GetDetails<PostDetailsViewModel>(1));
+        }
+
         [Fact]
         public async Task DeleteAsyncShouldThrowNullExceptionForNotFound()
         {

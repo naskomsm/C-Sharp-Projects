@@ -1,18 +1,20 @@
 ﻿namespace Sabv.Services.Data.Tests
 {
     using System;
-    using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
     using System.Threading.Tasks;
 
+    using AutoMapper;
     using Microsoft.EntityFrameworkCore;
     using Sabv.Data;
     using Sabv.Data.Models;
+    using Sabv.Data.Models.Enums;
     using Sabv.Data.Repositories;
+    using Sabv.Services.Mapping;
+    using Sabv.Web.ViewModels.Favourites;
     using Xunit;
 
-    public class FavouritesServiceTests
+    public class FavouritesServiceTests : BaseClass
     {
         [Fact]
         public async Task GetAllUserFavouritesShouldWork()
@@ -28,6 +30,40 @@
             var repository = new EfDeletableEntityRepository<Favourite>(dbContext);
             var service = new FavouritesService(repository);
             Assert.Single(service.GetAllUserFavourites("TestId"));
+        }
+
+        [Fact]
+        public async Task GetAllUserFavouritesGenericShouldWork()
+        {
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+            .UseInMemoryDatabase(databaseName: "GetAllUserFavouritesGenericShouldWork").Options;
+            var dbContext = new ApplicationDbContext(options);
+
+            var user = new ApplicationUser() { Id = "randomId" };
+            var post = new Post()
+            {
+                Id = 1,
+                Name = "random name",
+                Price = 53222,
+                Currency = Currency.LV,
+                Mileage = 25123,
+                Color = new Color(),
+                EngineType = EngineType.Disel,
+                Horsepower = 255,
+                TransmissionType = TransmissionType.Automatic,
+                ManufactureDate = DateTime.Now,
+                Category = new Category(),
+            };
+
+            dbContext.Users.Add(user);
+            dbContext.Posts.Add(post);
+            var favourite = new Favourite() { Post = post, User = user };
+            dbContext.Favourites.Add(favourite);
+            await dbContext.SaveChangesAsync();
+
+            var repository = new EfDeletableEntityRepository<Favourite>(dbContext);
+            var service = new FavouritesService(repository);
+            Assert.Single(service.GetAllUserFavourites<FavouriteViewModel>("randomId"));
         }
 
         [Fact]

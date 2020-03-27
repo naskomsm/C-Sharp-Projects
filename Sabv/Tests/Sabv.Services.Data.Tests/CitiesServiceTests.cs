@@ -4,13 +4,15 @@
     using System.Linq;
     using System.Threading.Tasks;
 
+    using AutoMapper;
     using Microsoft.EntityFrameworkCore;
     using Sabv.Data;
     using Sabv.Data.Models;
     using Sabv.Data.Repositories;
+    using Sabv.Services.Mapping;
     using Xunit;
 
-    public class CitiesServiceTests
+    public class CitiesServiceTests : BaseClass
     {
         [Theory]
         [InlineData("Stara Zagora")]
@@ -86,6 +88,22 @@
             var repository = new EfDeletableEntityRepository<City>(dbContext);
             var service = new CitiesService(repository);
             Assert.Equal(3, service.GetAll().Count());
+        }
+
+        [Fact]
+        public async Task GetAllGenericShouldWork()
+        {
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+            .UseInMemoryDatabase(databaseName: "GetAllGenericCities").Options;
+            var dbContext = new ApplicationDbContext(options);
+            dbContext.Cities.Add(new City());
+            dbContext.Cities.Add(new City());
+            dbContext.Cities.Add(new City());
+            await dbContext.SaveChangesAsync();
+
+            var repository = new EfDeletableEntityRepository<City>(dbContext);
+            var service = new CitiesService(repository);
+            Assert.Equal(3, service.GetAll<City>().Count());
         }
     }
 }
