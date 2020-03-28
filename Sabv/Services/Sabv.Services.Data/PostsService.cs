@@ -222,6 +222,17 @@
         public async Task AddImageToPost(int postId, PostImage postImage)
         {
             var post = this.GetAll().FirstOrDefault(x => x.Id == postId);
+
+            if (post == null)
+            {
+                throw new ArgumentNullException("Post with given id cannot be found.");
+            }
+
+            if (postImage == null)
+            {
+                throw new ArgumentNullException("Given post image cannot be null.");
+            }
+
             post.Images.Add(postImage);
             await this.postsRepo.SaveChangesAsync();
         }

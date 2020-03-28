@@ -10,7 +10,7 @@
     using Sabv.Data.Repositories;
     using Xunit;
 
-    public class VehicleCategoriesServiceTests
+    public class VehicleCategoriesServiceTests : BaseClass
     {
         [Fact]
         public async Task GetAllShouldWork()
@@ -26,6 +26,22 @@
             var repository = new EfDeletableEntityRepository<VehicleCategory>(dbContext);
             var service = new VehicleCategoriesService(repository);
             Assert.Equal(3, service.GetAll().Count());
+        }
+
+        [Fact]
+        public async Task GetAllGenericShouldWork()
+        {
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+            .UseInMemoryDatabase(databaseName: "GetAllGenericShouldWork").Options;
+            var dbContext = new ApplicationDbContext(options);
+            dbContext.VehicleCategories.Add(new VehicleCategory());
+            dbContext.VehicleCategories.Add(new VehicleCategory());
+            dbContext.VehicleCategories.Add(new VehicleCategory());
+            await dbContext.SaveChangesAsync();
+
+            var repository = new EfDeletableEntityRepository<VehicleCategory>(dbContext);
+            var service = new VehicleCategoriesService(repository);
+            Assert.Equal(3, service.GetAll<VehicleCategory>().Count());
         }
 
         [Fact]
