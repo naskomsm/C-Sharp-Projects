@@ -7,6 +7,7 @@
     using Moq;
     using Sabv.Data.Models;
     using Sabv.Services.Mapping;
+    using Sabv.Web.ViewModels.Favourites;
     using Sabv.Web.ViewModels.Posts;
 
     public class BaseClass
@@ -16,6 +17,7 @@
             var config = new MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<Post, AllPagePostViewModel>();
+                cfg.CreateMap<Post, FavouriteViewModel>();
             });
 
             var mapper = new Mapper(config);

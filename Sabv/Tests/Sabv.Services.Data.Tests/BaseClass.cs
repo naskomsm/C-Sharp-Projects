@@ -28,6 +28,7 @@
                 cfg.CreateMap<Model, ModelsReturnModel>();
                 cfg.CreateMap<Model, ModelsReturnModel>();
                 cfg.CreateMap<Post, PostDetailsViewModel>();
+                cfg.CreateMap<Post, FavouriteViewModel>();
                 cfg.CreateMap<Post, Post>();
                 cfg.CreateMap<VehicleCategory, VehicleCategory>();
             });
