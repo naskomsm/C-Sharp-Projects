@@ -5,17 +5,15 @@
     using System.Threading;
     using System.Threading.Tasks;
 
-    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Moq;
-    using Sabv.Common;
     using Sabv.Data.Models;
     using Sabv.Services.Data;
     using Sabv.Web.Controllers;
     using Sabv.Web.ViewModels.Comments;
     using Xunit;
 
-    public class CommentsControllerTests
+    public class CommentsControllerTests : BaseClass
     {
         [Fact]
         public async Task CreateCommentShouldWork()
@@ -31,7 +29,7 @@
 
             mockPostsService
                 .Setup(mp => mp.GetAll())
-                .Returns(this.GetAllPosts());
+                .Returns(this.GetAll<Post>());
 
             var claims = new List<Claim>()
             {
@@ -82,23 +80,6 @@
             // Assert
             var type = Assert.IsType<int>(result);
             Assert.Equal(1, result);
-        }
-
-        private Mock<UserManager<ApplicationUser>> GetMockUserManager()
-        {
-            var userStoreMock = new Mock<IUserStore<ApplicationUser>>();
-            return new Mock<UserManager<ApplicationUser>>(
-                userStoreMock.Object, null, null, null, null, null, null, null, null);
-        }
-
-        private IEnumerable<Post> GetAllPosts()
-        {
-            return new List<Post>()
-            {
-                new Post() { Id = 1 },
-                new Post() { Id = 2 },
-                new Post() { Id = 3 },
-            };
         }
     }
 }

@@ -15,7 +15,7 @@
     using Sabv.Web.ViewModels.Chat;
     using Xunit;
 
-    public class ChatControllerTests
+    public class ChatControllerTests : BaseClass
     {
         [Fact]
         public void MainShouldWorkWithProperView()

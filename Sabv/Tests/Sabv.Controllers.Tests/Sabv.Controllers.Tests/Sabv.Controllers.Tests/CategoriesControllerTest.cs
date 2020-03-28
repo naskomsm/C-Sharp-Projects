@@ -8,7 +8,7 @@
     using Sabv.Web.ViewModels.Category;
     using Xunit;
 
-    public class CategoriesControllerTest
+    public class CategoriesControllerTest : BaseClass
     {
         [Fact]
         public void DisplayShouldReturnProperViewWithModel()

@@ -20,7 +20,7 @@
     using Sabv.Web.ViewModels.Favourites;
     using Xunit;
 
-    public class UsersControllerTests
+    public class UsersControllerTests : BaseClass
     {
         [Fact]
         public async Task AddFavouriteAsyncShouldWork()
@@ -214,13 +214,6 @@
                     },
                 },
             };
-        }
-
-        private Mock<UserManager<ApplicationUser>> GetMockUserManager()
-        {
-            var userStoreMock = new Mock<IUserStore<ApplicationUser>>();
-            return new Mock<UserManager<ApplicationUser>>(
-                userStoreMock.Object, null, null, null, null, null, null, null, null);
         }
     }
 }

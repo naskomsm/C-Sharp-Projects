@@ -6,23 +6,19 @@
     using System.Security.Claims;
     using System.Threading;
     using System.Threading.Tasks;
-
-    using AutoMapper;
     using cloudscribe.Pagination.Models;
     using Microsoft.AspNetCore.Http;
-    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Moq;
     using Sabv.Common;
     using Sabv.Data.Models;
     using Sabv.Services.Data;
-    using Sabv.Services.Mapping;
     using Sabv.Web.Controllers;
     using Sabv.Web.ViewModels.Models;
     using Sabv.Web.ViewModels.Posts;
     using Xunit;
 
-    public class PostsControllerTests
+    public class PostsControllerTests : BaseClass
     {
         [Fact]
         public async Task DetailsShouldWork()
@@ -222,16 +218,6 @@
         public void AllShouldWork()
         {
             // Arrange
-            var config = new MapperConfiguration(cfg =>
-            {
-                cfg.CreateMap<Post, AllPagePostViewModel>();
-            });
-
-            var mapper = new Mapper(config);
-            mapper.Map(typeof(Post), typeof(AllPagePostViewModel));
-
-            AutoMapperConfig.MapperInstance = mapper;
-
             var mockCitiesService = new Mock<ICitiesService>();
             var mockMakesService = new Mock<IMakesService>();
             var mockCategoriesService = new Mock<ICategoriesService>();
@@ -495,13 +481,6 @@
             Assert.Equal("Details", redirectToActionResult.ActionName);
         }
 
-        private Mock<UserManager<ApplicationUser>> GetMockUserManager()
-        {
-            var userStoreMock = new Mock<IUserStore<ApplicationUser>>();
-            return new Mock<UserManager<ApplicationUser>>(
-                userStoreMock.Object, null, null, null, null, null, null, null, null);
-        }
-
         private IEnumerable<Comment> GetAllComments()
         {
             return new List<Comment>()
@@ -509,17 +488,6 @@
                 new Comment() { Id = 1, PostId = 1 },
                 new Comment() { Id = 2, PostId = 2 },
                 new Comment() { Id = 3, PostId = 3 },
-            };
-        }
-
-        private ICollection<T> GetAll<T>()
-            where T : new()
-        {
-            return new List<T>()
-            {
-                new T(),
-                new T(),
-                new T(),
             };
         }
     }

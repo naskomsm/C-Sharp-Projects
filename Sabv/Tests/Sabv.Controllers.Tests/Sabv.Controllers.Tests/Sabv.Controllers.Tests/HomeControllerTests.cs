@@ -13,7 +13,7 @@
     using Sabv.Web.ViewModels.Home;
     using Xunit;
 
-    public class HomeControllerTests
+    public class HomeControllerTests : BaseClass
     {
         [Fact]
         public void IndexShouldReturnProperView()
