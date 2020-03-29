@@ -9,16 +9,12 @@ connection.on("ReceiveMessage", function (username, message, currentUserImageUrl
     let outerDiv = document.createElement('div');
     outerDiv.className = "media";
 
-    let aElement = document.createElement('a');
-    aElement.className = "float-left mr-4";
-    aElement.href = "#";
-
-    let imageForAElement = document.createElement('img');
-    imageForAElement.className = "media-object";
-    imageForAElement.src = currentUserImageUrl;
-    imageForAElement.alt = "";
-    imageForAElement.width = "93";
-    imageForAElement.height = "93";
+    let imageElement = document.createElement('img');
+    imageElement.className = "media-object float-left mr-4";
+    imageElement.src = currentUserImageUrl;
+    imageElement.alt = "";
+    imageElement.width = "93";
+    imageElement.height = "93";
 
     let innerDiv = document.createElement('div');
     innerDiv.className = "media-body";
@@ -42,8 +38,7 @@ connection.on("ReceiveMessage", function (username, message, currentUserImageUrl
     iForLi.className = "fa fa-calendar";
 
     // Appendings
-    aElement.appendChild(imageForAElement);
-    outerDiv.appendChild(aElement);
+    outerDiv.appendChild(imageElement);
 
     li.appendChild(iForLi);
 

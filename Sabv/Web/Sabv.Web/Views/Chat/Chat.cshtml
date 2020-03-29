@@ -11,7 +11,7 @@
                     @foreach (var message in Model.Messages)
                     {
                         <div class="media">
-                            <a class="float-left mr-4" href="#"><img class="media-object" src="@message.User.Image.Url" alt="" width="93" height="93"></a>
+                            <img class="media-object float-left mr-4" src="@message.User.Image.Url" alt="" width="93" height="93">
                             <div class="media-body">
                                 <h4 class="media-heading">@message.User.UserName</h4>
                                 <p>

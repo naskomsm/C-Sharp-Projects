@@ -4,7 +4,7 @@
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Mvc.Testing;
-
+    
     using Xunit;
 
     public class WebTests : IClassFixture<WebApplicationFactory<Startup>>
@@ -64,6 +64,43 @@
         }
 
         [Fact]
+        public async Task IndexShouldContainCarouselDiv()
+        {
+            var client = this.server.CreateClient();
+            var response = await client.GetAsync("/");
+            response.EnsureSuccessStatusCode();
+            var responseContent = await response.Content.ReadAsStringAsync();
+            Assert.Contains("<div id=\"carouselExampleIndicators\" class=\"carousel slide my-4\" data-ride=\"carousel\" width=\"900\" height=\"350\">", responseContent);
+        }
+
+        [Theory]
+        [InlineData("<a href=\"Categories/Buses\" class=\"list-group-item\">")]
+        [InlineData("<a href=\"Categories/Trucks\" class=\"list-group-item\">")]
+        [InlineData("<a href=\"Categories/Motorcycles\" class=\"list-group-item\">")]
+        [InlineData("<a href=\"Categories/Cars and jeeps\" class=\"list-group-item\">")]
+        public async Task IndexPageShouldContainCategoriesLis(string element)
+        {
+            var client = this.server.CreateClient();
+            var response = await client.GetAsync("/");
+            response.EnsureSuccessStatusCode();
+            var responseContent = await response.Content.ReadAsStringAsync();
+            Assert.Contains(element, responseContent);
+        }
+
+        [Theory]
+        [InlineData("<a href=\"/Posts/Details/1\">")]
+        [InlineData("<a href=\"/Posts/Details/2\">")]
+        [InlineData("<a href=\"/Posts/Details/3\">")]
+        public async Task IndexShouldContainAElementAboutPost(string element)
+        {
+            var client = this.server.CreateClient();
+            var response = await client.GetAsync("/");
+            response.EnsureSuccessStatusCode();
+            var responseContent = await response.Content.ReadAsStringAsync();
+            Assert.Contains(element, responseContent);
+        }
+
+        [Fact]
         public async Task IndexPageShouldReturnStatusCode200WithTitle()
         {
             var client = this.server.CreateClient();
@@ -72,6 +109,16 @@
             var responseContent = await response.Content.ReadAsStringAsync();
             Assert.Contains("<title>", responseContent);
         }
+
+        //[Fact]
+        //public async Task ChatPageShouldContainChatDiv()
+        //{
+        //    var client = this.server.CreateClient();
+        //    var response = await client.GetAsync("/Chat/Main");
+        //    response.EnsureSuccessStatusCode();
+        //    var responseContent = await response.Content.ReadAsStringAsync();
+        //    Assert.Contains("<div id=\"chat\">", responseContent);
+        //}
 
         [Fact]
         public async Task AccountManagePageRequiresAuthorization()
