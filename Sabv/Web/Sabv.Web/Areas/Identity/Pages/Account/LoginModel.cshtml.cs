@@ -100,6 +100,7 @@
         {
             [Required]
             [MinLength(3)]
+            [Display(Name = "Username")]
             public string UserName { get; set; }
 
             [Required]
