@@ -22,12 +22,12 @@
         {
             var sender = new SendGridClient(this.Configuration["SendGrid:ApiKey"]);
 
-            var fromAddress = new EmailAddress("gosho", "gosho123@gmail.com");
-            var toAddress = new EmailAddress("nagoshkopriqtelq@gmail.bg");
+            var fromAddress = new EmailAddress("gosho1234@abv.bg", "goshko");
+            var toAddress = new EmailAddress("nagoshkopriqtelq@gmail.com");
             var message = MailHelper.CreateSingleEmail(fromAddress, toAddress, "zaglavie", null, "tainabrat");
 
             var result = await sender.SendEmailAsync(message);
-            Assert.Equal("200", result.StatusCode.ToString());
+            Assert.Equal("Accepted", result.StatusCode.ToString());
         }
     }
 }
