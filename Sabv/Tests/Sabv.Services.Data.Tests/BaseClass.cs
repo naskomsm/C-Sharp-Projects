@@ -1,6 +1,7 @@
 ﻿namespace Sabv.Services.Data.Tests
 {
     using AutoMapper;
+    using Microsoft.Extensions.Configuration;
     using Sabv.Data.Models;
     using Sabv.Services.Mapping;
     using Sabv.Web.ViewModels.Category;
@@ -13,7 +14,7 @@
 
     public class BaseClass
     {
-        public BaseClass()
+        protected BaseClass()
         {
             var config = new MapperConfiguration(cfg =>
             {
@@ -35,6 +36,12 @@
 
             var mapper = new Mapper(config);
             AutoMapperConfig.MapperInstance = mapper;
+
+            this.Configuration = new ConfigurationBuilder()
+                .AddJsonFile("mockappsettings.Development.json")
+                .Build();
         }
+
+        protected IConfiguration Configuration { get; set; }
     }
 }

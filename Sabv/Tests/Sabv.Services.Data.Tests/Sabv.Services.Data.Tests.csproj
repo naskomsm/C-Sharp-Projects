@@ -35,6 +35,13 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Data\Sabv.Data\Sabv.Data.csproj" />
     <ProjectReference Include="..\..\Services\Sabv.Services.Data\Sabv.Services.Data.csproj" />
+    <ProjectReference Include="..\..\Services\Sabv.Services.Messaging\Sabv.Services.Messaging.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="mockappsettings.Development.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

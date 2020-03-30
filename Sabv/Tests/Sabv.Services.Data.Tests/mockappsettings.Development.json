@@ -1,0 +1,10 @@
+﻿{
+  "Cloudinary": {
+    "CloudName": "det4b1n4l",
+    "ApiKey": "559637631932343",
+    "ApiSecret": "isGpydROpIOS9ZYk-IPRK09tiqM"
+  },
+  "SendGrid": {
+    "ApiKey": "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"
+  }
+}

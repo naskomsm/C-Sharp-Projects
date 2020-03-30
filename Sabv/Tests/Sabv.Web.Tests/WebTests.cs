@@ -1,10 +1,14 @@
 ﻿namespace Sabv.Web.Tests
 {
+    using System;
     using System.Net;
+    using System.Net.Http;
+    using System.Text;
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Mvc.Testing;
-    
+    using Newtonsoft.Json;
+    using Sabv.Data.Models;
     using Xunit;
 
     public class WebTests : IClassFixture<WebApplicationFactory<Startup>>
@@ -110,15 +114,26 @@
             Assert.Contains("<title>", responseContent);
         }
 
-        //[Fact]
-        //public async Task ChatPageShouldContainChatDiv()
-        //{
-        //    var client = this.server.CreateClient();
-        //    var response = await client.GetAsync("/Chat/Main");
-        //    response.EnsureSuccessStatusCode();
-        //    var responseContent = await response.Content.ReadAsStringAsync();
-        //    Assert.Contains("<div id=\"chat\">", responseContent);
-        //}
+        [Fact]
+        public async Task ChatPageShouldContainChatDiv()
+        {
+            var client = this.server.CreateClient();
+            var input = new InputModel()
+            {
+                UserName = "GOD",
+                Password = "123456",
+                RememberMe = false,
+            };
+
+            var json = JsonConvert.SerializeObject(input);
+            var uri = new Uri("https://localhost:5001/Identity/Account/Login");
+            var postResponse = await client.PostAsync(uri, new StringContent(json, Encoding.UTF8, "application/json"));
+
+            var response = await client.GetAsync("/Chat/Main");
+            response.EnsureSuccessStatusCode();
+            var responseContent = await response.Content.ReadAsStringAsync();
+            Assert.Contains("<div id=\"chat\">", responseContent);
+        }
 
         [Fact]
         public async Task AccountManagePageRequiresAuthorization()
@@ -126,6 +141,15 @@
             var client = this.server.CreateClient(new WebApplicationFactoryClientOptions { AllowAutoRedirect = false });
             var response = await client.GetAsync("Identity/Account/Manage");
             Assert.Equal(HttpStatusCode.Redirect, response.StatusCode);
+        }
+
+        public class InputModel
+        {
+            public string UserName { get; set; }
+
+            public string Password { get; set; }
+
+            public bool RememberMe { get; set; }
         }
     }
 }

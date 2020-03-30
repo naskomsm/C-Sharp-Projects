@@ -8,11 +8,11 @@
     using SendGrid;
     using SendGrid.Helpers.Mail;
 
-    public class SendGridEmailSender : IEmailSender
+    public class SendEmailClient : IEmailSender
     {
         private readonly SendGridClient client;
 
-        public SendGridEmailSender(string apiKey)
+        public SendEmailClient(string apiKey)
         {
             this.client = new SendGridClient(apiKey);
         }

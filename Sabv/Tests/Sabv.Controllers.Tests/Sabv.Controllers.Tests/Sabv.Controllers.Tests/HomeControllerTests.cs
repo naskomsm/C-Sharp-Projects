@@ -28,7 +28,7 @@
             var mockPostsService = new Mock<IPostsService>();
             mockPostsService.Setup(mp => mp.GetAll()).Returns(this.GetFirstSixPosts());
 
-            var mockEmailSender = new Mock<SendGridEmailSender>("12345");
+            var mockEmailSender = new Mock<SendEmailClient>("12345");
 
             var controller = new HomeController(
                 mockPostsService.Object,
@@ -54,7 +54,7 @@
             var mockCategoriesService = new Mock<ICategoriesService>();
             var mockImagesService = new Mock<IImagesService>();
             var mockPostsService = new Mock<IPostsService>();
-            var mockEmailSender = new Mock<SendGridEmailSender>("12345");
+            var mockEmailSender = new Mock<SendEmailClient>("12345");
 
             var controller = new HomeController(
                 mockPostsService.Object,
@@ -76,7 +76,7 @@
             var mockCategoriesService = new Mock<ICategoriesService>();
             var mockImagesService = new Mock<IImagesService>();
             var mockPostsService = new Mock<IPostsService>();
-            var mockEmailSender = new Mock<SendGridEmailSender>("12345");
+            var mockEmailSender = new Mock<SendEmailClient>("12345");
 
             var controller = new HomeController(
                 mockPostsService.Object,

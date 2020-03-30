@@ -6,7 +6,6 @@
     using System.Threading;
     using System.Threading.Tasks;
 
-    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Moq;
     using Sabv.Data.Models;
@@ -22,7 +21,7 @@
         {
             // Arrange
             var mockMessagesService = new Mock<IMessagesService>();
-            mockMessagesService.Setup(mm => mm.GetAll()).Returns(this.GetAllMessages());
+            mockMessagesService.Setup(mm => mm.GetAll()).Returns(this.GetAll<Message>());
 
             var mockUserManager = this.GetMockUserManager();
 
@@ -53,23 +52,6 @@
             var model = Assert.IsAssignableFrom<ChatViewModel>(viewResult.ViewData.Model);
             Assert.Equal(3, model.Messages.Count());
             Assert.Equal("MyName", model.User.UserName);
-        }
-
-        private Mock<UserManager<ApplicationUser>> GetMockUserManager()
-        {
-            var userStoreMock = new Mock<IUserStore<ApplicationUser>>();
-            return new Mock<UserManager<ApplicationUser>>(
-                userStoreMock.Object, null, null, null, null, null, null, null, null);
-        }
-
-        private IEnumerable<Message> GetAllMessages()
-        {
-            return new List<Message>()
-            {
-                new Message(),
-                new Message(),
-                new Message(),
-            };
         }
     }
 }
