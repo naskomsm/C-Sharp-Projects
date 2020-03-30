@@ -38,7 +38,7 @@
             AutoMapperConfig.MapperInstance = mapper;
 
             this.Configuration = new ConfigurationBuilder()
-                .AddJsonFile("mockappsettings.Development.json")
+                .AddJsonFile("mockappsettings.Production.json")
                 .Build();
         }
 

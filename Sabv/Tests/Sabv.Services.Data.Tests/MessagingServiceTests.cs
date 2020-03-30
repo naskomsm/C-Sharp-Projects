@@ -18,7 +18,7 @@
         }
 
         [Fact]
-        public async Task SendGridEmailSenderSendEmailAsyncShouldWork()
+        public async Task SendEmailClientSendEmailAsyncShouldWork()
         {
             var sender = new SendGridClient(this.Configuration["SendGrid:ApiKey"]);
 
