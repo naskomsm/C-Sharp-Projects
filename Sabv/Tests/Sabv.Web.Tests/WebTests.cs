@@ -1,13 +1,12 @@
 ﻿namespace Sabv.Web.Tests
 {
-    using System;
+    using System.Collections.Generic;
     using System.Net;
     using System.Net.Http;
-    using System.Text;
     using System.Threading.Tasks;
 
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc.Testing;
-    using Newtonsoft.Json;
     using Sabv.Data.Models;
     using Xunit;
 
@@ -118,17 +117,18 @@
         public async Task ChatPageShouldContainChatDiv()
         {
             var client = this.server.CreateClient();
-            var input = new InputModel()
+
+            // Should simulate login here...
+            var username = "GOD";
+            var password = "123456";
+            var formContent = new FormUrlEncodedContent(new[]
             {
-                UserName = "GOD",
-                Password = "123456",
-                RememberMe = false,
-            };
-
-            var json = JsonConvert.SerializeObject(input);
-            var uri = new Uri("https://localhost:5001/Identity/Account/Login");
-            var postResponse = await client.PostAsync(uri, new StringContent(json, Encoding.UTF8, "application/json"));
-
+                 new KeyValuePair<string, string>("__RequestVerificationToken", "CfDJ8OwyFtW952ZMjA-vuvOTnzfLT1uBrBfhZVcsGz3buwf11ePNEnz0YjY07XQEwQ8GhdRTWvR3qR77fwJ-_BF2BX8k-EmeiGQs4Mbh5_SjSlEJPdsX8PeRvhdGZ6pugYml966QYkEgB6cKS4hEcndOMAk"),
+                 new KeyValuePair<string, string>("Input.UserName", username),
+                 new KeyValuePair<string, string>("Input.Password", password),
+                 new KeyValuePair<string, string>("Input.RememberMe", "false"),
+            });
+            var responseMessage = await client.PostAsync("/Identity/Account/Login", formContent);
             var response = await client.GetAsync("/Chat/Main");
             response.EnsureSuccessStatusCode();
             var responseContent = await response.Content.ReadAsStringAsync();
@@ -141,15 +141,6 @@
             var client = this.server.CreateClient(new WebApplicationFactoryClientOptions { AllowAutoRedirect = false });
             var response = await client.GetAsync("Identity/Account/Manage");
             Assert.Equal(HttpStatusCode.Redirect, response.StatusCode);
-        }
-
-        public class InputModel
-        {
-            public string UserName { get; set; }
-
-            public string Password { get; set; }
-
-            public bool RememberMe { get; set; }
         }
     }
 }

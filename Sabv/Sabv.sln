@@ -41,12 +41,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sabv.Web.ViewModels", "Web\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sabv.Controllers.Tests", "Tests\Sabv.Controllers.Tests\Sabv.Controllers.Tests\Sabv.Controllers.Tests\Sabv.Controllers.Tests.csproj", "{DFC65DC4-D021-4EBA-8E37-36A03D7863FD}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3CBF7F5B-CFB0-4947-BF33-6F077FE6825E}"
-	ProjectSection(SolutionItems) = preProject
-		.editorconfig = .editorconfig
-	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sabv.Data.Tests", "Tests\Sabv.Data.Tests\Sabv.Data.Tests\Sabv.Data.Tests.csproj", "{77B2FC23-9356-4B13-A3D8-26279A63E39A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sabv.Data.Tests", "Tests\Sabv.Data.Tests\Sabv.Data.Tests\Sabv.Data.Tests.csproj", "{77B2FC23-9356-4B13-A3D8-26279A63E39A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

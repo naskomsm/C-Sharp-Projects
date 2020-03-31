@@ -13,7 +13,6 @@
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
-    using Sabv.Data;
     using Sabv.Data.Models;
     using Sabv.Data.Models.Enums;
     using Sabv.Services.Data;
@@ -106,7 +105,7 @@
         }
 
         [HttpGet]
-        public IActionResult All(PostDetailsInputModel inputModel, int pageNumber = 1, int pageSize = 15)
+        public IActionResult All(PostDetailsInputModel inputModel, int pageNumber = 1, int pageSize = 5)
         {
             var excludeRecords = (pageSize * pageNumber) - pageSize;
 
