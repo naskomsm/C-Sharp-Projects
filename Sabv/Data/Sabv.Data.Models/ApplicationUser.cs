@@ -17,6 +17,7 @@
             this.Posts = new HashSet<Post>();
             this.Comments = new HashSet<Comment>();
             this.Messages = new HashSet<Message>();
+            this.Likes = new HashSet<UserLikes>();
         }
 
         // Audit info
@@ -32,6 +33,8 @@
         public int ImageId { get; set; }
 
         public virtual Image Image { get; set; }
+
+        public virtual ICollection<UserLikes> Likes { get; set; }
 
         public virtual ICollection<Post> Posts { get; set; }
 

@@ -13,7 +13,7 @@
 
         Task<int> AddAsync(string content, ApplicationUser user, Post post);
 
-        Task Like(int id);
+        Task Like(int commentId, ApplicationUser user);
 
         Task DeleteAsync(int id);
     }

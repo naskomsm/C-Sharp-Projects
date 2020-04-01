@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Sabv.Data.Migrations
 {
-    public partial class AddOneMigrationForAll : Migration
+    public partial class AddNewInitialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -413,10 +413,9 @@ namespace Sabv.Data.Migrations
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false),
                     DeletedOn = table.Column<DateTime>(nullable: true),
-                    Content = table.Column<string>(nullable: true),
-                    Likes = table.Column<int>(nullable: false),
+                    Content = table.Column<string>(nullable: false),
                     PostId = table.Column<int>(nullable: false),
-                    UserId = table.Column<string>(nullable: true)
+                    UserId = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -485,6 +484,30 @@ namespace Sabv.Data.Migrations
                         name: "FK_PostImages_Posts_PostId",
                         column: x => x.PostId,
                         principalTable: "Posts",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UserLikes",
+                columns: table => new
+                {
+                    UserId = table.Column<string>(nullable: false),
+                    CommentId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserLikes", x => new { x.CommentId, x.UserId });
+                    table.ForeignKey(
+                        name: "FK_UserLikes_Comments_CommentId",
+                        column: x => x.CommentId,
+                        principalTable: "Comments",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_UserLikes_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -669,6 +692,11 @@ namespace Sabv.Data.Migrations
                 column: "VehicleCategoryId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_UserLikes_UserId",
+                table: "UserLikes",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_VehicleCategories_IsDeleted",
                 table: "VehicleCategories",
                 column: "IsDeleted");
@@ -692,9 +720,6 @@ namespace Sabv.Data.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Comments");
-
-            migrationBuilder.DropTable(
                 name: "Favourites");
 
             migrationBuilder.DropTable(
@@ -704,7 +729,13 @@ namespace Sabv.Data.Migrations
                 name: "PostImages");
 
             migrationBuilder.DropTable(
+                name: "UserLikes");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "Comments");
 
             migrationBuilder.DropTable(
                 name: "Posts");

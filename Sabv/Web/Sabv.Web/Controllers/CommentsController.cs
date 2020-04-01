@@ -50,8 +50,23 @@
         [Authorize]
         public async Task<int> Like(int commentId)
         {
-            await this.commentsService.Like(commentId);
+            var userChecker = this.User ?? (ClaimsPrincipal)Thread.CurrentPrincipal;
+            var user = await this.userManager.GetUserAsync(userChecker);
+            var comment = this.commentsService.GetAll().FirstOrDefault(x => x.Id == commentId);
+
+            if (!comment.UserLikes.Any(x => x.UserId == user.Id && x.CommentId == commentId))
+            {
+                await this.commentsService.Like(commentId, user);
+            }
+
             return commentId;
+        }
+
+        [HttpGet]
+        public int GetLikes(int commentId)
+        {
+            var comment = this.commentsService.GetAll().FirstOrDefault(x => x.Id == commentId);
+            return comment.UserLikes.Count;
         }
     }
 }

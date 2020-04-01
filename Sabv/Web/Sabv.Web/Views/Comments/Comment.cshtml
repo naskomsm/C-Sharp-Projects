@@ -1,5 +1,4 @@
 ﻿@using Sabv.Web.ViewModels.Comments
-
 @model CommentViewModel
 
 <link href="~/css/comments.css" rel="stylesheet" asp-append-version="true" />
@@ -12,9 +11,10 @@
 
                 @if (Model.User != null)
                 {
+                    <div asp-validation-summary="All" class="text-danger"></div>
                     <form id="commentsForm" method="post"></form>
                     <button id="commentBtn" type="button" class="btn btn-success float-right ml-3">Submit</button>
-                    <fieldset>
+                    <fieldset id="test">
                         <div class="row">
                             <div class="col-md-3 col-xl-2 hidden-xsd-none d-sm-block">
                                 <img class="img-fluid" src="@Model.User.Image.Url" alt="" width="93" height="93">
@@ -41,7 +41,7 @@
                             </p>
                             <ul class="list-unstyled list-inline media-detail float-left">
                                 <li class="list-inline-item"><i class="fa fa-calendar"></i>@comment.CreatedOn.ToString("MM/dd/yyyy hh:mm tt")</li>
-                                <li id="comment(@comment.Id)Likes" class="list-inline-item"><i class="fa fa-thumbs-up"></i>@comment.Likes</li>
+                                <li id="comment(@comment.Id)Likes" class="list-inline-item"><i class="fa fa-thumbs-up"></i>@comment.UserLikes.Count</li>
                             </ul>
                             <ul class="list-unstyled list-inline media-detail float-right">
                                 <li class="list-inline-item">
@@ -52,9 +52,11 @@
                         </div>
                     </div>
                 }
-
-
             </div>
         </div>
     </div>
 </section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

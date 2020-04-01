@@ -75,7 +75,7 @@
 
             var commentViewModel = new CommentViewModel()
             {
-                Comments = this.commentsService.GetAll().Where(x => x.PostId == id).OrderByDescending(x => x.Likes),
+                Comments = this.commentsService.GetAll().Where(x => x.PostId == id).OrderByDescending(x => x.UserLikes.Count),
                 PostId = id,
                 User = user,
             };

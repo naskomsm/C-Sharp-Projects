@@ -69,7 +69,7 @@
             var mockPostsService = new Mock<IPostsService>();
 
             mockCommentsService
-                .Setup(mc => mc.Like(1))
+                .Setup(mc => mc.Like(1, new ApplicationUser()))
                 .Returns(Task.CompletedTask);
 
             var controller = new CommentsController(mockUserManager.Object, mockCommentsService.Object, mockPostsService.Object);

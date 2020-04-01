@@ -71,7 +71,7 @@ $("#submitButton").on("click", function () {
     $("#message").val("");
 
     if (message.trim().length < 1) {
-        alert("Message should not be empty!");
+        $.notify('Content cannot be empty!');
     }
 
     connection.invoke("SendMessage", message);

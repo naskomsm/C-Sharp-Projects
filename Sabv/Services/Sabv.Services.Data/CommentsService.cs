@@ -73,16 +73,25 @@
             return this.commentRepo.All().ToList();
         }
 
-        public async Task Like(int id)
+        public async Task Like(int commentId, ApplicationUser user)
         {
-            var comment = this.commentRepo.All().FirstOrDefault(x => x.Id == id);
+            var comment = this.commentRepo.All().FirstOrDefault(x => x.Id == commentId);
 
             if (comment == null)
             {
                 throw new ArgumentNullException("Not existing comment with given id.");
             }
 
-            comment.Likes++;
+            // TODO:
+            var like = new UserLikes()
+            {
+                Comment = comment,
+                CommentId = commentId,
+                User = user,
+                UserId = user.Id,
+            };
+
+            comment.UserLikes.Add(like);
 
             await this.commentRepo.SaveChangesAsync();
         }

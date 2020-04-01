@@ -47,6 +47,8 @@
 
         public DbSet<PostImage> PostImages { get; set; }
 
+        public DbSet<UserLikes> UserLikes { get; set; }
+
         public override int SaveChanges() => this.SaveChanges(true);
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)

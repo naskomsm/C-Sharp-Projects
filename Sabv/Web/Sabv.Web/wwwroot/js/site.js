@@ -34,25 +34,31 @@ $("#categorySelect").on("change", function () {
 $("input#files").change(function () {
     var files = $(this)[0].files;
     if (files.length < 1) {
-        alert("You have to upload at least 1 image.")
+        $.notify('You have to upload at least 1 image.');
     }
     else if (files.length > 10) {
-        alert("You can upload max to 10 images.");
+        $.notify('You can upload max to 10 images.');
     }
 });
 
 $("#commentBtn").click(function () {
-    var content = $("#message").val();
-    var postId = $("#postId").val();
 
-    $("#message").val("");
+    if (!$("#message").val()) {
+        $.notify('Content cannot be empty!');
+    }
+    else {
+        var content = $("#message").val();
+        var postId = $("#postId").val();
 
-    $.get({
-        url: "/Comments/Create",
-        data: { content: content, postId: parseInt(postId) }
-    }).done(function (data) {
-        attachCommentToDom(data.username, data.content, data.currentUserImageUrl, data.commentId);
-    });
+        $("#message").val("");
+
+        $.get({
+            url: "/Comments/Create",
+            data: { content: content, postId: parseInt(postId) }
+        }).done(function (data) {
+            attachCommentToDom(data.username, data.content, data.currentUserImageUrl, data.commentId);
+        });
+    }
 });
 
 function attachCommentToDom(username, content, currentUserImageUrl, commentId) {
@@ -167,11 +173,13 @@ function giveLike(commentId) {
 function updateLikesDOM(commentId) {
     var id = "comment" + "(" + commentId + ")" + "Likes";
     var element = document.getElementById(id);
-    var currentLikesAsString = element.innerHTML.replace('<i class="fa fa-thumbs-up"></i>', '');
-    var currentLikesAsInteger = parseInt(currentLikesAsString);
-    var updatedLikes = currentLikesAsInteger + 1;
 
-    element.innerHTML = '<i class="fa fa-thumbs-up"></i>' + updatedLikes;
+    $.get({
+        url: "/Comments/GetLikes",
+        data: { commentId: parseInt(commentId) },
+    }).done(function (likesCount) {
+        element.innerHTML = '<i class="fa fa-thumbs-up"></i>' + likesCount;
+    });
 };
 
 function getCookie(name) {

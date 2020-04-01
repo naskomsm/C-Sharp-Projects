@@ -108,7 +108,7 @@
             var repository = new EfDeletableEntityRepository<Comment>(dbContext);
             var service = new CommentsService(repository);
 
-            await Assert.ThrowsAsync<ArgumentNullException>(() => service.Like(-5));
+            await Assert.ThrowsAsync<ArgumentNullException>(() => service.Like(-5, new ApplicationUser()));
         }
 
         [Fact]
@@ -122,8 +122,8 @@
             var service = new CommentsService(repository);
 
             await service.AddAsync("content", new ApplicationUser(), new Post());
-            await service.Like(1);
-            Assert.Equal(1, service.GetAll().FirstOrDefault(x => x.Content == "content").Likes);
+            await service.Like(1, new ApplicationUser());
+            Assert.Equal(1, service.GetAll().FirstOrDefault(x => x.Content == "content").UserLikes.Count);
         }
 
         [Fact]

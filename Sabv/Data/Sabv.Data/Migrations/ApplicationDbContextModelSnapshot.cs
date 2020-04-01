@@ -351,6 +351,7 @@ namespace Sabv.Data.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Content")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedOn")
@@ -362,9 +363,6 @@ namespace Sabv.Data.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<int>("Likes")
-                        .HasColumnType("int");
-
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
@@ -372,6 +370,7 @@ namespace Sabv.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("UserId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
@@ -664,6 +663,21 @@ namespace Sabv.Data.Migrations
                     b.ToTable("PostImages");
                 });
 
+            modelBuilder.Entity("Sabv.Data.Models.UserLikes", b =>
+                {
+                    b.Property<int>("CommentId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("CommentId", "UserId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserLikes");
+                });
+
             modelBuilder.Entity("Sabv.Data.Models.VehicleCategory", b =>
                 {
                     b.Property<int>("Id")
@@ -772,7 +786,9 @@ namespace Sabv.Data.Migrations
 
                     b.HasOne("Sabv.Data.Models.ApplicationUser", "User")
                         .WithMany("Comments")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Sabv.Data.Models.Favourite", b =>
@@ -861,6 +877,21 @@ namespace Sabv.Data.Migrations
                     b.HasOne("Sabv.Data.Models.Post", "Post")
                         .WithMany("Images")
                         .HasForeignKey("PostId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Sabv.Data.Models.UserLikes", b =>
+                {
+                    b.HasOne("Sabv.Data.Models.Comment", "Comment")
+                        .WithMany("UserLikes")
+                        .HasForeignKey("CommentId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Sabv.Data.Models.ApplicationUser", "User")
+                        .WithMany("Likes")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
