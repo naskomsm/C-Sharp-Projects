@@ -153,17 +153,22 @@ function attachCommentToDom(username, content, currentUserImageUrl, commentId, c
 };
 
 function giveLike(commentId) {
-    if (CheckLoggedIn() == false) {
-        window.location.href = "/Identity/Account/Login";
-    }
-    else {
-        $.get({
-            url: "/Comments/Like",
-            data: { commentId: parseInt(commentId) },
-        }).done(function (data) {
-            updateLikesDOM(data);
-        });
-    }
+    $.get({
+        url: "/Users/IsUserLoggedIn",
+    }).done(function (isLoggedIn) {
+        if (isLoggedIn) {
+            $.get({
+                url: "/Comments/Like",
+                data: { commentId: parseInt(commentId) },
+            }).done(function (data) {
+                updateLikesDOM(data);
+            });
+        }
+        else {
+            var currentPath = window.location.pathname;
+            window.location.href = "/Identity/Account/Login" + "?ReturnUrl=" + currentPath;
+        }
+    });
 };
 
 function updateLikesDOM(commentId) {
@@ -195,17 +200,6 @@ function getCookie(name) {
     }
 
     return decodeURI(dc.substring(begin + prefix.length, end));
-}
-
-function CheckLoggedIn() {
-    var customLoginCookie = getCookie("Username");
-
-    if (customLoginCookie == null) {
-        return false;
-    }
-    else {
-        return true;
-    }
 }
 
 // search bar in administration area

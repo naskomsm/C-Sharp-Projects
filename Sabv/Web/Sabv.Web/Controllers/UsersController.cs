@@ -74,5 +74,11 @@
             await this.favouritesService.Remove(id, user.Id);
             return this.RedirectToAction("Favourites", "Users");
         }
+
+        [HttpGet]
+        public bool IsUserLoggedIn()
+        {
+            return this.User.Identity.Name != null;
+        }
     }
 }

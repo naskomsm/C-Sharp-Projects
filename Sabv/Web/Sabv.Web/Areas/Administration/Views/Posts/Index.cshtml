@@ -3,14 +3,14 @@
 
 @model PostsAdminPanel
 
-<form method="post">
-    <div class="input-group mb-4 border rounded-pill p-1">
-        <div class="input-group-prepend border-0">
-            <button id="button-addon4" type="button" class="btn btn-link text-info"><i class="fa fa-search"></i></button>
-        </div>
-        <input id="searchBar" onkeyup="filter(2)" type="search" placeholder="Search by name..." aria-describedby="button-addon4" class="form-control bg-none border-0">
+<div class="input-group mb-4 border rounded-pill p-1">
+    <div class="input-group-prepend border-0">
+        <button id="button-addon4" type="button" class="btn btn-link text-info"><i class="fa fa-search"></i></button>
     </div>
+    <input id="searchBar" onkeyup="filter(2)" type="search" placeholder="Search by name..." aria-describedby="button-addon4" class="form-control bg-none border-0">
+</div>
 
+<form method="post">
     <table id="myTable" class="table table-striped">
         <thead>
             <tr>
