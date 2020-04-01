@@ -40,7 +40,7 @@
                                 @comment.Content
                             </p>
                             <ul class="list-unstyled list-inline media-detail float-left">
-                                <li class="list-inline-item"><i class="fa fa-calendar"></i>@comment.CreatedOn.ToString("MM/dd/yyyy hh:mm tt")</li>
+                                <li class="list-inline-item"><i class="fa fa-calendar"></i><time datetime="@comment.CreatedOn.ToString("O")"></time></li>
                                 <li id="comment(@comment.Id)Likes" class="list-inline-item"><i class="fa fa-thumbs-up"></i>@comment.UserLikes.Count</li>
                             </ul>
                             <ul class="list-unstyled list-inline media-detail float-right">

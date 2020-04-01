@@ -5,7 +5,7 @@ $("#makesSelect").on("change", function () {
     // Clear dropdown
     $("#modelsSelect").html("");
     var optionElement = document.createElement("option");
-    optionElement.innerHTML = "All";
+    optionElement.innerHTML = "";
     $("#modelsSelect").append(optionElement);
 
     $.get({
@@ -56,12 +56,12 @@ $("#commentBtn").click(function () {
             url: "/Comments/Create",
             data: { content: content, postId: parseInt(postId) }
         }).done(function (data) {
-            attachCommentToDom(data.username, data.content, data.currentUserImageUrl, data.commentId);
+            attachCommentToDom(data.username, data.content, data.currentUserImageUrl, data.commentId, data.createdOn);
         });
     }
 });
 
-function attachCommentToDom(username, content, currentUserImageUrl, commentId) {
+function attachCommentToDom(username, content, currentUserImageUrl, commentId, createdOn) {
     var commentsCountElement = document.getElementById("commentsCount").innerHTML;
     commentsCountElement = commentsCountElement.replace(" Comments", "");
     var commentsCount = Number(commentsCountElement) + 1;
@@ -130,11 +130,7 @@ function attachCommentToDom(username, content, currentUserImageUrl, commentId) {
 
     li.appendChild(iForLi);
 
-    li.innerHTML +=
-        (currentdate.getMonth() + 1) + "/"
-        + currentdate.getDate() + "/"
-        + currentdate.getFullYear() + " "
-        + currentdate.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true, timeZone: 'UTC' })
+    li.innerHTML += "<time datetime='" + createdOn + "'></time>";
 
     secondLi.appendChild(iForSecondLi);
     secondLi.innerHTML += "0";
@@ -232,3 +228,17 @@ function filter(column) {
         }
     }
 }
+
+// Global
+$(function () {
+    $("time").each(function (i, e) {
+        const dateTimeValue = $(e).attr("datetime");
+        if (!dateTimeValue) {
+            return;
+        }
+
+        const time = moment.utc(dateTimeValue).local();
+        $(e).html(time.format("llll"));
+        $(e).attr("title", $(e).attr("datetime"));
+    });
+});

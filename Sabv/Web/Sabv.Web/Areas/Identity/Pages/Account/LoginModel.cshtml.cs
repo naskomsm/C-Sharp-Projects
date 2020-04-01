@@ -1,5 +1,6 @@
 ﻿namespace Sabv.Web.Areas.Identity.Pages.Account
 {
+    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
@@ -70,7 +71,7 @@
                 var result = await this.signInManager.PasswordSignInAsync(this.Input.UserName, this.Input.Password, this.Input.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
-                    this.Response.Cookies.Append("Username", this.Input.UserName, new CookieOptions { Secure = true, SameSite = SameSiteMode.Strict });
+                    this.Response.Cookies.Append("Username", this.Input.UserName, new CookieOptions { Secure = true, SameSite = SameSiteMode.Strict, Expires = DateTime.UtcNow.AddMinutes(20) });
                     this.logger.LogInformation("User logged in.");
                     return this.LocalRedirect(returnUrl);
                 }

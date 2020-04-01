@@ -42,8 +42,9 @@
             var post = this.postsService.GetAll().FirstOrDefault(x => x.Id == input.PostId);
 
             var commentId = await this.commentsService.AddAsync(input.Content, user, post);
+            var comment = this.commentsService.GetAll().FirstOrDefault(x => x.Id == commentId);
 
-            return new CommentResponseModel { Content = input.Content, CommentId = commentId, Username = user.UserName, CurrentUserImageUrl = user.Image.Url, PostId = input.PostId };
+            return new CommentResponseModel { Content = input.Content, CommentId = commentId, Username = user.UserName, CurrentUserImageUrl = user.Image.Url, PostId = input.PostId, CreatedOn = comment.CreatedOn.ToString("O") };
         }
 
         [HttpGet]

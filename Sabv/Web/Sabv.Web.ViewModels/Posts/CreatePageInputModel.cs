@@ -6,7 +6,7 @@
 
     public class CreatePageInputModel
     {
-        [Required(ErrorMessage = "Post category should be selected!")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Post category should be selected!")]
         public string PostCategory { get; set; }
 
         [Required]
@@ -18,11 +18,11 @@
         [Required(ErrorMessage = "Model should be selected!")]
         public string Model { get; set; }
 
-        [Required(ErrorMessage = "Modification should not be empty!")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Modification should not be empty!")]
         [StringLength(100)]
         public string Modification { get; set; }
 
-        [Required(ErrorMessage = "Engine type should be selected!")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Engine type should be selected!")]
         public string EngineType { get; set; }
 
         [Required(ErrorMessage = "Horsepower should be set!")]
@@ -32,7 +32,7 @@
         [Required(ErrorMessage = "Eurostandard should be selected!")]
         public int? Eurostandard { get; set; }
 
-        [Required(ErrorMessage = "Transmission type should be selected!")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Transmission type should be selected!")]
         public string TransmissionType { get; set; }
 
         [Required(ErrorMessage = "Vehicle category should be selected!")]
@@ -42,16 +42,16 @@
         [Range(GlobalConstants.Post.MinPrice, GlobalConstants.Post.MaxPrice, ErrorMessage = "Value should be between {0} and {1}")]
         public decimal? Price { get; set; }
 
-        [Required(ErrorMessage = "Currency should be selected!")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Currency should be selected!")]
         public string Currency { get; set; }
 
         [Required(ErrorMessage = "Year should be selected!")]
         public int? Year { get; set; }
 
-        [Required(ErrorMessage = "Color should be selected!")]
+        [Required(AllowEmptyStrings = false ,ErrorMessage = "Color should be selected!")]
         public string Color { get; set; }
 
-        [Required(ErrorMessage = "Town should be set!")]
+        [Required(AllowEmptyStrings = false ,ErrorMessage = "Town should be set!")]
         public string Town { get; set; }
 
         [Required(ErrorMessage = "Mileage should be set!")]

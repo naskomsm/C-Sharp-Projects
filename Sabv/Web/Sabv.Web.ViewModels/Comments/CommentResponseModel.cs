@@ -11,5 +11,7 @@
         public int CommentId { get; set; }
 
         public int PostId { get; set; }
+
+        public string CreatedOn { get; set; }
     }
 }

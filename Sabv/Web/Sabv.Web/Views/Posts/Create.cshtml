@@ -17,7 +17,7 @@
                         <div class="ml-2">
                             <p class="mb-1 small">Post category</p>
                             <select class="mdb-select md-form container" id="categorySelect" name="postCategory">
-                                <option>All</option>
+                                <option></option>
                                 @foreach (var item in Model.Categories)
                                 {
                                     <option>@item.Name</option>
@@ -41,7 +41,7 @@
                         <div class="ml-2">
                             <p class="mb-1 small">Make</p>
                             <select class="mdb-select md-form container" id="makesSelect" name="make">
-                                <option value="0">All</option>
+                                <option></option>
                                 @foreach (var make in Model.Makes)
                                 {
                                     <option value="@make.Id">@make.Name</option>
@@ -54,7 +54,7 @@
                         <div class="ml-2">
                             <p class="mb-1 small">Model</p>
                             <select class="mdb-select md-form container" id="modelsSelect" name="model">
-                                <option>All</option>
+                                <option></option>
                             </select>
                         </div>
                     </div>
@@ -70,7 +70,7 @@
                         <div class="ml-2">
                             <p class="mb-1 small">Engine type</p>
                             <select class="mdb-select md-form container" name="engineType">
-                                <option>All</option>
+                                <option></option>
                                 <option value="Petrol">Petrol</option>
                                 <option value="Disel">Disel</option>
                                 <option value="Electric">Electric</option>
@@ -94,7 +94,7 @@
                         <div class="ml-2">
                             <p class="mb-1 small">Eurostandard</p>
                             <select class="mdb-select md-form container" name="eurostandard">
-                                <option>All</option>
+                                <option></option>
                                 <option value="1">Euro 1</option>
                                 <option value="2">Euro 2</option>
                                 <option value="3">Euro 3</option>
@@ -109,7 +109,7 @@
                         <div class="ml-2">
                             <p class="mb-1 small">Transmission type</p>
                             <select class="mdb-select md-form container" name="transmissionType">
-                                <option>All</option>
+                                <option></option>
                                 <option value="Manual">Manual</option>
                                 <option value="Automatic">Automatic</option>
                             </select>
@@ -120,7 +120,7 @@
                         <div class="ml-2">
                             <p class="mb-1 small">Category</p>
                             <select class="mdb-select md-form container" name="vehicleCategory">
-                                <option>All</option>
+                                <option></option>
                                 @foreach (var item in Model.VehicleCategories)
                                 {
                                     <option>@item.Name</option>
@@ -143,7 +143,7 @@
                         <div class="ml-2">
                             <p class="mb-1 small">Currency</p>
                             <select class="mdb-select md-form container" name="currency">
-                                <option>All</option>
+                                <option></option>
                                 <option value="LV">LV</option>
                                 <option value="USD">USD</option>
                                 <option value="EUR">EUR</option>
@@ -155,7 +155,7 @@
                         <div class="ml-2">
                             <p class="mb-1 small">Manufacture date</p>
                             <select class="mdb-select md-form container" name="year">
-                                <option>All</option>
+                                <option></option>
                                 @for (int i = 1990; i < 2020; i++)
                                 {
                                     <option>@i</option>
@@ -168,7 +168,7 @@
                         <div class="ml-2">
                             <p class="mb-1 small">Color</p>
                             <select class="mdb-select md-form container" name="color">
-                                <option>All</option>
+                                <option></option>
                                 @foreach (var item in Model.Colors)
                                 {
                                     <option>@item.Name</option>
@@ -184,7 +184,7 @@
                         <div class="ml-2">
                             <p class="mb-1 small">City</p>
                             <select class="mdb-select md-form container" name="town">
-                                <option>All</option>
+                                <option></option>
                                 @foreach (var item in Model.Cities)
                                 {
                                     <option>@item.Name</option>
