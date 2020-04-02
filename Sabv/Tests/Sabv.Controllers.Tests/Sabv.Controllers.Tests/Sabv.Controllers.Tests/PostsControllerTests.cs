@@ -285,7 +285,7 @@
             Assert.Equal(3, model.Data.Count());
             Assert.Equal(3, model.TotalItems);
             Assert.Equal(1, model.PageNumber);
-            Assert.Equal(15, model.PageSize);
+            Assert.Equal(5, model.PageSize);
         }
 
         [Fact]
