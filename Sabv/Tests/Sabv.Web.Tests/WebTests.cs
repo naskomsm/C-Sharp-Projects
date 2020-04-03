@@ -1,17 +1,8 @@
 ﻿namespace Sabv.Web.Tests
 {
-    using System;
-    using System.Collections.Generic;
     using System.Net;
-    using System.Net.Http;
-    using System.Net.Http.Headers;
     using System.Threading.Tasks;
-
-    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc.Testing;
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Linq;
-    using Sabv.Data.Models;
     using Xunit;
 
     public class WebTests : IClassFixture<WebApplicationFactory<Startup>>
