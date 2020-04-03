@@ -5,7 +5,7 @@ var connection = new signalR.HubConnectionBuilder().withUrl("/chathub").build();
 
 $("#submitButton").attr("disabled", true);
 
-connection.on("ReceiveMessage", function (username, message, currentUserImageUrl) {
+connection.on("ReceiveMessage", function (username, message, currentUserImageUrl, createdOn) {
     let outerDiv = document.createElement('div');
     outerDiv.className = "media";
 
@@ -42,11 +42,7 @@ connection.on("ReceiveMessage", function (username, message, currentUserImageUrl
 
     li.appendChild(iForLi);
 
-    li.innerHTML +=
-        (currentdate.getMonth() + 1) + "/"
-        + currentdate.getDate() + "/"
-        + currentdate.getFullYear() + " "
-        + currentdate.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true, timeZone: 'UTC' })
+    li.innerHTML += "<time datetime='" + createdOn.toString("O") + "'></time>";
 
     ul.appendChild(li);
 
@@ -57,6 +53,19 @@ connection.on("ReceiveMessage", function (username, message, currentUserImageUrl
     outerDiv.appendChild(innerDiv);
 
     document.getElementById("chat").appendChild(outerDiv);
+
+    $(function () {
+        $("time").each(function (i, e) {
+            const dateTimeValue = $(e).attr("datetime");
+            if (!dateTimeValue) {
+                return;
+            }
+
+            const time = moment.utc(dateTimeValue).local();
+            $(e).html(time.format("llll"));
+            $(e).attr("title", $(e).attr("datetime"));
+        });
+    });
 });
 
 

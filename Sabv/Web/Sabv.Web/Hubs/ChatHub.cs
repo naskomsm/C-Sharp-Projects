@@ -1,5 +1,6 @@
 ﻿namespace Sabv.Web.Hubs
 {
+    using System.Linq;
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Authorization;
@@ -32,9 +33,9 @@
             var user = await this.userManager.GetUserAsync(this.Context.User);
             var currentUserImageUrl = user.Image.Url;
 
-            await this.messagesService.AddAsync(message, user);
-
-            await this.Clients.All.SendAsync("ReceiveMessage", user.UserName, message, currentUserImageUrl);
+            var messageId = await this.messagesService.AddAsync(message, user);
+            var messageEntity = this.messagesService.GetAll().FirstOrDefault(x => x.Id == messageId);
+            await this.Clients.All.SendAsync("ReceiveMessage", user.UserName, message, currentUserImageUrl, messageEntity.CreatedOn);
         }
     }
 }

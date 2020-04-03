@@ -43,7 +43,7 @@ $("input#files").change(function () {
 
 $("#commentBtn").click(function () {
 
-    if (!$("#message").val()) {
+    if (!$("#message").val() || $("#message").val() == ' ' || $("#message").val() == '') {
         $.notify('Content cannot be empty!');
     }
     else {
@@ -93,7 +93,6 @@ function attachCommentToDom(username, content, currentUserImageUrl, commentId, c
     let li = document.createElement('li');
     li.className = "list-inline-item";
     li.id = 'when';
-    var currentdate = new Date();
 
     let iForLi = document.createElement('i');
     iForLi.className = "fa fa-calendar";
@@ -130,7 +129,7 @@ function attachCommentToDom(username, content, currentUserImageUrl, commentId, c
 
     li.appendChild(iForLi);
 
-    li.innerHTML += "<time datetime='" + createdOn + "'></time>";
+    li.innerHTML += "<time datetime='" + createdOn.toString("O") + "'></time>";
 
     secondLi.appendChild(iForSecondLi);
     secondLi.innerHTML += "0";
@@ -150,6 +149,19 @@ function attachCommentToDom(username, content, currentUserImageUrl, commentId, c
     outerDiv.appendChild(innerDiv);
 
     document.getElementById("commentsSection").appendChild(outerDiv);
+
+    $(function () {
+        $("time").each(function (i, e) {
+            const dateTimeValue = $(e).attr("datetime");
+            if (!dateTimeValue) {
+                return;
+            }
+
+            const time = moment.utc(dateTimeValue).local();
+            $(e).html(time.format("llll"));
+            $(e).attr("title", $(e).attr("datetime"));
+        });
+    });
 };
 
 function giveLike(commentId) {

@@ -11,7 +11,7 @@
 
         IEnumerable<Message> GetAll();
 
-        Task AddAsync(string content, ApplicationUser user);
+        Task<int> AddAsync(string content, ApplicationUser user);
 
         Task DeleteAsync(int id);
     }

@@ -118,7 +118,7 @@
 
         [Theory]
         [InlineData("<div class=\"card mb-3\">")]
-        [InlineData("<img class=\"card-img-top\" src=\"https://res.cloudinary.com/det4b1n4l/image/upload/v1585735263/fphpnwkyzpsdctc8cfwd.jpg\" alt=\"Card image cap\">")]
+        [InlineData("<h5 class=\"card-title\">Buses</h5>")]
         public async Task CategoryViewShouldContainElements(string element)
         {
             var client = this.server.CreateClient();

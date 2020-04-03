@@ -18,7 +18,7 @@
                                     @message.Content
                                 </p>
                                 <ul class="list-unstyled list-inline media-detail float-left">
-                                    <li class="list-inline-item" id="when"><i class="fa fa-calendar"></i>@message.CreatedOn.ToString("MM/dd/yyyy hh:mm tt")</li>
+                                    <li class="list-inline-item" id="when"><i class="fa fa-calendar"></i><time datetime="@message.CreatedOn.ToString("O")"></time></li>
                                 </ul>
                             </div>
                         </div>

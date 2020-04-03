@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Security.Cryptography.X509Certificates;
     using System.Threading.Tasks;
 
     using Sabv.Data.Common.Repositories;
@@ -18,7 +19,7 @@
             this.messagesRepo = messagesRepo;
         }
 
-        public async Task AddAsync(string content, ApplicationUser user)
+        public async Task<int> AddAsync(string content, ApplicationUser user)
         {
             if (string.IsNullOrEmpty(content))
             {
@@ -38,6 +39,7 @@
             });
 
             await this.messagesRepo.SaveChangesAsync();
+            return this.messagesRepo.All().FirstOrDefault(x => x.Content == content && x.User == user && x.UserId == user.Id).Id;
         }
 
         public async Task DeleteAsync(int id)
