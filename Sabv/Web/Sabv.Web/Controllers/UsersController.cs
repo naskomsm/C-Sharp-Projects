@@ -61,7 +61,12 @@
         {
             var userChecker = this.User ?? (ClaimsPrincipal)Thread.CurrentPrincipal;
             var user = await this.userManager.GetUserAsync(userChecker);
-            await this.favouritesService.AddAsync(id, user.Id);
+
+            if (!this.favouritesService.GetAllUserFavourites(user.Id).Any(x => x.PostId == id))
+            {
+                await this.favouritesService.AddAsync(id, user.Id);
+            }
+
             return this.RedirectToAction("Details", "Posts", new { id });
         }
 
