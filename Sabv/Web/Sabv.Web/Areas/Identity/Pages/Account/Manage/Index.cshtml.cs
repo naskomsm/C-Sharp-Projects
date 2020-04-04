@@ -1,25 +1,37 @@
 ﻿namespace Sabv.Web.Areas.Identity.Pages.Account.Manage
 {
     using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.ComponentModel.DataAnnotations;
+    using System.Linq;
     using System.Threading.Tasks;
 
+    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.RazorPages;
     using Sabv.Data.Models;
+    using Sabv.Services.Data;
 
     public partial class IndexModel : PageModel
     {
         private readonly UserManager<ApplicationUser> userManager;
         private readonly SignInManager<ApplicationUser> signInManager;
+        private readonly ICloudinaryService cloudinaryService;
+        private readonly IUsersService usersService;
 
         public IndexModel(
             UserManager<ApplicationUser> userManager,
-            SignInManager<ApplicationUser> signInManager)
+            SignInManager<ApplicationUser> signInManager,
+            ICloudinaryService cloudinaryService,
+            IUsersService usersService)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
+            this.cloudinaryService = cloudinaryService;
+            this.usersService = usersService;
         }
 
         public string Username { get; set; }
@@ -42,7 +54,7 @@
             return this.Page();
         }
 
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(IFormFile image)
         {
             var user = await this.userManager.GetUserAsync(this.User);
             if (user == null)
@@ -67,6 +79,13 @@
                 }
             }
 
+            // TODO add image
+            var collection = new Collection<IFormFile>();
+            collection.Add(image);
+
+            var images = await this.cloudinaryService.UploadAsync(collection);
+            await this.usersService.SetProfilePictureAsync(images.FirstOrDefault(), user.Id);
+
             await this.signInManager.RefreshSignInAsync(user);
             this.StatusMessage = "Your profile has been updated";
             return this.RedirectToPage();
@@ -87,6 +106,7 @@
             this.Input = new InputModel
             {
                 PhoneNumber = phoneNumber,
+                Image = user.Image,
             };
         }
 
@@ -95,6 +115,8 @@
             [Phone]
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
+
+            public Image Image { get; set; }
         }
     }
 }

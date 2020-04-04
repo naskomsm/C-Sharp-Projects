@@ -87,6 +87,7 @@
             services.AddTransient<ICommentsService, CommentsService>();
             services.AddTransient<IMessagesService, MessagesService>();
             services.AddTransient<IFavouritesService, FavouritesService>();
+            services.AddTransient<IUsersService, UsersService>();
             services.AddTransient<IEmailSender>(x => new SendEmailClient(this.configuration["SendGrid:ApiKey"]));
         }
 
