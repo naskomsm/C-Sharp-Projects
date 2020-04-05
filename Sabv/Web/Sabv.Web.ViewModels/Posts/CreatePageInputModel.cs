@@ -1,8 +1,11 @@
 ﻿namespace Sabv.Web.ViewModels.Posts
 {
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
+    using Microsoft.AspNetCore.Http;
     using Sabv.Common;
+    using Sabv.Web.Infrastructure.CustomAttributes;
 
     public class CreatePageInputModel
     {
@@ -48,10 +51,10 @@
         [Required(ErrorMessage = "Year should be selected!")]
         public int? Year { get; set; }
 
-        [Required(AllowEmptyStrings = false ,ErrorMessage = "Color should be selected!")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Color should be selected!")]
         public string Color { get; set; }
 
-        [Required(AllowEmptyStrings = false ,ErrorMessage = "Town should be set!")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Town should be set!")]
         public string Town { get; set; }
 
         [Required(ErrorMessage = "Mileage should be set!")]
@@ -67,5 +70,8 @@
         [Required(ErrorMessage = "Email should be set!")]
         [EmailAddress]
         public string Email { get; set; }
+
+        [NotNullOrEmptyCollectionAttribute(ErrorMessage = "Uploaded images must be between 1 and 10")]
+        public ICollection<IFormFile> Files { get; set; }
     }
 }

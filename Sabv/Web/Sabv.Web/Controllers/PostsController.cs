@@ -94,11 +94,11 @@
         {
             var model = new SearchViewModel()
             {
-                Categories = this.categoriesService.GetAll().ToList(),
-                Cities = this.citiesService.GetAll().ToList(),
-                Colors = this.colorService.GetAll().ToList(),
-                Makes = this.makesService.GetAll().ToList(),
-                VehicleCategories = this.vehicleCategoriesService.GetAll().ToList(),
+                Categories = this.categoriesService.GetAll().AsQueryable().AsNoTracking().ToList(),
+                Cities = this.citiesService.GetAll().AsQueryable().AsNoTracking().ToList(),
+                Colors = this.colorService.GetAll().AsQueryable().AsNoTracking().ToList(),
+                Makes = this.makesService.GetAll().AsQueryable().AsNoTracking().ToList(),
+                VehicleCategories = this.vehicleCategoriesService.GetAll().AsQueryable().AsNoTracking().ToList(),
             };
 
             return this.View(model);
@@ -133,11 +133,11 @@
         {
             var viewModel = new CreatePageViewModel()
             {
-                Categories = this.categoriesService.GetAll().ToList(),
-                Cities = this.citiesService.GetAll().ToList(),
-                Colors = this.colorService.GetAll().ToList(),
-                Makes = this.makesService.GetAll().ToList(),
-                VehicleCategories = this.vehicleCategoriesService.GetAll().ToList(),
+                Categories = this.categoriesService.GetAll().AsQueryable().AsNoTracking().ToList(),
+                Cities = this.citiesService.GetAll().AsQueryable().AsNoTracking().ToList(),
+                Colors = this.colorService.GetAll().AsQueryable().AsNoTracking().ToList(),
+                Makes = this.makesService.GetAll().AsQueryable().AsNoTracking().ToList(),
+                VehicleCategories = this.vehicleCategoriesService.GetAll().AsQueryable().AsNoTracking().ToList(),
             };
 
             return this.View(viewModel);
@@ -145,14 +145,9 @@
 
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> Create(CreatePageInputModel inputModel, ICollection<IFormFile> files)
+        public async Task<IActionResult> Create(CreatePageInputModel inputModel)
         {
             if (!this.ModelState.IsValid)
-            {
-                return this.Create();
-            }
-
-            if (files.Count < 1)
             {
                 return this.Create();
             }
@@ -205,7 +200,7 @@
             };
 
             await this.postsService.AddAsync(post);
-            var images = await this.cloudinaryService.UploadAsync(files);
+            var images = await this.cloudinaryService.UploadAsync(inputModel.Files);
 
             foreach (var image in images)
             {
