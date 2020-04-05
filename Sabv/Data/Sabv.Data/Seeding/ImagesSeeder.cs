@@ -27,7 +27,6 @@
             // 19 - 22 BMW M5 F10
             // 23 - 27 Audi RS6 C7
             // 28 - 32 Mercedes-Benz G-Class G500
-
             var links = new List<string>()
             {
                 "http://www.acornexclusivecars.com/Acorn-Exclusive-Cars-Audi-A6-900x350.png",

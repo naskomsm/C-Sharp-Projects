@@ -1,9 +1,5 @@
 ﻿namespace Sabv.Web.ViewModels.Posts
 {
-    using System.ComponentModel.DataAnnotations;
-
-    using Sabv.Common;
-
     public class PostDetailsInputModel
     {
         public string PostCategory { get; set; }

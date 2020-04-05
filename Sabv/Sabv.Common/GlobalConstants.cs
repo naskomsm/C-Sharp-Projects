@@ -4,8 +4,6 @@
     {
         public const string SystemName = "Sabv";
         public const string SystemEmail = "naskokolev00@gmail.com";
-        public const string BaseCloudinaryLink = "https://res.cloudinary.com/det4b1n4l/image/upload/";
-        public const string MakesAndModelsJsonPath = "wwwroot/datasets/MakesAndItsModels.json";
 
         public static class Post
         {

@@ -56,7 +56,7 @@
             Thread.CurrentPrincipal = principal;
 
             mockUserManager.Setup(mu => mu.GetUserAsync(principal))
-                .Returns(Task.FromResult(new ApplicationUser() { UserName = "MyName", Image = new Image() { Url = GlobalConstants.BaseCloudinaryLink + "testUrl" } }));
+                .Returns(Task.FromResult(new ApplicationUser() { UserName = "MyName", Image = new Image() { Url = "testUrl" } }));
 
             // Act
             var controller = new PostsController(
@@ -118,7 +118,7 @@
             Thread.CurrentPrincipal = principal;
 
             mockUserManager.Setup(mu => mu.GetUserAsync(principal))
-                .Returns(Task.FromResult(new ApplicationUser() { UserName = "MyName@abv.bg", Image = new Image() { Url = GlobalConstants.BaseCloudinaryLink + "testUrl" } }));
+                .Returns(Task.FromResult(new ApplicationUser() { UserName = "MyName@abv.bg", Image = new Image() { Url = "testUrl" } }));
 
             // Act
             var controller = new PostsController(
@@ -261,7 +261,7 @@
             Thread.CurrentPrincipal = principal;
 
             mockUserManager.Setup(mu => mu.GetUserAsync(principal))
-                .Returns(Task.FromResult(new ApplicationUser() { UserName = "MyName@abv.bg", Image = new Image() { Url = GlobalConstants.BaseCloudinaryLink + "testUrl" } }));
+                .Returns(Task.FromResult(new ApplicationUser() { UserName = "MyName@abv.bg", Image = new Image() { Url = "testUrl" } }));
 
             // Act
             var controller = new PostsController(
@@ -434,7 +434,7 @@
             Thread.CurrentPrincipal = principal;
 
             mockUserManager.Setup(mu => mu.GetUserAsync(principal))
-                .Returns(Task.FromResult(new ApplicationUser() { UserName = "MyName", Image = new Image() { Url = GlobalConstants.BaseCloudinaryLink + "testUrl" } }));
+                .Returns(Task.FromResult(new ApplicationUser() { UserName = "MyName", Image = new Image() { Url = "testUrl" } }));
 
             // Act
             var controller = new PostsController(
@@ -471,10 +471,11 @@
                 Modification = "F10",
                 Price = 52000,
                 PhoneNumber = "0897132123",
+                Files = files,
             };
 
             // Act
-            var result = await controller.Create(inputModel, files);
+            var result = await controller.Create(inputModel);
 
             // Assert
             var redirectToActionResult = Assert.IsType<RedirectToActionResult>(result);

@@ -1,6 +1,5 @@
 ﻿namespace Sabv.Data.Configurations
 {
-
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
     using Sabv.Data.Models;

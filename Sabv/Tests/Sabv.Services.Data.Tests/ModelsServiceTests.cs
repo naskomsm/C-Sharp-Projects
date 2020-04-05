@@ -3,12 +3,11 @@
     using System;
     using System.Linq;
     using System.Threading.Tasks;
-    using AutoMapper;
+
     using Microsoft.EntityFrameworkCore;
     using Sabv.Data;
     using Sabv.Data.Models;
     using Sabv.Data.Repositories;
-    using Sabv.Services.Mapping;
     using Sabv.Web.ViewModels.Models;
     using Xunit;
 

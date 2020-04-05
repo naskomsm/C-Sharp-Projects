@@ -5,6 +5,7 @@
 
     using Sabv.Data.Common.Models;
     using Sabv.Data.Models.Enums;
+    using Sabv.Services.Mapping;
 
     public class Post : BaseDeletableModel<int>
     {

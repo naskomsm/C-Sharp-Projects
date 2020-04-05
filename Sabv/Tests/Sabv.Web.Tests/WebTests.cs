@@ -2,6 +2,7 @@
 {
     using System.Net;
     using System.Threading.Tasks;
+
     using Microsoft.AspNetCore.Mvc.Testing;
     using Xunit;
 
@@ -166,7 +167,5 @@
             var responseContent = await response.Content.ReadAsStringAsync();
             Assert.Contains(element, responseContent);
         }
-
-
     }
 }
