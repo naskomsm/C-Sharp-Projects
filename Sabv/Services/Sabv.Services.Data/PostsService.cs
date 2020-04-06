@@ -178,7 +178,7 @@
 
             if (inputModel.YearTo != 0)
             {
-                    var year = new DateTime(inputModel.YearFrom, 1, 1);
+                    var year = new DateTime(inputModel.YearTo, 1, 1);
                     posts = posts
                         .Where(x => x.ManufactureDate <= year)
                         .ToList();
