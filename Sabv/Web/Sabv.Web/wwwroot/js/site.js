@@ -50,6 +50,8 @@ $("#commentBtn").click(function () {
         var content = $("#message").val();
         var postId = $("#postId").val();
 
+        content = escapeHtml(content);
+
         $("#message").val("");
 
         $.get({
@@ -248,3 +250,12 @@ $(function () {
         $(e).attr("title", $(e).attr("datetime"));
     });
 });
+
+function escapeHtml(unsafe) {
+    return unsafe
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}

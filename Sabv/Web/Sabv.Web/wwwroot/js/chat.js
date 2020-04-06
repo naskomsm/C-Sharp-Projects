@@ -24,7 +24,7 @@ connection.on("ReceiveMessage", function (username, message, currentUserImageUrl
     h4Element.innerHTML = username;
 
     let paragraph = document.createElement('p');
-    paragraph.innerHTML = message;
+    paragraph.innerHTML = escapeHtml(message);
 
     let ul = document.createElement('ul');
     ul.className = "list-unstyled list-inline media-detail float-left";
