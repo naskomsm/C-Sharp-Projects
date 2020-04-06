@@ -37,19 +37,17 @@
       ]
     },
     {
-      "provider": "unpkg",
-      "library": "@microsoft/signalr@3.1.3",
-      "destination": "wwwroot/js/signalr",
-      "files": [
-        "dist/browser/signalr.js",
-        "dist/browser/signalr.min.js"
-      ]
-    },
-    {
       "library": "moment@2.24.0",
       "destination": "wwwroot/lib/moment/",
       "files": [
         "min/moment-with-locales.min.js"
+      ]
+    },
+    {
+      "library": "@microsoft/signalr@3.1.3",
+      "destination": "wwwroot/lib/signalr/",
+      "files": [
+        "dist/browser/signalr.min.js"
       ]
     }
   ]
