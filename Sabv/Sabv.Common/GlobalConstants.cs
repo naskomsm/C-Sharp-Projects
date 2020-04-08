@@ -4,6 +4,8 @@
     {
         public const string SystemName = "Sabv";
         public const string SystemEmail = "naskokolev00@gmail.com";
+        public const string OriginalJsonPath = "../../../Sabv/Data/Sabv.Data/Seeding/Data/cars.json";
+        public const string TestJsonPath = "../../../../../../../Sabv/Data/Sabv.Data/Seeding/Data/cars.json";
 
         public static class Post
         {
