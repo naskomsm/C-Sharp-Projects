@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -22,25 +21,10 @@
 
             var service = serviceProvider.GetRequiredService<IMakesService>();
 
-            try
+            var cars = JsonConvert.DeserializeObject<List<Car>>(GlobalConstants.Seeder.Json);
+            foreach (var car in cars)
             {
-                using StreamReader r = new StreamReader(GlobalConstants.OriginalJsonPath);
-                string json = r.ReadToEnd();
-                var cars = JsonConvert.DeserializeObject<List<Car>>(json);
-                foreach (var car in cars)
-                {
-                    await service.AddAsync(car.Name);
-                }
-            }
-            catch (Exception)
-            {
-                using StreamReader r = new StreamReader(GlobalConstants.TestJsonPath);
-                string json = r.ReadToEnd();
-                var cars = JsonConvert.DeserializeObject<List<Car>>(json);
-                foreach (var car in cars)
-                {
-                    await service.AddAsync(car.Name);
-                }
+                await service.AddAsync(car.Name);
             }
         }
 
