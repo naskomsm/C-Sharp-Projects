@@ -208,11 +208,11 @@
 
             var viewResult = Assert.IsType<ViewResult>(result);
             var model = Assert.IsAssignableFrom<SearchViewModel>(viewResult.ViewData.Model);
-            Assert.Equal(3, model.Categories.Count());
-            Assert.Equal(3, model.Cities.Count());
-            Assert.Equal(3, model.Colors.Count());
-            Assert.Equal(3, model.Makes.Count());
-            Assert.Equal(3, model.VehicleCategories.Count());
+            Assert.Equal(4, model.Categories.Count());
+            Assert.Equal(4, model.Cities.Count());
+            Assert.Equal(4, model.Colors.Count());
+            Assert.Equal(4, model.Makes.Count());
+            Assert.Equal(4, model.VehicleCategories.Count());
         }
 
         [Fact]
