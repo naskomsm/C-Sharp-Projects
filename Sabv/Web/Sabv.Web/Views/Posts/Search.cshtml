@@ -1,4 +1,5 @@
 ﻿@using Sabv.Web.ViewModels.Posts
+
 @model SearchViewModel
 @{
     this.ViewData["Title"] = "Search";
@@ -16,13 +17,7 @@
                     <div class="col-4">
                         <div class="ml-2">
                             <p class="mb-1 small">Post category</p>
-                            <select class="mdb-select md-form container" id="categorySelect" name="postCategory">
-                                <option>All</option>
-                                @foreach (var item in Model.Categories)
-                                {
-                                    <option>@item.Name</option>
-                                }
-                            </select>
+                            <select asp-for="Category" asp-items="Model.Categories" class="mdb-select md-form container" id="categorySelect" name="postCategory"></select>
                         </div>
                     </div>
 
@@ -41,13 +36,7 @@
                     <div class="col-3">
                         <div class="ml-2">
                             <p class="mb-1 small">Make</p>
-                            <select class="mdb-select md-form container" id="makesSelect" name="make">
-                                <option value="0">All</option>
-                                @foreach (var make in Model.Makes)
-                                {
-                                    <option value="@make.Id">@make.Name</option>
-                                }
-                            </select>
+                            <select asp-for="Make" asp-items="Model.Makes" class="mdb-select md-form container" id="makesSelect" name="make"></select>                        
                         </div>
                     </div>
 
@@ -63,20 +52,14 @@
                     <div class="col-3">
                         <div class="ml-2">
                             <p class="mb-1 small">Max mileage in km</p>
-                            <input class="form-control form-control-sm container" type="number" name="maxMileage" min="5">
+                            <input asp-for="MaxMileage" class="form-control form-control-sm container" name="maxMileage"/>
                         </div>
                     </div>
 
                     <div class="col-3 pl-0 pr-4">
                         <div class="ml-2">
                             <p class="mb-1 small">Engine type</p>
-                            <select class="mdb-select md-form container" name="engineType">
-                                <option>All</option>
-                                <option value="Petrol">Petrol</option>
-                                <option value="Disel">Disel</option>
-                                <option value="Electric">Electric</option>
-                                <option value="Hybrid">Hybrid</option>
-                            </select>
+                            <select asp-for="EngineType" asp-items="Model.EngineTypes" class="mdb-select md-form container" name="engineType"></select>
                         </div>
                     </div>
 
@@ -87,53 +70,35 @@
                     <div class="col-2">
                         <div class="ml-2">
                             <p class="mb-1 small">Horsepower (from)</p>
-                            <input class="form-control form-control-sm container" type="number" name="horsePowerFrom" min="1" max="3000">
+                            <input asp-for="MinHorsepower" class="form-control form-control-sm container" name="horsePowerFrom" />
                         </div>
                     </div>
 
                     <div class="col-2">
                         <div class="ml-2">
                             <p class="mb-1 small">To</p>
-                            <input class="form-control form-control-sm container" type="number" name="horsePowerTo" min="1" max="3000">
+                            <input asp-for="MaxHorsepower" class="form-control form-control-sm container" name="horsePowerFrom" />
                         </div>
                     </div>
 
                     <div class="col-2">
                         <div class="ml-2">
                             <p class="mb-1 small">Eurostandard</p>
-                            <select class="mdb-select md-form container" name="eurostandard">
-                                <option>All</option>
-                                <option value="1">Euro 1</option>
-                                <option value="2">Euro 2</option>
-                                <option value="3">Euro 3</option>
-                                <option value="4">Euro 4</option>
-                                <option value="5">Euro 5</option>
-                                <option value="6">Euro 6</option>
-                            </select>
+                            <select asp-for="Eurostandard" asp-items="Model.Eurostandards" class="mdb-select md-form container" name="eurostandard"></select>
                         </div>
                     </div>
 
                     <div class="col-3">
                         <div class="ml-2">
                             <p class="mb-1 small">Transmission type</p>
-                            <select class="mdb-select md-form container" name="transmissionType">
-                                <option>All</option>
-                                <option value="Manual">Manual</option>
-                                <option value="Automatic">Automatic</option>
-                            </select>
+                            <select asp-for="TransmissionType" asp-items="Model.TransmissionTypes" class="mdb-select md-form container" name="transmissionType"></select>
                         </div>
                     </div>
 
                     <div class="col-3 pl-0 pr-4">
                         <div class="ml-2">
                             <p class="mb-1 small">Category</p>
-                            <select class="mdb-select md-form container" name="vehicleCategory">
-                                <option>All</option>
-                                @foreach (var item in Model.VehicleCategories)
-                                {
-                                    <option>@item.Name</option>
-                                }
-                            </select>
+                            <select asp-for="VehicleCategory" asp-items="Model.VehicleCategories" class="mdb-select md-form container" name="vehicleCategory"></select>
                         </div>
                     </div>
 
@@ -143,52 +108,35 @@
                     <div class="col-2">
                         <div class="ml-2">
                             <p class="mb-1 small">Price (From)</p>
-                            <input class="form-control form-control-sm container" type="number" name="priceFrom" min="200" max="10000000">
+                            <input asp-for="PriceFrom" class="form-control form-control-sm container" name="priceFrom" />
                         </div>
                     </div>
 
                     <div class="col-2">
                         <div class="ml-2">
                             <p class="mb-1 small">To</p>
-                            <input class="form-control form-control-sm container" type="number" name="priceTo" min="200" max="10000000">
+                            <input asp-for="PriceTo" class="form-control form-control-sm container" name="priceFrom" />
                         </div>
                     </div>
 
                     <div class="col-2">
                         <div class="ml-2">
                             <p class="mb-1 small">Currency</p>
-                            <select class="mdb-select md-form container" name="currency">
-                                <option>All</option>
-                                <option value="LV">LV</option>
-                                <option value="USD">USD</option>
-                                <option value="EUR">EUR</option>
-                            </select>
+                            <select asp-for="Currency" asp-items="Model.Currencies" class="mdb-select md-form container" name="currency"></select>
                         </div>
                     </div>
 
                     <div class="col-3">
                         <div class="ml-2">
                             <p class="mb-1 small">Manufacture date (from)</p>
-                            <select class="mdb-select md-form container" name="yearFrom">
-                                <option>All</option>
-                                @for (int i = 1990; i < 2020; i++)
-                                {
-                                    <option>@i</option>
-                                }
-                            </select>
+                            <select asp-for="YearFrom" asp-items="Model.YearsFrom" class="mdb-select md-form container" name="yearFrom"></select>
                         </div>
                     </div>
 
                     <div class="col-3 pl-0 pr-4">
                         <div class="ml-2">
                             <p class="mb-1 small">to</p>
-                            <select class="mdb-select md-form container" name="yearTo">
-                                <option>All</option>
-                                @for (int i = 1990; i < 2020; i++)
-                                {
-                                    <option>@i</option>
-                                }
-                            </select>
+                            <select asp-for="YearTo" asp-items="Model.YearsTo" class="mdb-select md-form container" name="yearTo"></select>
                         </div>
                     </div>
 
@@ -198,26 +146,14 @@
                     <div class="col-6">
                         <div class="ml-2">
                             <p class="mb-1 small">Color</p>
-                            <select class="mdb-select md-form container" name="color">
-                                <option>All</option>
-                                @foreach (var item in Model.Colors)
-                                {
-                                    <option>@item.Name</option>
-                                }
-                            </select>
+                            <select asp-for="Color" asp-items="Model.Colors" class="mdb-select md-form container" name="color"></select>
                         </div>
                     </div>
 
                     <div class="col-6 pl-0 pr-4">
                         <div class="ml-2">
                             <p class="mb-1 small">City</p>
-                            <select class="mdb-select md-form container" name="town">
-                                <option>All</option>
-                                @foreach (var item in Model.Cities)
-                                {
-                                    <option>@item.Name</option>
-                                }
-                            </select>
+                            <select asp-for="City" asp-items="Model.Cities" class="mdb-select md-form container" name="town"></select>
                         </div>
                     </div>
 

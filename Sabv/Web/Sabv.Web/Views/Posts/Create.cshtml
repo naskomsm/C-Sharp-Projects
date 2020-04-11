@@ -1,4 +1,7 @@
-﻿@{
+﻿@using Sabv.Web.ViewModels.Posts
+@model CreatePageViewModel
+
+@{
     this.ViewData["Title"] = "Create";
 }
 
@@ -16,13 +19,8 @@
                     <div class="col-4">
                         <div class="ml-2">
                             <p class="mb-1 small">Post category</p>
-                            <select class="mdb-select md-form container" id="categorySelect" name="postCategory">
-                                <option></option>
-                                @foreach (var item in Model.Categories)
-                                {
-                                    <option>@item.Name</option>
-                                }
-                            </select>
+                            <select asp-for="Category" asp-items="Model.Categories" class="mdb-select md-form container" id="categorySelect" name="postCategory"></select>
+                            <span asp-validation-for="Category" class="text-danger"></span>
                         </div>
                     </div>
 
@@ -40,13 +38,7 @@
                     <div class="col-3">
                         <div class="ml-2">
                             <p class="mb-1 small">Make</p>
-                            <select class="mdb-select md-form container" id="makesSelect" name="make">
-                                <option></option>
-                                @foreach (var make in Model.Makes)
-                                {
-                                    <option value="@make.Id">@make.Name</option>
-                                }
-                            </select>
+                            <select asp-for="Make" asp-items="Model.Makes" class="mdb-select md-form container" id="makesSelect" name="make"></select>
                         </div>
                     </div>
 
@@ -62,20 +54,15 @@
                     <div class="col-3">
                         <div class="ml-2">
                             <p class="mb-1 small">Modification</p>
-                            <input class="form-control form-control-sm container" type="text" name="modification">
+                            <input asp-for="Modification" class="form-control form-control-sm container" name="modification" />
+                            <span asp-validation-for="Modification" class="text-danger"></span>
                         </div>
                     </div>
 
                     <div class="col-3 pl-0 pr-4">
                         <div class="ml-2">
                             <p class="mb-1 small">Engine type</p>
-                            <select class="mdb-select md-form container" name="engineType">
-                                <option></option>
-                                <option value="Petrol">Petrol</option>
-                                <option value="Disel">Disel</option>
-                                <option value="Electric">Electric</option>
-                                <option value="Hybrid">Hybrid</option>
-                            </select>
+                            <select asp-for="EngineType" asp-items="Model.EngineTypes" class="mdb-select md-form container" name="engineType"></select>
                         </div>
                     </div>
 
@@ -86,46 +73,29 @@
                     <div class="col-3">
                         <div class="ml-2">
                             <p class="mb-1 small">Horsepower</p>
-                            <input class="form-control form-control-sm container" type="number" name="horsePower" min="1" max="3000">
+                            <input asp-for="Horsepower" class="form-control form-control-sm container" name="horsePower" />
+                            <span asp-validation-for="Horsepower" class="text-danger"></span>
                         </div>
                     </div>
 
                     <div class="col-3">
                         <div class="ml-2">
                             <p class="mb-1 small">Eurostandard</p>
-                            <select class="mdb-select md-form container" name="eurostandard">
-                                <option></option>
-                                <option value="1">Euro 1</option>
-                                <option value="2">Euro 2</option>
-                                <option value="3">Euro 3</option>
-                                <option value="4">Euro 4</option>
-                                <option value="5">Euro 5</option>
-                                <option value="6">Euro 6</option>
-                            </select>
+                            <select asp-for="Eurostandard" asp-items="Model.Eurostandards" class="mdb-select md-form container" name="eurostandard"></select>
                         </div>
                     </div>
 
                     <div class="col-3">
                         <div class="ml-2">
                             <p class="mb-1 small">Transmission type</p>
-                            <select class="mdb-select md-form container" name="transmissionType">
-                                <option></option>
-                                <option value="Manual">Manual</option>
-                                <option value="Automatic">Automatic</option>
-                            </select>
+                            <select asp-for="TransmissionType" asp-items="Model.TransmissionTypes" class="mdb-select md-form container" name="transmissionType"></select>
                         </div>
                     </div>
 
                     <div class="col-3 pl-0 pr-4">
                         <div class="ml-2">
                             <p class="mb-1 small">Category</p>
-                            <select class="mdb-select md-form container" name="vehicleCategory">
-                                <option></option>
-                                @foreach (var item in Model.VehicleCategories)
-                                {
-                                    <option>@item.Name</option>
-                                }
-                            </select>
+                            <select asp-for="VehicleCategory" asp-items="Model.VehicleCategories" class="mdb-select md-form container" name="vehicleCategory"></select>
                         </div>
                     </div>
 
@@ -135,45 +105,30 @@
                     <div class="col-3">
                         <div class="ml-2">
                             <p class="mb-1 small">Price</p>
-                            <input class="form-control form-control-sm container" type="number" name="price" min="200" max="10000000">
+                            <input asp-for="Price" class="form-control form-control-sm container" name="price" />
+                            <span asp-validation-for="Price" class="text-danger"></span>
                         </div>
                     </div>
 
                     <div class="col-3">
                         <div class="ml-2">
                             <p class="mb-1 small">Currency</p>
-                            <select class="mdb-select md-form container" name="currency">
-                                <option></option>
-                                <option value="LV">LV</option>
-                                <option value="USD">USD</option>
-                                <option value="EUR">EUR</option>
-                            </select>
+                            <select asp-for="Currency" asp-items="Model.Currencies" class="mdb-select md-form container" name="currency"></select>
                         </div>
                     </div>
 
                     <div class="col-3">
                         <div class="ml-2">
                             <p class="mb-1 small">Manufacture date</p>
-                            <select class="mdb-select md-form container" name="year">
-                                <option></option>
-                                @for (int i = 1990; i < 2020; i++)
-                                {
-                                    <option>@i</option>
-                                }
-                            </select>
+                            <select asp-for="Year" asp-items="Model.Years" class="mdb-select md-form container" name="year"></select>
+                            <span asp-validation-for="Year" class="text-danger"></span>
                         </div>
                     </div>
 
                     <div class="col-3 pl-0 pr-4">
                         <div class="ml-2">
                             <p class="mb-1 small">Color</p>
-                            <select class="mdb-select md-form container" name="color">
-                                <option></option>
-                                @foreach (var item in Model.Colors)
-                                {
-                                    <option>@item.Name</option>
-                                }
-                            </select>
+                            <select asp-for="Color" asp-items="Model.Colors" class="mdb-select md-form container" name="color"></select>
                         </div>
                     </div>
 
@@ -183,20 +138,15 @@
                     <div class="col-6">
                         <div class="ml-2">
                             <p class="mb-1 small">City</p>
-                            <select class="mdb-select md-form container" name="town">
-                                <option></option>
-                                @foreach (var item in Model.Cities)
-                                {
-                                    <option>@item.Name</option>
-                                }
-                            </select>
+                            <select asp-for="City" asp-items="Model.Cities" class="mdb-select md-form container" name="town"></select>
                         </div>
                     </div>
 
                     <div class="col-6">
                         <div class="ml-2">
                             <p class="mb-1 small">Mileage</p>
-                            <input class="form-control form-control-sm container" type="number" name="mileage" min="5">
+                            <input asp-for="Mileage" class="form-control form-control-sm container" name="mileage" />
+                            <span asp-validation-for="Mileage" class="text-danger"></span>
                         </div>
                     </div>
 
@@ -206,18 +156,21 @@
                     <div class="col-md-4">
                         <p class="mb-1 small">Additional information</p>
                         <div class="form-group">
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="description"></textarea>
+                            <textarea asp-for="Description" class="form-control" id="exampleFormControlTextarea1" rows="3" name="description"></textarea>
+                            <span asp-validation-for="Description" class="text-danger"></span>
                         </div>
                     </div>
 
                     <div class="col-md-4">
                         <p class="mb-1 small">Mobile number</p>
-                        <input class="form-control form-control-sm" type="text" name="phoneNumber">
+                        <input asp-for="MobileNumber" class="form-control form-control-sm" name="phoneNumber" />
+                        <span asp-validation-for="MobileNumber" class="text-danger"></span>
                     </div>
 
                     <div class="col-md-4">
                         <p class="mb-1 small">Email</p>
-                        <input class="form-control form-control-sm" type="email" name="email">
+                        <input asp-for="Email" class="form-control form-control-sm" name="email" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
                     </div>
                 </div>
 
@@ -226,10 +179,15 @@
                         <button id="CreateBtn" class="btn btn-primary btn-lg btn-block" type="submit" value="Create">Create</button>
                     </div>
                     <div class="col-md-6">
-                        Select files: <input type="file" name="files" id="files" multiple><br><br>
+                        Select files: <input asp-for="File" type="file" name="files" id="files" multiple><br><br>
+                        <span asp-validation-for="File" class="text-danger"></span>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
