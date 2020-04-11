@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -22,14 +23,28 @@
             var modelsService = serviceProvider.GetRequiredService<IModelsService>();
             var makesService = serviceProvider.GetRequiredService<IMakesService>();
 
-            var cars = JsonConvert.DeserializeObject<List<Car>>(GlobalConstants.Seeder.Json);
-            foreach (var car in cars)
+            StreamReader reader;
+            try
             {
-                var make = makesService.GetMakeByName(car.Name);
+                reader = new StreamReader(GlobalConstants.Seeder.WebJsonPath);
+            }
+            catch (Exception)
+            {
+                reader = new StreamReader(GlobalConstants.Seeder.TestsJsonPath);
+            }
 
-                foreach (var model in car.Models)
+            using (reader)
+            {
+                var json = reader.ReadToEnd();
+                var cars = JsonConvert.DeserializeObject<List<Car>>(json);
+                foreach (var car in cars)
                 {
-                    await modelsService.AddAsync(model, make);
+                    var make = makesService.GetMakeByName(car.Name);
+
+                    foreach (var model in car.Models)
+                    {
+                        await modelsService.AddAsync(model, make);
+                    }
                 }
             }
         }
