@@ -113,6 +113,7 @@
             }
             else
             {
+                app.UseStatusCodePagesWithRedirects("/Base/ProductionError/{0}");
                 app.UseExceptionHandler("/Base/Error");
                 app.UseHsts();
             }
@@ -133,7 +134,6 @@
                         endpoints.MapControllerRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapControllerRoute("postsByCategories", "Categories/{name:minlength(3)}", new { controller = "Categories", action = "Display" });
                         endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
-                        endpoints.MapControllerRoute("nonExistingPage", "/{0}", new { controller = "Base", action = "ProductionError" });
                         endpoints.MapRazorPages();
                     });
         }
