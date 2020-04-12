@@ -7,7 +7,7 @@
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using System.Threading.Tasks;
-
+    using Castle.Core.Internal;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
@@ -79,12 +79,14 @@
                 }
             }
 
-            // TODO add image
-            var collection = new Collection<IFormFile>();
-            collection.Add(image);
+            if (image != null)
+            {
+                var collection = new Collection<IFormFile>();
+                collection.Add(image);
 
-            var images = await this.cloudinaryService.UploadAsync(collection);
-            await this.usersService.SetProfilePictureAsync(images.FirstOrDefault(), user.Id);
+                var images = await this.cloudinaryService.UploadAsync(collection);
+                await this.usersService.SetProfilePictureAsync(images.FirstOrDefault(), user.Id);
+            }
 
             await this.signInManager.RefreshSignInAsync(user);
             this.StatusMessage = "Your profile has been updated";
@@ -112,7 +114,9 @@
 
         public class InputModel
         {
-            [Phone]
+            [Required(ErrorMessage = "A phone number is required.")]
+            [DataType(DataType.PhoneNumber, ErrorMessage = "Invalid Phone Number")]
+            [RegularExpression(@"^([0-9]{10})$", ErrorMessage = "Invalid Phone Number.")]
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
 

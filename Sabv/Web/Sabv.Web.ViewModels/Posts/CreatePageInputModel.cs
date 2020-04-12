@@ -64,7 +64,9 @@
         public string Description { get; set; }
 
         [Required(ErrorMessage = "Phone number should be set!")]
-        [Phone]
+        [DataType(DataType.PhoneNumber, ErrorMessage = "Invalid Phone Number")]
+        [RegularExpression(@"^([0-9]{10})$", ErrorMessage = "Invalid Phone Number.")]
+        [Display(Name = "Phone number")]
         public string PhoneNumber { get; set; }
 
         [Required(ErrorMessage = "Email should be set!")]
