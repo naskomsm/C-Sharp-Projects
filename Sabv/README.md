@@ -19,6 +19,8 @@ CloudscribePagination
 ## The app should launch your default browser and open the website. But if it dont, go to 
 ```
 localhost:5000
+or
+localhost:5001
 ```
 
 ## Important
