@@ -20,7 +20,7 @@
         {
             // Arange
             var mockCategoriesService = new Mock<ICategoriesService>();
-            mockCategoriesService.Setup(mc => mc.GetAll()).Returns(this.GetAllCategories());
+            mockCategoriesService.Setup(mc => mc.GetAll<Category>()).Returns(this.GetAllCategories());
 
             var mockImagesService = new Mock<IImagesService>();
             mockImagesService.Setup(mi => mi.GetAll()).Returns(this.GetFirstThreeImages());

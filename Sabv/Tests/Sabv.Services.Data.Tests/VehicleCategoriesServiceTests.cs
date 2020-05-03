@@ -25,7 +25,7 @@
 
             var repository = new EfDeletableEntityRepository<VehicleCategory>(dbContext);
             var service = new VehicleCategoriesService(repository);
-            Assert.Equal(3, service.GetAll().Count());
+            Assert.Equal(3, service.GetAll<VehicleCategory>().Count());
         }
 
         [Fact]
@@ -84,11 +84,11 @@
             var repository = new EfDeletableEntityRepository<VehicleCategory>(dbContext);
             var service = new VehicleCategoriesService(repository);
 
-            Assert.Empty(service.GetAll());
+            Assert.Empty(service.GetAll<VehicleCategory>());
 
             await service.AddAsync("Sedan");
 
-            Assert.Single(service.GetAll());
+            Assert.Single(service.GetAll<VehicleCategory>());
         }
 
         [Theory]

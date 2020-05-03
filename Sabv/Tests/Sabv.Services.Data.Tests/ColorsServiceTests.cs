@@ -86,7 +86,7 @@
 
             var repository = new EfDeletableEntityRepository<Color>(dbContext);
             var service = new ColorService(repository);
-            Assert.Equal(3, service.GetAll().Count());
+            Assert.Equal(3, service.GetAll<Color>().Count());
         }
 
         [Fact]

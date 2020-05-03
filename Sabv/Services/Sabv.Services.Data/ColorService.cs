@@ -38,9 +38,9 @@
             return this.colorRepo.All().OrderBy(x => x.Name).To<T>().ToList();
         }
 
-        public IEnumerable<Color> GetAll()
+        public IEnumerable<T> GetAllAsNoTracking<T>()
         {
-            return this.colorRepo.All().OrderBy(x => x.Name).ToList();
+            return this.colorRepo.AllAsNoTracking().OrderBy(x => x.Name).To<T>().ToList();
         }
 
         public Color GetColorByName(string name)

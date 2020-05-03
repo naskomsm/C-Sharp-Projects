@@ -9,7 +9,7 @@
     {
         IEnumerable<T> GetAll<T>();
 
-        IEnumerable<City> GetAll();
+        IEnumerable<T> GetAllAsNoTracking<T>();
 
         City GetCityByName(string name);
 

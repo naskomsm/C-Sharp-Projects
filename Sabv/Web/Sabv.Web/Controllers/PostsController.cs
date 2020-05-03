@@ -18,6 +18,8 @@
     using Sabv.Data.Models.Enums;
     using Sabv.Services.Data;
     using Sabv.Services.Mapping;
+    using Sabv.Web.Infrastructure.Informants;
+    using Sabv.Web.Infrastructure.Informants.Contracts;
     using Sabv.Web.ViewModels.Comments;
     using Sabv.Web.ViewModels.Models;
     using Sabv.Web.ViewModels.Posts;
@@ -93,82 +95,45 @@
         [HttpGet]
         public IActionResult Search()
         {
-            var engineTypes = new List<SelectListItem>()
-            {
-                new SelectListItem() { Text = "All", Selected = true },
-                new SelectListItem() { Text = "Petrol", Value = "Petrol" },
-                new SelectListItem() { Text = "Disel", Value = "Disel" },
-                new SelectListItem() { Text = "Electric", Value = "Electric" },
-                new SelectListItem() { Text = "Hybrid", Value = "Hybrid" },
-            };
+            var engineTypes = Informant.GetItems(new EngineInformant());
+            var eurostandards = Informant.GetItems(new EurostandardInformant());
+            var transmissionTypes = Informant.GetItems(new TransmissionTypeInformant());
+            var currencies = Informant.GetItems(new CurrencyInformant());
+            var yearsFrom = Informant.GetItems(new YearFromInformant());
+            var yearsTo = Informant.GetItems(new YearToInformant());
 
-            var eurostandards = new List<SelectListItem>()
-            {
-                new SelectListItem() { Text = "All", Selected = true },
-                new SelectListItem() { Text = "Euro 1", Value = "1" },
-                new SelectListItem() { Text = "Euro 2", Value = "2" },
-                new SelectListItem() { Text = "Euro 3", Value = "3" },
-                new SelectListItem() { Text = "Euro 4", Value = "4" },
-                new SelectListItem() { Text = "Euro 5", Value = "5" },
-                new SelectListItem() { Text = "Euro 6", Value = "6" },
-            };
+            var categories = new List<SelectListItem>() { new SelectListItem() { Text = "All", Selected = true } };
+            categories.AddRange(this.categoriesService.GetAllAsNoTracking<Category>()
+               .Select(x => new SelectListItem() { Text = x.Name })
+               .ToList<SelectListItem>());
 
-            var transmissionTypes = new List<SelectListItem>()
-            {
-                new SelectListItem() { Text = "All", Selected = true },
-                new SelectListItem() { Text = "Manual", Value = "Manual" },
-                new SelectListItem() { Text = "Automatic", Value = "Automatic" },
-            };
+            var cities = new List<SelectListItem>() { new SelectListItem() { Text = "All", Selected = true } };
+            cities.AddRange(this.citiesService.GetAllAsNoTracking<City>()
+                .Select(x => new SelectListItem() { Text = x.Name })
+                .ToList<SelectListItem>());
 
-            var currencies = new List<SelectListItem>()
-            {
-                new SelectListItem() { Text = "All", Selected = true },
-                new SelectListItem() { Text = "LV", Value = "LV" },
-                new SelectListItem() { Text = "USD", Value = "USD" },
-                new SelectListItem() { Text = "EUR", Value = "EUR" },
-            };
+            var colors = new List<SelectListItem>() { new SelectListItem() { Text = "All", Selected = true } };
+            colors.AddRange(this.colorService.GetAllAsNoTracking<Color>()
+                .Select(x => new SelectListItem() { Text = x.Name })
+                .ToList<SelectListItem>());
 
-            var yearsFrom = new List<SelectListItem>();
-            yearsFrom.Add(new SelectListItem() { Text = "All", Selected = true });
-            for (int i = 2021; i >= 1960; i--)
-            {
-                yearsFrom.Add(new SelectListItem() { Text = i.ToString() });
-            }
+            var makes = new List<SelectListItem>() { new SelectListItem() { Text = "All", Selected = true } };
+            makes.AddRange(this.makesService.GetAllAsNoTracking<Make>()
+                .Select(x => new SelectListItem() { Text = x.Name, Value = x.Id.ToString() })
+                .ToList<SelectListItem>());
 
-            var yearsTo = new List<SelectListItem>();
-            yearsTo.Add(new SelectListItem() { Text = "All", Selected = true });
-            for (int i = 2021; i >= 1960; i--)
-            {
-                yearsTo.Add(new SelectListItem() { Text = i.ToString() });
-            }
-
-            var categories = new List<Category>();
-            categories.Add(new Category() { Name = "All" });
-            categories.AddRange(this.categoriesService.GetAll().AsQueryable().AsNoTracking().ToList());
-
-            var cities = new List<City>();
-            cities.Add(new City() { Name = "All" });
-            cities.AddRange(this.citiesService.GetAll().AsQueryable().AsNoTracking().ToList());
-
-            var colors = new List<Color>();
-            colors.Add(new Color() { Name = "All" });
-            colors.AddRange(this.colorService.GetAll().AsQueryable().AsNoTracking().ToList());
-
-            var makes = new List<Make>();
-            makes.Add(new Make() { Name = "All" });
-            makes.AddRange(this.makesService.GetAll().AsQueryable().AsNoTracking().ToList());
-
-            var vehicleCategories = new List<VehicleCategory>();
-            vehicleCategories.Add(new VehicleCategory() { Name = "All" });
-            vehicleCategories.AddRange(this.vehicleCategoriesService.GetAll().AsQueryable().AsNoTracking().ToList());
+            var vehicleCategories= new List<SelectListItem>() { new SelectListItem() { Text = "All", Selected = true } };
+            vehicleCategories.AddRange(this.vehicleCategoriesService.GetAllAsNoTracking<VehicleCategory>()
+                .Select(x => new SelectListItem() { Text = x.Name })
+                .ToList<SelectListItem>());
 
             var model = new SearchViewModel()
             {
-                Categories = categories.Select(x => new SelectListItem() { Text = x.Name, Selected = x.Name == "All" }).ToList<SelectListItem>(),
-                Cities = cities.Select(x => new SelectListItem() { Text = x.Name, Selected = x.Name == "All" }).ToList<SelectListItem>(),
-                Colors = colors.Select(x => new SelectListItem() { Text = x.Name, Selected = x.Name == "All" }).ToList<SelectListItem>(),
-                Makes = makes.Select(x => new SelectListItem() { Text = x.Name, Value = x.Id.ToString(), Selected = x.Name == "All" }).ToList<SelectListItem>(),
-                VehicleCategories = vehicleCategories.Select(x => new SelectListItem() { Text = x.Name, Selected = x.Name == "All" }).ToList<SelectListItem>(),
+                Categories = categories,
+                Cities = cities,
+                Colors = colors,
+                Makes = makes,
+                VehicleCategories = vehicleCategories,
                 EngineTypes = engineTypes,
                 Eurostandards = eurostandards,
                 TransmissionTypes = transmissionTypes,
@@ -207,50 +172,39 @@
         [Authorize]
         public IActionResult Create()
         {
-            var engineTypes = new List<SelectListItem>()
-            {
-                new SelectListItem() { Text = "Petrol", Value = "Petrol" },
-                new SelectListItem() { Text = "Disel", Value = "Disel" },
-                new SelectListItem() { Text = "Electric", Value = "Electric" },
-                new SelectListItem() { Text = "Hybrid", Value = "Hybrid" },
-            };
+            var engineTypes = Informant.GetItems(new EngineInformant());
+            var eurostandards = Informant.GetItems(new EurostandardInformant());
+            var transmissionTypes = Informant.GetItems(new TransmissionTypeInformant());
+            var currencies = Informant.GetItems(new CurrencyInformant());
+            var years = Informant.GetItems(new YearToInformant());
 
-            var eurostandards = new List<SelectListItem>()
-            {
-                new SelectListItem() { Text = "Euro 1", Value = "1" },
-                new SelectListItem() { Text = "Euro 2", Value = "2" },
-                new SelectListItem() { Text = "Euro 3", Value = "3" },
-                new SelectListItem() { Text = "Euro 4", Value = "4" },
-                new SelectListItem() { Text = "Euro 5", Value = "5" },
-                new SelectListItem() { Text = "Euro 6", Value = "6" },
-            };
+            var categories = this.categoriesService.GetAllAsNoTracking<Category>()
+                .Select(x => new SelectListItem() { Text = x.Name, Selected = x.Name == "Cars and jeeps" })
+                .ToList<SelectListItem>();
 
-            var transmissionTypes = new List<SelectListItem>()
-            {
-                new SelectListItem() { Text = "Manual", Value = "Manual" },
-                new SelectListItem() { Text = "Automatic", Value = "Automatic" },
-            };
+            var cities = this.citiesService.GetAllAsNoTracking<City>()
+                .Select(x => new SelectListItem() { Text = x.Name })
+                .ToList<SelectListItem>();
 
-            var currencies = new List<SelectListItem>()
-            {
-                new SelectListItem() { Text = "LV", Value = "LV" },
-                new SelectListItem() { Text = "USD", Value = "USD" },
-                new SelectListItem() { Text = "EUR", Value = "EUR" },
-            };
+            var colors = this.colorService.GetAllAsNoTracking<Color>()
+                .Select(x => new SelectListItem() { Text = x.Name })
+                .ToList<SelectListItem>();
 
-            var years = new List<SelectListItem>();
-            for (int i = 2021; i >= 1960; i--)
-            {
-                years.Add(new SelectListItem() { Text = i.ToString() });
-            }
+            var makes = this.makesService.GetAllAsNoTracking<Make>()
+                .Select(x => new SelectListItem() { Text = x.Name, Value = x.Id.ToString() })
+                .ToList<SelectListItem>();
+
+            var vehicleCategories = this.vehicleCategoriesService.GetAllAsNoTracking<VehicleCategory>()
+                .Select(x => new SelectListItem() { Text = x.Name })
+                .ToList<SelectListItem>();
 
             var viewModel = new CreatePageViewModel()
             {
-                Categories = this.categoriesService.GetAll().AsQueryable().AsNoTracking().Select(x => new SelectListItem() { Text = x.Name, Selected = x.Name == "Cars and jeeps" }).ToList<SelectListItem>(),
-                Cities = this.citiesService.GetAll().AsQueryable().AsNoTracking().Select(x => new SelectListItem() { Text = x.Name }).ToList<SelectListItem>(),
-                Colors = this.colorService.GetAll().AsQueryable().AsNoTracking().Select(x => new SelectListItem() { Text = x.Name }).ToList<SelectListItem>(),
-                Makes = this.makesService.GetAll().AsQueryable().AsNoTracking().Select(x => new SelectListItem() { Text = x.Name, Value = x.Id.ToString() }).ToList<SelectListItem>(),
-                VehicleCategories = this.vehicleCategoriesService.GetAll().AsQueryable().Select(x => new SelectListItem() { Text = x.Name }).ToList<SelectListItem>(),
+                Categories = categories,
+                Cities = cities,
+                Colors = colors,
+                Makes = makes,
+                VehicleCategories = vehicleCategories,
                 EngineTypes = engineTypes,
                 Eurostandards = eurostandards,
                 TransmissionTypes = transmissionTypes,

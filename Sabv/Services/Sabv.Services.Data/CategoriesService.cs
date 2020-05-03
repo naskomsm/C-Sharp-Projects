@@ -41,9 +41,9 @@
             return this.categoryRepo.All().OrderBy(x => x.Name).To<T>().ToList();
         }
 
-        public IEnumerable<Category> GetAll()
+        public IEnumerable<T> GetAllAsNoTracking<T>()
         {
-            return this.categoryRepo.All().OrderBy(x => x.Name).ToList();
+            return this.categoryRepo.AllAsNoTracking().OrderBy(x => x.Name).To<T>().ToList();
         }
 
         public Category GetCategoryByName(string name)

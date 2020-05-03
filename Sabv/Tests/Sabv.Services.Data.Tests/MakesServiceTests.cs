@@ -27,7 +27,7 @@
 
             var repository = new EfDeletableEntityRepository<Make>(dbContext);
             var service = new MakesService(repository);
-            Assert.Equal(3, service.GetAll().Count());
+            Assert.Equal(3, service.GetAll<Make>().Count());
         }
 
         [Fact]

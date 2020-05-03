@@ -83,7 +83,7 @@
 
             if (inputModel.Make != 0)
             {
-                var makeFromService = this.makesService.GetAll().FirstOrDefault(x => x.Id == inputModel.Make);
+                var makeFromService = this.makesService.GetAll<Make>().FirstOrDefault(x => x.Id == inputModel.Make);
 
                 posts = posts
                     .Where(x => x.Make.Name.ToLower() == makeFromService.Name.ToLower())

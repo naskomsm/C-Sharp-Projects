@@ -85,7 +85,7 @@
 
             var repository = new EfDeletableEntityRepository<Category>(dbContext);
             var service = new CategoriesService(repository);
-            Assert.Equal(3, service.GetAll().Count());
+            Assert.Equal(3, service.GetAll<Category>().Count());
         }
 
         [Fact]

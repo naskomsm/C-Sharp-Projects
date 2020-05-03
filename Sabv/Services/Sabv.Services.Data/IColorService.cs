@@ -11,7 +11,7 @@
 
         Color GetColorByName(string name);
 
-        IEnumerable<Color> GetAll();
+        IEnumerable<T> GetAllAsNoTracking<T>();
 
         Task AddAsync(string name);
     }

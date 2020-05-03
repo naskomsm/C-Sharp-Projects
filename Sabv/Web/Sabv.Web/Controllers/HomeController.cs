@@ -5,6 +5,7 @@
 
     using Microsoft.AspNetCore.Mvc;
     using Sabv.Common;
+    using Sabv.Data.Models;
     using Sabv.Services.Data;
     using Sabv.Services.Messaging;
     using Sabv.Web.ViewModels.Home;
@@ -33,7 +34,7 @@
         {
             var model = new IndexViewModel()
             {
-                Categories = this.categoriesService.GetAll(),
+                Categories = this.categoriesService.GetAll<Category>(),
                 FirstThreeImages = this.imagesService.GetAll().Take(3),
                 Posts = this.postsService.GetAll().Take(6),
             };

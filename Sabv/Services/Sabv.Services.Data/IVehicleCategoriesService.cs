@@ -11,7 +11,7 @@
 
         VehicleCategory GetVehicleCategoryByName(string name);
 
-        IEnumerable<VehicleCategory> GetAll();
+        IEnumerable<T> GetAllAsNoTracking<T>();
 
         Task AddAsync(string name);
     }

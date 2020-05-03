@@ -157,23 +157,23 @@
             var mockUserManager = this.GetMockUserManager();
 
             mockCategoriesService
-                .Setup(mc => mc.GetAll())
+                .Setup(mc => mc.GetAll<Category>())
                 .Returns(this.GetAll<Category>());
 
             mockCitiesService
-                .Setup(mc => mc.GetAll())
+                .Setup(mc => mc.GetAll<City>())
                 .Returns(this.GetAll<City>());
 
             mockColorsService
-                .Setup(mc => mc.GetAll())
+                .Setup(mc => mc.GetAll<Color>())
                 .Returns(this.GetAll<Color>());
 
             mockMakesService
-                .Setup(mc => mc.GetAll())
+                .Setup(mc => mc.GetAll<Make>())
                 .Returns(this.GetAll<Make>());
 
             mockVehicleCategoriesService
-                .Setup(mc => mc.GetAll())
+                .Setup(mc => mc.GetAll<VehicleCategory>())
                 .Returns(this.GetAll<VehicleCategory>());
 
             var claims = new List<Claim>()
@@ -305,23 +305,23 @@
             var mockUserManager = this.GetMockUserManager();
 
             mockCategoriesService
-                .Setup(mc => mc.GetAll())
+                .Setup(mc => mc.GetAll<Category>())
                 .Returns(this.GetAll<Category>());
 
             mockCitiesService
-                .Setup(mc => mc.GetAll())
+                .Setup(mc => mc.GetAll<City>())
                 .Returns(this.GetAll<City>());
 
             mockColorsService
-                .Setup(mc => mc.GetAll())
+                .Setup(mc => mc.GetAll<Color>())
                 .Returns(this.GetAll<Color>());
 
             mockMakesService
-                .Setup(mc => mc.GetAll())
+                .Setup(mc => mc.GetAll<Make>())
                 .Returns(this.GetAll<Make>());
 
             mockVehicleCategoriesService
-                .Setup(mc => mc.GetAll())
+                .Setup(mc => mc.GetAll<VehicleCategory>())
                 .Returns(this.GetAll<VehicleCategory>());
 
             var claims = new List<Claim>()

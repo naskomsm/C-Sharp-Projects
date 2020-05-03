@@ -1,13 +1,11 @@
 ﻿namespace Sabv.Web.Areas.Identity.Pages.Account.Manage
 {
     using System;
-    using System.Collections;
-    using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using System.Threading.Tasks;
-    using Castle.Core.Internal;
+
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
@@ -114,7 +112,6 @@
 
         public class InputModel
         {
-            [Required(ErrorMessage = "A phone number is required.")]
             [DataType(DataType.PhoneNumber, ErrorMessage = "Invalid Phone Number")]
             [RegularExpression(@"^([0-9]{10})$", ErrorMessage = "Invalid Phone Number.")]
             [Display(Name = "Phone number")]

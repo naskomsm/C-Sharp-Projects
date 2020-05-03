@@ -87,7 +87,7 @@
 
             var repository = new EfDeletableEntityRepository<City>(dbContext);
             var service = new CitiesService(repository);
-            Assert.Equal(3, service.GetAll().Count());
+            Assert.Equal(3, service.GetAll<City>().Count());
         }
 
         [Fact]

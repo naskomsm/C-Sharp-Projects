@@ -38,9 +38,9 @@
             return this.vehicleCategoriesRepo.All().OrderBy(x => x.Name).To<T>().ToList();
         }
 
-        public IEnumerable<VehicleCategory> GetAll()
+        public IEnumerable<T> GetAllAsNoTracking<T>()
         {
-            return this.vehicleCategoriesRepo.All().OrderBy(x => x.Name).ToList();
+            return this.vehicleCategoriesRepo.AllAsNoTracking().OrderBy(x => x.Name).To<T>().ToList();
         }
 
         public VehicleCategory GetVehicleCategoryByName(string name)

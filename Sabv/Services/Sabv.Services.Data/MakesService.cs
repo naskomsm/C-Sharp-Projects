@@ -43,9 +43,9 @@
             return this.makesRepo.All().OrderBy(x => x.Name).To<T>().ToList();
         }
 
-        public IEnumerable<Make> GetAll()
+        public IEnumerable<T> GetAllAsNoTracking<T>()
         {
-            return this.makesRepo.All().OrderBy(x => x.Name).ToList();
+            return this.makesRepo.AllAsNoTracking().OrderBy(x => x.Name).To<T>().ToList();
         }
 
         public Make GetMakeById(int id)

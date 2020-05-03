@@ -13,7 +13,7 @@
 
         Make GetMakeById(int id);
 
-        IEnumerable<Make> GetAll();
+        IEnumerable<T> GetAllAsNoTracking<T>();
 
         Task AddAsync(string name);
     }

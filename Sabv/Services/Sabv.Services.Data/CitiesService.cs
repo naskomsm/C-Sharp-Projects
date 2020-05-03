@@ -38,9 +38,9 @@
             return this.citiesRepo.All().OrderBy(x => x.Name).To<T>().ToList();
         }
 
-        public IEnumerable<City> GetAll()
+        public IEnumerable<T> GetAllAsNoTracking<T>()
         {
-            return this.citiesRepo.All().OrderBy(x => x.Name).ToList();
+            return this.citiesRepo.AllAsNoTracking().OrderBy(x => x.Name).To<T>().ToList();
         }
 
         public City GetCityByName(string name)

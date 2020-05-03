@@ -9,7 +9,7 @@
     {
         IEnumerable<T> GetAll<T>();
 
-        IEnumerable<Category> GetAll();
+        IEnumerable<T> GetAllAsNoTracking<T>();
 
         Category GetCategoryByName(string name);
 
